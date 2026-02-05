@@ -1,0 +1,12 @@
+remote_theme: jeffreytse/jekyll-theme-yat
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-sitemap
+
+# site metadata settings
+title: David Le Chan
+description: A description of your site.
+baseurl: "/personalWebsite2" # Empty if your repo is username.github.io, otherwise "/repo-namr"
+url: "https://davidlechan.dev"
