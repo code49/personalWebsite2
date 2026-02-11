@@ -1,0 +1,19 @@
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+/nix/store/xz4msjk94m7r5kn7fpi186w0vn9lm839-ruby-3.3.8/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= sitearchdir\=./.gem.20260210-8041-pa27d sitelibdir\=./.gem.20260210-8041-pa27d clean
+
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= sitearchdir\=./.gem.20260210-8041-pa27d sitelibdir\=./.gem.20260210-8041-pa27d
+compiling mapper.cpp
+compiling rubymain.cpp
+linking shared-object fastfilereaderext.so
+
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= sitearchdir\=./.gem.20260210-8041-pa27d sitelibdir\=./.gem.20260210-8041-pa27d install
+install -c -p -m 755 fastfilereaderext.so ./.gem.20260210-8041-pa27d
+
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/eventmachine-1.2.7/ext/fastfilereader
+make DESTDIR\= sitearchdir\=./.gem.20260210-8041-pa27d sitelibdir\=./.gem.20260210-8041-pa27d clean

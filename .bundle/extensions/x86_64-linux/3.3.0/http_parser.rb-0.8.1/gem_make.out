@@ -1,0 +1,19 @@
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+/nix/store/xz4msjk94m7r5kn7fpi186w0vn9lm839-ruby-3.3.8/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20260210-8041-ag4rk6 sitelibdir\=./.gem.20260210-8041-ag4rk6 clean
+
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20260210-8041-ag4rk6 sitelibdir\=./.gem.20260210-8041-ag4rk6
+compiling ruby_http_parser.c
+compiling ryah_http_parser.c
+linking shared-object ruby_http_parser.so
+
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20260210-8041-ag4rk6 sitelibdir\=./.gem.20260210-8041-ag4rk6 install
+install -c -p -m 755 ruby_http_parser.so ./.gem.20260210-8041-ag4rk6
+
+current directory: /home/dchan/personal-work/website/personalWebsite2/.bundle/gems/http_parser.rb-0.8.1/ext/ruby_http_parser
+make DESTDIR\= sitearchdir\=./.gem.20260210-8041-ag4rk6 sitelibdir\=./.gem.20260210-8041-ag4rk6 clean
