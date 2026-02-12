@@ -88,7 +88,8 @@ translate_langs:
 #
   - lang: zh-CN
     img: https://cdn.countryflags.com/thumbs/china/flag-400.png
-    text: Chinese(Simple)
+    text: Chinese (Simplified)
+
 #
 #   - lang: ja
 #     img: https://cdn.countryflags.com/thumbs/japan/flag-400.png
@@ -121,13 +122,13 @@ greenblue: #389092
 #
 # brand_color: orangered
 #
-# Custom color as below:
-brand_color: "#daa9ff"
+# Custom color as below: 
+brand_color: "#8f63ee"
 
 # You can custom selection style
-# selection:
-#   color: "#ff00ff"
-#   background_color: "yellow"
+selection:
+  color: "#000000"
+  background_color: "#daa9ff"
 
 # Night/Dark mode
 # Default mode is "auto", "auto" is for auto nightshift
@@ -147,17 +148,19 @@ night_mode: "auto"
 code_badge:
   enabled: "true"
   color: "#fff"
-  background_color: "#ff4e00"
+  background_color: "#8f63ee"
   text_transform: "lowercase"  # ("uppercase", "lowercase", "capitalize")
 
 # If you want to link only specific pages in your header, uncomment
 # this and add the path to the pages in order as they should show up
 header_pages:
   - index.html
+  - categories.html
+  - resume.html
   # - archives.html
-  # - categories.html
-  - tags.html
-  - about.md
+  # - tags.html
+  # - about.html
+
 
 # Page default value
 defaults:

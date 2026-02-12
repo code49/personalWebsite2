@@ -1,1 +1,151 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://127.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.1:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-11T18:39:06+00:00</updated><id>http://127.0.1:4000/feed.xml</id><title type="html">David Le Chan</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>code49</name></author></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://127.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.1:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-12T21:56:34+00:00</updated><id>http://127.0.1:4000/feed.xml</id><title type="html">David Le Chan</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>code49</name></author><entry><title type="html">CMU List of Classes</title><link href="http://127.0.1:4000/education/2026/02/11/cmu-classes.html" rel="alternate" type="text/html" title="CMU List of Classes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu-classes</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu-classes.html"><![CDATA[<p><strong>August 2022 - Present | Pittsburgh, PA</strong> <br /></p>
+
+<hr />
+
+<p>Lightly-stylized list of the classes I’ve taken at CMU. Non-mini technical classes bolded!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Year</th>
+      <th>Fall</th>
+      <th>Spring</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td>**[18-100] Intro to ECE** <br /> **[21-120] Calculus 1** <br /> **[33-141] Physics 1 (Mechanics)** <br /> [76-107] Writing About Data <br /> [76-108] Writing About Public Problems</td>
+      <td>**[12-100] Intro to CivE** <br /> **[21-122] Calculus 2** <br /> **[21-127] Concepts of Mathematics** <br /> **[33-142] Physics 2 (E&amp;M)** <br /> **[36-219] Probability Theory**</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td>**[15-122] Principles of Imperative Computation** <br /> [18-200] ECE Sophomore Seminar <br /> **[18-240] Digital Design Core** <br /> [51-173] Human Experiences in Design <br /> [66-215] The Innovation Trials</td>
+      <td>[18-021] Intro to PCB Fabrication <br /> **[18-213] Computer Systems Core** <br /> **[21-241] Matrices and Linear Transformations** <br /> **[21-259] Calculus in 3-D** <br /> [76-270] Writing for the Professions</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td>**[18-220] Analog Circuits Core** <br /> **[18-290] Signals and Systems Core** <br /> **[18-341] Logic Design &amp; Verification** <br /> **[18-580]  Research** <br /> [98-008] Intro to Rust <br /> [99-190] Managing Stress</td>
+      <td>**[11-344] Machine Learning in Practice** <br /> **[18-320] Microelectronic Circuits** <br /> **[18-447] Intro to Computer Architecture** <br /> **[18-580/18-980] Research** <br /> [39-402] Leadership Development Seminar <br /> [82-234] Environment &amp; Society in Modern Chinese Literature &amp; Visual Culture</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td>**[15-369] Numerical Computing** <br /> **[18-622] Digital IC Design** <br /> **[18-981] Research** <br /> [53-312] Theme Park Design <br /> [66-221] IP Law <br /> [82-139] Chinese Language, Culture and Society</td>
+      <td>[12-201] Geology <br /> **[18-525] Advanced IC Design (Tapeout Capstone)** <br /> **[18-980] Research** <br /> **[19-682] Strategy &amp; Management of Technological Innovation** <br /> **[36-220] Engineering Statistics &amp; Quality Control** <br /> [69-136] Basketball Skills</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>See more about my CMU experience at <a href="davidlechan.dev/education/2026/02/11/cmu.html">this link</a>!</p>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[August 2022 - Present | Pittsburgh, PA]]></summary></entry><entry><title type="html">Carnegie Mellon University</title><link href="http://127.0.1:4000/education/2026/02/11/cmu.html" rel="alternate" type="text/html" title="Carnegie Mellon University" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu.html"><![CDATA[<p><strong>August 2022 - Present | Pittsburgh, PA</strong></p>
+
+<p><strong>M.S. in Electrical and Computer Engineering (Expected May 2027)</strong><br />
+<strong>B.S. in Electrical and Computer Engineering (Expected May 2026)</strong></p>
+
+<p><strong><a href="https://www.cmu.edu/">School Website</a> // <a href="https://www.ece.cmu.edu/">Department Website</a></strong></p>
+
+<hr />
+
+<h4 id="some-fun-projects">Some Fun Projects:</h4>
+
+<h4 id="clubs">Clubs:</h4>
+<ul>
+  <li><a href="https://tartanconnect.cmu.edu/cia/top/">Carngie Involvement Association (CIA) Buggy</a></li>
+  <li><a href="https://www.cmusase.org/index.html">Society of Asian Scientists and Engineers</a></li>
+</ul>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[August 2022 - Present | Pittsburgh, PA]]></summary></entry><entry><title type="html">Resume</title><link href="http://127.0.1:4000/misc/2026/02/11/resume.html" rel="alternate" type="text/html" title="Resume" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/misc/2026/02/11/resume</id><content type="html" xml:base="http://127.0.1:4000/misc/2026/02/11/resume.html"><![CDATA[<object data="/assets/misc/DavidChan_Resume.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="/assets/misc/DavidChan_Resume.pdf" />&lt;/embed&gt;
+</object>
+
+<p><br />
+Preview broken? You can download the file version from <a href="https://github.com/code49/resume/blob/master/DavidChan_Resume.pdf">this link</a>.</p>]]></content><author><name>code49</name></author><category term="misc" /><category term="misc" /><summary type="html"><![CDATA[&lt;/embed&gt;]]></summary></entry><entry><title type="html">Just One Flappy Bird</title><link href="http://127.0.1:4000/projects/2025/01/19/just-one-flappy-bird.html" rel="alternate" type="text/html" title="Just One Flappy Bird" /><published>2025-01-19T00:00:00+00:00</published><updated>2025-01-19T00:00:00+00:00</updated><id>http://127.0.1:4000/projects/2025/01/19/just-one-flappy-bird</id><content type="html" xml:base="http://127.0.1:4000/projects/2025/01/19/just-one-flappy-bird.html"><![CDATA[<p><strong>January 2025 | Pittsburgh, PA</strong></p>
+
+<p><strong>Build18 Hackathon 2025</strong><br />
+<strong>Teammates: Kody Liang, Jaehyun Lim*, John Alacce</strong></p>
+
+<p><strong>Tools: SystemVerilog, VCS, Xilinx Vivado</strong><br />
+<strong>Project Link: <a href="https://github.com/jobitaki/JustOneFlappyBird">https://github.com/jobitaki/JustOneFlappyBird</a></strong></p>
+
+<p>*<em>Thanks to Jaehyun for writing the original project description (which this article is largely</em>
+ <em>based on) and for making such pretty graphics!</em></p>
+
+<hr />
+
+<!-- <p align="center">
+  <img src="media/logo.jpg" alt="logo" width="300" align="center"/>
+</p> -->
+
+<p>JustOneFlappyBird is a turing complete, one instruction set processor that can run the programming langugae SUBLEQ. As a demonstration of its functionality, we animated the video game Flappy Bird via VGA display. We targeted a <a href="https://www.amd.com/en/corporate/university-program/aup-boards/realdigital-boolean-board.html">Boolean Board</a> Xilinx Spartan 7 FPGA using SystemVerilog RTL, Synopsys VCS simulation, and Vivado synthesis. Our team of 4 built JustOneFlappyBird as a part of <a href="https://www.build18.org/">Build18</a> 2025, CMU ECE’s annual week-long hardware hackathon.</p>
+
+<h2 id="subleq-briefly">SUBLEQ, Briefly</h2>
+
+<p><a href="https://esolangs.org/wiki/Subleq">SUBLEQ</a> is an esoteric programming language consisting of a single instruction, <strong>SUB</strong>tract and branch if <strong>L</strong>ess-than or <strong>EQ</strong>ual to zero. Instructions are of the form <code class="language-plaintext highlighter-rouge">A B C</code> where A, B, and C are all memory addresses. The processor computes the value of <code class="language-plaintext highlighter-rouge">*B - *A</code> (* representing memory dereferences) and stores it back into B. If the result was less than or equal to 0, the PC jumps to C. That’s it!</p>
+
+<h2 id="uniprocessor-design">Uniprocessor Design</h2>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/just-one-flappy-bird/datapath.jpg" alt="uniprocessor-datapath" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+</p>
+
+<p>Our processor consists of a PC register, two “general purpose” registers for collecting the value of operand A and operand B, and a register for saving the value of the memory address B for storing the result of the subtraction later. We used a 2-read-1-write memory (reading/writing B, as well as reading A or C), as well as a subtractor (calculating <code class="language-plaintext highlighter-rouge">*B - *A</code>) and comparator (checking <code class="language-plaintext highlighter-rouge">*B - *A &lt;= 0</code>).</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/just-one-flappy-bird/fsm.jpg" alt="uniprocessor-fsm" align="center" border="1" />
+  </kbd>
+</p>
+
+<p>Our processor executes each SUBLEQ instruction in 8 cycles, or 5 primary steps (non-await-memory stages):</p>
+<ol>
+  <li>Use PC and PC+1 to fetch addresses A and B</li>
+  <li>Store address B into the B address register</li>
+  <li>Read from addresses A and B to get *A and *B</li>
+  <li>Store *A and *B into their respective registers, use PC+2 to fetch address C</li>
+  <li>Save <code class="language-plaintext highlighter-rouge">*B - *A</code> into address B, jump to address C if result is less than or equal to 0</li>
+</ol>
+
+<h2 id="graphics--vga">Graphics &amp; VGA</h2>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/just-one-flappy-bird/vga.jpg" alt="vga" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+</p>
+
+<p>Bird and pipe sprites where drawn via combinational logic. Each sprite was divided into “column 
+groups” (sets of columns where each row had the same colors), which was then used in conjunction with
+the current row to save us from having to write logic to set the color for each pixel individually!</p>
+
+<p>Once we had a row/col –&gt; color assignment, we rendered it via a VGA engine we previously designed for
+18-240’s Pong lab. Because the Boolean Board ultimately used a HDMI output, we used Xilinx IP to
+convert our VGA into HDMI for display.</p>
+
+<h2 id="system-architecture">System Architecture</h2>
+
+<p>Our processor (and corresponding program memory) is connected via MMIO to the graphics modules “Draw Bird” 
+and VGA. When the processor writes a value to a MMIO-reserved addreses, the Draw Bird module intercepts to
+update the bird’s position on the screen and output to the VGA graphics engine.</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/just-one-flappy-bird/system.jpg" alt="system" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+</p>
+
+<h2 id="group-photos">Group Photos!</h2>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/just-one-flappy-bird/group1.jpeg" alt="group-photo-1" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+</p>
+
+<p align="center">(above) left to right: John Alacce, David Chan, Kody Liang, Jaehyun Lim</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/just-one-flappy-bird/group2.jpeg" alt="group-photo-2" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+</p>
+
+<p align="center"><i> "You guys are goofballs" - Professor Bill Nace</i></p>]]></content><author><name>code49</name></author><category term="projects" /><category term="cmu" /><category term="projects" /><category term="rtl" /><category term="fpga" /><summary type="html"><![CDATA[January 2025 | Pittsburgh, PA]]></summary></entry></feed>

@@ -1,4 +1,4 @@
-Configuration file: /home/dchan/personal-work/website/personalWebsite2/_config.yml
+Configuration file: /home/dchan/personal-work/personalWebsite2/_config.yml
   Jekyll Spaceship: [1m🚀 Jekyll-Spaceship 0.10.2[0m
   Jekyll Spaceship: [1m🎉 A Jekyll plugin to provide powerful supports.[0m
   Jekyll Spaceship: [1m👉 [4mhttps://github.com/jeffreytse/jekyll-spaceship[0m
@@ -10,40 +10,16 @@ Configuration file: /home/dchan/personal-work/website/personalWebsite2/_config.y
   Jekyll Spaceship: [1m🗂  use media-processor[0m
   Jekyll Spaceship: [1m🗂  use emoji-processor[0m
   Jekyll Spaceship: [1m🗂  use element-processor[0m
-            Source: /home/dchan/personal-work/website/personalWebsite2
-       Destination: /home/dchan/personal-work/website/personalWebsite2/_site
+            Source: /home/dchan/personal-work/personalWebsite2
+       Destination: /home/dchan/personal-work/personalWebsite2/_site
  Incremental build: disabled. Enable with --incremental
       Generating... 
        Jekyll Feed: Generating feed for posts
+  Jekyll Spaceship: [1m[TableProcessor] _posts/2026-02-11-cmu-classes.md[0m
   Jekyll Spaceship: [1m[EmojiProcessor] about.html[0m
-                    done in 0.177 seconds.
- Auto-regeneration: enabled for '/home/dchan/personal-work/website/personalWebsite2'
+                    done in 0.585 seconds.
+ Auto-regeneration: enabled for '/home/dchan/personal-work/personalWebsite2'
 LiveReload address: http://127.0.1:35729
     Server address: http://127.0.1:4000/
   Server running... press ctrl-c to stop.
         LiveReload: Browser connected
-      Regenerating: 1 file(s) changed at 2026-02-11 18:36:31
-                    index.html
-       Jekyll Feed: Generating feed for posts
-                    ...done in 0.183908923 seconds.
-                    
-      Regenerating: 1 file(s) changed at 2026-02-11 18:36:36
-                    index.html
-       Jekyll Feed: Generating feed for posts
-                    ...done in 0.137353815 seconds.
-                    
-      Regenerating: 1 file(s) changed at 2026-02-11 18:38:18
-                    index.html
-       Jekyll Feed: Generating feed for posts
-                    ...done in 0.160689771 seconds.
-                    
-      Regenerating: 1 file(s) changed at 2026-02-11 18:38:37
-                    index.html
-       Jekyll Feed: Generating feed for posts
-                    ...done in 0.146086119 seconds.
-                    
-      Regenerating: 1 file(s) changed at 2026-02-11 18:39:06
-                    index.html
-       Jekyll Feed: Generating feed for posts
-                    ...done in 0.171845516 seconds.
-                    
