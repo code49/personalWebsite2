@@ -30,11 +30,11 @@ tags: cmu projects rtl fpga
 
 JustOneFlappyBird is a turing complete, one instruction set processor that can run the programming langugae SUBLEQ. As a demonstration of its functionality, we animated the video game Flappy Bird via VGA display. We targeted a [Boolean Board](https://www.amd.com/en/corporate/university-program/aup-boards/realdigital-boolean-board.html) Xilinx Spartan 7 FPGA using SystemVerilog RTL, Synopsys VCS simulation, and Vivado synthesis. Our team of 4 built JustOneFlappyBird as a part of [Build18](https://www.build18.org/) 2025, CMU ECE's annual week-long hardware hackathon. 
 
-## SUBLEQ, Briefly
+### SUBLEQ, Briefly
 
 [SUBLEQ](https://esolangs.org/wiki/Subleq) is an esoteric programming language consisting of a single instruction, **SUB**tract and branch if **L**ess-than or **EQ**ual to zero. Instructions are of the form `A B C` where A, B, and C are all memory addresses. The processor computes the value of `*B - *A` (* representing memory dereferences) and stores it back into B. If the result was less than or equal to 0, the PC jumps to C. That's it! 
 
-## Uniprocessor Design
+### Uniprocessor Design
 
 <p align="center">
   <kbd>
@@ -48,7 +48,7 @@ Our processor consists of a PC register, two "general purpose" registers for col
 
 <p align="center">
   <kbd>
-    <img src="/assets/images/just-one-flappy-bird/fsm.jpg" alt="uniprocessor-fsm"  align="center" border="1"/>
+    <img src="/assets/images/just-one-flappy-bird/fsm.jpg" alt="uniprocessor-fsm"  style="display: block; margin: 0 auto; border: 1px solid black;"/>
   </kbd>
 </p>
 
@@ -59,7 +59,7 @@ Our processor executes each SUBLEQ instruction in 8 cycles, or 5 primary steps (
 4. Store *A and *B into their respective registers, use PC+2 to fetch address C
 5. Save `*B - *A` into address B, jump to address C if result is less than or equal to 0
 
-## Graphics & VGA
+### Graphics & VGA
 
 <p align="center">
   <kbd>
@@ -76,7 +76,7 @@ Once we had a row/col --> color assignment, we rendered it via a VGA engine we p
 18-240's Pong lab. Because the Boolean Board ultimately used a HDMI output, we used Xilinx IP to
 convert our VGA into HDMI for display.
 
-## System Architecture
+### System Architecture
 
 Our processor (and corresponding program memory) is connected via MMIO to the graphics modules "Draw Bird" 
 and VGA. When the processor writes a value to a MMIO-reserved addreses, the Draw Bird module intercepts to
@@ -89,22 +89,20 @@ update the bird's position on the screen and output to the VGA graphics engine.
   </kbd>
 </p>
 
-## Group Photos!
+### Group Photos!
 
 <p align="center">
   <kbd>
     <img src="/assets/images/just-one-flappy-bird/group1.jpeg" alt="group-photo-1"
     style="display: block; margin: 0 auto; border: 1px solid black;"/>
   </kbd>
+  <br><i>(above) left to right: John Alacce, David Chan, Kody Liang, Jaehyun Lim</i>
 </p>
-
-<p align="center">(above) left to right: John Alacce, David Chan, Kody Liang, Jaehyun Lim</p>
 
 <p align="center">
   <kbd>
     <img src="/assets/images/just-one-flappy-bird/group2.jpeg" alt="group-photo-2" 
     style="display: block; margin: 0 auto; border: 1px solid black;"/>
   </kbd>
+  <br><i> "You guys are goofballs" - Professor Bill Nace</i>
 </p>
-
-<p align="center"><i> "You guys are goofballs" - Professor Bill Nace</i></p>
