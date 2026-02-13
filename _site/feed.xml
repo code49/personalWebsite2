@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://127.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.1:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-13T18:24:21+00:00</updated><id>http://127.0.1:4000/feed.xml</id><title type="html">David Le Chan</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>code49</name></author><entry><title type="html">CMU List of Classes</title><link href="http://127.0.1:4000/education/2026/02/11/cmu-classes.html" rel="alternate" type="text/html" title="CMU List of Classes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu-classes</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu-classes.html"><![CDATA[<p><strong>August 2022 - Present | Pittsburgh, PA</strong> <br /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://127.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.1:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-13T19:49:51+00:00</updated><id>http://127.0.1:4000/feed.xml</id><title type="html">David Le Chan</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><author><name>code49</name></author><entry><title type="html">cmu list of classes</title><link href="http://127.0.1:4000/education/2026/02/11/cmu-classes.html" rel="alternate" type="text/html" title="cmu list of classes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu-classes</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu-classes.html"><![CDATA[<p><strong>august 2022 - present | pittsburgh, pa</strong> <br /></p>
 
 <hr />
 
@@ -36,28 +36,33 @@
   </tbody>
 </table>
 
-<p>See more about my CMU experience at <a href="davidlechan.dev/education/2026/02/11/cmu.html">this link</a>!</p>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[August 2022 - Present | Pittsburgh, PA]]></summary></entry><entry><title type="html">Carnegie Mellon University</title><link href="http://127.0.1:4000/education/2026/02/11/cmu.html" rel="alternate" type="text/html" title="Carnegie Mellon University" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu.html"><![CDATA[<p><strong>August 2022 - Present | Pittsburgh, PA</strong></p>
+<p>See more about my CMU experience at <a href="davidlechan.dev/education/2026/02/11/cmu.html">this link</a>!</p>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[august 2022 - present | pittsburgh, pa]]></summary></entry><entry><title type="html">carnegie mellon university</title><link href="http://127.0.1:4000/education/2026/02/11/cmu.html" rel="alternate" type="text/html" title="carnegie mellon university" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu.html"><![CDATA[<p><strong>august 2022 - present | pittsburgh, PA</strong></p>
 
-<p><strong>M.S. in Electrical and Computer Engineering (Expected May 2027)</strong><br />
-<strong>B.S. in Electrical and Computer Engineering (Expected May 2026)</strong></p>
+<p><strong>M.S. in electrical and computer engineering (expected may 2027)</strong><br />
+<strong>B.S. in electrical and computer engineering (expected may 2026)</strong></p>
 
-<p><strong><a href="https://www.cmu.edu/">School Website</a> // <a href="https://engineering.cmu.edu/">College of Engineering (CIT) Website</a> // <a href="https://www.ece.cmu.edu/">ECE Department Website</a></strong></p>
+<p><strong><a href="https://www.cmu.edu/">school website</a> // <a href="https://engineering.cmu.edu/">college of engineering (cit) website</a></strong>
+<strong>// <a href="https://www.ece.cmu.edu/">ece department website</a></strong></p>
 
 <hr />
 
-<h3 id="some-fun-projects">Some Fun Projects:</h3>
+<h3 id="some-fun-projects">some fun projects:</h3>
 
-<h3 id="clubs">Clubs:</h3>
+<h3 id="clubs">clubs:</h3>
 <ul>
-  <li><a href="https://tartanconnect.cmu.edu/cia/top/">Carngie Involvement Association (CIA) Buggy</a></li>
-  <li><a href="https://www.cmusase.org/index.html">Society of Asian Scientists and Engineers</a></li>
-</ul>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[August 2022 - Present | Pittsburgh, PA]]></summary></entry><entry><title type="html">Just One Flappy Bird</title><link href="http://127.0.1:4000/projects/2025/01/19/just-one-flappy-bird.html" rel="alternate" type="text/html" title="Just One Flappy Bird" /><published>2025-01-19T00:00:00+00:00</published><updated>2025-01-19T00:00:00+00:00</updated><id>http://127.0.1:4000/projects/2025/01/19/just-one-flappy-bird</id><content type="html" xml:base="http://127.0.1:4000/projects/2025/01/19/just-one-flappy-bird.html"><![CDATA[<p><strong>January 2025 | Pittsburgh, PA</strong></p>
+  <li><a href="https://tartanconnect.cmu.edu/cia/top/">Carngie Involvement Association (CIA) Buggy</a> - treasurer, pusher, mechanic <br />
+    <ul>
+      <li><a href="https://www.cmu.edu/buggy/">Quick Guide to Buggy</a></li>
+    </ul>
+  </li>
+  <li><a href="https://www.cmusase.org/index.html">Society of Asian Scientists and Engineers</a> - mentor</li>
+</ul>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[august 2022 - present | pittsburgh, PA]]></summary></entry><entry><title type="html">just one flappy bird</title><link href="http://127.0.1:4000/projects/2025/01/19/just-one-flappy-bird.html" rel="alternate" type="text/html" title="just one flappy bird" /><published>2025-01-19T00:00:00+00:00</published><updated>2025-01-19T00:00:00+00:00</updated><id>http://127.0.1:4000/projects/2025/01/19/just-one-flappy-bird</id><content type="html" xml:base="http://127.0.1:4000/projects/2025/01/19/just-one-flappy-bird.html"><![CDATA[<p><strong>january 2025 | pittsburgh, PA</strong></p>
 
-<p><strong>Build18 Hackathon 2025</strong><br />
-<strong>Teammates: Kody Liang, Jaehyun Lim*, John Alacce</strong></p>
+<p><strong>build18 hackathon 2025</strong><br />
+<strong>teammates: kody liang, jaehyun lim*, john alacce</strong></p>
 
-<p><strong>Tools: SystemVerilog, VCS, Xilinx Vivado</strong><br />
-<strong>Project Link: <a href="https://github.com/jobitaki/JustOneFlappyBird">https://github.com/jobitaki/JustOneFlappyBird</a></strong></p>
+<p><strong>tools: systemverilog, vcs, vivado</strong><br />
+<strong><a href="https://github.com/jobitaki/JustOneFlappyBird">project repository</a></strong></p>
 
 <p>*<em>Thanks to Jaehyun for writing the original project description (which this article is largely</em>
  <em>based on) and for making such pretty graphics!</em></p>
@@ -70,11 +75,11 @@
 
 <p>JustOneFlappyBird is a turing complete, one instruction set processor that can run the programming langugae SUBLEQ. As a demonstration of its functionality, we animated the video game Flappy Bird via VGA display. We targeted a <a href="https://www.amd.com/en/corporate/university-program/aup-boards/realdigital-boolean-board.html">Boolean Board</a> Xilinx Spartan 7 FPGA using SystemVerilog RTL, Synopsys VCS simulation, and Vivado synthesis. Our team of 4 built JustOneFlappyBird as a part of <a href="https://www.build18.org/">Build18</a> 2025, CMU ECE’s annual week-long hardware hackathon.</p>
 
-<h3 id="subleq-briefly">SUBLEQ, Briefly</h3>
+<h3 id="subleq-briefly">SUBLEQ, briefly</h3>
 
 <p><a href="https://esolangs.org/wiki/Subleq">SUBLEQ</a> is an esoteric programming language consisting of a single instruction, <strong>SUB</strong>tract and branch if <strong>L</strong>ess-than or <strong>EQ</strong>ual to zero. Instructions are of the form <code class="language-plaintext highlighter-rouge">A B C</code> where A, B, and C are all memory addresses. The processor computes the value of <code class="language-plaintext highlighter-rouge">*B - *A</code> (* representing memory dereferences) and stores it back into B. If the result was less than or equal to 0, the PC jumps to C. That’s it!</p>
 
-<h3 id="uniprocessor-design">Uniprocessor Design</h3>
+<h3 id="uniprocessor-design">uniprocessor design</h3>
 
 <p align="center">
   <kbd>
@@ -99,7 +104,7 @@
   <li>Save <code class="language-plaintext highlighter-rouge">*B - *A</code> into address B, jump to address C if result is less than or equal to 0</li>
 </ol>
 
-<h3 id="graphics--vga">Graphics &amp; VGA</h3>
+<h3 id="graphics--vga">graphics &amp; VGA</h3>
 
 <p align="center">
   <kbd>
@@ -115,7 +120,7 @@ the current row to save us from having to write logic to set the color for each 
 18-240’s Pong lab. Because the Boolean Board ultimately used a HDMI output, we used Xilinx IP to
 convert our VGA into HDMI for display.</p>
 
-<h3 id="system-architecture">System Architecture</h3>
+<h3 id="system-architecture">system architecture</h3>
 
 <p>Our processor (and corresponding program memory) is connected via MMIO to the graphics modules “Draw Bird” 
 and VGA. When the processor writes a value to a MMIO-reserved addreses, the Draw Bird module intercepts to
@@ -127,7 +132,7 @@ update the bird’s position on the screen and output to the VGA graphics engine
   </kbd>
 </p>
 
-<h3 id="group-photos">Group Photos!</h3>
+<h3 id="group-photos">group photos!</h3>
 
 <p align="center">
   <kbd>
@@ -141,16 +146,62 @@ update the bird’s position on the screen and output to the VGA graphics engine
     <img src="/assets/images/just-one-flappy-bird/group2.jpeg" alt="group-photo-2" style="display: block; margin: 0 auto; border: 1px solid black;" />
   </kbd>
   <br /><i> "You guys are goofballs" - Professor Bill Nace</i>
-</p>]]></content><author><name>code49</name></author><category term="projects" /><category term="cmu" /><category term="projects" /><category term="rtl" /><category term="fpga" /><summary type="html"><![CDATA[January 2025 | Pittsburgh, PA]]></summary></entry><entry><title type="html">UCSF Bakar Computational Health Sciences Institute</title><link href="http://127.0.1:4000/experience/2020/08/14/ucsf-bchsi.html" rel="alternate" type="text/html" title="UCSF Bakar Computational Health Sciences Institute" /><published>2020-08-14T00:00:00+00:00</published><updated>2020-08-14T00:00:00+00:00</updated><id>http://127.0.1:4000/experience/2020/08/14/ucsf-bchsi</id><content type="html" xml:base="http://127.0.1:4000/experience/2020/08/14/ucsf-bchsi.html"><![CDATA[<p><strong>June - August 2020 | San Francisco, CA</strong></p>
+</p>]]></content><author><name>code49</name></author><category term="projects" /><category term="cmu" /><category term="projects" /><category term="rtl" /><category term="fpga" /><summary type="html"><![CDATA[january 2025 | pittsburgh, PA]]></summary></entry><entry><title type="html">vestaboard</title><link href="http://127.0.1:4000/experience/2021/08/01/vestaboard.html" rel="alternate" type="text/html" title="vestaboard" /><published>2021-08-01T00:00:00+00:00</published><updated>2021-08-01T00:00:00+00:00</updated><id>http://127.0.1:4000/experience/2021/08/01/vestaboard</id><content type="html" xml:base="http://127.0.1:4000/experience/2021/08/01/vestaboard.html"><![CDATA[<p><strong>june - august 2021 | south san francisco, ca</strong></p>
 
-<p><strong>PHIlter (Protected Health Information Filter) Team</strong><br />
-<strong>Managers: Hunter Mills, Lakshmi Radhakrishnan</strong></p>
+<p><strong>web applications programming team</strong><br />
+<strong>mentors: sully syed, dorrian porter</strong></p>
 
-<p><strong>Tools: Python (pandas, NumPy, spaCy)</strong></p>
+<p><strong>tools: php, javascript</strong><br />
+<strong><a href="https://www.vestaboard.com/">company website</a></strong></p>
 
 <hr />
 
-<h3 id="intro">Intro</h3>
+<h3 id="intro">intro</h3>
+
+<p>Vestaboard is a startup based in South San Francisco building smart split-flap 
+display boards, combining the looks and sounds of a cruicial element of old-timey 
+train station while integrating all the smarts of modern day technology. Users 
+can use their Vestaboard to write a message to their kids when away on business,
+see live sports scores, even be inspired by quotes from celebrities and influencers.</p>
+
+<h3 id="my-work">my work</h3>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/vestaboard/feature-summary.png" alt="feature-summary" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>Visual summary of features I added to the Vestaboard software ecosystem.</i>
+</p>
+
+<p>I worked at Vestaboard to implement Word-Of-The-Day, a “channel” (plugins that 
+control the board, automatically collecting data from the internet to generate messages)
+that polled the <a href="https://www.oed.com/">Oxford English Dictionary’s word of the day</a> to display 
+to the board using a combination of PHP and JavaScript. Creating my installable required 
+that I write many new features, including RSS feeds, pagination (getting the server to queue 
+and send a group of messages in order, since definitions took more space than a single ‘frame’
+on the board), and progress bars.</p>
+
+<h3 id="other-learnings">other learnings</h3>
+
+<p>At Vestaboard, I not only got to learn web development concepts (using a LAMP stack) 
+and a new programming language, but also got my first taste of small-scale
+startup culture. I got to experience the thrilling ups and downs of early
+businesses, see how executives manage a team and find other companies to work together
+with, and learn the importance of taking initiative to create proof of concepts of my
+ideas in order to more easily convince others.</p>
+
+<p><em>Thank you also to Sully Syed for his many web development teachings as well as to</em>
+<em>Dorrian Porter and the rest of the Vestaboard team!</em></p>]]></content><author><name>code49</name></author><category term="experience" /><summary type="html"><![CDATA[june - august 2021 | south san francisco, ca]]></summary></entry><entry><title type="html">ucsf bakar computational health sciences institute</title><link href="http://127.0.1:4000/experience/2020/08/14/ucsf-bchsi.html" rel="alternate" type="text/html" title="ucsf bakar computational health sciences institute" /><published>2020-08-14T00:00:00+00:00</published><updated>2020-08-14T00:00:00+00:00</updated><id>http://127.0.1:4000/experience/2020/08/14/ucsf-bchsi</id><content type="html" xml:base="http://127.0.1:4000/experience/2020/08/14/ucsf-bchsi.html"><![CDATA[<p><strong>june - august 2020 | san francisco, ca</strong></p>
+
+<p><strong>PHIlter (protected health information filter) team</strong><br />
+<strong>managers: hunter mills, lakshmi radhakrishnan</strong></p>
+
+<p><strong>tools: python (pandas, numpy, spacy)</strong><br />
+<strong><a href="">institute website</a> // <a href="https://github.com/BCHSI/philter-ucsf">project repository</a></strong></p>
+
+<hr />
+
+<h3 id="intro">intro</h3>
 
 <p>The Bakar Computational Health Sciences Institute (BCHSI) is a division of the University of 
 California San Francisco dedicated to applying computational tools to help solve medical
@@ -161,7 +212,7 @@ understand how genetics impact common diseases.</p>
 (text documents doctors write during patient visits to note both quantitative and qualitative
 observations). Through de-identifying these notes by removing personal health information (PHI, such as names, locations, dates, etc.), the data in these notes could be made more widely available for research study, all while protecting the privacy of patients.</p>
 
-<h3 id="my-work">My Work</h3>
+<h3 id="my-work">my work</h3>
 
 <p>My project revolved around creating a post-processing algorithm for PHIlter’s de-identified 
 output. Initially, PHIlter simply marked each case of identifying information with a 
@@ -186,7 +237,7 @@ of concept!), so efficiency and simplicity were key considerations, particularly
 of i2b2 pales in comparison to the number of clinical notes generated by the UCSF healthcare 
 system, where PHIlter was intended to be used.</p>
 
-<h3 id="other-learnings">Other Learnings</h3>
+<h3 id="other-learnings">other learnings</h3>
 
 <p>Aside from using data libraries such as pandas and numpy on a large scale for the first time,
 my time at UCSF also allowed me to get a first-hand look at the forefront of computational
@@ -196,4 +247,4 @@ real-world problems, and how a diverse group of developers, researchers, even do
 together to work towards a collective end goal.</p>
 
 <p><em>Thank you also to Hunter Mills and Lakshmi Radhakrishnan, as well as the rest of the PHIlter</em>
-<em>team, whose mentorship over the summer taught me many life lessons and technical skills!</em></p>]]></content><author><name>code49</name></author><category term="experience" /><category term="python" /><summary type="html"><![CDATA[June - August 2020 | San Francisco, CA]]></summary></entry></feed>
+<em>team, whose mentorship over the summer taught me many life lessons and technical skills!</em></p>]]></content><author><name>code49</name></author><category term="experience" /><category term="python" /><summary type="html"><![CDATA[june - august 2020 | san francisco, ca]]></summary></entry></feed>

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CMU List of Classes
+title: cmu list of classes
 # subtitle: August 2022 - Present | Pittsburgh, PA
 # author: 
 categories: education
@@ -10,7 +10,7 @@ tags: cmu
 sidebar: []
 ---
 
-**August 2022 - Present \| Pittsburgh, PA** <br>
+**august 2022 - present \| pittsburgh, pa** <br>
 
 ---
 
