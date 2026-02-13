@@ -29,5 +29,5 @@
   '';
 
   # Command to run when entering the shell (gives you a bash prompt)
-  runScript = "bash";
+  runScript = "bash -c './start-local.sh; bash'"; 
 }).env

@@ -17,9 +17,42 @@ Configuration file: /home/dchan/personal-work/personalWebsite2/_config.yml
        Jekyll Feed: Generating feed for posts
   Jekyll Spaceship: [1m[TableProcessor] _posts/2026-02-11-cmu-classes.md[0m
   Jekyll Spaceship: [1m[EmojiProcessor] about.html[0m
-                    done in 0.585 seconds.
+                    done in 0.537 seconds.
  Auto-regeneration: enabled for '/home/dchan/personal-work/personalWebsite2'
 LiveReload address: http://127.0.1:35729
     Server address: http://127.0.1:4000/
   Server running... press ctrl-c to stop.
         LiveReload: Browser connected
+[2026-02-13 15:41:57] ERROR '/projects/2025/01/19/assets/brand/favicon.ico' not found.
+[2026-02-13 15:41:57] ERROR '/projects/2025/01/19/assets/brand/favicon.ico' not found.
+      Regenerating: 1 file(s) changed at 2026-02-13 15:44:00
+                    _posts/2025-01-19-just-one-flappy-bird.md
+       Jekyll Feed: Generating feed for posts
+                    ...done in 0.276333666 seconds.
+                    
+      Regenerating: 1 file(s) changed at 2026-02-13 15:44:04
+                    _posts/2025-01-19-just-one-flappy-bird.md
+       Jekyll Feed: Generating feed for posts
+                    ...done in 0.217058853 seconds.
+                    
+[2026-02-13 15:48:10] ERROR '/education/2026/02/11/assets/brand/favicon.ico' not found.
+      Regenerating: 1 file(s) changed at 2026-02-13 16:12:59
+                    _sass/misc/theme-toggle.scss
+       Jekyll Feed: Generating feed for posts
+                    ...done in 0.290054393 seconds.
+                    
+      Regenerating: 1 file(s) changed at 2026-02-13 16:13:36
+                    _sass/misc/theme-toggle.scss
+       Jekyll Feed: Generating feed for posts
+                    ...done in 0.322918908 seconds.
+                    
+      Regenerating: 1 file(s) changed at 2026-02-13 16:15:07
+                    _sass/misc/theme-toggle.scss
+       Jekyll Feed: Generating feed for posts
+                    ...done in 0.300814571 seconds.
+                    
+      Regenerating: 1 file(s) changed at 2026-02-13 16:15:25
+                    _sass/misc/theme-toggle.scss
+       Jekyll Feed: Generating feed for posts
+                    ...done in 0.291353702 seconds.
+                    

@@ -90,6 +90,10 @@ translate_langs:
     img: https://cdn.countryflags.com/thumbs/china/flag-400.png
     text: Chinese (Simplified)
 
+  # - lang: zh-HK
+  #   img: https://cdn.countryflags.com/thumbs/china/flag-400.png
+  #   text: Chinese (HK)
+
 #
 #   - lang: ja
 #     img: https://cdn.countryflags.com/thumbs/japan/flag-400.png
