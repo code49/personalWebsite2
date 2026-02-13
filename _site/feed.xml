@@ -1,8 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://127.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.1:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-13T20:05:12+00:00</updated><id>http://127.0.1:4000/feed.xml</id><title type="html">david le chan</title><subtitle>{Personal website for David Chan!}</subtitle><author><name>code49</name></author><entry><title type="html">cmu list of classes</title><link href="http://127.0.1:4000/education/2026/02/11/cmu-classes.html" rel="alternate" type="text/html" title="cmu list of classes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu-classes</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu-classes.html"><![CDATA[<p><strong>august 2022 - present | pittsburgh, pa</strong> <br /></p>
-
-<hr />
-
-<p>Lightly-stylized list of the classes I’ve taken at CMU. Non-mini technical classes bolded!</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://127.0.1:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://127.0.1:4000/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-13T21:03:07+00:00</updated><id>http://127.0.1:4000/feed.xml</id><title type="html">david le chan</title><subtitle>{Personal website for David Chan!}</subtitle><author><name>code49</name></author><entry><title type="html">cmu list of classes</title><link href="http://127.0.1:4000/education/2026/02/11/cmu-classes.html" rel="alternate" type="text/html" title="cmu list of classes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu-classes</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu-classes.html"><![CDATA[<p>Lightly-stylized list of the classes I’ve taken at CMU. Non-mini technical classes bolded!</p>
 
 <table>
   <thead>
@@ -36,7 +32,7 @@
   </tbody>
 </table>
 
-<p>See more about my CMU experience at <a href="davidlechan.dev/education/2026/02/11/cmu.html">this link</a>!</p>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[august 2022 - present | pittsburgh, pa]]></summary></entry><entry><title type="html">carnegie mellon university</title><link href="http://127.0.1:4000/education/2026/02/11/cmu.html" rel="alternate" type="text/html" title="carnegie mellon university" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu.html"><![CDATA[<p><strong>august 2022 - present | pittsburgh, PA</strong></p>
+<p>See more about my CMU experience at <a href="davidlechan.dev/education/2026/02/11/cmu.html">this link</a>!</p>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[Lightly-stylized list of the classes I’ve taken at CMU. Non-mini technical classes bolded!]]></summary></entry><entry><title type="html">carnegie mellon university</title><link href="http://127.0.1:4000/education/2026/02/11/cmu.html" rel="alternate" type="text/html" title="carnegie mellon university" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>http://127.0.1:4000/education/2026/02/11/cmu</id><content type="html" xml:base="http://127.0.1:4000/education/2026/02/11/cmu.html"><![CDATA[<p><strong>august 2022 - present | pittsburgh, PA</strong></p>
 
 <p><strong>M.S. in electrical and computer engineering (expected may 2027)</strong><br />
 <strong>B.S. in electrical and computer engineering (expected may 2026)</strong></p>
@@ -47,6 +43,9 @@
 <hr />
 
 <h3 id="some-fun-projects">some fun projects:</h3>
+<ul>
+  <li><a href="https://davidlechan.dev/projects/2025/01/19/just-one-flappy-bird.html">JustOneFlappyBird</a> - one-instruction CPU for flappy bird</li>
+</ul>
 
 <h3 id="clubs">clubs:</h3>
 <ul>
@@ -117,7 +116,7 @@ groups” (sets of columns where each row had the same colors), which was then u
 the current row to save us from having to write logic to set the color for each pixel individually!</p>
 
 <p>Once we had a row/col –&gt; color assignment, we rendered it via a VGA engine we previously designed for
-18-240’s Pong lab. Because the Boolean Board ultimately used a HDMI output, we used Xilinx IP to
+18-240’s Pong lab project. Because the Boolean Board ultimately used a HDMI output, we used Xilinx IP to
 convert our VGA into HDMI for display.</p>
 
 <h3 id="system-architecture">system architecture</h3>

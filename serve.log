@@ -18,14 +18,14 @@ Configuration file: /home/dchan/personal-work/personalWebsite2/_config.yml
   Jekyll Spaceship: [1m[TableProcessor] _posts/2026-02-11-cmu-classes.md[0m
   Jekyll Spaceship: [1m[EmojiProcessor] about.html[0m
   Jekyll Spaceship: [1m[TableProcessor] index.html[0m
-                    done in 0.614 seconds.
+                    done in 0.624 seconds.
  Auto-regeneration: enabled for '/home/dchan/personal-work/personalWebsite2'
 LiveReload address: http://127.0.1:35729
     Server address: http://127.0.1:4000/
   Server running... press ctrl-c to stop.
         LiveReload: Browser connected
-      Regenerating: 1 file(s) changed at 2026-02-13 20:05:12
-                    _includes/views/header.html
+      Regenerating: 1 file(s) changed at 2026-02-13 21:03:07
+                    _includes/extensions/theme-toggle.html
        Jekyll Feed: Generating feed for posts
-                    ...done in 0.454000911 seconds.
+                    ...done in 0.337069687 seconds.
                     

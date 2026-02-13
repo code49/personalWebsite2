@@ -53,7 +53,7 @@ sidebar:
     {%- assign result = hidden | where_exp: "item", "item == 'related_posts'" -%}
     {%- if result.size == 0 -%}
     <div class="post-related">
-      <div>Related Articles</div>
+      <div>possibly-related pages:</div>
       <ul>
         {% assign posts = site[page.collection] | sample:4 %}
         {%- for post in posts -%}

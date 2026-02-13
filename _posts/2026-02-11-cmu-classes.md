@@ -10,10 +10,6 @@ tags: cmu
 sidebar: []
 ---
 
-**august 2022 - present \| pittsburgh, pa** <br>
-
----
-
 Lightly-stylized list of the classes I've taken at CMU. Non-mini technical classes bolded!
 
 | Year| Fall | Spring |

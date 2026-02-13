@@ -73,7 +73,7 @@ groups" (sets of columns where each row had the same colors), which was then use
 the current row to save us from having to write logic to set the color for each pixel individually!
 
 Once we had a row/col --> color assignment, we rendered it via a VGA engine we previously designed for
-18-240's Pong lab. Because the Boolean Board ultimately used a HDMI output, we used Xilinx IP to
+18-240's Pong lab project. Because the Boolean Board ultimately used a HDMI output, we used Xilinx IP to
 convert our VGA into HDMI for display.
 
 ### system architecture
