@@ -17,8 +17,8 @@ tags: cmu projects rtl fpga
 **tools: systemverilog, vcs, vivado**<br>
 **[project repository](https://github.com/jobitaki/JustOneFlappyBird)**
 
-*_Thanks to Jaehyun for writing the original project description (which this article is largely_
- _based on) and for making such pretty graphics!_
+*_Thanks to Jaehyun for writing the [original project description](https://github.com/jobitaki/JustOneFlappyBird/blob/main/README.md)_
+  _(which this article is largely based on) and for making such pretty graphics!_
 
 ---
 
