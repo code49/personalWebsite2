@@ -1,7 +1,7 @@
 ---
 layout: post
 title: vestaboard
-subtitle: programming intern
+subtitle: "<b>programming intern</b><br>june - august 2021<br>south san francisco, ca"
 # author: 
 categories: experience
 banner: "/assets/images/banners/default.png"
@@ -9,8 +9,6 @@ tags:
 # top: 0
 # sidebar: []
 ---
-
-**june - august 2021 \| south san francisco, ca** 
 
 **web applications programming team**<br>
 **mentors: sully syed, dorrian porter**
@@ -50,7 +48,7 @@ on the board), and progress bars.
 
 At Vestaboard, I not only got to learn web development concepts (using a LAMP stack) 
 and a new programming language, but also got my first taste of small-scale
-startup culture. I got to experience the thrilling ups and downs of early
+startup culture. I got to experience the ups and downs of early
 businesses, see how executives manage a team and find other companies to work together
 with, and learn the importance of taking initiative to create proof of concepts of my
 ideas in order to more easily convince others.

@@ -803,7 +803,8 @@ html[data-scroll-status=down] .framework .sidebar {
   }
 }
 .page-banner .page-banner-inner > *:first-child > :nth-child(2) {
-  font-weight: lighter;
+  font-weight: normal;
+  font-style: italic;
   margin-bottom: 0.8em;
   transition: 0.2s all;
 }

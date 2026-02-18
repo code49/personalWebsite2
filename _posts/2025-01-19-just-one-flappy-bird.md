@@ -1,7 +1,7 @@
 ---
 layout: post
 title: just one flappy bird
-subtitle: one-instruction CPU video game
+subtitle: "<b>one-instruction CPU video game</b><br>january 2025<br>pittsburgh, pa"
 # author: 
 categories: projects
 banner: "/assets/images/banners/just-one-flappy-bird.png"
@@ -9,8 +9,6 @@ tags: cmu projects rtl fpga
 # top: 0
 # sidebar: []
 ---
-
-**january 2025 \| pittsburgh, PA** 
 
 **build18 hackathon 2025**<br>
 **teammates: kody liang, jaehyun lim\*, john alacce**

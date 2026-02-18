@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ucsf bakar computational health sciences institute
-subtitle: data science intern
+subtitle: "<b>data science intern</b><br>june - august 2020<br>san francisco, ca"
 # author: 
 categories: experience
 banner: "/assets/images/banners/just-one-flappy-bird.png"
@@ -10,7 +10,6 @@ tags: python
 # sidebar: []
 ---
 
-**june - august 2020 \| san francisco, ca** 
 
 **PHIlter (protected health information filter) team**<br>
 **managers: hunter mills, lakshmi radhakrishnan**

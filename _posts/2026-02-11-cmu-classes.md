@@ -12,7 +12,7 @@ sidebar: []
 
 Lightly-stylized list of the classes I've taken at CMU. Non-mini technical classes bolded!
 
-| Year| Fall | Spring |
+| year | fall | spring |
 | :---: | --- | --- |
 | 1 | **[18-100] Intro to ECE** <br> **[21-120] Calculus 1** <br> **[33-141] Physics 1 (Mechanics)** <br> [76-107] Writing About Data <br> [76-108] Writing About Public Problems | **[12-100] Intro to CivE** <br> **[21-122] Calculus 2** <br> **[21-127] Concepts of Mathematics** <br> **[33-142] Physics 2 (E&M)** <br> **[36-219] Probability Theory** |
 | 2 | **[15-122] Principles of Imperative Computation** <br> [18-200] ECE Sophomore Seminar <br> **[18-240] Digital Design Core** <br> [51-173] Human Experiences in Design <br> [66-215] The Innovation Trials | [18-021] Intro to PCB Fabrication <br> **[18-213] Computer Systems Core** <br> **[21-241] Matrices and Linear Transformations** <br> **[21-259] Calculus in 3-D** <br> [76-270] Writing for the Professions |
