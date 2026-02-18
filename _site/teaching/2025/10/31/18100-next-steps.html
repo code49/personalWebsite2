@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
 
     const imgEls = [];
-    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    const els = galleryEl.querySelectorAll("img:not(.emoji):not(.no-lightbox)");
     els.forEach((el) => {
       if (el.src.trim() == "") {
         return;
@@ -959,6 +959,14 @@ perfectly fit 5 cm x 5 cm sticky notes available from Target!</p>
       <div>possibly-related pages:</div>
       <ul>
         <li class="">
+          <a class="post-link" href="/projects/2025/01/19/just-one-flappy-bird.html" title="just one flappy bird">
+            just one flappy bird<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
           <a class="post-link" href="/teaching/2025/10/31/18100-next-steps.html" title="next steps in ece recitation">
             next steps in ece recitation<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
@@ -967,8 +975,8 @@ perfectly fit 5 cm x 5 cm sticky notes available from Target!</p>
 </a>
         </li>
 <li class="">
-          <a class="post-link" href="/experience/2020/08/14/ucsf-bchsi.html" title="ucsf bakar computational health sciences institute">
-            ucsf bakar computational health sciences institute<span class="post-badges">
+          <a class="post-link" href="/education/2026/02/11/cmu.html" title="carnegie mellon university">
+            carnegie mellon university<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>
@@ -977,14 +985,6 @@ perfectly fit 5 cm x 5 cm sticky notes available from Target!</p>
 <li class="">
           <a class="post-link" href="/education/2026/02/11/cmu-classes.html" title="cmu list of classes">
             cmu list of classes<span class="post-badges">
-  <span class="post-badge badge-top">TOP</span>
-  <span class="post-badge badge-new">NEW</span>
-</span>
-</a>
-        </li>
-<li class="">
-          <a class="post-link" href="/education/2026/02/11/cmu.html" title="carnegie mellon university">
-            carnegie mellon university<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>

@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
 
     const imgEls = [];
-    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    const els = galleryEl.querySelectorAll("img:not(.emoji):not(.no-lightbox)");
     els.forEach((el) => {
       if (el.src.trim() == "") {
         return;
@@ -1020,14 +1020,6 @@ update the bird’s position on the screen and output to the VGA graphics engine
       <div>possibly-related pages:</div>
       <ul>
         <li class="">
-          <a class="post-link" href="/experience/2023/08/01/tau.html" title="tau motors">
-            tau motors<span class="post-badges">
-  <span class="post-badge badge-top">TOP</span>
-  <span class="post-badge badge-new">NEW</span>
-</span>
-</a>
-        </li>
-<li class="">
           <a class="post-link" href="/experience/2021/08/01/vestaboard.html" title="vestaboard">
             vestaboard<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
@@ -1036,8 +1028,16 @@ update the bird’s position on the screen and output to the VGA graphics engine
 </a>
         </li>
 <li class="">
-          <a class="post-link" href="/projects/2025/01/19/just-one-flappy-bird.html" title="just one flappy bird">
-            just one flappy bird<span class="post-badges">
+          <a class="post-link" href="/teaching/2025/10/31/18100-next-steps.html" title="next steps in ece recitation">
+            next steps in ece recitation<span class="post-badges">
+  <span class="post-badge badge-top">TOP</span>
+  <span class="post-badge badge-new">NEW</span>
+</span>
+</a>
+        </li>
+<li class="">
+          <a class="post-link" href="/education/2026/02/11/cmu-classes.html" title="cmu list of classes">
+            cmu list of classes<span class="post-badges">
   <span class="post-badge badge-top">TOP</span>
   <span class="post-badge badge-new">NEW</span>
 </span>

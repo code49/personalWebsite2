@@ -41,7 +41,7 @@
     }
 
     const imgEls = [];
-    const els = galleryEl.querySelectorAll("img:not(.emoji)");
+    const els = galleryEl.querySelectorAll("img:not(.emoji):not(.no-lightbox)");
     els.forEach((el) => {
       if (el.src.trim() == "") {
         return;
