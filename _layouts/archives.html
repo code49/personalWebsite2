@@ -3,6 +3,12 @@ layout: framework
 sidebar: archive-list
 ---
 
+List of pages to explore, grouped by time!<br>
+Alternatively, view pages <a href="{% link categories.html %}">by category</a> 
+or <a href="{% link tags.html %}">by tag</a>.
+
+<br><br><hr><br>
+
 {%- if site.posts.size > 0 -%}
 
   {% include functions.html func='log' level='debug' msg='Get datetimes value' %}

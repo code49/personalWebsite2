@@ -3,6 +3,12 @@ layout: framework
 sidebar: tag-list
 ---
 
+List of pages to explore, grouped by tags!<br>
+Alternatively, view pages <a href="{% link categories.html %}">by category</a> 
+or <a href="{% link archives.html %}">by time</a>.
+
+<br><br><hr><br>
+
 {%- if site.posts.size > 0 -%}
 
   {%- include functions.html func='log' level='debug' msg='Get tags value' -%}
