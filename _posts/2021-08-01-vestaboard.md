@@ -5,7 +5,7 @@ subtitle: "<b>programming intern</b><br>june - august 2021<br>south san francisc
 # author: 
 categories: experience
 banner: "/assets/images/banners/default.png"
-tags: 
+tags: php javascript startup
 # top: 0
 # sidebar: []
 ---
