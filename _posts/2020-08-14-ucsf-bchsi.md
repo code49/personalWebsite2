@@ -4,7 +4,7 @@ title: ucsf bakar computational health sciences institute
 subtitle: "<b>data science intern</b><br>june - august 2020<br>san francisco, ca"
 # author: 
 categories: experience
-banner: "/assets/images/banners/just-one-flappy-bird.png"
+banner: "/assets/images/banners/ucsf.png"
 tags: python
 # top: 0
 # sidebar: []

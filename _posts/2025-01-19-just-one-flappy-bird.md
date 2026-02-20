@@ -17,8 +17,8 @@ tags: cmu projects rtl fpga
 **tools: systemverilog, vcs, vivado**<br>
 **[project repository](https://github.com/jobitaki/JustOneFlappyBird)**
 
-*_Thanks to Jaehyun for writing the original project description (which this article is largely_
- _based on) and for making such pretty graphics!_
+*_Thanks to Jaehyun for writing the [original project description](https://github.com/jobitaki/JustOneFlappyBird/blob/main/README.md)_
+  _(which this article is largely based on) and for making such pretty graphics!_
 
 ---
 
@@ -71,8 +71,8 @@ groups" (sets of columns where each row had the same colors), which was then use
 the current row to save us from having to write logic to set the color for each pixel individually!
 
 Once we had a row/col --> color assignment, we rendered it via a VGA engine we previously designed for
-18-240's Pong lab project. Because the Boolean Board ultimately used a HDMI output, we used Xilinx IP to
-convert our VGA into HDMI for display.
+[18-240's Pong project]({% link _posts/2023-11-09-pong.md %}). Because the Boolean Board ultimately
+used a HDMI output, we used Xilinx IP to convert our VGA into HDMI for display.
 
 ### system architecture
 

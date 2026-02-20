@@ -4,8 +4,8 @@ title: vestaboard
 subtitle: "<b>programming intern</b><br>june - august 2021<br>south san francisco, ca"
 # author: 
 categories: experience
-banner: "/assets/images/banners/default.png"
-tags: 
+banner: "/assets/images/banners/vestaboard.png"
+tags: php javascript startup
 # top: 0
 # sidebar: []
 ---

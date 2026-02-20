@@ -1,6 +1,6 @@
 ---
 layout: post
-title: power and equivalent circuits recitation
+title: "18-100: power and equivalent circuits recitation"
 subtitle: january 2025
 # author: 
 categories: teaching
@@ -12,7 +12,8 @@ tags:
 
 ### intro
 
-Recitation materials for 18-100 S25 recitation 2, covering power calculations and Norton/Thevenin equivalent circuits. Stepping in for the professors, I independently designed, developed, and delivered the following lecture materials.
+Recitation materials for 18-100 S25 recitation 2, covering power calculations and Norton/Thevenin equivalent circuits. Stepping in for the professors due to scheduling conflicts, 
+I independently designed, developed, and delivered the following lecture materials.
 
 ### handout
 
