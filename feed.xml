@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://davidlechan.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://davidlechan.dev/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-02-20T18:57:17+00:00</updated><id>https://davidlechan.dev/feed.xml</id><title type="html">david le chan</title><subtitle>{Personal website for David Chan!}</subtitle><author><name>code49</name></author><entry><title type="html">carnegie mellon university</title><link href="https://davidlechan.dev/education/2026/02/11/cmu.html" rel="alternate" type="text/html" title="carnegie mellon university" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://davidlechan.dev/education/2026/02/11/cmu*</id><content type="html" xml:base="https://davidlechan.dev/education/2026/02/11/cmu.html"><![CDATA[<p><strong><a href="https://www.cmu.edu/">school website</a> // <a href="https://engineering.cmu.edu/">college of engineering (cit) website</a></strong>
+<strong>// <a href="https://www.ece.cmu.edu/">ece department website</a></strong></p>
+
+<hr />
+
+<h3 id="some-fun-projects">some fun projects:</h3>
+<ul>
+  <li><a href="https://davidlechan.dev/projects/2025/01/19/just-one-flappy-bird.html">JustOneFlappyBird</a> - one-instruction CPU for flappy bird</li>
+</ul>
+
+<h3 id="clubs">clubs:</h3>
+<ul>
+  <li><a href="https://tartanconnect.cmu.edu/cia/top/">Carngie Involvement Association (CIA) Buggy</a> - treasurer, pusher, mechanic <br />
+    <ul>
+      <li><a href="https://www.cmu.edu/buggy/">Buggy Explained</a></li>
+    </ul>
+  </li>
+  <li><a href="https://www.cmusase.org/index.html">Society of Asian Scientists and Engineers</a> - mentor</li>
+</ul>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[school website // college of engineering (cit) website // ece department website]]></summary></entry><entry><title type="html">cmu list of classes</title><link href="https://davidlechan.dev/education/2026/02/11/cmu-classes.html" rel="alternate" type="text/html" title="cmu list of classes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://davidlechan.dev/education/2026/02/11/cmu-classes</id><content type="html" xml:base="https://davidlechan.dev/education/2026/02/11/cmu-classes.html"><![CDATA[<p>Lightly-stylized list of the classes I’ve taken at CMU. Non-mini technical classes bolded!</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">year</th>
+      <th>fall</th>
+      <th>spring</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td>**[18-100] Intro to ECE** <br /> **[21-120] Calculus 1** <br /> **[33-141] Physics 1 (Mechanics)** <br /> [76-107] Writing About Data <br /> [76-108] Writing About Public Problems</td>
+      <td>**[12-100] Intro to CivE** <br /> **[21-122] Calculus 2** <br /> **[21-127] Concepts of Mathematics** <br /> **[33-142] Physics 2 (E&amp;M)** <br /> **[36-219] Probability Theory**</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td>**[15-122] Principles of Imperative Computation** <br /> [18-200] ECE Sophomore Seminar <br /> **[18-240] Digital Design Core** <br /> [51-173] Human Experiences in Design <br /> [66-215] The Innovation Trials</td>
+      <td>[18-021] Intro to PCB Fabrication <br /> **[18-213] Computer Systems Core** <br /> **[21-241] Matrices and Linear Transformations** <br /> **[21-259] Calculus in 3-D** <br /> [76-270] Writing for the Professions</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td>**[18-220] Analog Circuits Core** <br /> **[18-290] Signals and Systems Core** <br /> **[18-341] Logic Design &amp; Verification** <br /> **[18-580]  Research** <br /> [98-008] Intro to Rust <br /> [99-190] Managing Stress</td>
+      <td>**[11-344] Machine Learning in Practice** <br /> **[18-320] Microelectronic Circuits** <br /> **[18-447] Intro to Computer Architecture** <br /> **[18-580/18-980] Research** <br /> [39-402] Leadership Development Seminar <br /> [82-234] Environment &amp; Society in Modern Chinese Literature &amp; Visual Culture</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td>**[15-369] Numerical Computing** <br /> **[18-622] Digital IC Design** <br /> **[18-981] Research** <br /> [53-312] Theme Park Design <br /> [66-221] IP Law <br /> [82-139] Chinese Language, Culture and Society</td>
+      <td>[12-201] Geology <br /> **[18-525] Advanced IC Design (Tapeout Capstone)** <br /> **[18-980] Research** <br /> **[19-682] Strategy &amp; Management of Technological Innovation** <br /> **[36-220] Engineering Statistics &amp; Quality Control** <br /> [69-136] Basketball Skills</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>See more about my CMU experience at <a href="davidlechan.dev/education/2026/02/11/cmu.html">this link</a>!</p>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[Lightly-stylized list of the classes I’ve taken at CMU. Non-mini technical classes bolded!]]></summary></entry><entry><title type="html">hydra</title><link href="https://davidlechan.dev/projects/2026/02/11/hydra.html" rel="alternate" type="text/html" title="hydra" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://davidlechan.dev/projects/2026/02/11/hydra*</id><content type="html" xml:base="https://davidlechan.dev/projects/2026/02/11/hydra.html"><![CDATA[<!-- **18-725: advanced digital ic design // 18-726: projects in integrated circuit design**<br> -->
+<p><strong>18-725: advanced digital ic design</strong><br />
+<strong>teammates: sophia fu, kody liang, silvia song, kaylan zhang</strong><br />
+<strong>mentors: ken mai, larry tang, siddharth das</strong></p>
+
+<p><strong>tools: systemverilog, vcs</strong></p>
+
+<hr />
+
+<p>Work in progress!</p>]]></content><author><name>code49</name></author><category term="projects" /><category term="cmu" /><category term="projects" /><category term="rtl" /><category term="fpga" /><summary type="html"><![CDATA[18-725: advanced digital ic design teammates: sophia fu, kody liang, silvia song, kaylan zhang mentors: ken mai, larry tang, siddharth das]]></summary></entry><entry><title type="html">18-100: intro to ece</title><link href="https://davidlechan.dev/teaching/2025/12/31/18100.html" rel="alternate" type="text/html" title="18-100: intro to ece" /><published>2025-12-31T00:00:00+00:00</published><updated>2025-12-31T00:00:00+00:00</updated><id>https://davidlechan.dev/teaching/2025/12/31/18100*</id><content type="html" xml:base="https://davidlechan.dev/teaching/2025/12/31/18100.html"><![CDATA[<p><strong>professors: jian-gang (jimmy) zhu, mark budnik, greg kesden, tom zajdel</strong><br /></p>
+
+<p><strong>tools: -</strong><br />
+<strong><a href="https://courses.ece.cmu.edu/18100">course website</a></strong></p>
+
+<hr />]]></content><author><name>code49</name></author><category term="teaching" /><summary type="html"><![CDATA[professors: jian-gang (jimmy) zhu, mark budnik, greg kesden, tom zajdel]]></summary></entry><entry><title type="html">sram</title><link href="https://davidlechan.dev/projects/2025/11/25/sram.html" rel="alternate" type="text/html" title="sram" /><published>2025-11-25T00:00:00+00:00</published><updated>2025-11-25T00:00:00+00:00</updated><id>https://davidlechan.dev/projects/2025/11/25/sram*</id><content type="html" xml:base="https://davidlechan.dev/projects/2025/11/25/sram.html"><![CDATA[<p><strong>18-622: digital ic design</strong><br />
+<strong>teammates: kody liang</strong></p>
+
+<p><strong>tools: virtuoso</strong></p>
+
+<hr />]]></content><author><name>code49</name></author><category term="projects" /><category term="cmu" /><category term="projects" /><summary type="html"><![CDATA[18-622: digital ic design teammates: kody liang]]></summary></entry><entry><title type="html">18-100: next steps in ece recitation</title><link href="https://davidlechan.dev/teaching/2025/10/31/18100-next-steps.html" rel="alternate" type="text/html" title="18-100: next steps in ece recitation" /><published>2025-10-31T00:00:00+00:00</published><updated>2025-10-31T00:00:00+00:00</updated><id>https://davidlechan.dev/teaching/2025/10/31/18100-next-steps</id><content type="html" xml:base="https://davidlechan.dev/teaching/2025/10/31/18100-next-steps.html"><![CDATA[<h3 id="intro">intro</h3>
+
+<p>Navigating the transition from introductory courses to a full Electrical and Computer 
+Engineering degree can be overwhelming. I recognized the need for stronger student engagement
+and completely overhauled our “Next Steps in ECE” workshop, transforming the curriculum from a 
+passive lecture into an interactive session, prioritizing personalized feedback and 
+dedicated Q&amp;A time to help students confidently map out their academic futures.</p>
+
+<h3 id="presentation">presentation</h3>
+
+<p>This was designed as a streamlined guide that breaks down the four core ECE pathways, 
+explains how they branch into specializations, and provides practical strategies for 
+time management and avoiding academic burnout.</p>
+
+<object data="/assets/misc/ece-recitation-presentation.pdf" type="application/pdf" width="100%" height="600px">
+    <blockquote>It appears your browser doesn't support embedded PDFs. 
+    <a href="/assets/misc/ece-recitation-presentation.pdf" target="_blank">Click here to download the PDF instead</a>.</blockquote>
+</object>
+
+<p><br />
+I also created a <a href="% link _posts/2025-10-31-18100-planning-sheet.md%">degree planner sheet</a> 
+as a part of this activity, so that students could visually map degree requirements 
+and priorities.</p>]]></content><author><name>code49</name></author><category term="teaching" /><summary type="html"><![CDATA[intro]]></summary></entry><entry><title type="html">18-100: ece degree planner</title><link href="https://davidlechan.dev/teaching/2025/10/31/18100-planning-sheet.html" rel="alternate" type="text/html" title="18-100: ece degree planner" /><published>2025-10-31T00:00:00+00:00</published><updated>2025-10-31T00:00:00+00:00</updated><id>https://davidlechan.dev/teaching/2025/10/31/18100-planning-sheet</id><content type="html" xml:base="https://davidlechan.dev/teaching/2025/10/31/18100-planning-sheet.html"><![CDATA[<p>Degree planner sheet I created to help students map out their technical, capstone, 
+and general education requirements in a clear, easy-to-digest format. Designed to
+perfectly fit 5 cm x 5 cm sticky notes available from Target!</p>
+
+<object data="/assets/misc/ece-recitation-planner.pdf" type="application/pdf" width="100%" height="600px">
+    <blockquote>It appears your browser doesn't support embedded PDFs. 
+    <a href="/assets/misc/ece-recitation-planner.pdf" target="_blank">Click here to download the PDF instead</a>.</blockquote>
+</object>
+
+<p align="center">
+    <i>(Requirement listings based on CMU ECE's <a href="https://www.ece.cmu.edu/academics/bs-in-ece/academic-guide.html">Academic Guide</a> as of October 2025)</i>
+</p>
+
+<p>This sheet was originally developed as a part of an <a href="/teaching/2025/10/31/18100-next-steps.html">18-100 recitation I designed
+to prepare students for the next steps in ece</a>,
+though I hope it can remain useful for many others around the department! :)</p>]]></content><author><name>code49</name></author><category term="teaching" /><summary type="html"><![CDATA[Degree planner sheet I created to help students map out their technical, capstone, and general education requirements in a clear, easy-to-digest format. Designed to perfectly fit 5 cm x 5 cm sticky notes available from Target!]]></summary></entry><entry><title type="html">kla</title><link href="https://davidlechan.dev/experience/2025/08/08/kla.html" rel="alternate" type="text/html" title="kla" /><published>2025-08-08T00:00:00+00:00</published><updated>2025-08-08T00:00:00+00:00</updated><id>https://davidlechan.dev/experience/2025/08/08/kla</id><content type="html" xml:base="https://davidlechan.dev/experience/2025/08/08/kla.html"><![CDATA[<p><strong>broadband plasma (BBP) division // input data adapter (IDA) team</strong><br />
+<strong>managers: wes nakamura, rish patel</strong><br />
+<strong>project mentors: frank chao, johnny trinh</strong></p>
+
+<p><strong>tools: systemverilog, questa, vivado, python</strong><br />
+<strong><a href="https://www.taumotors.com/">company website</a> // <a href="https://www.kla.com/advance/innovation/klas-legacy-of-broadband-plasma-products-lights-the-way-for-future-innovations">division website</a></strong></p>
+
+<hr />
+
+<h3 id="intro">intro</h3>
+
+<script type="module" src="https://widgets.tradingview-widget.com/w/en/tv-ticker-tape.js"></script>
+
+<tv-ticker-tape symbols="NASDAQ:KLAC" direction="horizontal" hover-type="chart" show-hover=""></tv-ticker-tape>
+<p><br /></p>
+
+<p>KLA (formerly KLA-Tencor) is a prominent toolmaker in the semiconductor industry,
+specializing in process control and yield management solutions that catch mistakes 
+and ensure chip manufacturing processes are perfect. KLA’s work broadly falls under
+three main categories:</p>
+
+<ul>
+  <li>Inspection: High-powered optical and electron-beam systems that scan silicon wafers 
+and <a href="https://en.wikipedia.org/wiki/Photomask">photomasks</a> for flaws.</li>
+  <li>Metrology: Tools that measure the physical dimensions of chip features, such as layer thickness
+or pattern alignment, to ensure they match the architectural design.</li>
+  <li>Data Analytics: Software analyzes the data to identify where manufacturing issues occur.</li>
+</ul>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/kla/example-tools.png" alt="example-kla-tools" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>Examples of KLA inpsection tools.</i>
+</p>
+
+<p>I worked for KLA’s BBP (broadband plasma) division, which is primarily in charge of “brightfield”
+inspection tools: versatile, high-end machines capable of scanning wafers with anywhere between
+visible and deep ultraviolet light. These balance inspection throughput with image fidelity 
+<a href="https://averroes.ai/blog/kla-defect-inspection">(compared to electron-beam; imagine using a flashlight as compared to a laser beam to see in the dark)</a> for the perfect inspection sweet spot.</p>
+
+<p><em>You can read more about KLA’s BBP tools in <a href="https://www.kla.com/advance/innovation/klas-legacy-of-broadband-plasma-products-lights-the-way-for-future-innovations">this article</a>!</em></p>
+
+<h3 id="my-work">my work</h3>
+
+<p>I helped design and implementat a hardware-accelerated compression pipeline to manage the extreme
+data throughput of KLA inspection tools. Given the scale of modern semiconductor manufacturing 
+(hundreds of wafers/hour times hundreds of gigabytes/wafer), the <a href="https://en.wikipedia.org/wiki/Lossless_JPEG">JPEG-LS (lossless JPEG)</a>
+algorithm is implemented on a reconfigurable FPGA array to enable real-time, line-speed processing.</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/kla/jpeg-ls-pixels.png" alt="jpegls-pixels" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>Pixels A --&gt; D used to predict next pixel X in JPEG-LS.</i>
+</p>
+
+<p>The implementation utilizes predictive coding: an interpolation model calculates the expected
+value of subsequent pixels, storing only the difference (residual) between the actual and predicted
+values. By integrating a “run-length” mode for contiguous regions of similar intensity, the system
+is optimized for the high-contrast geometries found in photomask and wafer imagery, ensuring
+efficient storage while maintaining bit-perfect data integrity for future analysis.</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/kla/alveo.png" alt="alveo-u50" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>Alveo U50 FPGA accelerator card I targeted for this design.</i>
+</p>
+
+<p>To meet production demands, I overhauled the initial decompression prototype to use a new JPEG-LS
+engine design. This involved architecting a system-level framework to manage data distribution
+and frame reconstruction across multiple JPEG-LS cores. My workflow integrated Vivado’s IP-Integrator
+for hardware synthesis and Questa for rigorous RTL simulation. I addressed the challenges of
+frame “stitching” (ensuring seamless data reassembly at the output), optimized hardware utilization,
+and validated the entire pipeline’s performance using KLA’s hardware benchmarks. This work bridged the
+gap between a standalone IP block and a fully integrated, hardware-validated acceleration solution.</p>
+
+<h3 id="photos">photos!</h3>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/kla/desk-card.png" alt="desk-cards" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>Introduction/status cards I made for my "box" (cubicle)</i>
+</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/kla/clean-room.png" alt="clean-room" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>Intern tour of the clean room; me in a bunny suit!</i>
+</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/kla/kit-packing.png" alt="kit-packing" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>Making electronics kits for local high school students with the <a href="https://www.kla.foundation/">KLA foundation</a></i>
+</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/kla/all-interns.png" alt="kla-interns" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>Group photo of all the Milpitas HQ interns</i>
+</p>
+
+<h3 id="acknowledgements">acknowledgements</h3>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/kla/ida-team.png" alt="ida-team" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>IDA team photo, August 2025</i>
+</p>
+
+<p>A massive thank you to the IMC/IDA team for welcoming me with open arms. From competitive
+pickleball and boba runs to sharing our mechanical keyboard builds and putting fences together,
+I had an absolute blast.</p>
+
+<p>To my managers, Rish Patel and Wes Nakamura: thank you for the endless mentorship and for trusting
+me with such a critical project. And to Coen Warmenhoven and Natalie Cooper: thank you for opening
+the door to this unforgettable summer.</p>
+
+<p>Thanks also to <a href="https://www.jonathantrinh.com/">Johhny Trinh</a> for inspiring me
+to make this website in Jekyll :)</p>]]></content><author><name>code49</name></author><category term="experience" /><category term="fpga" /><category term="rtl" /><category term="verification" /><summary type="html"><![CDATA[broadband plasma (BBP) division // input data adapter (IDA) team managers: wes nakamura, rish patel project mentors: frank chao, johnny trinh]]></summary></entry><entry><title type="html">risc-v</title><link href="https://davidlechan.dev/projects/2025/04/22/riscv.html" rel="alternate" type="text/html" title="risc-v" /><published>2025-04-22T00:00:00+00:00</published><updated>2025-04-22T00:00:00+00:00</updated><id>https://davidlechan.dev/projects/2025/04/22/riscv*</id><content type="html" xml:base="https://davidlechan.dev/projects/2025/04/22/riscv.html"><![CDATA[<p><strong>18-447: intro to computer architecture</strong><br />
+<strong>teammates: frances adiwijiya, kody liang</strong></p>
+
+<p><strong>tools: systemverilog, vcs, sdc</strong></p>
+
+<hr />]]></content><author><name>code49</name></author><category term="projects" /><category term="cmu" /><category term="projects" /><category term="rtl" /><summary type="html"><![CDATA[18-447: intro to computer architecture teammates: frances adiwijiya, kody liang]]></summary></entry><entry><title type="html">18-100: power and equivalent circuits recitation</title><link href="https://davidlechan.dev/teaching/2025/01/24/18100-equivalent-circuits.html" rel="alternate" type="text/html" title="18-100: power and equivalent circuits recitation" /><published>2025-01-24T00:00:00+00:00</published><updated>2025-01-24T00:00:00+00:00</updated><id>https://davidlechan.dev/teaching/2025/01/24/18100-equivalent-circuits</id><content type="html" xml:base="https://davidlechan.dev/teaching/2025/01/24/18100-equivalent-circuits.html"><![CDATA[<h3 id="intro">intro</h3>
+
+<p>Recitation materials for 18-100 S25 recitation 2, covering power calculations and Norton/Thevenin equivalent circuits. Stepping in for the professors due to scheduling conflicts, 
+I independently designed, developed, and delivered the following lecture materials.</p>
+
+<h3 id="handout">handout</h3>
+
+<object data="/assets/misc/ece-recitation-equivalents.pdf" type="application/pdf" width="100%" height="600px">
+    <blockquote>It appears your browser doesn't support embedded PDFs. 
+    <a href="/assets/misc/ece-recitation-equivalents.pdf" target="_blank">Click here to download the PDF instead</a>.</blockquote>
+</object>
+
+<h3 id="solutions">solutions</h3>
+
+<object data="/assets/misc/ece-recitation-equivalents-solutions.pdf" type="application/pdf" width="100%" height="600px">
+    <blockquote>It appears your browser doesn't support embedded PDFs. 
+    <a href="/assets/misc/ece-recitation-equivalents-solutions.pdf" target="_blank">Click here to download the PDF instead</a>.</blockquote>
+</object>]]></content><author><name>code49</name></author><category term="teaching" /><summary type="html"><![CDATA[intro]]></summary></entry></feed>
