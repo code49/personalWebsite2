@@ -1,0 +1,325 @@
+---
+layout: about
+title: contact
+permalink: /contact/
+banner: "/assets/images/banners/default.png"
+---
+
+<style>
+  .contact-page-container {
+    margin-top: 24px;
+    font-family: inherit;
+  }
+
+  .contact-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    opacity: 0.9;
+  }
+
+  /* CTA Buttons */
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    border: none;
+    outline: none;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background-color: {{ site.brand_color | default: '#8f63ee' }};
+    color: #ffffff !important;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+    box-shadow: 0 4px 12px rgba(143, 99, 238, 0.25);
+  }
+
+  .btn-secondary {
+    background-color: rgba(128, 128, 128, 0.15);
+    color: inherit !important;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(128, 128, 128, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary.copied {
+    background-color: rgba(0, 230, 118, 0.12);
+    color: #00e676 !important;
+    border-color: rgba(0, 230, 118, 0.3);
+  }
+
+  /* Links List */
+  .contact-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .contact-row {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .contact-row .contact-card {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    padding: 18px 24px;
+    border-radius: 12px;
+    background: rgba(128, 128, 128, 0.05);
+    border: 1px solid rgba(128, 128, 128, 0.15);
+    text-decoration: none !important;
+    color: inherit !important;
+    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .contact-card:hover {
+    background: rgba(128, 128, 128, 0.08);
+    border-color: {{ site.brand_color | default: '#8f63ee' }};
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(143, 99, 238, 0.1);
+    border-radius: 8px;
+    color: {{ site.brand_color | default: '#8f63ee' }};
+    margin-right: 20px;
+    transition: all 0.25s ease;
+    font-size: 1rem;
+  }
+
+  .contact-card:hover .card-icon {
+    background-color: {{ site.brand_color | default: '#8f63ee' }};
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(143, 99, 238, 0.3);
+  }
+
+  .card-details {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-label {
+    font-size: 0.75rem;
+    text-transform: lowercase;
+    letter-spacing: 0.8px;
+    opacity: 0.65;
+    margin-bottom: 4px;
+  }
+
+  .card-value {
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .card-arrow {
+    opacity: 0.3;
+    transition: all 0.25s ease;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .contact-card:hover .card-arrow {
+    opacity: 0.8;
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 560px) {
+    .contact-row {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<div class="contact-page-container">
+  <p class="contact-desc">
+    here are the primary ways to contact me or check out my work:
+  </p>
+
+  <!-- CTA Action Buttons -->
+  <div class="cta-actions">
+    <button class="btn btn-primary" onclick="downloadVCard()">
+      👤 save contact (vcard)
+    </button>
+    <button class="btn btn-secondary" id="copy-email-btn" onclick="copyEmail()">
+      📋 copy email
+    </button>
+  </div>
+
+  <!-- Contact Cards List -->
+  <div class="contact-grid">
+    
+    <!-- Email Row -->
+    <div class="contact-row">
+      <!-- Personal Email -->
+      <a href="mailto:davidlechan@gmail.com" class="contact-card">
+        <div class="card-icon" style="font-size: 1.2rem;">
+          ✉
+        </div>
+        <div class="card-details">
+          <div class="card-label">(personal) email</div>
+          <div class="card-value">davidlechan@gmail.com</div>
+        </div>
+        <div class="card-arrow">
+          →
+        </div>
+      </a>
+
+      <!-- Work Email -->
+      <a href="mailto:dchan2@andrew.cmu.edu" class="contact-card">
+        <div class="card-icon" style="font-size: 1.2rem;">
+          ✉
+        </div>
+        <div class="card-details">
+          <div class="card-label">(work) email</div>
+          <div class="card-value">dchan2@andrew.cmu.edu</div>
+        </div>
+        <div class="card-arrow">
+          →
+        </div>
+      </a>
+    </div>
+
+    <!-- LinkedIn -->
+    <a href="https://www.linkedin.com/in/david-le-chan/" target="_blank" rel="noopener" class="contact-card">
+      <div class="card-icon" style="font-size: 0.95rem; font-weight: bold;">
+        in
+      </div>
+      <div class="card-details">
+        <div class="card-label">linkedin</div>
+        <div class="card-value">david-le-chan</div>
+      </div>
+      <div class="card-arrow">
+        →
+      </div>
+    </a>
+
+    <!-- GitHub -->
+    <a href="https://github.com/code49" target="_blank" rel="noopener" class="contact-card">
+      <div class="card-icon" style="font-size: 0.95rem; font-weight: bold;">
+        git
+      </div>
+      <div class="card-details">
+        <div class="card-label">(personal) github</div>
+        <div class="card-value">code49</div>
+      </div>
+      <div class="card-arrow">
+        →
+      </div>
+    </a>
+
+    <!-- Resume -->
+    <a href="/assets/misc/DavidChan_Resume.pdf" target="_blank" class="contact-card">
+      <div class="card-icon" style="font-size: 0.85rem; font-weight: bold;">
+        pdf
+      </div>
+      <div class="card-details">
+        <div class="card-label">resume / cv</div>
+        <div class="card-value">davidchan_resume.pdf</div>
+      </div>
+      <div class="card-arrow">
+        →
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Link to the main website -->
+  <div style="text-align: center; margin-top: 36px; margin-bottom: 12px;">
+    <a href="/" class="btn btn-secondary" style="display: inline-flex; width: auto; padding: 12px 32px;">
+      visit main website &rarr;
+    </a>
+  </div>
+</div>
+
+<script>
+  // Save Contact details as a dynamic vCard (.vcf)
+  function downloadVCard() {
+    const vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'FN:David Le Chan',
+      'N:Chan;David;Le;;',
+      'ORG:Carnegie Mellon University',
+      'TITLE:FPGA & Systems Architecture Researcher',
+      'TEL;TYPE=CELL,VOICE:+16503838954',
+      'EMAIL;TYPE=PREF,INTERNET:davidlechan@gmail.com',
+      'EMAIL;TYPE=INTERNET:dchan2@andrew.cmu.edu',
+      'URL:https://davidlechan.dev',
+      'REV:' + new Date().toISOString(),
+      'END:VCARD'
+    ].join('\r\n');
+
+    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'David_Le_Chan.vcf');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  // Copy Email to Clipboard with animated feedback
+  function copyEmail() {
+    const email = 'davidlechan@gmail.com';
+    navigator.clipboard.writeText(email).then(() => {
+      const btn = document.getElementById('copy-email-btn');
+      const originalContent = btn.innerHTML;
+      
+      // Show success state
+      btn.innerHTML = `
+        email copied!
+      `;
+      btn.classList.add('copied');
+      
+      // Reset after delay
+      setTimeout(() => {
+        btn.innerHTML = originalContent;
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(err => {
+      console.error('Could not copy email: ', err);
+    });
+  }
+</script>
