@@ -5,8 +5,7 @@
 
   # Packages available inside the FHS environment
   targetPkgs = pkgs: (with pkgs; [
-    ruby
-    bundler
+    ruby_3_3
     gcc
     gnumake
     pkg-config

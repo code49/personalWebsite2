@@ -1,4 +1,5 @@
 _site/
 serve.log
-
 nohup.out
+.bundle/
+.bundle_backup/
