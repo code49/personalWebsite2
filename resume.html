@@ -69,13 +69,13 @@ title: resume
   created using LaTeX + RenderCV &bull; code available on <a href="https://github.com/code49/resume" target="_blank">github</a>
 </p>
 
-<!-- Download Button dynamically matching theme -->
-<div style="text-align: center; margin-bottom: 28px;">
-  <a href="{{ "/assets/misc/DavidChan_Resume.pdf" | relative_url }}?v={{ site.time | date: '%s' }}" download class="btn btn-secondary resume-light">
-    📥 download resume (pdf)
+<!-- Download Buttons -->
+<div style="text-align: center; margin-bottom: 28px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+  <a href="{{ "/assets/misc/DavidChan_Resume.pdf" | relative_url }}?v={{ site.time | date: '%s' }}" download class="btn btn-secondary">
+    📥 download resume (light)
   </a>
-  <a href="{{ "/assets/misc/DavidChan_Resume_Dark.pdf" | relative_url }}?v={{ site.time | date: '%s' }}" download class="btn btn-secondary resume-dark">
-    📥 download resume (pdf)
+  <a href="{{ "/assets/misc/DavidChan_Resume_Dark.pdf" | relative_url }}?v={{ site.time | date: '%s' }}" download class="btn btn-secondary">
+    📥 download resume (dark)
   </a>
 </div>
 
