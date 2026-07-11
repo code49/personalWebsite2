@@ -2,7 +2,6 @@
 layout: about
 title: contact
 permalink: /contact/
-banner: "/assets/images/banners/default.png"
 ---
 
 <style>
@@ -168,10 +167,26 @@ banner: "/assets/images/banners/default.png"
       flex-direction: column;
     }
   }
+
+  .contact-portrait {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border: 3px solid {{ site.brand_color | default: '#8f63ee' }};
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    cursor: default;
+  }
 </style>
 
 <div class="contact-page-container">
+  <div class="contact-header" style="text-align: center; margin-bottom: 32px; margin-top: 12px;">
+    <img src="/assets/images/home/portrait-circle.png" alt="david le chan" class="contact-portrait no-lightbox">
+    <h1 style="margin-top: 16px; margin-bottom: 0; font-weight: 700; text-transform: lowercase;">contact</h1>
+  </div>
+
   <p class="contact-desc">
+    Nice to meet you! If you want to reach out, collaborate, or just say hi,
     here are the primary ways to contact me or check out my work:
   </p>
 
@@ -254,7 +269,7 @@ banner: "/assets/images/banners/default.png"
       </div>
       <div class="card-details">
         <div class="card-label">resume / cv</div>
-        <div class="card-value">davidchan_resume.pdf</div>
+        <div class="card-value">DavidChan_Resume.pdf</div>
       </div>
       <div class="card-arrow">
         →
