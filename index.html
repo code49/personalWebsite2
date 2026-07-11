@@ -5,19 +5,19 @@
 layout: about
 title: home
 heading: hello, I'm david! 
-banner: "/assets/images/banners/default.png"
 sidebar: []
 ---
+
+<div class="about-header" style="text-align: center; margin-bottom: 32px; margin-top: 12px;">
+  <img src="/assets/images/home/portrait-circle.png" alt="david le chan" class="about-portrait no-lightbox">
+  <h1 style="margin-top: 16px; margin-bottom: 0; font-weight: 700; text-transform: lowercase;">hello, I'm david!</h1>
+</div>
 
 <blockquote>
   <p>"Guess what? You're going to wake up tomorrow and have an absolutely
   phenomenal day. And if your day isn't phenomenal, it'll still be better than today."</p>
   <footer style="text-align: right;">— <cite>Celine "starsmitten" Chueng</cite></footer>
 </blockquote>
-
-<div style="text-align: center;">
-  <img src="/assets/images/home/portrait-circle.png" style="border-radius: 50%; width: 300px;">
-</div>
 
 
 <h3>about</h3>
@@ -115,3 +115,15 @@ I've been, and wonderful people I've met!
 <hr>
 
 <!-- <h3>fun links</h3> -->
+
+<style>
+  .about-portrait {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 3px solid {{ site.brand_color | default: '#8f63ee' }};
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    cursor: default;
+  }
+</style>
