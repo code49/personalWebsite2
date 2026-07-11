@@ -1,11 +1,93 @@
 ---
 layout: about
 title: resume
-banner: "/assets/images/banners/default.png"
 ---
 
-Resume, created using LaTeX + RenderCV! <br><br>
+<style>
+  /* Button styling matching the theme */
+  .btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+    border: none;
+    outline: none;
+    text-decoration: none;
+  }
 
-<object data="/assets/misc/DavidChan_Resume.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="/assets/misc/DavidChan_Resume.pdf"></embed>
-</object>
+  .btn-secondary {
+    background-color: rgba(128, 128, 128, 0.12);
+    color: inherit !important;
+    border: 1px solid rgba(128, 128, 128, 0.1);
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(128, 128, 128, 0.22);
+    transform: translateY(-2px);
+  }
+
+  /* Default display behavior: hide dark, show light */
+  .resume-dark {
+    display: none !important;
+  }
+  
+  .resume-light {
+    display: inline-flex !important;
+  }
+
+  /* Target object elements specifically to force block layout */
+  object.resume-light {
+    display: block !important;
+  }
+
+  /* When dark mode is active */
+  html[data-theme="dark"] .resume-dark {
+    display: inline-flex !important;
+  }
+  
+  html[data-theme="dark"] object.resume-dark {
+    display: block !important;
+  }
+
+  html[data-theme="dark"] .resume-light {
+    display: none !important;
+  }
+</style>
+
+<div class="resume-header" style="text-align: center; margin-bottom: 12px; margin-top: 12px;">
+  <h1 style="margin-top: 0; margin-bottom: 0; font-weight: 700; text-transform: lowercase;">resume</h1>
+</div>
+
+<p style="text-align: center; font-size: 1.05rem; opacity: 0.8; margin-bottom: 24px;">
+  created using LaTeX + RenderCV &bull; code available on <a href="https://github.com/code49/resume" target="_blank">github</a>
+</p>
+
+<!-- Download Button dynamically matching theme -->
+<div style="text-align: center; margin-bottom: 28px;">
+  <a href="/assets/misc/DavidChan_Resume.pdf" download class="btn btn-secondary resume-light">
+    📥 download resume (pdf)
+  </a>
+  <a href="/assets/misc/DavidChan_Resume_Dark.pdf" download class="btn btn-secondary resume-dark">
+    📥 download resume (pdf)
+  </a>
+</div>
+
+<!-- Embedded PDF Objects -->
+<div class="resume-container" style="text-align: center; margin-bottom: 32px; display: flex; justify-content: center;">
+  <!-- Light Resume -->
+  <object class="resume-pdf resume-light" data="/assets/misc/DavidChan_Resume.pdf" type="application/pdf" width="100%" style="height: 1100px; max-width: 850px; border: 1px solid rgba(128,128,128,0.2); border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+    <p>it looks like your browser doesn't support embedded PDFs. you can <a href="/assets/misc/DavidChan_Resume.pdf">download the light PDF here</a>.</p>
+  </object>
+
+  <!-- Dark Resume -->
+  <object class="resume-pdf resume-dark" data="/assets/misc/DavidChan_Resume_Dark.pdf" type="application/pdf" width="100%" style="height: 1100px; max-width: 850px; border: 1px solid rgba(128,128,128,0.2); border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+    <p>it looks like your browser doesn't support embedded PDFs. you can <a href="/assets/misc/DavidChan_Resume_Dark.pdf">download the dark PDF here</a>.</p>
+  </object>
+</div>
