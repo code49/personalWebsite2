@@ -1,42 +1,54 @@
 ---
 layout: post
 title: ucsf bakar computational health sciences institute
-subtitle: "<b>data science intern</b><br>june - august 2020<br>san francisco, ca"
 # author: 
 categories: experience
-banner: "/assets/images/banners/just-one-flappy-bird.png"
 tags: python
 # top: 0
 # sidebar: []
+hidden:
+  - header
 ---
 
+
+<style>
+  .ucsf-banner {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    cursor: default;
+  }
+</style>
+
+<div class="ucsf-header" style="text-align: center; margin-bottom: 24px; margin-top: 12px;">
+  <img src="/assets/images/banners/ucsf.jpg" alt="ucsf bakar computational health sciences institute" class="ucsf-banner no-lightbox">
+  <h1 style="margin-top: 16px; margin-bottom: 8px; font-weight: 700; text-transform: lowercase;">ucsf bakar computational health sciences institute</h1>
+  <p class="ucsf-subtitle" style="font-size: 1.05rem; opacity: 0.85; line-height: 1.6; margin: 0 auto; max-width: 600px;">
+    <b>data science intern</b><br>
+    june - august 2020 &bull; san francisco, ca
+  </p>
+</div>
 
 **PHIlter (protected health information filter) team**<br>
 **managers: hunter mills, lakshmi radhakrishnan**
 
 **tools: python (pandas, numpy, spacy)**<br>
-**[institute website]() // [project repository](https://github.com/BCHSI/philter-ucsf)**
+**[institute website](https://bakarinstitute.ucsf.edu/) // [project repository](https://github.com/BCHSI/philter-ucsf)**
 
 ---
 
 ### intro
 
-The Bakar Computational Health Sciences Institute (BCHSI) is a division of the University of 
-California San Francisco dedicated to applying computational tools to help solve medical
-problems, from helping process sound data used to image living hearts to building models to
-understand how genetics impact common diseases.
+The Bakar Computational Health Sciences Institute (BCHSI) at the University of California, San Francisco (UCSF) applies advanced computational tools to solve complex medical challenges. Work at the institute ranges from processing cardiac acoustic data for imaging to building genomic models that analyze how genetics influence common diseases.
 
-At UCSF, I worked on PHIlter, an open-source project dedicated to de-identifying clinical notes
-(text documents doctors write during patient visits to note both quantitative and qualitative
-observations). Through de-identifying these notes by removing personal health information (PHI, such as names, locations, dates, etc.), the data in these notes could be made more widely available for research study, all while protecting the privacy of patients.
+During my internship, I worked on **PHIlter**, an open-source tool designed to de-identify clinical notes—the unstructured text documents doctors write during patient visits. By removing Protected Health Information (PHI) like names, dates, and locations, the tool enables these rich clinical datasets to be safely shared for medical research while maintaining strict patient privacy.
 
 ### my work
 
-My project revolved around creating a post-processing algorithm for PHIlter's de-identified 
-output. Initially, PHIlter simply marked each case of identifying information with a 
-standardized tag (e.g. `[***NAME***]` where a patient's name was listed) in the text. This could lead to issues of privacy in cases where PHIlter has a false-negative (i.e. fails to
-detect a phrase as identifying information, as would happen roughly 1 percent of the time), as
-the identity of the patient would be quickly revealed.
+My project focused on designing a post-processing pseudonymization algorithm for PHIlter's output. Originally, the tool redacted PHI by replacing it with static placeholder tags (e.g., `[***NAME***]`). While secure in theory, this method presents privacy risks if the parser misses a piece of PHI (a false negative, which occurs in roughly 1% of cases). In these scenarios, the remaining un-redacted PHI stands out starkly against the placeholders, making the patient's identity easier to reconstruct.
 
 <p align="center">
   <kbd>
@@ -46,24 +58,13 @@ the identity of the patient would be quickly revealed.
   <br><i>Sample PHI replacement made by my algorithm! Dates were already de-identified in a way that preserved the relative timing of events.</i>
 </p>
 
-I was charged with writing software to replace these censoring tags with randomized data, helping to hide these false-positives "in plain sight." In order to keep the 'camouflage' intact, therefore, it was important to ensure that this data matched the context of the original identifying information.
+To address this, I developed software that replaces these static redaction tags with synthetic, context-aware surrogates. By swapping placeholders with realistic but fake data (e.g., replacing `[***NAME***]` with a random name like 'Sarah'), any missed PHI (false negatives) is camouflaged "in plain sight" among the synthetic entries. To maintain the medical utility of the notes, the algorithm ensures that the synthetic data matches the grammatical and semantic context of the original text.
 
-My algorithm supported a host of identifying information types, from names to dates, phone 
-numbers, even various random locations around the Bay Area. This project not only challenged
-me in terms of complexity, but also in terms of scale. The program had to run over the i2b2
-clinical notes test dataset, which contains nearly 2 million notes (and that was just the proof
-of concept!), so efficiency and simplicity were key considerations, particularly as the size
-of i2b2 pales in comparison to the number of clinical notes generated by the UCSF healthcare 
-system, where PHIlter was intended to be used.
+The algorithm handles a wide array of PHI categories—including names, phone numbers, relative dates, and geographical locations (using a database of Bay Area locations). Scaling the solution was a major engineering challenge. I optimized the pipeline to run efficiently over the **i2b2 clinical notes dataset**, which contains nearly two million notes. Ensuring low computational overhead was critical, as the tool was designed to eventually process the massive stream of daily clinical documentation generated across the entire UCSF Health system.
 
 ### other learnings
 
-Aside from using data libraries such as pandas and numpy on a large scale for the first time,
-my time at UCSF also allowed me to get a first-hand look at the forefront of computational
-biology research, as well as the dynamics within a large research institution such as UCSF.
-It was fantastic seeing how the tools I had learned about in class translated into solving
-real-world problems, and how a diverse group of developers, researchers, even doctors can come
-together to work towards a collective end goal.
+This experience provided my first opportunity to apply data libraries like `pandas`, `NumPy`, and `spaCy` to large-scale datasets. It also offered a firsthand look at the intersection of medicine and data science at a world-class research institution. Collaborating with developers, clinical researchers, and physicians showed me how interdisciplinary teams unite to translate theoretical algorithms into impactful, real-world privacy solutions.
 
 _Thank you also to Hunter Mills and Lakshmi Radhakrishnan, as well as the rest of the PHIlter_
 _team, whose mentorship over the summer taught me many life lessons and technical skills!_

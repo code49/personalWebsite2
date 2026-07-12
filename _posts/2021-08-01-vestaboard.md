@@ -1,14 +1,35 @@
 ---
 layout: post
 title: vestaboard
-subtitle: "<b>programming intern</b><br>june - august 2021<br>south san francisco, ca"
 # author: 
 categories: experience
-banner: "/assets/images/banners/default.png"
-tags: 
+tags: php javascript startup
 # top: 0
 # sidebar: []
+hidden:
+  - header
 ---
+
+<style>
+  .vestaboard-banner {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    cursor: default;
+  }
+</style>
+
+<div class="vestaboard-header" style="text-align: center; margin-bottom: 24px; margin-top: 12px;">
+  <img src="/assets/images/banners/vestaboard.jpg" alt="vestaboard" class="vestaboard-banner no-lightbox">
+  <h1 style="margin-top: 16px; margin-bottom: 8px; font-weight: 700; text-transform: lowercase;">vestaboard</h1>
+  <p class="vestaboard-subtitle" style="font-size: 1.05rem; opacity: 0.85; line-height: 1.6; margin: 0 auto; max-width: 600px;">
+    <b>programming intern</b><br>
+    june - august 2021 &bull; south san francisco, ca
+  </p>
+</div>
 
 **web applications programming team**<br>
 **mentors: sully syed, dorrian porter**
@@ -20,11 +41,7 @@ tags:
 
 ### intro
 
-Vestaboard is a startup based in South San Francisco building smart split-flap 
-display boards, combining the looks and sounds of a cruicial element of old-timey 
-train station while integrating all the smarts of modern day technology. Users 
-can use their Vestaboard to write a message to their kids when away on business,
-see live sports scores, even be inspired by quotes from celebrities and influencers.
+Vestaboard is a South San Francisco-based startup that designs and builds smart split-flap display boards. These displays combine the nostalgic aesthetic and mechanical sounds of vintage train stations with modern internet connectivity, allowing users to send remote messages, track live sports scores, or display automated daily content.
 
 ### my work
 
@@ -36,22 +53,11 @@ see live sports scores, even be inspired by quotes from celebrities and influenc
   <br><i>Visual summary of features I added to the Vestaboard software ecosystem.</i>
 </p>
 
-I worked at Vestaboard to implement Word-Of-The-Day, a "channel" (plugins that 
-control the board, automatically collecting data from the internet to generate messages)
-that polled the [Oxford English Dictionary's word of the day](https://www.oed.com/) to display 
-to the board using a combination of PHP and JavaScript. Creating my installable required 
-that I write many new features, including RSS feeds, pagination (getting the server to queue 
-and send a group of messages in order, since definitions took more space than a single 'frame'
-on the board), and progress bars.
+I developed the **Word-of-the-Day channel**—an installable application plugin for the Vestaboard software ecosystem. Built using PHP and JavaScript, the plugin automatically polls the [Oxford English Dictionary's Word of the Day API](https://www.oed.com/) and formats it for split-flap rendering. Creating this installable required developing several key software features: integrating RSS feeds to fetch and parse daily content, building a server-side queuing and pagination system to sequentially cycle through definitions that exceeded the board's single-frame character limit, and designing progress bars to indicate the status of multi-frame messages.
 
 ### other learnings
 
-At Vestaboard, I not only got to learn web development concepts (using a LAMP stack) 
-and a new programming language, but also got my first taste of small-scale
-startup culture. I got to experience the ups and downs of early
-businesses, see how executives manage a team and find other companies to work together
-with, and learn the importance of taking initiative to create proof of concepts of my
-ideas in order to more easily convince others.
+This role introduced me to full-stack web development on the LAMP stack and gave me my first exposure to small-scale startup operations. Beyond coding, I experienced the dynamic, fast-paced environment of an early-stage business, observing how leadership coordinates partnerships and drives product strategy. I also learned the value of taking initiative—specifically how building quick proof-of-concepts is the most effective way to pitch and validate new features.
 
 _Thank you also to Sully Syed for his many web development teachings as well as to_
 _Dorrian Porter and the rest of the Vestaboard team!_
