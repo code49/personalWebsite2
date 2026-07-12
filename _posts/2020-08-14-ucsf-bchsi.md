@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ucsf bakar computational health sciences institute
-subtitle: "<b>data science intern</b><br>june - august 2020 &bull; san francisco, ca"
+subtitle: "<b>data science intern</b><br>june - august 2020 &#124; san francisco, ca"
 # author: 
 categories: experience
 banner: "/assets/images/banners/ucsf.jpg"
@@ -14,7 +14,7 @@ tags: python
 **managers: hunter mills, lakshmi radhakrishnan**
 
 **tools: python (pandas, numpy, spacy)**<br>
-**[institute website](https://bakarinstitute.ucsf.edu/) // [project repository](https://github.com/BCHSI/philter-ucsf)**
+**[institute website](https://bakarinstitute.ucsf.edu/) &#124; [project repository](https://github.com/BCHSI/philter-ucsf)**
 
 ---
 

@@ -6,7 +6,7 @@ categories: random
 tags: python nix
 ---
 
-**Spotify Playlist Sorter // Personal Project**<br>
+**Spotify Playlist Sorter &#124; Personal Project**<br>
 **technologies: Python, Spotipy, Nix Shell, OpenAI/Antigravity CLI**
 
 ---

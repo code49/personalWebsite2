@@ -1,7 +1,7 @@
 ---
 layout: post
 title: vestaboard
-subtitle: "<b>programming intern</b><br>june - august 2021 &bull; south san francisco, ca"
+subtitle: "<b>programming intern</b><br>june - august 2021 &#124; south san francisco, ca"
 # author: 
 categories: experience
 banner: "/assets/images/banners/vestaboard.jpg"

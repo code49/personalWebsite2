@@ -6,7 +6,7 @@ categories: random
 tags: python raspberry-pi nix
 ---
 
-**displayThingy // Personal Project**<br>
+**displayThingy &#124; Personal Project**<br>
 **technologies: Python, Pygame, Spotipy, pytz, Nix Shell, Raspberry Pi**
 
 ---

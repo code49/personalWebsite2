@@ -1,7 +1,7 @@
 ---
 layout: post
 title: cmu list of classes
-subtitle: "august 2022 - present &bull; pittsburgh, pa"
+subtitle: "august 2022 - present &#124; pittsburgh, pa"
 # author: 
 categories: education
 banner: "/assets/images/banners/cmu.png"
