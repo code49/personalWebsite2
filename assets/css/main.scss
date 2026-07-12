@@ -70,3 +70,15 @@ $base-font-family: "Roboto Mono", monospace;
   cursor: default;
   margin-bottom: 12px;
 }
+
+// Custom image caption spacing
+p[align="center"] {
+  br {
+    display: none;
+  }
+  i {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.9em;
+  }
+}
