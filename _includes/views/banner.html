@@ -15,6 +15,10 @@
 
 {%- include functions.html func='get_banner' -%}
 
+{%- if page.layout == 'post' -%}
+  {%- assign has_banner = false -%}
+{%- endif -%}
+
 {%- if has_banner -%}
   {%- if banner_background -%}
   <style>

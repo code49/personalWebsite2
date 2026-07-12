@@ -33,6 +33,9 @@
           </label>
 
           <div class="trigger">
+            <div class="page-link" style="display: inline-block; vertical-align: middle; margin-right: 24px;">
+              {%- include extensions/theme-toggle.html -%}
+            </div>
             {%- for path in page_paths -%}
               {%- assign my_page = site.pages | where: "path", path | first -%}
               {%- if my_page.title -%}

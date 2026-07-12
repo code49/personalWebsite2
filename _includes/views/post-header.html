@@ -1,32 +1,22 @@
-<header class="post-header">
-  <h1 class="post-title p-name" itemprop="name headline">{{ heading | default: page.title | escape }}</h1>
+<header class="post-header" style="text-align: center; margin-bottom: 24px; margin-top: 12px;">
+  {%- if page.banner -%}
+  <div class="post-banner-container" style="margin-bottom: 16px;">
+    <img src="{{ page.banner | relative_url }}" alt="{{ page.title | escape }}" class="post-banner-img no-lightbox">
+  </div>
+  {%- endif -%}
   
-  <!-- <h2 class="post-subtitle">{{ subheading | default: page.subtitle | escape }}</h2> -->
-   <h2 class="post-subtitle">{{ subheading | default: page.subtitle | markdownify }}</h2>  <!-- allowing multi-line subtitles -->
-
-  <!-- <div class="post-meta">
-    <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-      {%- assign date_format = site.yat.date_format | default: "%b %-d, %Y" -%}
-      <i class="fa fa-calendar"></i> {{ page.date | date: date_format }}
-    </time>
-
-    {%- if page.author -%}
-    <span class="post-author left-vsplit"><i class="fa fa-pencil"></i> {{ page.author | escape }}</span>
-    {%- endif -%}
-
-    {% assign article = page.content %}
-    {% assign lang = page.lang %}
-    {%- include functions.html func='get_reading_time' -%}
-    {% assign reading_time = return %}
-    <span class="post-reading-time left-vsplit"><i class="fa fa-clock-o"></i> {{ reading_time }}</span>
-  </div> -->
+  <h1 class="post-title p-name" itemprop="name headline" style="text-transform: lowercase; font-weight: 700; margin-top: 16px; margin-bottom: 8px;">{{ heading | default: page.title | escape }}</h1>
+  
+  {%- assign subtitle = page.subtitle | default: page.subheading -%}
+  {%- if subtitle -%}
+    <h2 class="post-subtitle" style="font-size: 1.05rem; opacity: 0.85; line-height: 1.6; margin: 0 auto; max-width: 600px; font-weight: normal;">{{ subtitle | markdownify | replace: '<p>', '' | replace: '</p>', '' }}</h2>
+  {%- endif -%}
 
   {%- if page.tags.size > 0 -%}
-  <div class="post-tags">
+  <div class="post-tags" style="margin-top: 12px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; padding-right: 0 !important;">
     {%- for tag in page.tags -%}
-    <a class="post-tag" href="{{ '/tags.html ' | relative_url }}#{{tag}}">#{{tag}}</a>
+    <a class="post-tag" style="margin: 0 !important;" href="{{ '/tags.html ' | relative_url }}#{{tag}}">#{{tag}}</a>
     {%- endfor -%}
   </div>
   {%- endif -%}
-
 </header>
