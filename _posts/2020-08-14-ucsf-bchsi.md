@@ -1,21 +1,42 @@
 ---
 layout: post
 title: ucsf bakar computational health sciences institute
-subtitle: "<b>data science intern</b><br>june - august 2020<br>san francisco, ca"
 # author: 
 categories: experience
-banner: "/assets/images/banners/ucsf.png"
 tags: python
 # top: 0
 # sidebar: []
+hidden:
+  - header
 ---
 
+
+<style>
+  .ucsf-banner {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    cursor: default;
+  }
+</style>
+
+<div class="ucsf-header" style="text-align: center; margin-bottom: 24px; margin-top: 12px;">
+  <img src="/assets/images/banners/ucsf.png" alt="ucsf bakar computational health sciences institute" class="ucsf-banner no-lightbox">
+  <h1 style="margin-top: 16px; margin-bottom: 8px; font-weight: 700; text-transform: lowercase;">ucsf bakar computational health sciences institute</h1>
+  <p class="ucsf-subtitle" style="font-size: 1.05rem; opacity: 0.85; line-height: 1.6; margin: 0 auto; max-width: 600px;">
+    <b>data science intern</b><br>
+    june - august 2020 &bull; san francisco, ca
+  </p>
+</div>
 
 **PHIlter (protected health information filter) team**<br>
 **managers: hunter mills, lakshmi radhakrishnan**
 
 **tools: python (pandas, numpy, spacy)**<br>
-**[institute website]() // [project repository](https://github.com/BCHSI/philter-ucsf)**
+**[institute website](https://bakarinstitute.ucsf.edu/) // [project repository](https://github.com/BCHSI/philter-ucsf)**
 
 ---
 

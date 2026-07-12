@@ -1,14 +1,35 @@
 ---
 layout: post
 title: vestaboard
-subtitle: "<b>programming intern</b><br>june - august 2021<br>south san francisco, ca"
 # author: 
 categories: experience
-banner: "/assets/images/banners/vestaboard.png"
 tags: php javascript startup
 # top: 0
 # sidebar: []
+hidden:
+  - header
 ---
+
+<style>
+  .vestaboard-banner {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+    cursor: default;
+  }
+</style>
+
+<div class="vestaboard-header" style="text-align: center; margin-bottom: 24px; margin-top: 12px;">
+  <img src="/assets/images/banners/vestaboard.png" alt="vestaboard" class="vestaboard-banner no-lightbox">
+  <h1 style="margin-top: 16px; margin-bottom: 8px; font-weight: 700; text-transform: lowercase;">vestaboard</h1>
+  <p class="vestaboard-subtitle" style="font-size: 1.05rem; opacity: 0.85; line-height: 1.6; margin: 0 auto; max-width: 600px;">
+    <b>programming intern</b><br>
+    june - august 2021 &bull; south san francisco, ca
+  </p>
+</div>
 
 **web applications programming team**<br>
 **mentors: sully syed, dorrian porter**
