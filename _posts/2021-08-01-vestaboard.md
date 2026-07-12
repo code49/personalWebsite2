@@ -5,7 +5,7 @@ subtitle: "<b>programming intern</b><br>june - august 2021 &bull; south san fran
 # author: 
 categories: experience
 banner: "/assets/images/banners/vestaboard.jpg"
-tags: php javascript startup
+tags: php javascript
 # top: 0
 # sidebar: []
 ---

@@ -4,7 +4,7 @@ title: spotify playlist sorter
 subtitle: "<b>ai-powered playlist classifier & syncing engine</b>"
 categories: random
 banner: "/assets/images/banners/spotify_sorter.jpg"
-tags: python spotify ai automation nix
+tags: python nix
 ---
 
 **spotify playlist sorter // personal project**<br>

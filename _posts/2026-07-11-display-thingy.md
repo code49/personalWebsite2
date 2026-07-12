@@ -4,7 +4,7 @@ title: display thingy
 subtitle: "<b>ambient smart dashboard widget</b>"
 categories: random
 banner: "/assets/images/banners/display_thingy.png"
-tags: python pygame dashboard raspberry-pi ambient-ui
+tags: python raspberry-pi nix
 ---
 
 **displayThingy // personal project**<br>
