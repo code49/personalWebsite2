@@ -5,7 +5,7 @@ subtitle: "<b>one-instruction CPU video game</b><br>january 2025<br>pittsburgh, 
 # author: 
 categories: projects
 banner: "/assets/images/banners/just-one-flappy-bird.png"
-tags: cmu projects rtl fpga
+tags: cmu rtl fpga verilog
 # top: 0
 # sidebar: []
 ---
