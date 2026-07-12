@@ -21,7 +21,7 @@ List of the classes I've taken at CMU:
 | 5 | **[18-617] Mem Devices & Tech** <br> **[18-643] Reconfigurable Logic** <br> **[18-726] Project Integrated Circuit Design** <br> **[18-768] Hardware Verification** | |
 {: .cmu-classes-table}
 
-See more about my CMU experience at [this link](/education/2026/02/11/cmu.html)!
+See more about my CMU experience at [this link]({% link _posts/2026-02-11-cmu.md %})!
 
 <style>
   .cmu-classes-table {

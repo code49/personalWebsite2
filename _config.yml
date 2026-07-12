@@ -71,6 +71,9 @@ yat:
 # If you want to generate website sitemap, you can set true
 sitemap: true
 
+# Clean article URLs (e.g. /experience/kla.html instead of /experience/2025/08/08/kla.html)
+permalink: /:categories/:title.html
+
 # If you want to change site language, you can set lang option
 lang: "en"  # default lang is en
 
