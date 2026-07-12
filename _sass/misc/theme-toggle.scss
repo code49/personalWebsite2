@@ -27,11 +27,10 @@
   .names {
     font-size: 0.72em;
     font-weight: bolder;
-    width: 76%;
-    margin-left: 12%;
+    width: 100%;
+    margin-left: 0;
     position: relative;
     display: flex;
-    justify-content: space-between;
     user-select: none;
   }
 
@@ -39,6 +38,8 @@
     margin-bottom: 0;
     line-height: 24px;
     opacity: .5;
+    width: 50%;
+    text-align: center;
   }
 
   label .light {
