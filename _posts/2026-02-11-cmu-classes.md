@@ -1,22 +1,14 @@
 ---
 layout: post
 title: cmu list of classes
+subtitle: "august 2022 - present &bull; pittsburgh, pa"
 # author: 
 categories: education
+banner: "/assets/images/banners/cmu.png"
 tags: cmu
 # top: 0
 sidebar: []
-hidden:
-  - header
 ---
-
-<div class="cmu-header" style="text-align: center; margin-bottom: 24px; margin-top: 12px;">
-  <img src="/assets/images/banners/cmu.png" alt="cmu list of classes" class="cmu-banner no-lightbox">
-  <h1 style="margin-top: 16px; margin-bottom: 8px; font-weight: 700; text-transform: lowercase;">cmu list of classes</h1>
-  <p class="cmu-subtitle" style="font-size: 1.05rem; opacity: 0.85; line-height: 1.6; margin: 0 auto; max-width: 600px;">
-    august 2022 - present &bull; pittsburgh, pa
-  </p>
-</div>
 
 List of the classes I've taken at CMU:
 
@@ -32,17 +24,6 @@ List of the classes I've taken at CMU:
 See more about my CMU experience at [this link](/education/2026/02/11/cmu.html)!
 
 <style>
-  .cmu-banner {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    border-radius: 8px;
-    border: 1px solid rgba(128, 128, 128, 0.2);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-    cursor: default;
-    margin-bottom: 12px;
-  }
-
   .cmu-classes-table {
     table-layout: fixed;
     width: 100%;

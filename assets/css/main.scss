@@ -56,3 +56,17 @@ $selection-background-color: unquote("{{ site.selection.background_color }}");
 $base-font-family: "Roboto Mono", monospace;
 
 @import "yat";
+
+// Custom post banner styling
+.post-banner-img {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  cursor: default;
+  margin-bottom: 12px;
+}
