@@ -10,7 +10,7 @@ html {
 
   &[data-scroll-status='top'] {
     header.site-header-transparent {
-      height: 0;
+      height: $header-height;
       margin-top: 12px;
       background-color: transparent;
       transition: 0.1s height,background-color,box-shadow;
@@ -47,7 +47,7 @@ html {
 
   &[data-scroll-status='down'] {
     header.site-header {
-      top: -$header-height;
+      top: 0;
     }
 
     .framework .sidebar {
