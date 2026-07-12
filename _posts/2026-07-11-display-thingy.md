@@ -3,7 +3,6 @@ layout: post
 title: display thingy
 subtitle: "<b>ambient smart dashboard widget</b>"
 categories: random
-banner: "/assets/images/banners/display_thingy.png"
 tags: python raspberry-pi nix
 ---
 
@@ -15,6 +14,12 @@ tags: python raspberry-pi nix
 ### overview
 `displayThingy` is an aesthetic, real-time smart dashboard designed for ambient desktop screens or wall-mounted displays (such as a raspberry pi). built using **pygame**, it integrates spotify tracking, cyclical world timezone clocks, and real-time weather metrics in a dark-mode UI.
 
+<p align="center">
+  <kbd>
+    <img src="/assets/images/banners/display_thingy.png" alt="displayThingy interface screenshot" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br><i>Interface dashboard layout displaying Spotify track progress, clock, and weather.</i>
+</p>
 
 ### features
 

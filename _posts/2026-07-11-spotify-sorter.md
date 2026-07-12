@@ -3,7 +3,6 @@ layout: post
 title: spotify playlist sorter
 subtitle: "<b>ai-powered playlist classifier & syncing engine</b>"
 categories: random
-banner: "/assets/images/banners/spotify_sorter.jpg"
 tags: python nix
 ---
 
