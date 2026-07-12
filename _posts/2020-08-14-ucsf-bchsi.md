@@ -24,7 +24,7 @@ hidden:
 </style>
 
 <div class="ucsf-header" style="text-align: center; margin-bottom: 24px; margin-top: 12px;">
-  <img src="/assets/images/banners/ucsf.png" alt="ucsf bakar computational health sciences institute" class="ucsf-banner no-lightbox">
+  <img src="/assets/images/banners/ucsf.jpg" alt="ucsf bakar computational health sciences institute" class="ucsf-banner no-lightbox">
   <h1 style="margin-top: 16px; margin-bottom: 8px; font-weight: 700; text-transform: lowercase;">ucsf bakar computational health sciences institute</h1>
   <p class="ucsf-subtitle" style="font-size: 1.05rem; opacity: 0.85; line-height: 1.6; margin: 0 auto; max-width: 600px;">
     <b>data science intern</b><br>
