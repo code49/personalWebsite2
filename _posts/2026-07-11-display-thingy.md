@@ -6,8 +6,8 @@ categories: random
 tags: python raspberry-pi nix
 ---
 
-**displayThingy &#124; Personal Project**<br>
-**technologies: Python, Pygame, Spotipy, pytz, Nix Shell, Raspberry Pi**
+**tools: python, pygame, spotipy, pytz, nix shell, raspberry pi**<br>
+**[project repository](https://github.com/code49/displayThingy)**
 
 ---
 

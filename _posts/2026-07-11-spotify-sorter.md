@@ -6,8 +6,8 @@ categories: random
 tags: python nix
 ---
 
-**Spotify Playlist Sorter &#124; Personal Project**<br>
-**technologies: Python, Spotipy, Nix Shell, OpenAI/Antigravity CLI**
+**tools: python, spotipy, nix shell, openai/antigravity cli**<br>
+**[project repository](https://github.com/code49/spotifySorter)**
 
 ---
 
