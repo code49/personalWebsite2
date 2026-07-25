@@ -4,7 +4,7 @@ title: just one flappy bird
 subtitle: "<b>one-instruction CPU video game</b><br>january 2025<br>pittsburgh, pa"
 # author: 
 categories: projects
-banner: "/assets/images/banners/just-one-flappy-bird.png"
+banner: "/assets/images/banners/just_one_flappy_bird.jpg"
 tags: cmu rtl fpga verilog
 # top: 0
 # sidebar: []
