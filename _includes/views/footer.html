@@ -2,7 +2,11 @@
   <data class="u-url" href="{{ "/" | relative_url }}"></data>
 
   <div class="wrapper">
-    <div class="site-footer-inner">
+    <div class="site-footer-inner" style="display: flex; align-items: center; gap: 20px;">
+      <a href="{{ "/" | relative_url }}" style="flex-shrink: 0; display: block;">
+        <img src="{{ site.favicon | relative_url }}" alt="logo" style="width: 48px; height: 48px; border-radius: 6px; border: 1.5px solid rgba(128, 128, 128, 0.2); background-color: #ffffff !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);" class="no-lightbox">
+      </a>
+      <div style="flex-grow: 1;">
         {%- assign currentYear = 'now' | date: "%Y" -%}
         {%- assign copyright = site.copyright
             | replace: '{currentYear}', currentYear
@@ -11,12 +15,12 @@
             | replace: '(p)', '℗'
             | replace: '(cleft)', '<span class="copyleft">&copy;</span>'
         -%}
-      <div>{{ copyright }}</div>
-      <div><a href="{{ "/about" | relative_url }}">about</a> | <a href="{{ "/contact" | relative_url }}">contact</a> | <a href="{{ "/resume" | relative_url }}">resume</a></div>
-      <div>powered by <a title="Jekyll is a simple, blog-aware, static site
-      generator." href="https://jekyllrb.com/">jekyll</a> &amp; <a title="Yat, yet
-      another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">yat theme</a></div>
-      <!-- <div class="footer-col rss-subscribe">Subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></div> -->
+        <div>{{ copyright }}</div>
+        <div><a href="{{ "/about" | relative_url }}">about</a> | <a href="{{ "/contact" | relative_url }}">contact</a> | <a href="{{ "/resume" | relative_url }}">resume</a></div>
+        <div>powered by <a title="Jekyll is a simple, blog-aware, static site
+        generator." href="https://jekyllrb.com/">jekyll</a> &amp; <a title="Yat, yet
+        another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">yat theme</a></div>
+      </div>
     </div>
   </div>
 </footer>
