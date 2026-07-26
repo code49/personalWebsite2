@@ -5,7 +5,7 @@ subtitle: january 2025
 # author: 
 categories: teaching
 banner: "/assets/images/banners/default.png"
-tags: 
+tags: cmu teaching
 # top: 0
 # sidebar: []
 ---

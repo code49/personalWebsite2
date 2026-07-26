@@ -5,7 +5,7 @@ subtitle: "<b>data science intern</b><br>june - august 2020 &#124; san francisco
 # author: 
 categories: experience
 banner: "/assets/images/banners/ucsf.jpg"
-tags: python
+tags: experience python
 # top: 0
 # sidebar: []
 ---
