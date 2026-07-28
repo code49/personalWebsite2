@@ -3,7 +3,7 @@ layout: post
 title: spotify playlist sorter
 subtitle: "<b>ai-powered playlist classifier & syncing engine</b>"
 categories: random
-tags: python nix
+tags: python nix random
 ---
 
 **tools: python, spotipy, nix shell, openai/antigravity cli**<br>

@@ -3,7 +3,7 @@ layout: post
 title: display thingy
 subtitle: "<b>ambient smart dashboard widget</b>"
 categories: random
-tags: python raspberry-pi nix
+tags: python raspberry-pi nix random
 ---
 
 **tools: python, pygame, spotipy, pytz, nix shell, raspberry pi**<br>

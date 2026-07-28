@@ -1,0 +1,167 @@
+{% if include.category %}
+  {% assign candidate_posts = site.categories[include.category] %}
+{% else %}
+  {% assign candidate_posts = site.posts %}
+{% endif %}
+{% assign id_suffix = include.id_suffix | default: "default" %}
+
+<div id="project-showcase-{{ id_suffix }}" class="project-showcase-wrapper" style="opacity: 0; transition: opacity 0.3s ease;">
+  {% if include.title %}
+    <h3 class="showcase-title" style="text-transform: lowercase; margin-bottom: 20px;">{{ include.title }}</h3>
+  {% endif %}
+  
+  <div class="carousel-container">
+    <button class="carousel-btn prev-btn" aria-label="Previous project">&#10094;</button>
+    <div class="carousel-window">
+      <div class="carousel-track">
+        <!-- Cards injected dynamically -->
+      </div>
+    </div>
+    <button class="carousel-btn next-btn" aria-label="Next project">&#10095;</button>
+  </div>
+  <div class="carousel-indicators"></div>
+</div>
+
+<script>
+(function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    const rawPosts = [
+      {% for post in candidate_posts %}
+        {% unless post.url == page.url %}
+          {% unless post.tags contains "random" %}
+            {% if include.tag_filter == nil or post.tags contains include.tag_filter %}
+              {
+                title: {{ post.title | escape | jsonify }},
+                subtitle: {{ post.subtitle | jsonify }},
+                banner: {{ post.banner | default: '/assets/images/banners/default.png' | relative_url | jsonify }},
+                url: {{ post.url | relative_url | jsonify }},
+                tags: {{ post.tags | jsonify }}
+              },
+            {% endif %}
+          {% endunless %}
+        {% endunless %}
+      {% endfor %}
+    ];
+
+    if (rawPosts.length === 0) return;
+
+    let posts = [...rawPosts];
+
+    // Shuffle if random is enabled
+    if ({{ include.random | default: false }}) {
+      for (let i = posts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [posts[i], posts[j]] = [posts[j], posts[i]];
+      }
+    }
+
+    // Limit to max_items if specified
+    const maxItems = parseInt("{{ include.max_items | default: 3 }}", 10);
+    if (posts.length > maxItems) {
+      posts = posts.slice(0, maxItems);
+    }
+
+    const wrapper = document.getElementById("project-showcase-{{ id_suffix }}");
+    const track = wrapper.querySelector(".carousel-track");
+    const indicatorsContainer = wrapper.querySelector(".carousel-indicators");
+    
+    // Inject Cards
+    posts.forEach((post, index) => {
+      const card = document.createElement("div");
+      card.className = "project-card";
+      
+      const tagPills = post.tags && post.tags.length 
+        ? post.tags.map(t => `<span class="project-card-tag-pill">#${t}</span>`).join("")
+        : "";
+
+      card.innerHTML = `
+        <div class="project-card-image" style="background-image: url('${post.banner}');"></div>
+        <div class="project-card-content">
+          <h4 class="project-card-title">${post.title}</h4>
+          <p class="project-card-subtitle">${post.subtitle || ""}</p>
+          <div class="project-card-tags">${tagPills}</div>
+          <a href="${post.url}" class="project-card-link">read article &rarr;</a>
+        </div>
+      `;
+      track.appendChild(card);
+
+      // Add dot indicator
+      const dot = document.createElement("span");
+      dot.className = `carousel-indicator-dot${index === 0 ? ' active' : ''}`;
+      dot.addEventListener("click", () => goToSlide(index));
+      indicatorsContainer.appendChild(dot);
+    });
+
+    let currentIndex = 0;
+    const cards = track.querySelectorAll(".project-card");
+    const dots = indicatorsContainer.querySelectorAll(".carousel-indicator-dot");
+    const totalSlides = posts.length;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle("active", idx === currentIndex);
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    // Auto rotate
+    let intervalId = setInterval(nextSlide, 6000);
+    function resetInterval() {
+      clearInterval(intervalId);
+      intervalId = setInterval(nextSlide, 6000);
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateCarousel();
+      resetInterval();
+    }
+
+    // Set buttons
+    wrapper.querySelector(".next-btn").addEventListener("click", () => {
+      nextSlide();
+      resetInterval();
+    });
+    wrapper.querySelector(".prev-btn").addEventListener("click", () => {
+      prevSlide();
+      resetInterval();
+    });
+
+    // Touch Swipe Support
+    let startX = 0;
+    let isSwiping = false;
+
+    track.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      isSwiping = true;
+    }, { passive: true });
+
+    track.addEventListener("touchend", (e) => {
+      if (!isSwiping) return;
+      const diffX = e.changedTouches[0].clientX - startX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          prevSlide();
+        } else {
+          nextSlide();
+        }
+        resetInterval();
+      }
+      isSwiping = false;
+    });
+
+    // Reveal container once loaded
+    wrapper.style.opacity = "1";
+  });
+})();
+</script>

@@ -3,7 +3,7 @@ layout: post
 title: terminal tools
 subtitle: "<b>portable shell utilities & command line productivity hacks</b>"
 categories: random
-tags: bash nix
+tags: bash nix random
 ---
 
 **tools: bash, git, python, fzf**<br>
