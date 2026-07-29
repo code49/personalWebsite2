@@ -162,6 +162,7 @@ code_badge:
 header_pages:
   - index.html
   - categories.html
+  - contact.html
   - resume.html
   # - archives.html
   # - tags.html
