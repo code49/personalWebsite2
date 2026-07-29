@@ -4,7 +4,7 @@ title: "18-100: power and equivalent circuits recitation"
 subtitle: january 2025
 # author: 
 categories: teaching
-banner: "/assets/images/banners/default.png"
+banner: "/assets/images/18100/18100-test.png"
 tags: cmu teaching
 # top: 0
 # sidebar: []
