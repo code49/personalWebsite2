@@ -1,7 +1,7 @@
 # davidlechan.dev
 
-[![Build and Deploy to Github Pages](https://github.com/code49/personalWebsite2/actions/workflows/build-jekyll.yml/badge.svg)](https://github.com/code49/personalWebsite2/actions/workflows/build-jekyll.yml)
-[![GoatCounter Views](https://code49.goatcounter.com/counter/TOTAL.svg)](https://code49.goatcounter.com)
+[![Build and Deploy to Github Pages](https://github.com/code49/personalWebsite2/actions/workflows/build-jekyll.yml/badge.svg)](https://github.com/code49/personalWebsite2/actions/workflows/build-jekyll.yml)\
+[![GoatCounter Views](https://code49.goatcounter.com/counter/TOTAL.svg?no_branding=1)](https://code49.goatcounter.com)
 
 Welcome to the repository for my personal website, hosted live at **[davidlechan.dev](https://davidlechan.dev)**. 
 
