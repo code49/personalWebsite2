@@ -67,7 +67,8 @@
     
     // Inject Cards
     posts.forEach((post, index) => {
-      const card = document.createElement("div");
+      const card = document.createElement("a");
+      card.href = post.url;
       card.className = "project-card";
       
       const tagPills = post.tags && post.tags.length 
@@ -80,7 +81,7 @@
           <h4 class="project-card-title">${post.title}</h4>
           <p class="project-card-subtitle">${post.subtitle || ""}</p>
           <div class="project-card-tags">${tagPills}</div>
-          <a href="${post.url}" class="project-card-link">read article &rarr;</a>
+          <span class="project-card-link">read article &rarr;</span>
         </div>
       `;
       track.appendChild(card);

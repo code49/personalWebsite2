@@ -1,0 +1,156 @@
+{% assign id_suffix = include.id_suffix | default: "default" %}
+
+<div id="photo-gallery-{{ id_suffix }}" class="photo-gallery-wrapper" style="opacity: 0; transition: opacity 0.3s ease;">
+  {% if include.title %}
+    <h3 class="showcase-title" style="text-transform: lowercase; margin-bottom: 20px;">{{ include.title }}</h3>
+  {% endif %}
+
+  <div class="gallery-container">
+    <button class="gallery-btn prev-btn" aria-label="Previous photo">&#10094;</button>
+    <div class="gallery-window">
+      <div class="gallery-track">
+        <!-- Slides injected dynamically -->
+      </div>
+    </div>
+    <button class="gallery-btn next-btn" aria-label="Next photo">&#10095;</button>
+  </div>
+  <div class="gallery-indicators">
+    <!-- Indicator dots injected dynamically -->
+  </div>
+</div>
+
+<script>
+(function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    const wrapper = document.getElementById("photo-gallery-{{ id_suffix }}");
+    if (!wrapper) return;
+
+    const rawJsonUrl = "{{ include.json_url }}";
+    // Resolve relative URL based on site.baseurl if needed
+    const baseUrl = "{{ site.baseurl }}";
+    const jsonUrl = rawJsonUrl.startsWith(baseUrl) ? rawJsonUrl : baseUrl + (rawJsonUrl.startsWith('/') ? '' : '/') + rawJsonUrl;
+
+    fetch(jsonUrl)
+      .then(response => {
+        if (!response.ok) throw new Error("Failed to load photo metadata JSON");
+        return response.json();
+      })
+      .then(photos => {
+        if (!photos || photos.length === 0) return;
+
+        const track = wrapper.querySelector(".gallery-track");
+        const indicatorsContainer = wrapper.querySelector(".gallery-indicators");
+
+        photos.forEach((photo, index) => {
+          const slide = document.createElement("div");
+          slide.className = "photo-slide";
+          
+          let captionHTML = "";
+          if (photo.caption && photo.caption.trim() !== "") {
+            captionHTML = `<div class="photo-slide-caption">${escapeHtml(photo.caption)}</div>`;
+          }
+
+          const resolvedPath = photo.path.startsWith(baseUrl) ? photo.path : baseUrl + (photo.path.startsWith('/') ? '' : '/') + photo.path;
+
+          slide.innerHTML = `
+            <div class="photo-slide-img-container">
+              <img src="${resolvedPath}" alt="${escapeHtml(photo.caption || '')}" class="photo-slide-img no-lightbox">
+            </div>
+            ${captionHTML}
+          `;
+          track.appendChild(slide);
+
+          // Add indicator dot
+          const dot = document.createElement("span");
+          dot.className = `gallery-indicator-dot${index === 0 ? ' active' : ''}`;
+          dot.addEventListener("click", () => goToSlide(index));
+          indicatorsContainer.appendChild(dot);
+        });
+
+        let currentIndex = 0;
+        const slides = track.querySelectorAll(".photo-slide");
+        const dots = indicatorsContainer.querySelectorAll(".gallery-indicator-dot");
+        const totalSlides = photos.length;
+
+        function updateGallery() {
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+          dots.forEach((dot, idx) => {
+            dot.classList.toggle("active", idx === currentIndex);
+          });
+        }
+
+        function nextSlide() {
+          currentIndex = (currentIndex + 1) % totalSlides;
+          updateGallery();
+        }
+
+        function prevSlide() {
+          currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+          updateGallery();
+        }
+
+        function goToSlide(index) {
+          currentIndex = index;
+          updateGallery();
+          resetInterval();
+        }
+
+        // Set buttons
+        wrapper.querySelector(".next-btn").addEventListener("click", () => {
+          nextSlide();
+          resetInterval();
+        });
+        wrapper.querySelector(".prev-btn").addEventListener("click", () => {
+          prevSlide();
+          resetInterval();
+        });
+
+        // Auto rotate
+        let intervalId = setInterval(nextSlide, 8000);
+        function resetInterval() {
+          clearInterval(intervalId);
+          intervalId = setInterval(nextSlide, 8000);
+        }
+
+        // Touch Swipe Support
+        let startX = 0;
+        let isSwiping = false;
+
+        track.addEventListener("touchstart", (e) => {
+          startX = e.touches[0].clientX;
+          isSwiping = true;
+        }, { passive: true });
+
+        track.addEventListener("touchend", (e) => {
+          if (!isSwiping) return;
+          const diffX = e.changedTouches[0].clientX - startX;
+          if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+              prevSlide();
+            } else {
+              nextSlide();
+            }
+            resetInterval();
+          }
+          isSwiping = false;
+        });
+
+        // Reveal container once loaded
+        wrapper.style.opacity = "1";
+      })
+      .catch(err => {
+        console.error("Error loading photo gallery carousel:", err);
+      });
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  });
+})();
+</script>
