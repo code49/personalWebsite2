@@ -56,7 +56,7 @@
     }
 
     // Limit to max_items if specified
-    const maxItems = parseInt("{{ include.max_items | default: 3 }}", 10);
+    const maxItems = parseInt("{{ include.max_items | default: 5 }}", 10);
     if (posts.length > maxItems) {
       posts = posts.slice(0, maxItems);
     }
