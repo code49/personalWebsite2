@@ -839,3 +839,31 @@ a:visited .post-badges .post-badge.badge-new {
   color: $background-color;
   background-color: $background-color;
 }
+
+// Highlighted Practical Applications Box
+.practical-applications-box {
+  background-color: rgba(189, 178, 255, 0.08);
+  border: 1px solid rgba(189, 178, 255, 0.25);
+  border-left: 4px solid #bdb2ff;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 20px 0 28px 0;
+
+  .box-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: lowercase;
+    color: #bdb2ff;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+}
