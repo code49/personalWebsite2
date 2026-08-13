@@ -18,6 +18,11 @@ tags: experience python
 
 ---
 
+<div class="practical-applications-box">
+  <div class="box-title">💡 practical application</div>
+  <p>Medical records contain rich clinical details that researchers need to discover new disease treatments, but sharing them poses privacy risks if patient identities are exposed. This project built automated software that replaces real names and dates in medical notes with realistic fake ones. If a name is accidentally missed during filtering, it blends in naturally with the fake names rather than standing out, allowing medical scientists to safely analyze thousands of health records while protecting patient confidentiality.</p>
+</div>
+
 ### intro
 
 The Bakar Computational Health Sciences Institute (BCHSI) at the University of California, San Francisco (UCSF) applies advanced computational tools to solve complex medical challenges. Work at the institute ranges from processing cardiac acoustic data for imaging to building genomic models that analyze how genetics influence common diseases.

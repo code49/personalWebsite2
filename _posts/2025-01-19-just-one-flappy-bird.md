@@ -22,6 +22,11 @@ tags: cmu projects rtl fpga verilog
 
 ---
 
+<div class="practical-applications-box">
+  <div class="box-title">💡 practical application</div>
+  <p>Computer processors usually rely on complex instruction sets with hundreds of distinct commands (like ADD, MULTIPLY, and JUMP) to execute software. This hackathon project built an ultra-minimalist CPU that operates using only a single mathematical instruction (<code>SUBLEQ</code>: subtract and branch if less than or equal to zero). Despite having just one command, the hardware processor is fully functional and capable of running a complete Flappy Bird video game on a monitor.</p>
+</div>
+
 <!-- <p align="center">
   <img src="media/logo.jpg" alt="logo" width="300" align="center"/>
 </p> -->

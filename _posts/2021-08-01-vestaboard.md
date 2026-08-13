@@ -18,6 +18,11 @@ tags: experience php javascript
 
 ---
 
+<div class="practical-applications-box">
+  <div class="box-title">💡 practical application</div>
+  <p>Vestaboard is a modern, physical split-flap display board (inspired by vintage train station arrival boards) that displays messages sent over the internet. This project built automated channel plugins—like a daily vocabulary builder—that format and schedule dynamic, engaging content onto smart physical displays in homes and offices without requiring daily manual input.</p>
+</div>
+
 ### intro
 
 Vestaboard is a South San Francisco-based startup that designs and builds smart split-flap display boards. These displays combine the nostalgic aesthetic and mechanical sounds of vintage train stations with modern internet connectivity, allowing users to send remote messages, track live sports scores, or display automated daily content.
