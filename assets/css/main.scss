@@ -393,7 +393,7 @@ html[data-theme="dark"] {
   padding: 14px 20px;
   border-radius: 8px !important;
   background-color: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid #cccccc !important;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
   color: #1d1f21 !important;
   text-decoration: none !important;
@@ -402,18 +402,7 @@ html[data-theme="dark"] {
   text-transform: lowercase;
   overflow: visible !important;
 
-  // Mask out the straight border line at notch locations (0% 50% and 100% 50%)
-  -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 6.5px, #000 7px),
-                      radial-gradient(circle at 100% 50%, transparent 6.5px, #000 7px);
-  -webkit-mask-composite: destination-in;
-  mask-image: radial-gradient(circle at 0% 50%, transparent 6.5px, #000 7px),
-              radial-gradient(circle at 100% 50%, transparent 6.5px, #000 7px);
-  mask-composite: intersect;
-
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
-  cursor: pointer;
-
-  // Inward Notch Inner Curved Border Line
+  // Inward Notch Inner Curved Border Line & Eraser Patch (3-Layer Architecture)
   &::before, &::after {
     content: "" !important;
     display: block !important;
@@ -422,20 +411,22 @@ html[data-theme="dark"] {
     transform: translateY(-50%);
     width: 14px;
     height: 14px;
-    background-color: transparent !important;
-    border: 1px solid rgba(0, 0, 0, 0.15); // inner curved border
+    background-color: #ffffff !important; // Page background color inside notch
+    border: 1px solid #cccccc; // 1px stroke matching card border
     border-radius: 50%;
     z-index: 3;
-    transition: border-color 0.25s ease;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
     pointer-events: none;
   }
   &::before {
-    left: -7px;
+    left: -9px;
     clip-path: inset(-5px -5px -5px 50%);
+    box-shadow: -3px 0 0 0 #ffffff; // Layer 2 Eraser patch covering left border line segment
   }
   &::after {
-    right: -7px;
+    right: -9px;
     clip-path: inset(-5px 50% -5px -5px);
+    box-shadow: 3px 0 0 0 #ffffff; // Layer 2 Eraser patch covering right border line segment
   }
 
   // Vertical Perforation Line and Stub Segment
@@ -489,8 +480,16 @@ html[data-theme="dark"] {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 
     &::before, &::after {
-      background-color: transparent !important;
+      background-color: #1d1f21 !important; // Dark mode page background color inside notch cutout
       border-color: #373b41;
+    }
+
+    &::before {
+      box-shadow: -3px 0 0 0 #1d1f21; // Dark mode page background eraser patch
+    }
+
+    &::after {
+      box-shadow: 3px 0 0 0 #1d1f21; // Dark mode page background eraser patch
     }
 
     .ticket-stub {
@@ -502,6 +501,7 @@ html[data-theme="dark"] {
       box-shadow: 0 6px 20px rgba(189, 178, 255, 0.2);
 
       &::before, &::after {
+        background-color: #1d1f21 !important;
         border-color: #bdb2ff;
       }
 
@@ -511,6 +511,347 @@ html[data-theme="dark"] {
 
       .ticket-stub-icon, .ticket-btn-arrow, .card-arrow {
         color: #bdb2ff !important;
+      }
+    }
+  }
+}
+
+// Footer Fading Train Track Line Component
+.site-footer-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  .footer-text-block {
+    flex-shrink: 0;
+  }
+
+  .footer-track-line {
+    flex-grow: 1;
+    height: 12px;
+    margin-left: 12px;
+    background-color: transparent !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Crect x='8' y='0' width='4' height='12' rx='1' fill='%23969896'/%3E%3Cline x1='0' y1='2.5' x2='20' y2='2.5' stroke='%23666666' stroke-width='1.8'/%3E%3Cline x1='0' y1='9.5' x2='20' y2='9.5' stroke='%23666666' stroke-width='1.8'/%3E%3C/svg%3E") !important;
+    background-repeat: repeat-x !important;
+    background-position: center !important;
+    opacity: 0.65;
+    
+    // Smooth linear fade-out to the right edge
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 15%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 0%, #000 15%, transparent 100%);
+
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+}
+
+// Dark Mode Fading Train Track Line in Footer
+html[data-theme="dark"] .site-footer-inner .footer-track-line {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Crect x='8' y='0' width='4' height='12' rx='1' fill='%23373b41'/%3E%3Cline x1='0' y1='2.5' x2='20' y2='2.5' stroke='%23666666' stroke-width='1.8'/%3E%3Cline x1='0' y1='9.5' x2='20' y2='9.5' stroke='%23666666' stroke-width='1.8'/%3E%3C/svg%3E") !important;
+  opacity: 0.6;
+}
+
+// Vertical Transit Station Map for Career Highlights (Train Ticket Style)
+.career-station-map {
+  position: relative;
+  margin-top: 28px;
+  margin-bottom: 36px;
+  padding-left: 36px;
+
+  .career-station-node {
+    position: relative;
+    margin-bottom: 24px;
+
+    // Continuous gapless track line segments connecting seamlessly from top dot to bottom dot
+    &::before {
+      content: "";
+      position: absolute;
+      left: -19.5px; // 36px padding - 19.5px = 16.5px left (+ 1.5px center = 18px exact center!)
+      top: 0;
+      bottom: -26px; // Overlap 2px into next node to eliminate any seam gaps
+      width: 3px;
+      background-color: #8f63ee;
+      border-radius: 0; // Flat joints between segments (no rounded caps at seams!)
+      z-index: 1;
+    }
+
+    &:first-child {
+      &::before {
+        top: 50%; // Start line strictly at center of top-most station dot #1
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+
+      &::before {
+        bottom: 50%; // Terminate line strictly at center of bottom-most station dot #8
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+      }
+    }
+
+    // Station Stop Bullet Node Dot (Centered vertically relative to card container!)
+    .station-dot {
+      position: absolute;
+      left: -26px; // 36px padding - 26px = 10px left offset. Center = 10px + 8px = 18px!
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      border: 3px solid #8f63ee;
+      box-sizing: border-box;
+      z-index: 2;
+      transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    // Station Stop Content Card Container (Train Ticket Style: Logo -> Description -> Date Stub)
+    .ticket-station-card {
+      position: relative !important;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background-color: #ffffff !important;
+      border: 1px solid #cccccc !important;
+      border-radius: 8px !important;
+      padding: 14px 20px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+      color: #1d1f21;
+      text-decoration: none;
+      overflow: visible !important;
+
+      // Dashed border styling for non-linked tickets (no article)
+      &:not(.has-article) {
+        border-style: dashed !important;
+
+        &::before, &::after {
+          border-style: dashed !important;
+        }
+      }
+
+      // Inward Notch Inner Curved Arc Border Lines & Eraser Patch (3-Layer Architecture)
+      &::before, &::after {
+        content: "" !important;
+        display: block !important;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 14px;
+        height: 14px;
+        background-color: #ffffff !important;
+        border: 1px solid #cccccc;
+        border-radius: 50%;
+        z-index: 3;
+        transition: border-color 0.25s ease, background-color 0.25s ease;
+        pointer-events: none;
+      }
+      &::before {
+        left: -9px;
+        clip-path: inset(-5px -5px -5px 50%);
+        box-shadow: -3px 0 0 0 #ffffff;
+      }
+      &::after {
+        right: -9px;
+        clip-path: inset(-5px 50% -5px -5px);
+        box-shadow: 3px 0 0 0 #ffffff;
+      }
+
+      // Vertical Perforation Line & Stub Segment for Date
+      .ticket-stub {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-left: 16px;
+        margin-left: 12px;
+        border-left: 1.5px dashed rgba(0, 0, 0, 0.15);
+        align-self: stretch;
+        transition: border-color 0.25s ease;
+      }
+    }
+
+    // Hover interactions
+    &:hover {
+      .station-dot {
+        transform: translateY(-50%) scale(1.3);
+        background-color: #8f63ee;
+        box-shadow: 0 0 10px rgba(143, 99, 238, 0.6);
+      }
+
+      .ticket-station-card.has-article {
+        transform: translateX(4px);
+        border-color: #8f63ee !important;
+        box-shadow: 0 4px 16px rgba(143, 99, 238, 0.15);
+
+        &::before, &::after {
+          border-color: #8f63ee;
+        }
+
+        .ticket-stub {
+          border-left-color: rgba(143, 99, 238, 0.4);
+        }
+
+        .station-title a {
+          color: #8f63ee;
+        }
+      }
+    }
+
+    .ticket-station-card.has-article {
+      cursor: pointer;
+    }
+
+    // 1. Logo
+    .station-logo-wrap {
+      flex-shrink: 0;
+
+      .company-logo {
+        width: 44px;
+        height: 44px;
+        object-fit: contain;
+        border-radius: 6px;
+        display: block;
+      }
+    }
+
+    // 2. Description (Title + Details)
+    .station-desc-wrap {
+      flex: 1 1 0%;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      .station-title {
+        font-weight: 700;
+        font-size: 0.95rem;
+        text-transform: lowercase;
+        color: inherit;
+
+        a {
+          color: inherit;
+          text-decoration: none;
+          transition: color 0.2s ease;
+        }
+      }
+
+      .station-details {
+        font-weight: 400;
+        font-size: 0.88rem;
+        line-height: 1.4;
+        color: #555555;
+      }
+    }
+
+    // 3. Date Stub
+    .station-time {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: #777777;
+      text-transform: lowercase;
+      flex-shrink: 0;
+      text-align: right;
+      white-space: nowrap;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 720px) {
+      .ticket-station-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+
+        .ticket-stub {
+          border-left: none;
+          padding-left: 0;
+          margin-left: 0;
+          justify-content: flex-start;
+        }
+      }
+
+      .station-time {
+        text-align: left;
+      }
+    }
+  }
+}
+
+// Dark Mode Overrides for Vertical Transit Station Map
+html[data-theme="dark"] .career-station-map {
+  .career-station-node {
+    &::before {
+      background-color: #bdb2ff;
+    }
+
+    .station-dot {
+      background-color: #1d1f21;
+      border-color: #bdb2ff;
+    }
+
+    .ticket-station-card {
+      background-color: #282a2e !important;
+      border-color: #373b41 !important;
+      color: #e0e0e0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+
+      &:not(.has-article) {
+        border-style: dashed !important;
+
+        &::before, &::after {
+          border-style: dashed !important;
+        }
+      }
+
+      &::before, &::after {
+        background-color: #1d1f21 !important; // Dark mode page background
+        border-color: #373b41;
+      }
+
+      &::before {
+        box-shadow: -3px 0 0 0 #1d1f21;
+      }
+
+      &::after {
+        box-shadow: 3px 0 0 0 #1d1f21;
+      }
+
+      .ticket-stub {
+        border-left-color: #373b41;
+      }
+    }
+
+    .station-time {
+      color: #969896;
+    }
+
+    .station-details {
+      color: #c5c8c6;
+    }
+
+    &:hover {
+      .station-dot {
+        background-color: #bdb2ff;
+        box-shadow: 0 0 10px rgba(189, 178, 255, 0.7);
+      }
+
+      .ticket-station-card.has-article {
+        border-color: #bdb2ff !important;
+        box-shadow: 0 4px 18px rgba(189, 178, 255, 0.18);
+
+        &::before, &::after {
+          border-color: #bdb2ff;
+        }
+
+        .ticket-stub {
+          border-left-color: #bdb2ff;
+        }
+
+        .station-title a {
+          color: #bdb2ff;
+        }
       }
     }
   }
