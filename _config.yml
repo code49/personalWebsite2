@@ -161,7 +161,7 @@ code_badge:
 # this and add the path to the pages in order as they should show up
 header_pages:
   - index.html
-  - categories.html
+  - tags.html
   - contact.html
   - resume.html
   # - archives.html

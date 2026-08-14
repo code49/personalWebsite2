@@ -1143,3 +1143,481 @@ html[data-theme="dark"] .page-segments {
   }
 }
 
+// ==========================================
+// SUBWAY NETWORK MAP PAGE & COMPONENT STYLING
+// ==========================================
+
+.subway-page-header {
+  margin-bottom: 24px;
+
+  .subway-page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-transform: lowercase;
+    margin-bottom: 8px;
+  }
+
+  .subway-page-subtitle {
+    color: #969896;
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+
+    a {
+      color: #8f63ee;
+      text-decoration: underline;
+    }
+  }
+
+  .subway-controls-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 14px;
+  }
+
+  .view-toggle-group {
+    display: inline-flex;
+    background-color: #282a2e;
+    border: 1px solid #373b41;
+    border-radius: 8px;
+    padding: 3px;
+    gap: 4px;
+
+    .subway-toggle-btn {
+      background: transparent;
+      border: none;
+      color: #c5c8c6;
+      font-family: monospace;
+      font-size: 0.85rem;
+      text-transform: lowercase;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      i {
+        margin-right: 6px;
+      }
+
+      &.active, &:hover {
+        background-color: #373b41;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+// Subway Line Legend Filter Bar
+.subway-legend-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #282a2e;
+  border: 1px solid #373b41;
+  border-radius: 10px;
+  padding: 12px 18px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+
+  .legend-title {
+    font-family: monospace;
+    font-size: 0.85rem;
+    text-transform: lowercase;
+    color: #969896;
+    flex-shrink: 0;
+  }
+
+  .legend-pills-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    .legend-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #1d1f21;
+      border: 1px solid #373b41;
+      border-radius: 16px;
+      padding: 4px 12px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      text-transform: lowercase;
+      color: #c5c8c6;
+      cursor: pointer;
+      transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+      .pill-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: inline-block;
+
+        &.all-dot {
+          background-color: #bdb2ff;
+        }
+      }
+
+      &:hover, &.active {
+        border-color: var(--pill-color, #bdb2ff);
+        color: #ffffff;
+        transform: translateY(-1px);
+        box-shadow: 0 0 8px var(--pill-color, rgba(189, 178, 255, 0.4));
+      }
+
+      &.active-all {
+        border-color: #bdb2ff;
+        color: #ffffff;
+        box-shadow: 0 0 8px rgba(189, 178, 255, 0.4);
+      }
+    }
+  }
+}
+
+// Main Subway Network Map Container
+.subway-map-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.subway-canvas-container {
+  position: relative;
+  width: 100%;
+  min-height: 700px;
+  background-color: #1d1f21;
+  border: 1px solid #373b41;
+  border-radius: 12px;
+  overflow: auto;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+
+  canvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .subway-overlay-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    pointer-events: auto;
+  }
+}
+
+// Subway Station Node Element
+.subway-station-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+
+  &.dimmed-node {
+    opacity: 0.3;
+  }
+
+  &.active-node {
+    opacity: 1.0;
+  }
+
+  .node-dot-inner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #1d1f21;
+    border: 3px solid var(--node-color, #bdb2ff);
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  &.interchange-hub .node-dot-inner {
+    width: 22px;
+    height: 22px;
+    border-width: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #282a2e;
+
+    .interchange-rings {
+      display: flex;
+      gap: 2px;
+
+      .ring-segment {
+        width: 4px;
+        height: 10px;
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .node-station-label {
+    display: flex;
+    flex-direction: column;
+    background-color: #282a2e;
+    border: 1px solid #373b41;
+    border-radius: 6px;
+    padding: 5px 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap;
+
+    .station-name-text {
+      font-family: monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #e0e0e0;
+      text-transform: lowercase;
+    }
+
+    .station-date-sub {
+      font-family: monospace;
+      font-size: 0.72rem;
+      color: #969896;
+    }
+  }
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+
+    .node-dot-inner {
+      box-shadow: 0 0 12px var(--node-color, #bdb2ff);
+    }
+
+    .node-station-label {
+      border-color: var(--node-color, #bdb2ff);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+
+      .station-name-text {
+        color: var(--node-color, #bdb2ff);
+      }
+    }
+  }
+}
+
+// Station Ticket Popover Card
+.station-popover-ticket {
+  position: absolute;
+  width: 320px;
+  background-color: #282a2e;
+  border: 1px solid #373b41;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  animation: ticketPop 0.2s ease-out;
+
+  .close-ticket-btn {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    color: #969896;
+    font-size: 1.4rem;
+    cursor: pointer;
+    line-height: 1;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+
+  .ticket-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    .station-badge {
+      font-family: monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #bdb2ff;
+      background-color: rgba(189, 178, 255, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .ticket-date-stub {
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: #969896;
+    }
+  }
+
+  .ticket-post-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: lowercase;
+    margin: 6px 0 8px 0;
+    line-height: 1.3;
+  }
+
+  .ticket-post-excerpt {
+    font-size: 0.85rem;
+    color: #c5c8c6;
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+
+  .ticket-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+
+    .ticket-tag-badge {
+      font-family: monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+  }
+
+  .board-train-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    background-color: #1d1f21 !important;
+    border: 1px solid #373b41 !important;
+    color: #bdb2ff !important;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+
+    &:hover {
+      border-color: #bdb2ff !important;
+      background-color: #282a2e !important;
+    }
+  }
+}
+
+@keyframes ticketPop {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// Light Mode Overrides for Subway Map
+html[data-theme="light"] {
+  .subway-page-subtitle {
+    color: #666666;
+  }
+
+  .view-toggle-group {
+    background-color: #f0f0f0;
+    border-color: #dddddd;
+
+    .subway-toggle-btn {
+      color: #555555;
+
+      &.active, &:hover {
+        background-color: #ffffff;
+        color: #1d1f21;
+      }
+    }
+  }
+
+  .subway-legend-bar {
+    background-color: #f8f9fa;
+    border-color: #e0e0e0;
+
+    .legend-title {
+      color: #666666;
+    }
+
+    .legend-pill {
+      background-color: #ffffff;
+      border-color: #e0e0e0;
+      color: #444444;
+
+      &:hover, &.active {
+        color: #1d1f21;
+      }
+    }
+  }
+
+  .subway-canvas-container {
+    background-color: #ffffff;
+    border-color: #e0e0e0;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.03);
+  }
+
+  .subway-station-node {
+    .node-dot-inner {
+      background-color: #ffffff;
+    }
+
+    .node-station-label {
+      background-color: #ffffff;
+      border-color: #e0e0e0;
+
+      .station-name-text {
+        color: #1d1f21;
+      }
+
+      .station-date-sub {
+        color: #777777;
+      }
+    }
+  }
+
+  .station-popover-ticket {
+    background-color: #ffffff;
+    border-color: #e0e0e0;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+
+    .close-ticket-btn {
+      color: #777777;
+
+      &:hover {
+        color: #1d1f21;
+      }
+    }
+
+    .ticket-post-title {
+      color: #1d1f21;
+    }
+
+    .ticket-post-excerpt {
+      color: #555555;
+    }
+
+    .board-train-btn {
+      background-color: #f8f9fa !important;
+      border-color: #e0e0e0 !important;
+      color: #8f63ee !important;
+
+      &:hover {
+        border-color: #8f63ee !important;
+        background-color: #ffffff !important;
+      }
+    }
+  }
+}
+
+
