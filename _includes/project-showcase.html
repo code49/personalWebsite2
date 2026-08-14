@@ -19,7 +19,14 @@
     </div>
     <button class="carousel-btn next-btn" aria-label="Next project">&#10095;</button>
   </div>
-  <div class="carousel-indicators"></div>
+
+  <!-- Horizontal Transit Line Station Indicators -->
+  <div class="transit-line-indicators">
+    <div class="transit-track-line"></div>
+    <div class="station-nodes-container">
+      <!-- Station stop nodes injected dynamically -->
+    </div>
+  </div>
 </div>
 
 <script>
@@ -63,10 +70,11 @@
 
     const wrapper = document.getElementById("project-showcase-{{ id_suffix }}");
     const track = wrapper.querySelector(".carousel-track");
-    const indicatorsContainer = wrapper.querySelector(".carousel-indicators");
+    const stationContainer = wrapper.querySelector(".station-nodes-container");
     
-    // Inject Cards
+    // Inject Cards & Horizontal Station Indicators
     posts.forEach((post, index) => {
+      // 1. Carousel Card
       const card = document.createElement("a");
       card.href = post.url;
       card.className = "project-card";
@@ -86,35 +94,32 @@
       `;
       track.appendChild(card);
 
-      // Add dot indicator
-      const dot = document.createElement("span");
-      dot.className = `carousel-indicator-dot${index === 0 ? ' active' : ''}`;
-      dot.addEventListener("click", () => goToSlide(index));
-      indicatorsContainer.appendChild(dot);
+      // 2. Station Stop Indicator
+      const stationNode = document.createElement("div");
+      stationNode.className = `station-indicator-stop${index === 0 ? ' active' : ''}`;
+      stationNode.innerHTML = `
+        <div class="station-node-dot"></div>
+        <span class="station-node-title">${post.title}</span>
+      `;
+      stationNode.addEventListener("click", () => goToSlide(index));
+      stationContainer.appendChild(stationNode);
     });
 
     let currentIndex = 0;
     const cards = track.querySelectorAll(".project-card");
-    const dots = indicatorsContainer.querySelectorAll(".carousel-indicator-dot");
+    const stationStops = stationContainer.querySelectorAll(".station-indicator-stop");
     const totalSlides = posts.length;
 
     function updateCarousel() {
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      dots.forEach((dot, idx) => {
-        dot.classList.toggle("active", idx === currentIndex);
+      stationStops.forEach((stop, idx) => {
+        stop.classList.toggle("active", idx === currentIndex);
       });
     }
 
     function nextSlide() {
       currentIndex = (currentIndex + 1) % totalSlides;
       updateCarousel();
-    }
-
-    // Auto rotate
-    let intervalId = setInterval(nextSlide, 6000);
-    function resetInterval() {
-      clearInterval(intervalId);
-      intervalId = setInterval(nextSlide, 6000);
     }
 
     function prevSlide() {
@@ -128,15 +133,27 @@
       resetInterval();
     }
 
-    // Set buttons
-    wrapper.querySelector(".next-btn").addEventListener("click", () => {
-      nextSlide();
-      resetInterval();
-    });
-    wrapper.querySelector(".prev-btn").addEventListener("click", () => {
-      prevSlide();
-      resetInterval();
-    });
+    // Auto rotate
+    let intervalId = setInterval(nextSlide, 6000);
+    function resetInterval() {
+      clearInterval(intervalId);
+      intervalId = setInterval(nextSlide, 6000);
+    }
+
+    const prevBtn = wrapper.querySelector(".prev-btn");
+    const nextBtn = wrapper.querySelector(".next-btn");
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        resetInterval();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        resetInterval();
+      });
+    }
 
     // Touch Swipe Support
     let startX = 0;
@@ -161,7 +178,6 @@
       isSwiping = false;
     });
 
-    // Reveal container once loaded
     wrapper.style.opacity = "1";
   });
 })();

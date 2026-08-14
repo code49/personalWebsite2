@@ -237,28 +237,138 @@ p[align="center"] {
     color: $brand-color !important;
   }
 
-  .carousel-indicators {
+  // Horizontal Transit Line Station Indicators (Bottom of Carousel)
+  .transit-line-indicators {
+    position: relative;
+    margin-top: 24px;
+    padding: 12px 0;
     display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 16px;
-  }
+    flex-direction: column;
+    align-items: center;
 
-  .carousel-indicator-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgba(128, 128, 128, 0.3);
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-
-    &:hover {
-      background-color: rgba(128, 128, 128, 0.6);
+    // Horizontal Route Track Line running behind station dots
+    .transit-track-line {
+      position: absolute;
+      top: 27.5px;
+      left: 30px;
+      right: 30px;
+      height: 3px;
+      background-color: #8f63ee;
+      border-radius: 2px;
+      z-index: 1;
     }
 
-    &.active {
-      background-color: $brand-color;
-      transform: scale(1.25);
+    .station-nodes-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 100%;
+      padding: 10px 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .station-indicator-stop {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      gap: 8px;
+      flex: 1 1 0%;
+      min-width: 70px;
+      transition: transform 0.2s ease;
+
+      .station-node-dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        border: 2px solid #8f63ee;
+        background-color: #ffffff;
+        box-sizing: border-box;
+        transform-origin: center center;
+        transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .station-node-title {
+        font-family: monospace;
+        font-size: 0.78rem;
+        text-transform: lowercase;
+        color: #777777;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.25;
+        max-width: 110px;
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+
+      &:hover {
+        .station-node-dot {
+          transform: scale(1.25);
+          background-color: #8f63ee;
+          box-shadow: 0 0 8px rgba(143, 99, 238, 0.6);
+        }
+        .station-node-title {
+          color: #8f63ee;
+        }
+      }
+
+      &.active {
+        .station-node-dot {
+          transform: scale(1.3);
+          background-color: #8f63ee;
+          box-shadow: 0 0 10px rgba(143, 99, 238, 0.8);
+        }
+        .station-node-title {
+          color: #8f63ee;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+// Dark Mode Overrides for Horizontal Transit Line Indicators
+html[data-theme="dark"] .project-showcase-wrapper {
+  .transit-line-indicators {
+    .transit-track-line {
+      background-color: #bdb2ff;
+    }
+
+    .station-indicator-stop {
+      .station-node-dot {
+        border-color: #bdb2ff;
+        background-color: #1d1f21;
+      }
+
+      .station-node-title {
+        color: #969896;
+      }
+
+      &:hover {
+        .station-node-dot {
+          background-color: #bdb2ff;
+          box-shadow: 0 0 8px rgba(189, 178, 255, 0.6);
+        }
+        .station-node-title {
+          color: #bdb2ff;
+        }
+      }
+
+      &.active {
+        .station-node-dot {
+          background-color: #bdb2ff;
+          box-shadow: 0 0 10px rgba(189, 178, 255, 0.8);
+        }
+        .station-node-title {
+          color: #bdb2ff;
+        }
+      }
     }
   }
 }
@@ -267,8 +377,141 @@ p[align="center"] {
 html[data-theme="dark"] {
   .project-showcase-wrapper {
     .carousel-window {
-      background-color: #141414;
+      background-color: #282a2e;
+      border-color: #373b41;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+  }
+}
+
+// Train Ticket Style Action Buttons & Cards
+.ticket-btn, .contact-card {
+  position: relative !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-radius: 8px !important;
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  color: #1d1f21 !important;
+  text-decoration: none !important;
+  font-family: monospace;
+  font-size: 0.95rem;
+  text-transform: lowercase;
+  overflow: visible !important;
+
+  // Mask out the straight border line at notch locations (0% 50% and 100% 50%)
+  -webkit-mask-image: radial-gradient(circle at 0% 50%, transparent 6.5px, #000 7px),
+                      radial-gradient(circle at 100% 50%, transparent 6.5px, #000 7px);
+  -webkit-mask-composite: destination-in;
+  mask-image: radial-gradient(circle at 0% 50%, transparent 6.5px, #000 7px),
+              radial-gradient(circle at 100% 50%, transparent 6.5px, #000 7px);
+  mask-composite: intersect;
+
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  cursor: pointer;
+
+  // Inward Notch Inner Curved Border Line
+  &::before, &::after {
+    content: "" !important;
+    display: block !important;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    background-color: transparent !important;
+    border: 1px solid rgba(0, 0, 0, 0.15); // inner curved border
+    border-radius: 50%;
+    z-index: 3;
+    transition: border-color 0.25s ease;
+    pointer-events: none;
+  }
+  &::before {
+    left: -7px;
+    clip-path: inset(-5px -5px -5px 50%);
+  }
+  &::after {
+    right: -7px;
+    clip-path: inset(-5px 50% -5px -5px);
+  }
+
+  // Vertical Perforation Line and Stub Segment
+  .ticket-stub {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 16px;
+    margin-left: 16px;
+    border-left: 1.5px dashed rgba(0, 0, 0, 0.15);
+    align-self: stretch;
+    transition: border-color 0.25s ease;
+  }
+
+  .ticket-stub-icon {
+    font-size: 1.1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    transition: color 0.2s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: #8f63ee !important;
+    box-shadow: 0 6px 18px rgba(143, 99, 238, 0.18);
+
+    &::before, &::after {
+      border-color: #8f63ee;
+    }
+
+    .ticket-stub {
+      border-left-color: #8f63ee;
+    }
+
+    .ticket-stub-icon, .ticket-btn-arrow, .card-arrow {
+      color: #8f63ee !important;
+      opacity: 1 !important;
+    }
+  }
+}
+
+// Dark Mode Overrides for Train Ticket Buttons & Contact Cards
+html[data-theme="dark"] {
+  .ticket-btn, .contact-card {
+    background-color: #282a2e !important;
+    border-color: #373b41 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+    &::before, &::after {
+      background-color: transparent !important;
+      border-color: #373b41;
+    }
+
+    .ticket-stub {
+      border-left-color: #373b41;
+    }
+
+    &:hover {
+      border-color: #bdb2ff !important;
+      box-shadow: 0 6px 20px rgba(189, 178, 255, 0.2);
+
+      &::before, &::after {
+        border-color: #bdb2ff;
+      }
+
+      .ticket-stub {
+        border-left-color: #bdb2ff;
+      }
+
+      .ticket-stub-icon, .ticket-btn-arrow, .card-arrow {
+        color: #bdb2ff !important;
+      }
     }
   }
 }

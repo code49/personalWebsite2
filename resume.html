@@ -102,12 +102,18 @@ title: resume
 </p>
 
 <!-- Download Buttons -->
-<div style="text-align: center; margin-bottom: 28px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-  <a href="{{ "/assets/misc/DavidChan_Resume.pdf" | relative_url }}?v={{ site.time | date: '%s' }}" download class="btn btn-secondary">
-    📥 download resume (light)
+<div style="text-align: center; margin-bottom: 28px; display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+  <a href="{{ "/assets/misc/DavidChan_Resume.pdf" | relative_url }}?v={{ site.time | date: '%s' }}" download class="ticket-btn">
+    <span>download resume (light)</span>
+    <span class="ticket-stub">
+      <span class="ticket-stub-icon">📥</span>
+    </span>
   </a>
-  <a href="{{ "/assets/misc/DavidChan_Resume_Dark.pdf" | relative_url }}?v={{ site.time | date: '%s' }}" download class="btn btn-secondary">
-    📥 download resume (dark)
+  <a href="{{ "/assets/misc/DavidChan_Resume_Dark.pdf" | relative_url }}?v={{ site.time | date: '%s' }}" download class="ticket-btn">
+    <span>download resume (dark)</span>
+    <span class="ticket-stub">
+      <span class="ticket-stub-icon">📥</span>
+    </span>
   </a>
 </div>
 
@@ -126,7 +132,10 @@ title: resume
 
 <!-- Link to the main website -->
 <div style="text-align: center; margin-top: 36px; margin-bottom: 12px;">
-  <a href="/" class="btn btn-secondary" style="display: inline-flex; width: auto; padding: 12px 32px;">
-    visit main website &rarr;
+  <a href="/" class="ticket-btn" style="padding: 14px 24px; font-weight: 600;">
+    <span>visit main website</span>
+    <span class="ticket-stub">
+      <span class="ticket-stub-icon">&rarr;</span>
+    </span>
   </a>
 </div>

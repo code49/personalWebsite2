@@ -213,12 +213,18 @@ permalink: /contact/
   </p>
 
   <!-- CTA Action Buttons -->
-  <div class="cta-actions">
-    <button class="btn btn-primary" onclick="downloadVCard()">
-      👤 save contact (vcard)
+  <div class="cta-actions" style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px;">
+    <button class="ticket-btn" onclick="downloadVCard()">
+      <span>save contact (vcard)</span>
+      <span class="ticket-stub">
+        <span class="ticket-stub-icon">👤</span>
+      </span>
     </button>
-    <button class="btn btn-secondary" id="copy-email-btn" onclick="copyEmail()">
-      📋 copy email
+    <button class="ticket-btn" id="copy-email-btn" onclick="copyEmail()">
+      <span>copy email</span>
+      <span class="ticket-stub">
+        <span class="ticket-stub-icon">📋</span>
+      </span>
     </button>
   </div>
 
@@ -229,72 +235,57 @@ permalink: /contact/
     <div class="contact-row">
       <!-- Personal Email -->
       <a href="mailto:davidlechan@gmail.com" class="contact-card">
-        <div class="card-icon" style="font-size: 1.2rem;">
-          ✉
-        </div>
         <div class="card-details">
           <div class="card-label">(personal) email</div>
           <div class="card-value">davidlechan@gmail.com</div>
         </div>
-        <div class="card-arrow">
-          →
+        <div class="ticket-stub">
+          <div class="ticket-stub-icon">📧</div>
         </div>
       </a>
 
       <!-- Work Email -->
       <a href="mailto:dchan2@andrew.cmu.edu" class="contact-card">
-        <div class="card-icon" style="font-size: 1.2rem;">
-          ✉
-        </div>
         <div class="card-details">
           <div class="card-label">(work) email</div>
           <div class="card-value">dchan2@andrew.cmu.edu</div>
         </div>
-        <div class="card-arrow">
-          →
+        <div class="ticket-stub">
+          <div class="ticket-stub-icon">📧</div>
         </div>
       </a>
     </div>
 
     <!-- LinkedIn -->
     <a href="https://www.linkedin.com/in/david-le-chan/" target="_blank" rel="noopener" class="contact-card">
-      <div class="card-icon" style="font-size: 0.95rem; font-weight: bold;">
-        in
-      </div>
       <div class="card-details">
         <div class="card-label">linkedin</div>
         <div class="card-value">david-le-chan</div>
       </div>
-      <div class="card-arrow">
-        →
+      <div class="ticket-stub">
+        <div class="ticket-stub-icon" style="font-size: 0.9rem;">in</div>
       </div>
     </a>
 
     <!-- GitHub -->
     <a href="https://github.com/code49" target="_blank" rel="noopener" class="contact-card">
-      <div class="card-icon" style="font-size: 0.95rem; font-weight: bold;">
-        git
-      </div>
       <div class="card-details">
         <div class="card-label">(personal) github</div>
         <div class="card-value">code49</div>
       </div>
-      <div class="card-arrow">
-        →
+      <div class="ticket-stub">
+        <div class="ticket-stub-icon" style="font-size: 0.9rem;">git</div>
       </div>
     </a>
 
     <!-- Resume -->
     <a href="{{ "/resume" | relative_url }}" class="contact-card">
-      <div class="card-icon" style="font-size: 0.85rem; font-weight: bold;">
-        pdf
-      </div>
       <div class="card-details">
         <div class="card-label">resume / cv</div>
         <div class="card-value">davidlechan.dev/resume</div>
       </div>
-      <div class="card-arrow">
-        →
+      <div class="ticket-stub">
+        <div class="ticket-stub-icon" style="font-size: 0.85rem;">pdf</div>
       </div>
     </a>
 
@@ -302,8 +293,11 @@ permalink: /contact/
 
   <!-- Link to the main website -->
   <div style="text-align: center; margin-top: 36px; margin-bottom: 12px;">
-    <a href="/" class="btn btn-secondary" style="display: inline-flex; width: auto; padding: 12px 32px;">
-      visit main website &rarr;
+    <a href="/" class="ticket-btn" style="padding: 14px 24px; font-weight: 600;">
+      <span>visit main website</span>
+      <span class="ticket-stub">
+        <span class="ticket-stub-icon">&rarr;</span>
+      </span>
     </a>
   </div>
 </div>
