@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ucsf bakar computational health sciences institute
+title: ucsf bakar institute
 subtitle: "<b>data science intern</b><br>june - august 2020 &#124; san francisco, ca"
 # author: 
 categories: experience

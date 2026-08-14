@@ -1,4 +1,6 @@
+{%- if post.top or post.new -%}
 <span class="post-badges">
-  <span class="post-badge badge-top">TOP</span>
-  <span class="post-badge badge-new">NEW</span>
+  {%- if post.top -%}<span class="post-badge badge-top">TOP</span>{%- endif -%}
+  {%- if post.new -%}<span class="post-badge badge-new">NEW</span>{%- endif -%}
 </span>
+{%- endif -%}

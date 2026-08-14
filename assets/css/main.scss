@@ -389,3 +389,173 @@ html[data-theme="dark"] {
   }
 }
 
+// Global Train Track Horizontal Rule (Personal Branding)
+hr {
+  height: 12px;
+  border: none !important;
+  margin: 20px 0 8px 0;
+  background-color: transparent !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Crect x='8' y='0' width='4' height='12' rx='1' fill='%23969896'/%3E%3Cline x1='0' y1='2.5' x2='20' y2='2.5' stroke='%23666666' stroke-width='1.8'/%3E%3Cline x1='0' y1='9.5' x2='20' y2='9.5' stroke='%23666666' stroke-width='1.8'/%3E%3C/svg%3E") !important;
+  background-repeat: repeat-x !important;
+  background-position: center !important;
+  opacity: 0.65;
+}
+
+html[data-theme="dark"] hr {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='12' viewBox='0 0 20 12'%3E%3Crect x='8' y='0' width='4' height='12' rx='1' fill='%23373b41'/%3E%3Cline x1='0' y1='2.5' x2='20' y2='2.5' stroke='%23666666' stroke-width='1.8'/%3E%3Cline x1='0' y1='9.5' x2='20' y2='9.5' stroke='%23666666' stroke-width='1.8'/%3E%3C/svg%3E") !important;
+  opacity: 0.6;
+}
+
+// Transit Map Timeline (Categories & Experience Page)
+.page-segments {
+  margin-top: 24px;
+
+  .segment-name {
+    font-weight: 700;
+    margin-bottom: 24px;
+    margin-top: 36px;
+    position: relative;
+    font-size: 1.35rem;
+    text-transform: lowercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &::after {
+      content: "";
+      flex-grow: 1;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(143, 99, 238, 0.4), transparent);
+    }
+  }
+
+  .page-segments-list {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none !important;
+    position: relative;
+
+    li {
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 20px;
+      list-style: none !important;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+
+      // Station Stop Node (Circle) - Positioned centered (top: 6px, x = 6px)
+      &::before {
+        content: "";
+        position: absolute;
+        box-sizing: border-box;
+        left: 0px;
+        top: 6px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid #8f63ee;
+        background-color: #ffffff;
+        z-index: 2;
+        transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      // Track Segment - Centered on dot center (y = 12px, x = 6px)
+      &:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        box-sizing: border-box;
+        left: 4px;
+        top: 12px;
+        height: calc(100% + 20px);
+        width: 4px;
+        background-color: #8f63ee;
+        z-index: 1;
+      }
+
+      &:hover {
+        // Dot fills in on hover (without scaling)
+        &::before {
+          background-color: #8f63ee;
+          box-shadow: 0 0 8px rgba(143, 99, 238, 0.6);
+        }
+
+        // Both date and title slide right on hover
+        .post-meta,
+        .post-link {
+          transform: translateX(4px);
+        }
+      }
+
+      // Column 1: Date Badge (Top aligned with title, all-lowercase)
+      .post-meta {
+        font-family: monospace;
+        font-size: 0.88rem;
+        text-transform: lowercase;
+        color: #777;
+        flex-shrink: 0;
+        width: 110px;
+        line-height: 1.4;
+        margin: 0;
+        padding: 3px 0 0 0;
+        transition: transform 0.2s ease, color 0.2s ease;
+      }
+
+      // Column 2: Title (Raised UP relative to date)
+      .post-link {
+        font-weight: 600;
+        font-size: 1.05rem;
+        text-transform: lowercase;
+        color: inherit;
+        flex: 1 1 0%;
+        min-width: 0;
+        line-height: 1.4;
+        margin: -2px 0 0 0;
+        padding: 0;
+        display: block;
+        transition: transform 0.2s ease, color 0.2s ease;
+
+        &:hover {
+          color: #8f63ee;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+// Dark Mode Transit Map
+html[data-theme="dark"] .page-segments {
+  .segment-name::after {
+    background: linear-gradient(90deg, rgba(189, 178, 255, 0.4), transparent);
+  }
+
+  .page-segments-list {
+    li {
+      &::before {
+        border-color: #bdb2ff;
+        background-color: #1d1f21;
+      }
+
+      &:not(:last-child)::after {
+        background-color: #bdb2ff;
+      }
+
+      &:hover {
+        &::before {
+          background-color: #bdb2ff;
+          box-shadow: 0 0 8px rgba(189, 178, 255, 0.6);
+        }
+      }
+
+      .post-meta {
+        color: #969896;
+      }
+
+      .post-link:hover {
+        color: #bdb2ff;
+      }
+    }
+  }
+}
+
