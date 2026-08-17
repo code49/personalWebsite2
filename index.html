@@ -50,196 +50,244 @@ This site serves as a showcase of my publicly shareable work, professional miles
 
 <h3>career highlights</h3>
 
-<div class="career-station-map">
+<div class="train-line">
 
-  <!-- Station 01: AWS -->
-  <div class="career-station-node">
-    <div class="station-dot"></div>
-    <div class="station-content-box ticket-station-card">
-      <!-- 1. Logo -->
-      <div class="station-logo-wrap">
-        <a href="https://aws.amazon.com" target="_blank" rel="noopener" onclick="event.stopPropagation();">
-          <img src="/assets/images/home/aws_logo.jpg" alt="Annapurna Labs (AWS)" class="company-logo no-lightbox">
-        </a>
-      </div>
-
-      <!-- 2. Description -->
-      <div class="station-desc-wrap">
-        <div class="station-title">Hardware Engineering Intern</div>
-        <div class="station-details">Verified PCIe Gen5/Gen6 links and qualified rack-level switches for ML acceleration systems.</div>
-      </div>
-
-      <!-- 3. Ticket Stub Date -->
-      <div class="ticket-stub">
-        <div class="station-time">may - aug 2026</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Station 02: KLA -->
-  <div class="career-station-node">
-    <div class="station-dot"></div>
-    <div class="station-content-box ticket-station-card has-article" onclick="window.location.href='{% link _posts/2025-08-08-kla.md %}';">
-      <!-- 1. Logo -->
-      <div class="station-logo-wrap">
-        <a href="https://www.kla.com/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
-          <img src="/assets/images/home/klacorp_logo.jpg" alt="KLA" class="company-logo no-lightbox">
-        </a>
-      </div>
-
-      <!-- 2. Description -->
-      <div class="station-desc-wrap">
-        <div class="station-title"><a href="{% link _posts/2025-08-08-kla.md %}">FPGA Intern</a></div>
-        <div class="station-details">Upgraded FPGA IP for high-speed image compression engines.</div>
-      </div>
-
-      <!-- 3. Ticket Stub Date -->
-      <div class="ticket-stub">
-        <div class="station-time">may - aug 2025</div>
+  <!-- Stop 01: AWS -->
+  <div class="reveal reveal-left">
+    <div class="arrival-motion">
+      <div class="train-consist">
+        <div class="locomotive-runner">
+          {% include locomotive.html %}
+        </div>
+        <div class="railcar ticket-station-card">
+          <div class="railcar-logo">
+            <a href="https://aws.amazon.com" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+              <img src="/assets/images/home/aws_logo.jpg" alt="Annapurna Labs (AWS)" class="company-logo no-lightbox">
+            </a>
+          </div>
+          <div class="railcar-copy">
+            <p>Annapurna Labs · AWS</p>
+            <h3>Hardware Engineering Intern</h3>
+            <span>Verified PCIe Gen5/Gen6 links and qualified rack-level switches for ML acceleration systems.</span>
+          </div>
+          <div class="railcar-date">
+            <strong>may - aug 2026</strong>
+          </div>
+          <div class="wheels" aria-hidden="true">
+            <div class="bogie"><i></i><i></i><i></i></div>
+            <div class="bogie"><i></i><i></i><i></i></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Station 03: Head TA 18-100 -->
-  <div class="career-station-node">
-    <div class="station-dot"></div>
-    <div class="station-content-box ticket-station-card has-article" onclick="window.location.href='{% link _posts/2025-12-31-18100.md %}';">
-      <!-- 1. Logo -->
-      <div class="station-logo-wrap">
-        <a href="https://www.ece.cmu.edu/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
-          <img src="/assets/images/home/carnegie_mellon_university_logo.jpg" alt="CMU ECE" class="company-logo no-lightbox">
-        </a>
-      </div>
-
-      <!-- 2. Description -->
-      <div class="station-desc-wrap">
-        <div class="station-title"><a href="{% link _posts/2025-12-31-18100.md %}">Head TA, 18-100</a></div>
-        <div class="station-details">Led 40 TAs to serve 180 first-year students for ECE's introductory class.</div>
-      </div>
-
-      <!-- 3. Ticket Stub Date -->
-      <div class="ticket-stub">
-        <div class="station-time">jan - dec 2026</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Station 04: IO Harness Researcher -->
-  <div class="career-station-node">
-    <div class="station-dot"></div>
-    <div class="station-content-box ticket-station-card">
-      <!-- 1. Logo -->
-      <div class="station-logo-wrap">
-        <a href="https://www.ece.cmu.edu/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
-          <img src="/assets/images/home/carnegie_mellon_university_logo.jpg" alt="CMU ECE" class="company-logo no-lightbox">
-        </a>
-      </div>
-
-      <!-- 2. Description -->
-      <div class="station-desc-wrap">
-        <div class="station-title">Researcher, IO Harness Project</div>
-        <div class="station-details">Designing a standardized interface harness for IC tapeouts.</div>
-      </div>
-
-      <!-- 3. Ticket Stub Date -->
-      <div class="ticket-stub">
-        <div class="station-time">may 2024 - present</div>
+  <!-- Stop 02: KLA -->
+  <div class="reveal reveal-right">
+    <div class="arrival-motion">
+      <div class="train-consist">
+        <div class="locomotive-runner">
+          {% include locomotive.html %}
+        </div>
+        <div class="railcar ticket-station-card has-article" onclick="window.location.href='{% link _posts/2025-08-08-kla.md %}';">
+          <div class="railcar-logo">
+            <a href="https://www.kla.com/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+              <img src="/assets/images/home/klacorp_logo.jpg" alt="KLA" class="company-logo no-lightbox">
+            </a>
+          </div>
+          <div class="railcar-copy">
+            <p>KLA</p>
+            <h3><a href="{% link _posts/2025-08-08-kla.md %}">FPGA Intern</a></h3>
+            <span>Upgraded FPGA IP for high-speed image compression engines.</span>
+          </div>
+          <div class="railcar-date">
+            <strong>may - aug 2025</strong>
+          </div>
+          <div class="wheels" aria-hidden="true">
+            <div class="bogie"><i></i><i></i><i></i></div>
+            <div class="bogie"><i></i><i></i><i></i></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Station 05: TA 18-100 -->
-  <div class="career-station-node">
-    <div class="station-dot"></div>
-    <div class="station-content-box ticket-station-card has-article" onclick="window.location.href='{% link _posts/2025-12-31-18100.md %}';">
-      <!-- 1. Logo -->
-      <div class="station-logo-wrap">
-        <a href="https://www.ece.cmu.edu/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
-          <img src="/assets/images/home/carnegie_mellon_university_logo.jpg" alt="CMU ECE" class="company-logo no-lightbox">
-        </a>
-      </div>
-
-      <!-- 2. Description -->
-      <div class="station-desc-wrap">
-        <div class="station-title"><a href="{% link _posts/2025-12-31-18100.md %}">TA, 18-100</a></div>
-        <div class="station-details">Led small groups and office hours for ECE's introductory class.</div>
-      </div>
-
-      <!-- 3. Ticket Stub Date -->
-      <div class="ticket-stub">
-        <div class="station-time">aug 2023 - jan 2026</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Station 06: Tau Motors -->
-  <div class="career-station-node">
-    <div class="station-dot"></div>
-    <div class="station-content-box ticket-station-card has-article" onclick="window.location.href='{% link _posts/2023-08-01-tau.md %}';">
-      <!-- 1. Logo -->
-      <div class="station-logo-wrap">
-        <a href="https://www.taumotors.com/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
-          <img src="/assets/images/home/taumotors_logo.jpg" alt="Tau Motors" class="company-logo no-lightbox">
-        </a>
-      </div>
-
-      <!-- 2. Description -->
-      <div class="station-desc-wrap">
-        <div class="station-title"><a href="{% link _posts/2023-08-01-tau.md %}">Power Electronics &amp; Programming Intern</a></div>
-        <div class="station-details">Prototyped power electronics circuits and inventory management systems.</div>
-      </div>
-
-      <!-- 3. Ticket Stub Date -->
-      <div class="ticket-stub">
-        <div class="station-time">jun - aug 2022<br>jun - aug 2023</div>
+  <!-- Stop 03: Head TA 18-100 -->
+  <div class="reveal reveal-left">
+    <div class="arrival-motion">
+      <div class="train-consist">
+        <div class="locomotive-runner">
+          {% include locomotive.html %}
+        </div>
+        <div class="railcar ticket-station-card has-article" onclick="window.location.href='{% link _posts/2025-12-31-18100.md %}';">
+          <div class="railcar-logo">
+            <a href="https://www.ece.cmu.edu/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+              <img src="/assets/images/home/carnegie_mellon_university_logo.jpg" alt="CMU ECE" class="company-logo no-lightbox">
+            </a>
+          </div>
+          <div class="railcar-copy">
+            <p>Carnegie Mellon ECE</p>
+            <h3><a href="{% link _posts/2025-12-31-18100.md %}">Head TA, 18-100</a></h3>
+            <span>Led 40 TAs to serve 180 first-year students for ECE's introductory class.</span>
+          </div>
+          <div class="railcar-date">
+            <strong>jan - dec 2026</strong>
+          </div>
+          <div class="wheels" aria-hidden="true">
+            <div class="bogie"><i></i><i></i><i></i></div>
+            <div class="bogie"><i></i><i></i><i></i></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Station 07: Vestaboard -->
-  <div class="career-station-node">
-    <div class="station-dot"></div>
-    <div class="station-content-box ticket-station-card has-article" onclick="window.location.href='{% link _posts/2021-08-01-vestaboard.md %}';">
-      <!-- 1. Logo -->
-      <div class="station-logo-wrap">
-        <a href="https://www.vestaboard.com/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
-          <img src="/assets/images/home/vestaboard_inc__logo.jpg" alt="Vestaboard" class="company-logo no-lightbox">
-        </a>
-      </div>
-
-      <!-- 2. Description -->
-      <div class="station-desc-wrap">
-        <div class="station-title"><a href="{% link _posts/2021-08-01-vestaboard.md %}">Programming Intern</a></div>
-        <div class="station-details">Designed a "word-of-the-day" channel (software plugin).</div>
-      </div>
-
-      <!-- 3. Ticket Stub Date -->
-      <div class="ticket-stub">
-        <div class="station-time">jun - aug 2021</div>
+  <!-- Stop 04: IO Harness Researcher -->
+  <div class="reveal reveal-right">
+    <div class="arrival-motion">
+      <div class="train-consist">
+        <div class="locomotive-runner">
+          {% include locomotive.html %}
+        </div>
+        <div class="railcar ticket-station-card">
+          <div class="railcar-logo">
+            <a href="https://www.ece.cmu.edu/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+              <img src="/assets/images/home/carnegie_mellon_university_logo.jpg" alt="CMU ECE" class="company-logo no-lightbox">
+            </a>
+          </div>
+          <div class="railcar-copy">
+            <p>Carnegie Mellon ECE</p>
+            <h3>Researcher, IO Harness Project</h3>
+            <span>Designing a standardized interface harness for IC tapeouts.</span>
+          </div>
+          <div class="railcar-date">
+            <strong>may 2024 - present</strong>
+          </div>
+          <div class="wheels" aria-hidden="true">
+            <div class="bogie"><i></i><i></i><i></i></div>
+            <div class="bogie"><i></i><i></i><i></i></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Station 08: UCSF -->
-  <div class="career-station-node">
-    <div class="station-dot"></div>
-    <div class="station-content-box ticket-station-card has-article" onclick="window.location.href='{% link _posts/2020-08-14-ucsf-bchsi.md %}';">
-      <!-- 1. Logo -->
-      <div class="station-logo-wrap">
-        <a href="https://bakarinstitute.ucsf.edu/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
-          <img src="/assets/images/home/ucsf_logo.jpg" alt="UCSF Bakar Institute" class="company-logo no-lightbox">
-        </a>
+  <!-- Stop 05: TA 18-100 -->
+  <div class="reveal reveal-left">
+    <div class="arrival-motion">
+      <div class="train-consist">
+        <div class="locomotive-runner">
+          {% include locomotive.html %}
+        </div>
+        <div class="railcar ticket-station-card has-article" onclick="window.location.href='{% link _posts/2025-12-31-18100.md %}';">
+          <div class="railcar-logo">
+            <a href="https://www.ece.cmu.edu/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+              <img src="/assets/images/home/carnegie_mellon_university_logo.jpg" alt="CMU ECE" class="company-logo no-lightbox">
+            </a>
+          </div>
+          <div class="railcar-copy">
+            <p>Carnegie Mellon ECE</p>
+            <h3><a href="{% link _posts/2025-12-31-18100.md %}">TA, 18-100</a></h3>
+            <span>Led small groups and office hours for ECE's introductory class.</span>
+          </div>
+          <div class="railcar-date">
+            <strong>aug 2023 - jan 2026</strong>
+          </div>
+          <div class="wheels" aria-hidden="true">
+            <div class="bogie"><i></i><i></i><i></i></div>
+            <div class="bogie"><i></i><i></i><i></i></div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <!-- 2. Description -->
-      <div class="station-desc-wrap">
-        <div class="station-title"><a href="{% link _posts/2020-08-14-ucsf-bchsi.md %}">Data Science Intern</a></div>
-        <div class="station-details">Implemented scripts to disguise personally-identifying information in clinical notes.</div>
+  <!-- Stop 06: Tau Motors -->
+  <div class="reveal reveal-right">
+    <div class="arrival-motion">
+      <div class="train-consist">
+        <div class="locomotive-runner">
+          {% include locomotive.html %}
+        </div>
+        <div class="railcar ticket-station-card has-article" onclick="window.location.href='{% link _posts/2023-08-01-tau.md %}';">
+          <div class="railcar-logo">
+            <a href="https://www.taumotors.com/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+              <img src="/assets/images/home/taumotors_logo.jpg" alt="Tau Motors" class="company-logo no-lightbox">
+            </a>
+          </div>
+          <div class="railcar-copy">
+            <p>Tau Motors</p>
+            <h3><a href="{% link _posts/2023-08-01-tau.md %}">Power Electronics &amp; Programming Intern</a></h3>
+            <span>Prototyped power electronics circuits and inventory management systems.</span>
+          </div>
+          <div class="railcar-date">
+            <strong>jun 2022 - aug 2023</strong>
+          </div>
+          <div class="wheels" aria-hidden="true">
+            <div class="bogie"><i></i><i></i><i></i></div>
+            <div class="bogie"><i></i><i></i><i></i></div>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 
-      <!-- 3. Ticket Stub Date -->
-      <div class="ticket-stub">
-        <div class="station-time">jun - aug 2020</div>
+  <!-- Stop 07: Vestaboard -->
+  <div class="reveal reveal-left">
+    <div class="arrival-motion">
+      <div class="train-consist">
+        <div class="locomotive-runner">
+          {% include locomotive.html %}
+        </div>
+        <div class="railcar ticket-station-card has-article" onclick="window.location.href='{% link _posts/2021-08-01-vestaboard.md %}';">
+          <div class="railcar-logo">
+            <a href="https://www.vestaboard.com/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+              <img src="/assets/images/home/vestaboard_inc__logo.jpg" alt="Vestaboard" class="company-logo no-lightbox">
+            </a>
+          </div>
+          <div class="railcar-copy">
+            <p>Vestaboard</p>
+            <h3><a href="{% link _posts/2021-08-01-vestaboard.md %}">Programming Intern</a></h3>
+            <span>Designed a "word-of-the-day" channel (software plugin).</span>
+          </div>
+          <div class="railcar-date">
+            <strong>jun - aug 2021</strong>
+          </div>
+          <div class="wheels" aria-hidden="true">
+            <div class="bogie"><i></i><i></i><i></i></div>
+            <div class="bogie"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stop 08: UCSF -->
+  <div class="reveal reveal-right">
+    <div class="arrival-motion">
+      <div class="train-consist">
+        <div class="locomotive-runner">
+          {% include locomotive.html %}
+        </div>
+        <div class="railcar ticket-station-card has-article" onclick="window.location.href='{% link _posts/2020-08-14-ucsf-bchsi.md %}';">
+          <div class="railcar-logo">
+            <a href="https://bakarinstitute.ucsf.edu/" target="_blank" rel="noopener" onclick="event.stopPropagation();">
+              <img src="/assets/images/home/ucsf_logo.jpg" alt="UCSF Bakar Institute" class="company-logo no-lightbox">
+            </a>
+          </div>
+          <div class="railcar-copy">
+            <p>UCSF Bakar Institute</p>
+            <h3><a href="{% link _posts/2020-08-14-ucsf-bchsi.md %}">Data Science Intern</a></h3>
+            <span>Implemented scripts to disguise personally-identifying information in clinical notes.</span>
+          </div>
+          <div class="railcar-date">
+            <strong>jun - aug 2020</strong>
+          </div>
+          <div class="wheels" aria-hidden="true">
+            <div class="bogie"><i></i><i></i><i></i></div>
+            <div class="bogie"><i></i><i></i><i></i></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

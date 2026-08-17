@@ -552,6 +552,260 @@ html[data-theme="dark"] .site-footer-inner .footer-track-line {
   opacity: 0.6;
 }
 
+// Animated Scroll Trains for Career Highlights Section
+.train-line {
+  position: relative;
+  width: 100%;
+  margin-top: 32px;
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  overflow: hidden;
+  padding-bottom: 20px;
+
+  .reveal {
+    --locomotive-width: clamp(140px, 22vw, 200px);
+    --train-gap: -4px;
+    --locomotive-primary: #bdb2ff;
+    --locomotive-dark-accent: #8f63ee;
+    --locomotive-roof: #a0c4ff;
+    --locomotive-stripe: #7042c4;
+    --locomotive-stroke: #080909;
+
+    position: relative;
+    isolation: isolate;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 100vw;
+      height: 18px;
+      transform: translateX(-50%);
+      background: repeating-linear-gradient(90deg, transparent 0 18px, #373b41 18px 25px, transparent 25px 44px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 3px;
+      width: 100vw;
+      height: 12px;
+      transform: translateX(-50%);
+      background: linear-gradient(to bottom, #969896 0 2px, #1d1f21 2px 4px, transparent 4px 8px, #969896 8px 10px, #1d1f21 10px 12px);
+      z-index: 1;
+      pointer-events: none;
+    }
+  }
+
+  .arrival-motion {
+    position: relative;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.16, 0.7, 0.2, 1);
+  }
+
+  .reveal-left:not(.is-visible) .arrival-motion {
+    opacity: 0.4;
+    transform: translateX(-40px);
+  }
+
+  .reveal-right:not(.is-visible) .arrival-motion {
+    opacity: 0.4;
+    transform: translateX(40px);
+  }
+
+  .reveal.is-visible .arrival-motion {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .train-consist {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) var(--locomotive-width);
+    align-items: end;
+    gap: var(--train-gap);
+    padding: 0 0 14px;
+  }
+
+  .reveal-right .train-consist {
+    grid-template-columns: var(--locomotive-width) minmax(0, 1fr);
+  }
+
+  .reveal-left .locomotive-runner {
+    grid-column: 2;
+  }
+
+  .reveal-left .railcar {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .reveal-right .locomotive-runner {
+    grid-column: 1;
+  }
+
+  .reveal-right .locomotive {
+    transform: scaleX(-1);
+  }
+
+  .reveal-right .railcar {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .locomotive-runner {
+    position: relative;
+    z-index: 2;
+    align-self: end;
+    width: 100%;
+    transform-origin: center;
+    transform: translateY(7px);
+  }
+
+  .locomotive {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform-origin: center;
+    filter: drop-shadow(0 4px 0 #090a0b);
+  }
+
+  .railcar {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    align-items: center;
+    gap: 16px;
+    background-color: #282a2e;
+    border: 1px solid #373b41;
+    border-radius: 8px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+
+    &.has-article {
+      cursor: pointer;
+
+      &:hover {
+        border-color: #bdb2ff;
+        transform: translateY(-2px);
+      }
+    }
+
+    .railcar-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #ffffff;
+      border: 1px solid #373b41;
+      flex-shrink: 0;
+      padding: 3px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 4px;
+      }
+    }
+
+    .railcar-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      p {
+        margin: 0;
+        font-family: monospace;
+        font-size: 0.75rem;
+        color: #bdb2ff;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #ffffff;
+
+        a {
+          color: #ffffff;
+          text-decoration: none;
+
+          &:hover {
+            color: #bdb2ff;
+          }
+        }
+      }
+
+      span {
+        font-size: 0.85rem;
+        color: #969896;
+        line-height: 1.35;
+      }
+    }
+
+    .railcar-date {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid #373b41;
+      padding-left: 16px;
+      white-space: nowrap;
+
+      strong {
+        font-family: monospace;
+        font-size: 0.82rem;
+        color: #c5c8c6;
+      }
+    }
+
+    .wheels {
+      position: absolute;
+      bottom: -11px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: none;
+      z-index: 4;
+
+      .bogie {
+        display: flex;
+        gap: 3px;
+        align-items: center;
+
+        i {
+          width: 15px;
+          height: 15px;
+          background: #121516;
+          border: 2px solid #737a7c;
+          border-radius: 50%;
+          display: inline-block;
+          box-shadow: inset 0 0 0 2px #080909;
+        }
+      }
+    }
+  }
+}
+
 // Vertical Transit Station Map for Career Highlights (Train Ticket Style)
 .career-station-map {
   position: relative;

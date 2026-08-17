@@ -56,3 +56,29 @@ function smoothScrollTo(y, time) {
   }
 }
 
+// Scroll Observer for Animated Trains in Career Highlights
+function initTrainObserver() {
+  function checkReveals() {
+    var reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.95) {
+        el.classList.add('is-visible');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', checkReveals, { passive: true });
+  window.addEventListener('resize', checkReveals, { passive: true });
+  checkReveals();
+  setTimeout(checkReveals, 100);
+  setTimeout(checkReveals, 500);
+  setTimeout(checkReveals, 1500);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTrainObserver);
+} else {
+  initTrainObserver();
+}
+
