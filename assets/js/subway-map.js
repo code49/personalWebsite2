@@ -26,8 +26,38 @@
   };
 
   function getTagColor(tag) {
-    if (!tag) return '#bdb2ff';
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    if (!tag) return isLight ? '#a32a2a' : '#bdb2ff';
     const cleanTag = String(tag).toLowerCase().trim();
+    if (isLight) {
+      const LIGHT_PALETTE = {
+        'core': '#a32a2a',
+        'fpga': '#b83232',
+        'cmu': '#2b5ca8',
+        'projects': '#2e7d32',
+        'experience': '#c0392b',
+        'rtl': '#8e24aa',
+        'verilog': '#00838f',
+        'python': '#d87000',
+        'teaching': '#e65100',
+        'verification': '#6a1b9a',
+        'physical-design': '#00695c',
+        'kicad': '#ad1457',
+        'php': '#2e7d32',
+        'javascript': '#d87000',
+        'nix': '#1565c0',
+        'random': '#0277bd',
+        'bash': '#2e7d32',
+        'raspberry-pi': '#ef6c00'
+      };
+      if (LIGHT_PALETTE[cleanTag]) return LIGHT_PALETTE[cleanTag];
+      let hash = 0;
+      for (let i = 0; i < cleanTag.length; i++) {
+        hash = cleanTag.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      const hue = Math.abs(hash) % 360;
+      return `hsl(${hue}, 65%, 40%)`;
+    }
     if (COLOR_PALETTE[cleanTag]) return COLOR_PALETTE[cleanTag];
     let hash = 0;
     for (let i = 0; i < cleanTag.length; i++) {

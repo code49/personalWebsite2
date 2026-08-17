@@ -1870,8 +1870,91 @@ html[data-theme="dark"] .page-segments {
   }
 }
 
-// Light Mode Overrides for Subway Map
+// Header Portrait & Logo Styling with Light/Dark Mode Themes
+.about-portrait {
+  display: inline-block !important;
+  margin: 0 !important;
+  border-radius: 50%;
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border: 3px solid #a32a2a;
+  box-shadow: 0 8px 24px rgba(163, 42, 42, 0.18);
+  cursor: default;
+  z-index: 1;
+  position: relative;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.about-logo {
+  display: inline-block !important;
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  border: 3px solid #a32a2a;
+  box-shadow: 0 8px 24px rgba(163, 42, 42, 0.18);
+  margin-left: -25px !important;
+  margin-right: 0 !important;
+  margin-top: 75px !important;
+  z-index: 2;
+  position: relative;
+  background-color: #ffffff !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+html[data-theme="dark"] {
+  .about-portrait, .about-logo {
+    border-color: #bdb2ff !important;
+    box-shadow: 0 8px 24px rgba(189, 178, 255, 0.2) !important;
+  }
+}
+
 html[data-theme="light"] {
+  .about-portrait, .about-logo {
+    border-color: #a32a2a !important;
+    box-shadow: 0 8px 24px rgba(163, 42, 42, 0.18) !important;
+  }
+}
+
+// Light Mode Palette & Component Overrides (Semi-dark Red Theme #a32a2a)
+html[data-theme="light"] {
+  a {
+    color: #a32a2a;
+
+    &:hover {
+      color: #801b1b;
+    }
+  }
+
+  .practical-applications-box {
+    background-color: rgba(163, 42, 42, 0.06);
+    border-color: rgba(163, 42, 42, 0.25);
+    border-left-color: #a32a2a;
+
+    .box-title {
+      color: #a32a2a;
+    }
+  }
+
+  .train-line .reveal {
+    --locomotive-primary: #a32a2a;
+    --locomotive-dark-accent: #801b1b;
+    --locomotive-roof: #e68a8a;
+    --locomotive-stripe: #661010;
+
+    .railcar-copy p {
+      color: #a32a2a;
+    }
+
+    .railcar.has-article:hover {
+      border-color: #a32a2a;
+
+      h3 a {
+        color: #a32a2a;
+      }
+    }
+  }
+
   .subway-page-subtitle {
     color: #666666;
   }
@@ -1885,7 +1968,8 @@ html[data-theme="light"] {
 
       &.active, &:hover {
         background-color: #ffffff;
-        color: #1d1f21;
+        color: #a32a2a;
+        border-color: #a32a2a;
       }
     }
   }
@@ -1903,16 +1987,30 @@ html[data-theme="light"] {
       border-color: #e0e0e0;
       color: #444444;
 
-      &:hover, &.active, &.active-all {
-        color: #1d1f21;
-        border-color: var(--pill-color, #8f63ee);
+      &:hover, &.active {
+        color: #a32a2a;
+        border-color: var(--pill-color, #a32a2a);
       }
 
       &.active-all {
-        background-color: #f0ecfc;
-        border-color: #8f63ee;
-        color: #1d1f21;
-        box-shadow: 0 0 8px rgba(143, 99, 238, 0.25);
+        background-color: #fdf0f0;
+        border-color: #a32a2a;
+        color: #a32a2a;
+        box-shadow: 0 0 8px rgba(163, 42, 42, 0.25);
+      }
+    }
+  }
+
+  .subway-zoom-controls {
+    .zoom-btn {
+      background-color: #ffffff;
+      border-color: #e0e0e0;
+      color: #444444;
+
+      &:hover {
+        background-color: #fdf0f0;
+        border-color: #a32a2a;
+        color: #a32a2a;
       }
     }
   }
@@ -1952,7 +2050,7 @@ html[data-theme="light"] {
       color: #777777;
 
       &:hover {
-        color: #1d1f21;
+        color: #a32a2a;
       }
     }
 
@@ -1965,12 +2063,12 @@ html[data-theme="light"] {
     }
 
     .board-train-btn {
-      background-color: #f8f9fa !important;
+      background-color: #fdf0f0 !important;
       border-color: #e0e0e0 !important;
-      color: #8f63ee !important;
+      color: #a32a2a !important;
 
       &:hover {
-        border-color: #8f63ee !important;
+        border-color: #a32a2a !important;
         background-color: #ffffff !important;
       }
     }
