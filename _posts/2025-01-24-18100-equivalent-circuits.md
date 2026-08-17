@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "18-100: power and equivalent circuits recitation"
+title: "power and equivalent circuits recitation"
 subtitle: january 2025
 # author: 
 categories: teaching

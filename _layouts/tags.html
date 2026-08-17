@@ -72,20 +72,20 @@ layout: default
   "posts": [
     {% for post in site.posts %}
     {
-      "id": {{ post.url | slugify | json }},
-      "title": {{ post.title | json }},
-      "url": {{ post.url | relative_url | json }},
-      "date": {{ post.date | date: "%b %d, %Y" | json }},
-      "categories": {{ post.categories | json }},
-      "tags": {{ post.tags | json }},
-      "excerpt": {{ post.excerpt | strip_html | truncate: 150 | json }}
+      "id": {{ post.url | slugify | jsonify }},
+      "title": {{ post.title | jsonify }},
+      "url": {{ post.url | relative_url | jsonify }},
+      "date": {{ post.date | date: "%b %d, %Y" | jsonify }},
+      "categories": {{ post.categories | jsonify }},
+      "tags": {{ post.tags | jsonify }},
+      "excerpt": {{ post.excerpt | strip_html | truncate: 150 | jsonify }}
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ],
   "tags": [
     {% for tag in site.tags %}
     {
-      "name": {{ tag[0] | json }},
+      "name": {{ tag[0] | jsonify }},
       "count": {{ tag[1].size }}
     }{% unless forloop.last %},{% endunless %}
     {% endfor %}

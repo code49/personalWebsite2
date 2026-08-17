@@ -1284,11 +1284,12 @@ html[data-theme="dark"] .page-segments {
 .subway-canvas-container {
   position: relative;
   width: 100%;
-  min-height: 700px;
+  min-height: 800px;
+  height: 800px;
   background-color: #1d1f21;
   border: 1px solid #373b41;
   border-radius: 12px;
-  overflow: auto;
+  overflow: hidden;
   background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
   background-size: 24px 24px;
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
@@ -1311,54 +1312,22 @@ html[data-theme="dark"] .page-segments {
   }
 }
 
-// Subway Station Node Element
+// Subway Station Node Element (Compact Card Design)
 .subway-station-node {
   position: absolute;
   transform: translate(-50%, -50%);
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
   cursor: pointer;
   z-index: 10;
   transition: transform 0.2s ease, opacity 0.3s ease;
 
   &.dimmed-node {
-    opacity: 0.3;
+    opacity: 0.25;
   }
 
   &.active-node {
     opacity: 1.0;
-  }
-
-  .node-dot-inner {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background-color: #1d1f21;
-    border: 3px solid var(--node-color, #bdb2ff);
-    box-sizing: border-box;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  &.interchange-hub .node-dot-inner {
-    width: 22px;
-    height: 22px;
-    border-width: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #282a2e;
-
-    .interchange-rings {
-      display: flex;
-      gap: 2px;
-
-      .ring-segment {
-        width: 4px;
-        height: 10px;
-        border-radius: 2px;
-      }
-    }
   }
 
   .node-station-label {
@@ -1367,40 +1336,76 @@ html[data-theme="dark"] .page-segments {
     background-color: #282a2e;
     border: 1px solid #373b41;
     border-radius: 6px;
-    padding: 5px 10px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    padding: 4px 8px;
+    width: 130px;
+    box-sizing: border-box;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
     transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    white-space: nowrap;
+
+    .label-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+      margin-bottom: 2px;
+      padding-bottom: 2px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+      .station-date-sub {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.66rem;
+        font-weight: 600;
+        color: #969896;
+        min-width: 52px;
+        flex-shrink: 0;
+        letter-spacing: -0.2px;
+      }
+
+      .line-dots-inline {
+        display: flex;
+        align-items: center;
+        gap: 2px 3px;
+        flex-wrap: wrap;
+        max-width: 30px;
+        justify-content: flex-end;
+
+        &.few-dots {
+          max-width: none;
+          flex-wrap: nowrap;
+        }
+
+        .inline-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          display: inline-block;
+          flex-shrink: 0;
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
 
     .station-name-text {
       font-family: monospace;
-      font-size: 0.85rem;
+      font-size: 0.74rem;
       font-weight: 600;
       color: #e0e0e0;
       text-transform: lowercase;
-    }
-
-    .station-date-sub {
-      font-family: monospace;
-      font-size: 0.72rem;
-      color: #969896;
+      white-space: normal;
+      word-break: normal;
+      overflow-wrap: break-word;
+      line-height: 1.25;
+      display: block;
+      width: 100%;
     }
   }
 
   &:hover {
-    transform: translate(-50%, -50%) scale(1.1);
-
-    .node-dot-inner {
-      box-shadow: 0 0 12px var(--node-color, #bdb2ff);
-    }
+    transform: translate(-50%, -50%) scale(1.08);
 
     .node-station-label {
       border-color: var(--node-color, #bdb2ff);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-
-      .station-name-text {
-        color: var(--node-color, #bdb2ff);
-      }
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 8px var(--node-color, rgba(189, 178, 255, 0.3));
     }
   }
 }
