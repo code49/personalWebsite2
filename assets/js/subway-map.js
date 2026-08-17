@@ -289,11 +289,18 @@
     const mapBtn = document.getElementById('toggle-map-btn');
     const listBtn = document.getElementById('toggle-list-btn');
 
+    const container = document.querySelector('.subway-canvas-container');
+    const currentWidth = container ? container.clientWidth : window.innerWidth;
+    const isNarrow = currentWidth < 650;
+
+    if (mobileToast) {
+      mobileToast.style.display = isNarrow ? 'flex' : 'none';
+    }
+
     if (mode === 'map') {
       mapView.style.display = 'block';
       listView.style.display = 'none';
       legendBar.style.display = 'flex';
-      if (mobileToast) mobileToast.style.display = 'none';
       if (mapBtn) mapBtn.classList.add('active');
       if (listBtn) listBtn.classList.remove('active');
       requestAnimationFrame(setupCanvasAndNodes);
@@ -301,9 +308,6 @@
       mapView.style.display = 'none';
       listView.style.display = 'block';
       legendBar.style.display = 'none';
-      if (isUserAction && mobileToast) {
-        mobileToast.style.display = 'none';
-      }
       if (mapBtn) mapBtn.classList.remove('active');
       if (listBtn) listBtn.classList.add('active');
     }
@@ -356,21 +360,31 @@
     let minY = Infinity, maxY = -Infinity;
 
     activeNodes.forEach(n => {
-      if (n.x < minX) minX = n.x;
-      if (n.x > maxX) maxX = n.x;
-      if (n.y < minY) minY = n.y;
-      if (n.y > maxY) maxY = n.y;
+      const titleLen = String(n.post.title || '').length;
+      const cardHalfWidth = Math.max(95, Math.min(160, titleLen * 5.5 + 40));
+      const cardHalfHeight = 32;
+
+      const nodeMinX = n.x - cardHalfWidth;
+      const nodeMaxX = n.x + cardHalfWidth;
+      const nodeMinY = n.y - cardHalfHeight;
+      const nodeMaxY = n.y + cardHalfHeight;
+
+      if (nodeMinX < minX) minX = nodeMinX;
+      if (nodeMaxX > maxX) maxX = nodeMaxX;
+      if (nodeMinY < minY) minY = nodeMinY;
+      if (nodeMaxY > maxY) maxY = nodeMaxY;
     });
 
-    const contentWidth = (maxX - minX) || 180;
-    const contentHeight = (maxY - minY) || 180;
+    const contentWidth = (maxX - minX) || 240;
+    const contentHeight = (maxY - minY) || 160;
 
-    const padding = 180;
-    const targetScaleX = (width - padding) / contentWidth;
-    const targetScaleY = (height - padding) / contentHeight;
+    const paddingX = 120;
+    const paddingY = 100;
+    const targetScaleX = (width - paddingX) / contentWidth;
+    const targetScaleY = (height - paddingY) / contentHeight;
 
     let targetScale = Math.min(targetScaleX, targetScaleY);
-    targetScale = Math.min(2.0, Math.max(0.65, targetScale));
+    targetScale = Math.min(1.8, Math.max(0.55, targetScale));
 
     const centerX = (minX + maxX) / 2;
     const centerY = (minY + maxY) / 2;
