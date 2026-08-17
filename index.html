@@ -31,8 +31,14 @@ To me, reliability extends beyond logic circuits and systems; it is also about t
 
 This site serves as a showcase of my publicly shareable work, professional milestones, and the experiences that shape my engineering journey.
 
-<div style="text-align: center; margin-top: 24px; margin-bottom: 8px;">
-  <a href="/contact/" class="ticket-btn" style="padding: 14px 24px; font-weight: 600;">
+<div style="display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 24px; margin-bottom: 8px; flex-wrap: wrap;">
+  <a href="{% link tags.html %}" class="ticket-btn" style="padding: 14px 24px; font-weight: 600;">
+    <span>explore my stuff</span>
+    <span class="ticket-stub">
+      <span class="ticket-stub-icon">&rarr;</span>
+    </span>
+  </a>
+  <a href="{% link contact.html %}" class="ticket-btn" style="padding: 14px 24px; font-weight: 600;">
     <span>contact me</span>
     <span class="ticket-stub">
       <span class="ticket-stub-icon">&rarr;</span>

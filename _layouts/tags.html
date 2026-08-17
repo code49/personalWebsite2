@@ -2,31 +2,29 @@
 layout: default
 ---
 
-<div class="subway-page-header">
-  <h2 class="subway-page-title">transit network map</h2>
-  <p class="subway-page-subtitle">
-    Explore articles by tag transit lines and station interchanges.
-    Alternatively, view pages <a href="{% link categories.html %}">by category</a> or <a href="{% link archives.html %}">by time</a>.
-  </p>
-  
-  <div class="subway-controls-bar">
-    <div class="view-toggle-group">
-      <button id="toggle-map-btn" class="subway-toggle-btn active" onclick="setSubwayView('map')">
-        <i class="fa fa-map-o"></i> subway map
-      </button>
-      <button id="toggle-list-btn" class="subway-toggle-btn" onclick="setSubwayView('list')">
-        <i class="fa fa-list"></i> tag list
-      </button>
-    </div>
+List of pages to explore, grouped by tag!<br>
+Alternatively, view pages <a href="{% link categories.html %}">by category</a> 
+or <a href="{% link time.html %}">by time</a>.
+
+<br><br><hr><br>
+
+<div class="subway-controls-bar">
+  <div class="view-toggle-group">
+    <button id="toggle-map-btn" class="subway-toggle-btn active" onclick="setSubwayView('map', true)">
+      <i class="fa fa-map-o"></i> map
+    </button>
+    <button id="toggle-list-btn" class="subway-toggle-btn" onclick="setSubwayView('list', true)">
+      <i class="fa fa-list"></i> list
+    </button>
   </div>
 </div>
 
 <!-- Subway Line Legend Filter Bar -->
 <div id="subway-legend-container" class="subway-legend-bar">
-  <div class="legend-title">lines:</div>
+  <div class="legend-title">tags:</div>
   <div id="subway-legend-pills" class="legend-pills-wrap">
     <button class="legend-pill active-all" onclick="filterTagLine('all')">
-      <span class="pill-dot all-dot"></span> all lines
+      <span class="pill-dot all-dot"></span> all
     </button>
   </div>
 </div>
@@ -36,26 +34,45 @@ layout: default
   <div class="subway-canvas-container">
     <canvas id="subway-canvas"></canvas>
     <div id="subway-nodes-overlay" class="subway-overlay-layer"></div>
+
+    <!-- Web-Map Zoom Controls & Home Button -->
+    <div class="subway-zoom-controls">
+      <button class="zoom-btn" onclick="zoomSubwayMap(1.25)" title="zoom in">
+        <i class="fa fa-plus"></i>
+      </button>
+      <button class="zoom-btn" onclick="resetSubwayMapZoom()" title="home view (reset)">
+        <i class="fa fa-home"></i>
+      </button>
+      <button class="zoom-btn" onclick="zoomSubwayMap(0.8)" title="zoom out">
+        <i class="fa fa-minus"></i>
+      </button>
+    </div>
   </div>
 
   <!-- Station Ticket Drawer Card (Appears on station click) -->
   <div id="station-ticket-card" class="station-popover-ticket" style="display: none;">
     <button class="close-ticket-btn" onclick="closeStationTicket()">&times;</button>
     <div class="ticket-header">
-      <span class="station-badge">station stop</span>
+      <span id="ticket-category-badge" class="station-badge"></span>
       <span id="ticket-date" class="ticket-date-stub"></span>
     </div>
     <h3 id="ticket-title" class="ticket-post-title"></h3>
-    <p id="ticket-excerpt" class="ticket-post-excerpt"></p>
     <div class="ticket-tags-list" id="ticket-tags-badges"></div>
     <a id="ticket-action-btn" href="#" class="btn ticket-btn board-train-btn">
-      board train (read article) <span class="ticket-btn-arrow">&rarr;</span>
+      go to article <span class="ticket-btn-arrow">&rarr;</span>
     </a>
   </div>
 </div>
 
 <!-- Grouped Tag List View Fallback -->
 <div id="subway-list-view" class="subway-list-wrapper" style="display: none;">
+  <div id="subway-mobile-notice" class="subway-mobile-toast" style="display: none;">
+    <i class="fa fa-desktop toast-icon"></i>
+    <div class="toast-content">
+      <strong>desktop map view hidden:</strong> screen width is under 650px. For the full interactive transit map experience, view this page on a desktop browser!
+    </div>
+  </div>
+
   {%- if site.posts.size > 0 -%}
     {%- include functions.html func='log' level='debug' msg='Get tags value' -%}
     {%- include functions.html func='get_tags' -%}

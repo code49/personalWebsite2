@@ -5,7 +5,7 @@
 
 (function() {
   const COLOR_PALETTE = {
-    'hub': '#c4b5fd',
+    'core': '#c4b5fd',
     'fpga': '#bdb2ff',
     'cmu': '#a0c4ff',
     'projects': '#caffbf',
@@ -119,8 +119,8 @@
       p.tags = normalizeTags(p.tags);
     });
 
-    if (!mapData.tags.some(t => t.name === 'hub')) {
-      mapData.tags.push({ name: 'hub', count: PENTAGON_HUBS.length });
+    if (!mapData.tags.some(t => t.name === 'core')) {
+      mapData.tags.push({ name: 'core', count: PENTAGON_HUBS.length });
     }
 
     renderLegendPills();
@@ -136,6 +136,138 @@
     requestAnimationFrame(setupCanvasAndNodes);
   }
 
+  let zoomScale = 1.0;
+  let panX = 0;
+  let panY = 0;
+  let isPanning = false;
+  let panStartX = 0;
+  let panStartY = 0;
+  let initialPanX = 0;
+  let initialPanY = 0;
+
+  window.zoomSubwayMap = function(factor, center) {
+    const container = document.querySelector('.subway-canvas-container');
+    if (!container) return;
+
+    const oldScale = zoomScale;
+    let newScale = Math.min(3.0, Math.max(0.5, zoomScale * factor));
+    if (newScale === oldScale) return;
+
+    const cx = center ? center.x : container.clientWidth / 2;
+    const cy = center ? center.y : container.clientHeight / 2;
+
+    panX = cx - (cx - panX) * (newScale / oldScale);
+    panY = cy - (cy - panY) * (newScale / oldScale);
+    zoomScale = newScale;
+
+    drawNetworkMap();
+  };
+
+  window.resetSubwayMapZoom = function() {
+    zoomScale = 1.0;
+    panX = 0;
+    panY = 0;
+    drawNetworkMap();
+  };
+
+  function initPanAndZoomEvents() {
+    const container = document.querySelector('.subway-canvas-container');
+    if (!container || container.dataset.panZoomInitialized) return;
+    container.dataset.panZoomInitialized = 'true';
+
+    container.addEventListener('wheel', (e) => {
+      const mapView = document.getElementById('subway-map-view');
+      if (!mapView || mapView.style.display === 'none') return;
+      e.preventDefault();
+      const rect = container.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      const factor = e.deltaY < 0 ? 1.15 : 0.85;
+      zoomSubwayMap(factor, { x: cx, y: cy });
+    }, { passive: false });
+
+    container.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      if (e.target.closest('.subway-station-node') || e.target.closest('.subway-zoom-controls') || e.target.closest('#station-ticket-card')) {
+        return;
+      }
+      isPanning = true;
+      panStartX = e.clientX;
+      panStartY = e.clientY;
+      initialPanX = panX;
+      initialPanY = panY;
+      container.classList.add('is-panning');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isPanning) return;
+      const dx = e.clientX - panStartX;
+      const dy = e.clientY - panStartY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        closeStationTicket();
+      }
+      panX = initialPanX + dx;
+      panY = initialPanY + dy;
+      drawNetworkMap();
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isPanning) {
+        isPanning = false;
+        const container = document.querySelector('.subway-canvas-container');
+        if (container) container.classList.remove('is-panning');
+      }
+    });
+
+    let initialTouchDist = 0;
+    let initialTouchScale = 1.0;
+
+    container.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        if (e.target.closest('.subway-station-node') || e.target.closest('.subway-zoom-controls') || e.target.closest('#station-ticket-card')) {
+          return;
+        }
+        isPanning = true;
+        panStartX = e.touches[0].clientX;
+        panStartY = e.touches[0].clientY;
+        initialPanX = panX;
+        initialPanY = panY;
+      } else if (e.touches.length === 2) {
+        isPanning = false;
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        initialTouchDist = Math.sqrt(dx * dx + dy * dy);
+        initialTouchScale = zoomScale;
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchmove', (e) => {
+      if (isPanning && e.touches.length === 1) {
+        const dx = e.touches[0].clientX - panStartX;
+        const dy = e.touches[0].clientY - panStartY;
+        panX = initialPanX + dx;
+        panY = initialPanY + dy;
+        drawNetworkMap();
+      } else if (e.touches.length === 2 && initialTouchDist > 0) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const rect = container.getBoundingClientRect();
+        const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+        const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+
+        const targetScale = initialTouchScale * (dist / initialTouchDist);
+        const factor = targetScale / zoomScale;
+        zoomSubwayMap(factor, { x: cx, y: cy });
+      }
+    }, { passive: true });
+
+    container.addEventListener('touchend', () => {
+      isPanning = false;
+      initialTouchDist = 0;
+    });
+  }
+
   function debounce(func, wait) {
     let timeout;
     return function(...args) {
@@ -144,10 +276,16 @@
     };
   }
 
-  window.setSubwayView = function(mode) {
+  let userExplicitView = null;
+
+  window.setSubwayView = function(mode, isUserAction = false) {
+    if (isUserAction) {
+      userExplicitView = mode;
+    }
     const mapView = document.getElementById('subway-map-view');
     const listView = document.getElementById('subway-list-view');
     const legendBar = document.getElementById('subway-legend-container');
+    const mobileToast = document.getElementById('subway-mobile-notice');
     const mapBtn = document.getElementById('toggle-map-btn');
     const listBtn = document.getElementById('toggle-list-btn');
 
@@ -155,6 +293,7 @@
       mapView.style.display = 'block';
       listView.style.display = 'none';
       legendBar.style.display = 'flex';
+      if (mobileToast) mobileToast.style.display = 'none';
       if (mapBtn) mapBtn.classList.add('active');
       if (listBtn) listBtn.classList.remove('active');
       requestAnimationFrame(setupCanvasAndNodes);
@@ -162,6 +301,9 @@
       mapView.style.display = 'none';
       listView.style.display = 'block';
       legendBar.style.display = 'none';
+      if (isUserAction && mobileToast) {
+        mobileToast.style.display = 'none';
+      }
       if (mapBtn) mapBtn.classList.remove('active');
       if (listBtn) listBtn.classList.add('active');
     }
@@ -175,7 +317,7 @@
 
     let html = `
       <button class="legend-pill ${activeTagFilter === 'all' ? 'active-all' : ''}" onclick="filterTagLine('all')">
-        <span class="pill-dot all-dot"></span> all lines (${mapData.posts.length})
+        <span class="pill-dot all-dot"></span> all (${mapData.posts.length})
       </button>
     `;
 
@@ -193,15 +335,64 @@
     legendWrap.innerHTML = html;
   }
 
+  function zoomToFilteredTagNodes(tagName) {
+    const container = document.querySelector('.subway-canvas-container');
+    const canvas = document.getElementById('subway-canvas');
+    if (!container || !canvas || !mapData) return;
+
+    const dpr = window.devicePixelRatio || 1;
+    const width = canvas.width / dpr;
+    const height = canvas.height / dpr;
+
+    const nodes = computeStationLayout(mapData.posts, width, height);
+    const activeNodes = nodes.filter(node => node.tags.includes(tagName));
+
+    if (activeNodes.length === 0) {
+      resetSubwayMapZoom();
+      return;
+    }
+
+    let minX = Infinity, maxX = -Infinity;
+    let minY = Infinity, maxY = -Infinity;
+
+    activeNodes.forEach(n => {
+      if (n.x < minX) minX = n.x;
+      if (n.x > maxX) maxX = n.x;
+      if (n.y < minY) minY = n.y;
+      if (n.y > maxY) maxY = n.y;
+    });
+
+    const contentWidth = (maxX - minX) || 180;
+    const contentHeight = (maxY - minY) || 180;
+
+    const padding = 180;
+    const targetScaleX = (width - padding) / contentWidth;
+    const targetScaleY = (height - padding) / contentHeight;
+
+    let targetScale = Math.min(targetScaleX, targetScaleY);
+    targetScale = Math.min(2.0, Math.max(0.65, targetScale));
+
+    const centerX = (minX + maxX) / 2;
+    const centerY = (minY + maxY) / 2;
+
+    panX = (width / 2) - centerX * targetScale;
+    panY = (height / 2) - centerY * targetScale;
+    zoomScale = targetScale;
+
+    drawNetworkMap();
+  }
+
   window.filterTagLine = function(tagName) {
     activeTagFilter = tagName;
     renderLegendPills();
-    drawNetworkMap();
+    closeStationTicket();
 
-    if (tagName !== 'all') {
-      history.replaceState(null, null, `#${tagName}`);
-    } else {
+    if (tagName === 'all') {
+      resetSubwayMapZoom();
       history.replaceState(null, null, window.location.pathname);
+    } else {
+      history.replaceState(null, null, `#${tagName}`);
+      zoomToFilteredTagNodes(tagName);
     }
   };
 
@@ -558,9 +749,20 @@
     const width = container.clientWidth || 900;
     const height = 800;
 
+    const mobileToast = document.getElementById('subway-mobile-notice');
+
     if (width < 650) {
       setSubwayView('list');
+      if (mobileToast) mobileToast.style.display = 'flex';
       return;
+    } else {
+      if (mobileToast) mobileToast.style.display = 'none';
+      if (userExplicitView !== 'list') {
+        const listView = document.getElementById('subway-list-view');
+        if (listView && listView.style.display !== 'none') {
+          setSubwayView('map');
+        }
+      }
     }
 
     canvas.width = width * window.devicePixelRatio;
@@ -571,6 +773,7 @@
     overlay.style.width = width + 'px';
     overlay.style.height = height + 'px';
 
+    initPanAndZoomEvents();
     drawNetworkMap();
   }
 
@@ -743,6 +946,11 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
     ctx.scale(dpr, dpr);
+    ctx.translate(panX, panY);
+    ctx.scale(zoomScale, zoomScale);
+
+    overlay.style.transformOrigin = '0 0';
+    overlay.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomScale})`;
 
     const nodes = computeStationLayout(mapData.posts, width, height);
 
@@ -756,7 +964,7 @@
     // Central Interchange Hub Ring Nodes
     const ringNodes = [];
     nodes.filter(n => n.isRing).forEach(node => {
-      if (!node.tags.includes('hub')) node.tags.push('hub');
+      if (!node.tags.includes('core')) node.tags.push('core');
       ringNodes.push(node);
     });
 
@@ -775,17 +983,17 @@
       }
     }
 
-    // 1. Central Interchange Hub Loop Connections with shadow 'hub' line
+    // 1. Central Interchange Hub Loop Connections with shadow 'core' line
     for (let i = 0; i < ringNodes.length; i++) {
       const h1 = ringNodes[i];
       const h2 = ringNodes[(i + 1) % ringNodes.length];
 
-      // Add shadow 'hub' line tag
-      addEdgeTag(h1, h2, 'hub');
+      // Add shadow 'core' line tag
+      addEdgeTag(h1, h2, 'core');
 
       mapData.tags.forEach(tObj => {
         const tag = tObj.name;
-        if (tag !== 'hub' && h1.tags.includes(tag) && h2.tags.includes(tag)) {
+        if (tag !== 'core' && h1.tags.includes(tag) && h2.tags.includes(tag)) {
           addEdgeTag(h1, h2, tag);
         }
       });
@@ -992,9 +1200,14 @@
     const ticketCard = document.getElementById('station-ticket-card');
     if (!ticketCard) return;
 
+    const categoryName = (node.post.categories && node.post.categories[0]) ? node.post.categories[0] : 'article';
+    const badgeEl = document.getElementById('ticket-category-badge') || ticketCard.querySelector('.station-badge');
+    if (badgeEl) badgeEl.textContent = categoryName;
+
+    const dateEl = document.getElementById('ticket-date');
+    if (dateEl) dateEl.textContent = formatSubwayDate(node.post.date);
+
     document.getElementById('ticket-title').textContent = node.post.title;
-    document.getElementById('ticket-date').textContent = `${formatSubwayDate(node.post.date)} • ${(node.post.categories && node.post.categories[0]) ? node.post.categories[0] : 'article'}`;
-    document.getElementById('ticket-excerpt').textContent = node.post.excerpt;
     document.getElementById('ticket-action-btn').href = node.post.url;
 
     const tagsContainer = document.getElementById('ticket-tags-badges');
@@ -1002,22 +1215,29 @@
       <span class="ticket-tag-badge" style="background-color: ${getTagColor(t)}; color: #1d1f21;">#${escapeHtml(t)}</span>
     `).join('');
 
-    const overlay = document.getElementById('subway-nodes-overlay');
-    const overlayRect = overlay.getBoundingClientRect();
+    ticketCard.style.display = 'block';
 
-    let leftPos = node.x + 30;
-    let topPos = node.y - 40;
+    const container = document.querySelector('.subway-canvas-container');
+    const containerWidth = container ? container.clientWidth : 900;
+    const containerHeight = container ? container.clientHeight : 800;
+    const cardWidth = ticketCard.offsetWidth || 260;
+    const cardHeight = ticketCard.offsetHeight || 160;
 
-    if (leftPos + 320 > overlayRect.width) {
-      leftPos = node.x - 330;
+    const screenX = node.x * zoomScale + panX;
+    const screenY = node.y * zoomScale + panY;
+
+    let leftPos = screenX + 25;
+    let topPos = screenY - 30;
+
+    if (leftPos + cardWidth > containerWidth - 10) {
+      leftPos = screenX - cardWidth - 15;
     }
-    if (topPos + 220 > overlayRect.height) {
-      topPos = Math.max(20, node.y - 200);
+    if (topPos + cardHeight > containerHeight - 10) {
+      topPos = Math.max(20, screenY - cardHeight + 20);
     }
 
     ticketCard.style.left = `${Math.max(10, leftPos)}px`;
     ticketCard.style.top = `${Math.max(10, topPos)}px`;
-    ticketCard.style.display = 'block';
   }
 
   window.closeStationTicket = function() {
