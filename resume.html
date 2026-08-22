@@ -39,24 +39,16 @@ title: resume
   }
   
   .resume-light {
-    display: inline-flex !important;
-  }
-
-  /* Target object elements specifically to force block layout */
-  object.resume-light {
     display: block !important;
   }
 
-  /* When dark mode is active */
+  /* When dark mode is active: hide light, show dark */
   html[data-theme="dark"] .resume-dark {
-    display: inline-flex !important;
-  }
-  
-  html[data-theme="dark"] object.resume-dark {
     display: block !important;
   }
 
   html[data-theme="dark"] .resume-light {
+    display: none !important;
   }
 </style>
 
