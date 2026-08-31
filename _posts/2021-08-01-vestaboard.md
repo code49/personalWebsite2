@@ -25,7 +25,7 @@ tags: experience php javascript
 
 ### intro
 
-Vestaboard is a South San Francisco-based startup that designs and builds smart split-flap display boards. These displays combine the nostalgic aesthetic and mechanical sounds of vintage train stations with modern internet connectivity, allowing users to send remote messages, track live sports scores, or display automated daily content.
+Vestaboard builds physical split-flap display boards inspired by vintage train station arrival boards, updated with modern internet connectivity. Users send remote messages, track live scores, or automate daily content displays.
 
 ### my work
 
@@ -34,14 +34,15 @@ Vestaboard is a South San Francisco-based startup that designs and builds smart 
     <img src="/assets/images/vestaboard/feature-summary.png" alt="feature-summary" 
     style="display: block; margin: 0 auto; border: 1px solid black;"/>
   </kbd>
-  <br><i>Visual summary of features I added to the Vestaboard software ecosystem.</i>
+  <br><i>Visual summary of software features added to the Vestaboard ecosystem.</i>
 </p>
 
-I developed the **Word-of-the-Day channel**—an installable application plugin for the Vestaboard software ecosystem. Built using PHP and JavaScript, the plugin automatically polls the [Oxford English Dictionary's Word of the Day API](https://www.oed.com/) and formats it for split-flap rendering. Creating this installable required developing several key software features: integrating RSS feeds to fetch and parse daily content, building a server-side queuing and pagination system to sequentially cycle through definitions that exceeded the board's single-frame character limit, and designing progress bars to indicate the status of multi-frame messages.
+I built the **Word-of-the-Day channel**, an installable plugin for the Vestaboard software ecosystem using PHP and JavaScript:
 
-### other learnings
+*   **API Integration:** Automated daily polling and parsing of the Oxford English Dictionary's Word of the Day API, formatting definitions for split-flap grid rendering.
+*   **Queuing & Pagination:** Built a server-side queuing system to paginate definitions that exceeded the single-frame character limit, cycling multi-frame messages sequentially.
+*   **Progress Tracking:** Added UI progress bars to display real-time status as multi-frame messages were sent to physical boards.
 
-This role introduced me to full-stack web development on the LAMP stack and gave me my first exposure to small-scale startup operations. Beyond coding, I experienced the dynamic, fast-paced environment of an early-stage business, observing how leadership coordinates partnerships and drives product strategy. I also learned the value of taking initiative—specifically how building quick proof-of-concepts is the most effective way to pitch and validate new features.
+### acknowledgements
 
-_Thank you also to Sully Syed for his many web development teachings as well as to_
-_Dorrian Porter and the rest of the Vestaboard team!_
+Thank you to Sully Syed for web development guidance, and to Dorrian Porter and the Vestaboard team for a great summer learning LAMP stack development and startup operations.

@@ -12,7 +12,8 @@ tags: python raspberry-pi nix random
 ---
 
 ### overview
-`displayThingy` is an aesthetic, real-time smart dashboard designed for ambient desktop screens or wall-mounted displays (such as a Raspberry Pi). Built using **Pygame**, it integrates Spotify tracking, cyclical world timezone clocks, and real-time weather metrics in a dark-mode UI.
+
+`displayThingy` is an ambient smart dashboard for desktop screens or wall-mounted Raspberry Pi displays. Built using **Pygame**, it integrates Spotify playback tracking, cyclical world clocks, and real-time weather metrics in a dark-mode UI.
 
 <p align="center">
   <kbd>
@@ -23,33 +24,27 @@ tags: python raspberry-pi nix random
 
 ### features
 
-1. **real-time spotify player:**
-   Tracks song names, artist details, album art, and progress tracks. To keep API requests low and avoid rate limits, the player interpolates playback progress locally, only querying the Spotify Web API during track transitions or updates.
-2. **timezone clock cycles:**
-   A cycling list of timezones (configured in `configs.json`) displaying current times, date formats, and offset calculations relative to your designated home timezone.
-3. **asynchronous weather fetches:**
-   Queries the `wttr.in` API in a background thread to prevent the dashboard's rendering loops from stuttering or blocking during network latency.
-4. **ambient click-to-dim:**
-   Tapping or clicking the center of the display toggles a dim overlay, making it comfortable to use as a bedside clock or ambient display at night.
-
+*   **Real-Time Spotify Player:** Displays track titles, artist metadata, album artwork, and progress indicators. The player interpolates playback progress locally, querying the Spotify Web API only during track transitions to minimize rate-limit risks.
+*   **Timezone Clock Cycles:** Rotates through user-configured timezones (`configs.json`), showing local times, date formats, and offsets relative to a home timezone.
+*   **Asynchronous Weather Updates:** Fetches `wttr.in` API data in a background thread to prevent UI rendering stalls.
+*   **Ambient Dimming:** Tapping or clicking the display toggles a dim overlay for bedside or nighttime operation.
 
 ### architecture
 
-The project splits configurations, data collection widgets, and rendering views:
+The project separates configurations, data widgets, and layout views:
 
 ```
 displayThingy/
 ├── configs.json                # Screen resolutions and view profiles
 ├── main.py                     # App setup & primary Pygame drawing loop
 ├── widgets/                    # Data retrievers
-│   ├── world_clock/clock.py    # Timezone cycling maths
+│   ├── world_clock/clock.py    # Timezone cycling math
 │   ├── weather/weather.py      # Async wttr.in updates
-│   └── spotify/spotify.py      # Spotify API authentication & local tracking
+│   └── spotify/spotify.py      # Spotify API auth & local tracking
 └── views/                      # Drawing & layout managers
     ├── base_view.py            # Base layout definition
     └── spotify_clock_weather_view.py # Double-line layout subclass
 ```
-
 
 ### deployment
 
@@ -60,7 +55,7 @@ Designed to auto-launch on startup on a Raspberry Pi running **Raspberry Pi OS**
 lxterminal -e ~/Documents/displayThingy/run_display.sh &
 ```
 
-The launch script loads the environment variables, activates the local Python virtual environment, and executes the Pygame application in fullscreen mode:
+The launch script initializes environment variables, activates the Python virtual environment, and executes Pygame in fullscreen mode:
 
 ```bash
 #!/bin/bash

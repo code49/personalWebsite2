@@ -31,11 +31,11 @@ tags: cmu projects rtl fpga verilog
   <img src="media/logo.jpg" alt="logo" width="300" align="center"/>
 </p> -->
 
-JustOneFlappyBird is a turing complete, one instruction set processor that can run the programming langugae SUBLEQ. As a demonstration of its functionality, we animated the video game Flappy Bird via VGA display. We targeted a [Boolean Board](https://www.amd.com/en/corporate/university-program/aup-boards/realdigital-boolean-board.html) Xilinx Spartan 7 FPGA using SystemVerilog RTL, Synopsys VCS simulation, and Vivado synthesis. Our team of 4 built JustOneFlappyBird as a part of [Build18](https://www.build18.org/) 2025, CMU ECE's annual week-long hardware hackathon. 
+JustOneFlappyBird is a Turing-complete, one-instruction-set processor that executes the SUBLEQ esoteric programming language. To demonstrate hardware functionality, we animated Flappy Bird via VGA display on an AMD/Xilinx Spartan-7 FPGA (Boolean Board) using SystemVerilog RTL, Synopsys VCS simulation, and AMD Vivado synthesis. Built as part of CMU ECE's [Build18](https://www.build18.org/) 2025 hardware hackathon.
 
-### SUBLEQ, briefly
+### subleq, briefly
 
-[SUBLEQ](https://esolangs.org/wiki/Subleq) is an esoteric programming language consisting of a single instruction, **SUB**tract and branch if **L**ess-than or **EQ**ual to zero. Instructions are of the form `A B C` where A, B, and C are all memory addresses. The processor computes the value of `*B - *A` (* representing memory dereferences) and stores it back into B. If the result was less than or equal to 0, the PC jumps to C. That's it! 
+[SUBLEQ](https://esolangs.org/wiki/Subleq) is an esoteric programming language consisting of a single instruction: **SUB**tract and branch if **L**ess-than or **EQ**ual to zero. Instructions take the form `A B C` where `A`, `B`, and `C` are memory addresses. The processor computes `*B - *A` (dereferencing memory) and stores the result back into `B`. If the result is $\le 0$, the program counter jumps to `C`.
 
 ### uniprocessor design
 
@@ -46,8 +46,7 @@ JustOneFlappyBird is a turing complete, one instruction set processor that can r
   </kbd>
 </p>
 
-Our processor consists of a PC register, two "general purpose" registers for collecting the value of operand A and operand B, and a register for saving the value of the memory address B for storing the result of the subtraction later. We used a 2-read-1-write memory (reading/writing B, as well as reading A or C), as well as a subtractor (calculating `*B - *A`) and comparator (checking `*B - *A <= 0`).
-
+The processor contains a program counter register, two operand registers (`A` and `B`), and a destination address register for storing the subtraction result. The datapath includes 2-read-1-write memory, a subtractor (`*B - *A`), and a comparator (`*B - *A <= 0`).
 
 <p align="center">
   <kbd>
@@ -55,14 +54,14 @@ Our processor consists of a PC register, two "general purpose" registers for col
   </kbd>
 </p>
 
-Our processor executes each SUBLEQ instruction in 8 cycles, or 5 primary steps (non-await-memory stages):
-1. Use PC and PC+1 to fetch addresses A and B
-2. Store address B into the B address register
-3. Read from addresses A and B to get *A and *B
-4. Store *A and *B into their respective registers, use PC+2 to fetch address C
-5. Save `*B - *A` into address B, jump to address C if result is less than or equal to 0
+The processor executes each SUBLEQ instruction in 8 clock cycles across 5 execution steps:
+1. Fetch addresses `A` and `B` using `PC` and `PC+1`.
+2. Latch address `B` into the `B` address register.
+3. Read memory at `A` and `B` to retrieve `*A` and `*B`.
+4. Latch `*A` and `*B` into operand registers, fetching address `C` using `PC+2`.
+5. Store `*B - *A` back to address `B`, branching to `C` if the result is $\le 0$.
 
-### graphics & VGA
+### graphics & vga
 
 <p align="center">
   <kbd>
@@ -71,19 +70,13 @@ Our processor executes each SUBLEQ instruction in 8 cycles, or 5 primary steps (
   </kbd>
 </p>
 
-Bird and pipe sprites where drawn via combinational logic. Each sprite was divided into "column 
-groups" (sets of columns where each row had the same colors), which was then used in conjunction with
-the current row to save us from having to write logic to set the color for each pixel individually!
+Bird and pipe sprites render via combinational logic. Sprites are partitioned into column groups with shared row color assignments, avoiding individual pixel logic overhead.
 
-Once we had a row/col --> color assignment, we rendered it via a VGA engine we previously designed for
-[18-240's Pong project]({% link _posts/2023-11-09-pong.md %}). Because the Boolean Board ultimately
-used a HDMI output, we used Xilinx IP to convert our VGA into HDMI for display.
+Once color assignments are generated, the frame renders via a VGA engine adapted from our [18-240 Pong project]({% link _posts/2023-11-09-pong.md %}). Because the Boolean Board uses an HDMI output port, Xilinx IP converts raw VGA signals to HDMI streams.
 
 ### system architecture
 
-Our processor (and corresponding program memory) is connected via MMIO to the graphics modules "Draw Bird" 
-and VGA. When the processor writes a value to a MMIO-reserved addreses, the Draw Bird module intercepts to
-update the bird's position on the screen and output to the VGA graphics engine. 
+The processor connects to the "Draw Bird" graphics module and VGA controller via MMIO. When SUBLEQ instructions write to MMIO-mapped addresses, the Draw Bird module updates screen coordinates and triggers render updates in the VGA engine.
 
 <p align="center">
   <kbd>
@@ -92,14 +85,14 @@ update the bird's position on the screen and output to the VGA graphics engine.
   </kbd>
 </p>
 
-### group photos!
+### photos
 
 <p align="center">
   <kbd>
     <img src="/assets/images/just-one-flappy-bird/group1.jpeg" alt="group-photo-1"
     style="display: block; margin: 0 auto; border: 1px solid black;"/>
   </kbd>
-  <br><i>(above) left to right: John Alacce, David Chan, Kody Liang, Jaehyun Lim</i>
+  <br><i>Left to right: John Alacce, David Chan, Kody Liang, Jaehyun Lim</i>
 </p>
 
 <p align="center">
@@ -107,5 +100,5 @@ update the bird's position on the screen and output to the VGA graphics engine.
     <img src="/assets/images/just-one-flappy-bird/group2.jpeg" alt="group-photo-2" 
     style="display: block; margin: 0 auto; border: 1px solid black;"/>
   </kbd>
-  <br><i> "You guys are goofballs" - Professor Bill Nace</i>
+  <br><i>"You guys are goofballs" - Professor Bill Nace</i>
 </p>
