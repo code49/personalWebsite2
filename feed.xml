@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://davidlechan.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://davidlechan.dev/" rel="alternate" type="text/html" hreflang="en" /><updated>2026-08-31T16:50:19+00:00</updated><id>https://davidlechan.dev/feed.xml</id><title type="html">david le chan</title><subtitle>Personal website for David Chan!</subtitle><author><name>code49</name></author><entry><title type="html">display thingy</title><link href="https://davidlechan.dev/random/display-thingy.html" rel="alternate" type="text/html" title="display thingy" /><published>2026-07-11T00:00:00+00:00</published><updated>2026-07-11T00:00:00+00:00</updated><id>https://davidlechan.dev/random/display-thingy</id><content type="html" xml:base="https://davidlechan.dev/random/display-thingy.html"><![CDATA[<p><strong>tools: python, pygame, spotipy, pytz, nix shell, raspberry pi</strong><br />
+<strong><a href="https://github.com/code49/displayThingy">project repository</a></strong></p>
+
+<hr />
+
+<h3 id="overview">overview</h3>
+
+<p><code class="language-plaintext highlighter-rouge">displayThingy</code> is an ambient smart dashboard for desktop screens or wall-mounted Raspberry Pi displays. Built using <strong>Pygame</strong>, it integrates Spotify playback tracking, cyclical world clocks, and real-time weather metrics in a dark-mode UI.</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/banners/display_thingy.png" alt="displayThingy interface screenshot" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd>
+  <br /><i>Interface dashboard layout displaying Spotify track progress, clock, and weather.</i>
+</p>
+
+<h3 id="features">features</h3>
+
+<ul>
+  <li><strong>Real-Time Spotify Player:</strong> Displays track titles, artist metadata, album artwork, and progress indicators. The player interpolates playback progress locally, querying the Spotify Web API only during track transitions to minimize rate-limit risks.</li>
+  <li><strong>Timezone Clock Cycles:</strong> Rotates through user-configured timezones (<code class="language-plaintext highlighter-rouge">configs.json</code>), showing local times, date formats, and offsets relative to a home timezone.</li>
+  <li><strong>Asynchronous Weather Updates:</strong> Fetches <code class="language-plaintext highlighter-rouge">wttr.in</code> API data in a background thread to prevent UI rendering stalls.</li>
+  <li><strong>Ambient Dimming:</strong> Tapping or clicking the display toggles a dim overlay for bedside or nighttime operation.</li>
+</ul>
+
+<h3 id="architecture">architecture</h3>
+
+<p>The project separates configurations, data widgets, and layout views:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>displayThingy/
+├── configs.json                # Screen resolutions and view profiles
+├── main.py                     # App setup &amp; primary Pygame drawing loop
+├── widgets/                    # Data retrievers
+│   ├── world_clock/clock.py    # Timezone cycling math
+│   ├── weather/weather.py      # Async wttr.in updates
+│   └── spotify/spotify.py      # Spotify API auth &amp; local tracking
+└── views/                      # Drawing &amp; layout managers
+    ├── base_view.py            # Base layout definition
+    └── spotify_clock_weather_view.py # Double-line layout subclass
+</code></pre></div></div>
+
+<h3 id="deployment">deployment</h3>
+
+<p>Designed to auto-launch on startup on a Raspberry Pi running <strong>Raspberry Pi OS</strong> with the <strong>labwc</strong> compositor:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># inside ~/.config/labwc/autostart</span>
+lxterminal <span class="nt">-e</span> ~/Documents/displayThingy/run_display.sh &amp;
+</code></pre></div></div>
+
+<p>The launch script initializes environment variables, activates the Python virtual environment, and executes Pygame in fullscreen mode:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c"># ~/Documents/displayThingy/run_display.sh</span>
+<span class="nb">cd</span> ~/Documents/displayThingy
+<span class="nb">source</span> .dt_venv/bin/activate
+python main.py <span class="nt">--width</span> 1024 <span class="nt">--height</span> 600 <span class="nt">--fullscreen</span>
+</code></pre></div></div>]]></content><author><name>code49</name></author><category term="random" /><category term="python" /><category term="raspberry-pi" /><category term="nix" /><category term="random" /><summary type="html"><![CDATA[tools: python, pygame, spotipy, pytz, nix shell, raspberry pi project repository]]></summary></entry><entry><title type="html">dotfiles</title><link href="https://davidlechan.dev/random/dotfiles.html" rel="alternate" type="text/html" title="dotfiles" /><published>2026-07-11T00:00:00+00:00</published><updated>2026-07-11T00:00:00+00:00</updated><id>https://davidlechan.dev/random/dotfiles</id><content type="html" xml:base="https://davidlechan.dev/random/dotfiles.html"><![CDATA[<p><strong>tools: nix, nixos flakes, home-manager, hyprland, systemd</strong><br />
+<strong><a href="https://github.com/code49/.dotfiles">project repository</a></strong></p>
+
+<hr />
+
+<h3 id="philosophy">philosophy</h3>
+<p>Traditional dotfiles management relies on symlinks, manually run install scripts, and ad-hoc package installations. If your system breaks or you switch hardware, recreating that exact environment is a headache.</p>
+
+<p>This repository houses my entire OS and application setup as a declarative, version-controlled <strong>Nix Flake</strong> codebase. Tailored for my Framework Laptop 13 (AMD Ryzen AI 9), a single terminal command rebuilds the entire operating system, downloads packages, configures files, and registers system settings:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nixos-rebuild switch <span class="nt">--flake</span> .#dchan-laptop
+</code></pre></div></div>
+
+<h3 id="structure">structure</h3>
+
+<p>The codebase is split into modular directories handling system-wide NixOS configurations, home-manager user spaces, and hardware specifications:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.dotfiles/
+├── flake.nix                  # Flake entry point, defines inputs, outputs, system settings
+├── configuration.nix          # main system settings
+├── INSTALLATION.md            # step-by-step setup guide for fresh installations
+├── hosts/                     # hardware profiles
+│   ├── dchan-laptop/          # host-specific configuration for Framework 13 AMD
+│   └── nvidia-intel-template/ # fallback template for NVIDIA/Intel machines
+├── home/                      # user space configuration managed by home-manager
+│   ├── home.nix               # main user environment settings (packages, shell aliases)
+│   └── [apps]/                # application configs (hyprland, waybar, kitty, helix, vscode, etc.)
+├── terminalTools/             # submodule pointing to custom portable utilities (sls, ff, gitac)
+└── scripts/                   # system helper scripts (e.g., nix-rebuild-nice.sh)
+</code></pre></div></div>
+
+<h3 id="highlights">highlights</h3>
+
+<h4 id="1-hardware-power-management">1. hardware power management</h4>
+<p>For the Framework 13 host (<code class="language-plaintext highlighter-rouge">dchan-laptop</code>), we handle power saving and heat reduction for the Framework Storage Expansion Card by writing custom udev rules to enable USB autosuspend on the underlying SCSI disk controllers:</p>
+
+<div class="language-nix highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># excerpt from hosts/dchan-laptop/configuration.nix</span>
+<span class="nv">services</span><span class="o">.</span><span class="nv">udev</span><span class="o">.</span><span class="nv">extraRules</span> <span class="o">=</span> <span class="s2">''</span><span class="err">
+</span><span class="s2">  # Enable autosuspend on the parent Framework Storage Expansion USB device</span><span class="err">
+</span><span class="s2">  ACTION=="add|change", SUBSYSTEM=="usb", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0005", ATTR{power/control}="auto"</span><span class="err">
+
+</span><span class="s2">  # Configure power management for the SCSI disk backing the USB device</span><span class="err">
+</span><span class="s2">  ACTION=="add|change", SUBSYSTEM=="scsi", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0005", ATTR{power/control}="auto", ATTR{power/autosuspend_delay_ms}="2000"</span><span class="err">
+</span><span class="s2">  ACTION=="add|change", SUBSYSTEM=="scsi_disk", ATTRS{idVendor}=="32ac", ATTRS{idProduct}=="0005", ATTR{manage_runtime_start_stop}="1", ATTR{manage_system_start_stop}="1"</span><span class="err">
+</span><span class="s2">''</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="2-centralized-themes">2. centralized themes</h4>
+<p>The entire system’s styling (window borders, terminal backgrounds, waybar alerts, and text highlights) inherits its colors from a single, centralized <code class="language-plaintext highlighter-rouge">theme</code> variable declared inside <code class="language-plaintext highlighter-rouge">flake.nix</code>. It sets hex and RGB values for the standard base16 spectrum:</p>
+
+<div class="language-nix highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># flake.nix</span>
+<span class="nv">theme</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nv">base00</span> <span class="o">=</span> <span class="s2">"1d1f21"</span><span class="p">;</span>     <span class="c"># primary dark background</span>
+  <span class="nv">base01</span> <span class="o">=</span> <span class="s2">"282a2e"</span><span class="p">;</span>     <span class="c"># secondary background</span>
+  <span class="nv">base0D</span> <span class="o">=</span> <span class="s2">"bdb2ff"</span><span class="p">;</span>     <span class="c"># purple ; primary accent</span>
+  <span class="nv">base0B</span> <span class="o">=</span> <span class="s2">"daa9ff"</span><span class="p">;</span>     <span class="c"># magenta ; secondary accent</span>
+<span class="p">};</span>
+</code></pre></div></div>
+<p>These colors are mapped dynamically into configuration templates during home-manager evaluation, keeping my desktop style clean and cohesive.</p>]]></content><author><name>code49</name></author><category term="random" /><category term="nix" /><category term="random" /><summary type="html"><![CDATA[tools: nix, nixos flakes, home-manager, hyprland, systemd project repository]]></summary></entry><entry><title type="html">spotify playlist sorter</title><link href="https://davidlechan.dev/random/spotify-playlist-sorter.html" rel="alternate" type="text/html" title="spotify playlist sorter" /><published>2026-07-11T00:00:00+00:00</published><updated>2026-07-11T00:00:00+00:00</updated><id>https://davidlechan.dev/random/spotify-playlist-sorter</id><content type="html" xml:base="https://davidlechan.dev/random/spotify-playlist-sorter.html"><![CDATA[<p><strong>tools: python, spotipy, nix shell, openai/antigravity cli</strong><br />
+<strong><a href="https://github.com/code49/spotifySorter">project repository</a></strong></p>
+
+<hr />
+
+<h3 id="problem-statement">problem statement</h3>
+
+<p>Organizing large Spotify playlists by vibe, genre, or release decade manually is tedious. Manual sorting makes incremental updates difficult: adding new tracks to a master playlist requires hunting down where they belong in sub-playlists, causing duplicates or out-of-sync states.</p>
+
+<h3 id="solution">solution</h3>
+
+<p>This utility uses Python, <code class="language-plaintext highlighter-rouge">spotipy</code>, and the <strong>Antigravity CLI (<code class="language-plaintext highlighter-rouge">agy</code>)</strong> to process a source playlist, send track metadata to an LLM for categorization, and automatically create and sync sub-playlists on Spotify.</p>
+
+<p>The project features a <strong>stateful local sync engine</strong> that tracks playlist state in JSON files under <code class="language-plaintext highlighter-rouge">states/</code>. On subsequent runs, it performs diffs to handle:</p>
+<ol>
+  <li><strong>Incremental Additions:</strong> Sorting only new tracks added since the last run.</li>
+  <li><strong>Cleanups:</strong> Removing tracks from sub-playlists if deleted from the master list.</li>
+  <li><strong>Spotify Reconciliation:</strong> Detecting direct playlist edits on Spotify to resolve configuration drift.</li>
+</ol>
+
+<h3 id="implementation">implementation</h3>
+
+<h4 id="1-api-compliance">1. api compliance</h4>
+<p>The utility targets <code class="language-plaintext highlighter-rouge">/v1/playlists/{id}/items</code> and <code class="language-plaintext highlighter-rouge">/v1/me/playlists</code> endpoints, handling pagination automatically:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># excerpt from get_playlist_tracks in spotify_sorter.py
+</span><span class="n">results</span> <span class="o">=</span> <span class="n">sp</span><span class="p">.</span><span class="nf">_get</span><span class="p">(</span>
+    <span class="sa">f</span><span class="sh">"</span><span class="s">playlists/</span><span class="si">{</span><span class="n">playlist_id</span><span class="si">}</span><span class="s">/items</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">limit</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">fields</span><span class="o">=</span><span class="sh">"</span><span class="s">items(track(id,name,artists(name),album(name))),next</span><span class="sh">"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="2-nix-environment">2. nix environment</h4>
+<p>Dependency management uses a native <code class="language-plaintext highlighter-rouge">shell.nix</code> pinning Python packages and system dependencies:</p>
+
+<div class="language-nix highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="nv">pkgs</span> <span class="o">?</span> <span class="kr">import</span> <span class="o">&lt;</span><span class="nv">nixos</span><span class="o">&gt;</span> <span class="p">{}</span> <span class="p">}:</span>
+<span class="nv">pkgs</span><span class="o">.</span><span class="nv">mkShell</span> <span class="p">{</span>
+  <span class="nv">buildInputs</span> <span class="o">=</span> <span class="kn">with</span> <span class="nv">pkgs</span><span class="p">;</span> <span class="p">[</span>
+    <span class="p">(</span><span class="nv">python3</span><span class="o">.</span><span class="nv">withPackages</span> <span class="p">(</span><span class="nv">ps</span><span class="p">:</span> <span class="kn">with</span> <span class="nv">ps</span><span class="p">;</span> <span class="p">[</span>
+      <span class="nv">spotipy</span>
+      <span class="nv">python-dotenv</span>
+    <span class="p">]))</span>
+  <span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="usage">usage</h3>
+
+<ol>
+  <li><strong>Scan &amp; Cache:</strong> Initial run pulls playlist track data into <code class="language-plaintext highlighter-rouge">playlist_tracks.json</code>.</li>
+  <li><strong>AI Categorization Query:</strong> Direct sorting by passing custom queries:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python spotify_sorter.py <span class="nt">--query</span> <span class="s2">"separate into high-energy gym beats, chill lo-fi, and acoustic pop"</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Interactive Confirmation:</strong> Displays a preview of proposed sub-playlists before creating private Spotify playlists.</li>
+  <li><strong>Timestamping:</strong> Appends <code class="language-plaintext highlighter-rouge">(Last sorted: YYYY-MM-DD HH:MM)</code> to playlist descriptions to verify sync status.</li>
+</ol>]]></content><author><name>code49</name></author><category term="random" /><category term="python" /><category term="nix" /><category term="random" /><summary type="html"><![CDATA[tools: python, spotipy, nix shell, openai/antigravity cli project repository]]></summary></entry><entry><title type="html">terminal tools</title><link href="https://davidlechan.dev/random/terminal-tools.html" rel="alternate" type="text/html" title="terminal tools" /><published>2026-07-11T00:00:00+00:00</published><updated>2026-07-11T00:00:00+00:00</updated><id>https://davidlechan.dev/random/terminal-tools</id><content type="html" xml:base="https://davidlechan.dev/random/terminal-tools.html"><![CDATA[<p><strong>tools: bash, git, python, fzf</strong><br />
+<strong><a href="https://github.com/code49/terminalTools">project repository</a></strong></p>
+
+<hr />
+
+<h3 id="overview">overview</h3>
+<p><code class="language-plaintext highlighter-rouge">terminalTools</code> is a collection of system-agnostic, portable shell scripts and utilities designed to boost terminal productivity. Built using standard Bash scripting with zero heavy dependencies (such as Nix or Homebrew), these utilities are fully portable across macOS and any Linux distribution.</p>
+
+<hr />
+
+<h3 id="the-utilities">the utilities</h3>
+
+<h4 id="1-sls--smart-ls">1. <code class="language-plaintext highlighter-rouge">sls</code> — Smart LS</h4>
+<p>An improved <code class="language-plaintext highlighter-rouge">ls</code> wrapper that automatically groups directory contents by type and displays them in a columnar side-by-side layout.</p>
+
+<ul>
+  <li><strong>Split View:</strong> Groups entries into labeled sections (directories, hidden directories, files, hidden files, symlinks) and renders them in side-by-side columns to fit the terminal width.</li>
+  <li><strong>Git Status:</strong> Appends a quick <code class="language-plaintext highlighter-rouge">git status</code> summary at the bottom when run with the <code class="language-plaintext highlighter-rouge">-g</code> flag inside a git repository.</li>
+  <li><strong>Tree Mode:</strong> Wraps the standard <code class="language-plaintext highlighter-rouge">tree</code> command with sensible defaults (hidden files, directories-first grouping, classification symbols) and prints the absolute path on the first line.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># split view with git status</span>
+sls <span class="nt">-g</span>
+
+<span class="c"># tree view with custom depth</span>
+sls <span class="nt">-t</span> 2
+</code></pre></div></div>
+
+<h4 id="2-ff--firefox-launcher">2. <code class="language-plaintext highlighter-rouge">ff</code> — Firefox Launcher</h4>
+<p>An interactive bookmark and shortcut launcher that integrates with <code class="language-plaintext highlighter-rouge">fzf</code> for keyboard-driven browser control.</p>
+
+<ul>
+  <li><strong>Fuzzy Search:</strong> Prompts an interactive fuzzy-search dropdown list of all browser shortcuts when run without arguments.</li>
+  <li><strong>Direct Launch:</strong> Instantly opens a named bookmark (e.g. <code class="language-plaintext highlighter-rouge">ff github</code> or <code class="language-plaintext highlighter-rouge">ff calendar</code>) in a new browser tab.</li>
+</ul>
+
+<h4 id="3-gitac--git-add--commit">3. <code class="language-plaintext highlighter-rouge">gitac</code> — Git Add &amp; Commit</h4>
+<p>A quick Git helper that stages all untracked/modified files and commits them in a single command, reducing keystrokes during rapid coding iterations.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gitac <span class="s2">"refactor helper functions"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h3 id="installation">installation</h3>
+<p>The repository features a self-managing installer (<code class="language-plaintext highlighter-rouge">install.sh</code>) that symlinks individual utilities from the local clone to a directory on your shell’s search path (defaulting to <code class="language-plaintext highlighter-rouge">~/.local/bin</code>).</p>
+
+<p>This allows updates to files inside the local repository clone to propagate instantly to terminal sessions without requiring manual reinstallation.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># clone and install</span>
+git clone https://github.com/code49/terminalTools.git
+<span class="nb">cd </span>terminalTools
+./install.sh
+</code></pre></div></div>]]></content><author><name>code49</name></author><category term="random" /><category term="bash" /><category term="nix" /><category term="random" /><summary type="html"><![CDATA[tools: bash, git, python, fzf project repository]]></summary></entry><entry><title type="html">cmu list of classes</title><link href="https://davidlechan.dev/education/cmu-classes.html" rel="alternate" type="text/html" title="cmu list of classes" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://davidlechan.dev/education/cmu-classes</id><content type="html" xml:base="https://davidlechan.dev/education/cmu-classes.html"><![CDATA[<p>List of the classes I’ve taken at CMU:</p>
+
+<table class="cmu-classes-table">
+  <thead>
+    <tr>
+      <th style="text-align: center">year</th>
+      <th>fall</th>
+      <th>spring</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1</td>
+      <td>**[18-100] Intro to ECE** <br /> **[21-120] Calculus 1** <br /> **[33-141] Physics 1 (Mechanics)** <br /> [76-107] Writing About Data <br /> [76-108] Writing About Public Problems</td>
+      <td>**[12-100] Intro to CivE** <br /> **[21-122] Calculus 2** <br /> **[21-127] Concepts of Mathematics** <br /> **[33-142] Physics 2 (E&amp;M)** <br /> **[36-219] Probability Theory**</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2</td>
+      <td>**[15-122] Principles of Imperative Computation** <br /> [18-200] ECE Sophomore Seminar <br /> **[18-240] Digital Design Core** <br /> [51-173] Human Experiences in Design <br /> [66-215] The Innovation Trials</td>
+      <td>[18-021] Intro to PCB Fabrication <br /> **[18-213] Computer Systems Core** <br /> **[21-241] Matrices and Linear Transformations** <br /> **[21-259] Calculus in 3-D** <br /> [76-270] Writing for the Professions</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3</td>
+      <td>**[18-220] Analog Circuits Core** <br /> **[18-290] Signals and Systems Core** <br /> **[18-341] Logic Design &amp; Verification** <br /> [18-580]  Research <br /> [98-008] Intro to Rust <br /> [99-190] Managing Stress</td>
+      <td>**[11-344] Machine Learning in Practice** <br /> **[18-320] Microelectronic Circuits** <br /> **[18-447] Intro to Computer Architecture** <br />[18-580/18-980] Research <br /> [39-402] Leadership Development Seminar <br /> [82-234] Environment &amp; Society in Modern Chinese Literature &amp; Visual Culture</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4</td>
+      <td>**[15-369] Numerical Computing** <br /> **[18-622] Digital IC Design** <br /> [18-981] Research <br /> [53-312] Theme Park Design <br /> [66-221] IP Law <br /> [82-139] Chinese Language, Culture and Society</td>
+      <td>[12-201] Geology <br /> **[18-525] Advanced IC Design (Tapeout Capstone)** <br /> [18-980] Research <br /> **[19-682] Strategy &amp; Management of Technological Innovation** <br /> **[36-220] Engineering Statistics &amp; Quality Control** <br /> [69-136] Basketball Skills</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5</td>
+      <td>**[18-617] Memory Devices &amp; Technology** <br /> **[18-643] Reconfigurable Logic** <br /> **[18-726] Projects in IC Design (Tapeout Testing)** <br /> **[18-768] Hardware Verification**</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>See more about my CMU experience at <a href="/education/cmu.html">this link</a>!</p>
+
+<style>
+  .cmu-classes-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  .cmu-classes-table th:nth-child(1),
+  .cmu-classes-table td:nth-child(1) {
+    width: 6%;
+    text-align: center;
+  }
+  .cmu-classes-table th:nth-child(2),
+  .cmu-classes-table td:nth-child(2),
+  .cmu-classes-table th:nth-child(3),
+  .cmu-classes-table td:nth-child(3) {
+    width: 47%;
+  }
+</style>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[List of the classes I’ve taken at CMU:]]></summary></entry><entry><title type="html">carnegie mellon university</title><link href="https://davidlechan.dev/education/cmu.html" rel="alternate" type="text/html" title="carnegie mellon university" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://davidlechan.dev/education/cmu</id><content type="html" xml:base="https://davidlechan.dev/education/cmu.html"><![CDATA[<p><strong><a href="https://www.cmu.edu/">school website</a> | <a href="https://engineering.cmu.edu/">college of engineering (cit) website</a></strong>
+<strong>| <a href="https://www.ece.cmu.edu/">ece department website</a></strong></p>
+
+<hr />
+
+<p>I graduated from Carnegie Mellon University (CMU) with my B.S. in Electrical and Computer Engineering (May 2026) and am continuing in the ECE M.S. program (expected May 2027). During my undergraduate studies, I received the <strong>CMU Senior Leadership Recognition Award</strong> and was a 6-time <strong>Dean’s List</strong> recipient.</p>
+
+<p>My academic concentration covers:</p>
+<ul>
+  <li><strong>Computer Architecture:</strong> Designing pipelined processors, memory hierarchies, and hardware accelerators.</li>
+  <li><strong>Digital VLSI/IC Design:</strong> Translating RTL logic through synthesis, place &amp; route, and sign-off verification for silicon tapeout.</li>
+  <li><strong>Reconfigurable Computing:</strong> Utilizing FPGAs and custom execution units for hardware acceleration.</li>
+</ul>
+
+<p>For a full breakdown of all ECE, computer science, mathematics, and elective courses I have completed, see the <a href="/education/cmu-classes.html">CMU List of Classes</a>.</p>
+
+<h3 id="teaching--leadership">teaching &amp; leadership</h3>
+
+<ul>
+  <li><strong>Head Teaching Assistant, 18-100 (Intro to ECE):</strong> Managed a staff of 40 TAs to coordinate labs, recitations, grading, and office hours for over 180 students.
+    <ul>
+      <li>Developed custom recitations and planning tools:
+        <ul>
+          <li><a href="/teaching/18100-equivalent-circuits.html">Power and Equivalent Circuits</a></li>
+          <li><a href="/teaching/18100-planning-sheet.html">ECE Degree Planner &amp; Sticky Sheet</a></li>
+          <li><a href="/teaching/18100-next-steps.html">Next Steps in ECE</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Teaching Assistant, 18-100:</strong> Led lab sections, conducted recitations, and held office hours.</li>
+</ul>
+
+<h3 id="campus-life--clubs">campus life &amp; clubs</h3>
+
+<ul>
+  <li><strong><a href="https://tartanconnect.cmu.edu/cia/top/">Carnegie Involvement Association (CIA) Buggy</a>:</strong> Active pusher, mechanic, and treasurer for CIA Buggy. Buggy is a CMU tradition involving student-built aerodynamic vehicles raced relay-style around Schenley Park (see <a href="https://www.cmu.edu/buggy/">Buggy Explained</a>).</li>
+  <li><strong><a href="https://www.cmusase.org/index.html">Society of Asian Scientists and Engineers (SASE)</a>:</strong> Academic mentor guiding students through course selection, internship searches, and campus transitions.</li>
+</ul>
+
+<div id="project-showcase-cmu-projects" class="project-showcase-wrapper" style="opacity: 0; transition: opacity 0.3s ease;">
+  
+    <h3 class="showcase-title" style="text-transform: lowercase; margin-bottom: 20px;">possibly-interesting cmu projects</h3>
+  
+  
+  <div class="carousel-container">
+    <button class="carousel-btn prev-btn" aria-label="Previous project">&#10094;</button>
+    <div class="carousel-window">
+      <div class="carousel-track">
+        <!-- Cards injected dynamically -->
+      </div>
+    </div>
+    <button class="carousel-btn next-btn" aria-label="Next project">&#10095;</button>
+  </div>
+
+  <!-- Horizontal Transit Line Station Indicators -->
+  <div class="transit-line-indicators">
+    <div class="transit-track-line"></div>
+    <div class="station-nodes-container">
+      <!-- Station stop nodes injected dynamically -->
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    const rawPosts = [
+      
+        
+          
+            
+              {
+                title: "hydra",
+                subtitle: "<b>28nm digital ic tapeout</b><br>january 2026 - present<br>pittsburgh, pa",
+                banner: "/assets/images/banners/hydra.png",
+                url: "/projects/hydra.html",
+                tags: ["cmu","projects","rtl","verification","verilog","physical-design"]
+              },
+            
+          
+        
+      
+        
+          
+            
+              {
+                title: "sram",
+                subtitle: "<b>memory design and layout</b><br>november 2025<br>pittsburgh, pa",
+                banner: "/assets/images/banners/sram.png",
+                url: "/projects/sram.html",
+                tags: ["cmu","projects","physical-design"]
+              },
+            
+          
+        
+      
+        
+          
+            
+              {
+                title: "risc-v",
+                subtitle: "<b>pipelined processor</b><br>april 2025<br>pittsburgh, pa",
+                banner: "/assets/images/banners/riscv.png",
+                url: "/projects/riscv.html",
+                tags: ["cmu","projects","rtl","verilog"]
+              },
+            
+          
+        
+      
+        
+          
+            
+              {
+                title: "just one flappy bird",
+                subtitle: "<b>one-instruction CPU video game</b><br>january 2025<br>pittsburgh, pa",
+                banner: "/assets/images/banners/just_one_flappy_bird.jpg",
+                url: "/projects/just-one-flappy-bird.html",
+                tags: ["cmu","projects","rtl","fpga","verilog"]
+              },
+            
+          
+        
+      
+        
+          
+            
+              {
+                title: "usb",
+                subtitle: "<b>usb protocol engine</b><br>november 2024<br>pittsburgh, pa",
+                banner: "/assets/images/banners/usb.png",
+                url: "/projects/usb.html",
+                tags: ["cmu","projects","rtl","verilog"]
+              },
+            
+          
+        
+      
+        
+          
+            
+              {
+                title: "noc",
+                subtitle: "<b>network-on-chip prototype</b><br>october 2024<br>pittsburgh, pa",
+                banner: "/assets/images/banners/noc.png",
+                url: "/projects/noc.html",
+                tags: ["cmu","projects","rtl","verilog"]
+              },
+            
+          
+        
+      
+        
+          
+            
+              {
+                title: "matmul",
+                subtitle: "<b>pipelined matrix multiplier</b><br>september 2024<br>pittsburgh, pa",
+                banner: "/assets/images/banners/matmul.jpg",
+                url: "/projects/matmul.html",
+                tags: ["cmu","projects","rtl","fpga","verilog"]
+              },
+            
+          
+        
+      
+        
+          
+            
+              {
+                title: "pong",
+                subtitle: "<b>pong game and VGA engine</b><br>november 2023<br>pittsburgh, pa",
+                banner: "/assets/images/banners/pong.jpg",
+                url: "/projects/pong.html",
+                tags: ["cmu","projects","rtl","fpga","verilog"]
+              },
+            
+          
+        
+      
+    ];
+
+    if (rawPosts.length === 0) return;
+
+    let posts = [...rawPosts];
+
+    // Shuffle if random is enabled
+    if (false) {
+      for (let i = posts.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [posts[i], posts[j]] = [posts[j], posts[i]];
+      }
+    }
+
+    // Limit to max_items if specified
+    const maxItems = parseInt("5", 10);
+    if (posts.length > maxItems) {
+      posts = posts.slice(0, maxItems);
+    }
+
+    const wrapper = document.getElementById("project-showcase-cmu-projects");
+    const track = wrapper.querySelector(".carousel-track");
+    const stationContainer = wrapper.querySelector(".station-nodes-container");
+    
+    // Inject Cards & Horizontal Station Indicators
+    posts.forEach((post, index) => {
+      // 1. Carousel Card
+      const card = document.createElement("a");
+      card.href = post.url;
+      card.className = "project-card";
+      
+      const tagPills = post.tags && post.tags.length 
+        ? post.tags.map(t => `<span class="project-card-tag-pill">#${t}</span>`).join("")
+        : "";
+
+      card.innerHTML = `
+        <div class="project-card-image" style="background-image: url('${post.banner}');"></div>
+        <div class="project-card-content">
+          <h4 class="project-card-title">${post.title}</h4>
+          <p class="project-card-subtitle">${post.subtitle || ""}</p>
+          <div class="project-card-tags">${tagPills}</div>
+          <span class="project-card-link">read article &rarr;</span>
+        </div>
+      `;
+      track.appendChild(card);
+
+      // 2. Station Stop Indicator
+      const stationNode = document.createElement("div");
+      stationNode.className = `station-indicator-stop${index === 0 ? ' active' : ''}`;
+      stationNode.innerHTML = `
+        <div class="station-node-dot"></div>
+        <span class="station-node-title">${post.title}</span>
+      `;
+      stationNode.addEventListener("click", () => goToSlide(index));
+      stationContainer.appendChild(stationNode);
+    });
+
+    let currentIndex = 0;
+    const cards = track.querySelectorAll(".project-card");
+    const stationStops = stationContainer.querySelectorAll(".station-indicator-stop");
+    const totalSlides = posts.length;
+
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      stationStops.forEach((stop, idx) => {
+        stop.classList.toggle("active", idx === currentIndex);
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function goToSlide(index) {
+      currentIndex = index;
+      updateCarousel();
+      resetInterval();
+    }
+
+    // Auto rotate
+    let intervalId = setInterval(nextSlide, 6000);
+    function resetInterval() {
+      clearInterval(intervalId);
+      intervalId = setInterval(nextSlide, 6000);
+    }
+
+    const prevBtn = wrapper.querySelector(".prev-btn");
+    const nextBtn = wrapper.querySelector(".next-btn");
+
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        resetInterval();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        resetInterval();
+      });
+    }
+
+    // Touch Swipe Support
+    let startX = 0;
+    let isSwiping = false;
+
+    track.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      isSwiping = true;
+    }, { passive: true });
+
+    track.addEventListener("touchend", (e) => {
+      if (!isSwiping) return;
+      const diffX = e.changedTouches[0].clientX - startX;
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          prevSlide();
+        } else {
+          nextSlide();
+        }
+        resetInterval();
+      }
+      isSwiping = false;
+    });
+
+    wrapper.style.opacity = "1";
+  });
+})();
+</script>]]></content><author><name>code49</name></author><category term="education" /><category term="cmu" /><summary type="html"><![CDATA[school website | college of engineering (cit) website | ece department website]]></summary></entry><entry><title type="html">hydra</title><link href="https://davidlechan.dev/projects/hydra.html" rel="alternate" type="text/html" title="hydra" /><published>2026-02-11T00:00:00+00:00</published><updated>2026-02-11T00:00:00+00:00</updated><id>https://davidlechan.dev/projects/hydra</id><content type="html" xml:base="https://davidlechan.dev/projects/hydra.html"><![CDATA[<!-- **18-725: advanced digital ic design // 18-726: projects in integrated circuit design**<br> -->
+<p><strong>18-725: advanced digital ic design</strong><br />
+<strong>teammates: sophia fu, kody liang, silvia song, kaylan zhang</strong><br />
+<strong>mentors: ken mai, larry tang, siddharth das</strong></p>
+
+<p><strong>tools: chisel, spinalhdl, systemverilog, vexriscv, cocotb, genus, innovus, calibre, xcelium</strong></p>
+
+<hr />
+
+<div class="practical-applications-box">
+  <div class="box-title">💡 practical application</div>
+  <p>Transmitting encrypted data securely over the internet and processing high-speed signals (like 5G, audio, or video) require immense mathematical calculations. Encryption uses Number Theoretic Transforms (NTT) to protect data against future quantum computers, while signal processing uses Fast Fourier Transforms (FFT) to process waves. HYDRA is a physical silicon chip (a 28nm System-on-Chip) that combines both algorithms into a single shared hardware engine, giving electronic devices high-speed signal processing and next-generation quantum-safe security on a single tiny chip.</p>
+</div>
+
+<h3 id="overview--architecture">overview &amp; architecture</h3>
+
+<p>HYDRA (Hybrid Dual Reconfigurable Architecture) is a custom System-on-Chip (SoC) designed and taped out in a <strong>28nm digital IC technology node</strong>. The chip accelerates two computationally intensive workloads: <strong>Fast Fourier Transforms (FFTs)</strong> for digital signal processing, and <strong>Number Theoretic Transforms (NTTs)</strong> for post-quantum lattice-based cryptography (targeting Kyber/ML-KEM algorithms).</p>
+
+<p>Both FFT and NTT algorithms rely on butterfly network topologies for Cooley-Tukey decimation passes. By sharing the butterfly routing infrastructure and multiplexing complex-floating-point and modular-integer arithmetic units, HYDRA provides a hardware accelerator that is highly area-efficient while serving dual-mode operations.</p>
+
+<div style="text-align: center; margin-bottom: 24px;">
+  <img src="/assets/images/hydra/accelerator_architecture.jpg" alt="Accelerator Architecture" style="border: 1px solid rgba(128,128,128,0.2); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); max-width: 100%;" />
+  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 8px; margin-bottom: 0;">Figure 1: HYDRA Accelerator Architecture (L. Tang et. al, 2025).</p>
+</div>
+
+<h3 id="reconfigurable-accelerator-design">reconfigurable accelerator design</h3>
+
+<p>At the core of the HYDRA accelerator lies a reconfigurable butterfly unit that dynamically switches between two dataflows:</p>
+<ol>
+  <li><strong>FFT Mode:</strong> Configured for 8-point radix-2 Cooley-Tukey FFT operations using standard IEEE-754 complex floating-point numbers. The arithmetic units operate on complex data inputs (real and imaginary parts), utilizing complex adders and complex multipliers.</li>
+  <li><strong>NTT Mode:</strong> Configured for modular integer arithmetic in lattice ciphers. In this mode, the complex adder/subtractor and multiplier structures dynamically remap into modular arithmetic units (modulo addition, subtraction, and multiplication). The hardware features a dedicated <strong>Barrett Reduction</strong> engine to perform fast modulo calculations without division.</li>
+</ol>
+
+<p>The butterfly network is governed by a fully pipelined accelerator controller designed in Chisel (Scala). It generates addresses dynamically via specialized Address Generation Units (AGUs) that handle multi-dimensional strides, batch offsets, twiddle factor lookups, and block transposes out of local memory banks.</p>
+
+<div style="display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center;">
+  <div style="flex: 1; min-width: 250px; text-align: center;">
+    <img src="/assets/images/hydra/accelerator_fft.png" alt="FFT Mode Datapath" style="border: 1px solid rgba(128,128,128,0.2); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); width: 100%;" />
+    <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 8px;">Figure 2: Reconfigurable modular arithmetic units set up for FFT mode.</p>
+  </div>
+  <div style="flex: 1; min-width: 250px; text-align: center;">
+    <img src="/assets/images/hydra/accelerator_ntt.png" alt="NTT Mode Datapath" style="border: 1px solid rgba(128,128,128,0.2); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); width: 100%;" />
+    <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 8px;">Figure 3: Reconfigurable modular arithmetic units set up for NTT mode.</p>
+  </div>
+</div>
+
+<h3 id="system-on-chip-integration">system-on-chip integration</h3>
+
+<p>To provide system programmability, the HYDRA accelerator is integrated into a complete System-on-Chip (SoC) centered around a <strong>32-bit VexRiscv CPU core</strong>.</p>
+
+<div style="text-align: center; margin-bottom: 24px;">
+  <img src="/assets/images/hydra/system_architecture.png" alt="System Architecture" style="border: 1px solid rgba(128,128,128,0.2); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); max-width: 100%;" />
+  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 8px; margin-bottom: 0;">Figure 4: HYDRA Full System Architecture &amp; Memory Map.</p>
+</div>
+
+<p>Key features of the SoC integration include:</p>
+<ul>
+  <li><strong>CFU (Custom Function Unit) Interface:</strong> Tightly couples the CPU and accelerator, enabling low-latency control handshakes. Start, configuration constants (modulus value, modular inverse parameters), and done status signals are handled via custom instruction extensions.</li>
+  <li><strong>Shared Scratchpad Memory:</strong> A banked, dual-port local SRAM ($32\ \text{kB}$ data memory, $1\ \text{kB}$ instruction/plan memory) shared between the VexRiscv CPU and the accelerator. A hardware multiplexer coordinates control: while the CPU writes inputs or reads outputs, the accelerator is locked out, and vice-versa. This eliminates read-write hazards without bus-arbitration overhead.</li>
+  <li><strong>DMA Engine:</strong> The CPU configures a DMA controller to move contiguous blocks of data between main system memory and shared scratchpad memory, keeping the accelerator continuously fed.</li>
+  <li><strong>C Software API:</strong> A custom low-level C firmware library using the plan/execute paradigm (interfacing with the FFTX backend). Users compile C programs targeting the accelerator, wrapping custom assembly instructions into function calls.</li>
+</ul>
+
+<h3 id="verification--simulation-suite">verification &amp; simulation suite</h3>
+
+<p>Verification was performed using a testbench suite powered by <strong>cocotb</strong> (python-based HDL verification) and <strong>Cadence XCelium</strong>.</p>
+
+<div style="text-align: center; margin-bottom: 24px;">
+  <img src="/assets/images/hydra/clock_configuration.jpg" alt="Clock Configuration" style="border: 1px solid rgba(128,128,128,0.2); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); max-width: 100%;" />
+  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 8px; margin-bottom: 0;">Figure 5: SoC Clock Generation &amp; Scan Configuration.</p>
+</div>
+
+<p>Verification guaranteed correctness at every design phase:</p>
+<ol>
+  <li><strong>Netlist Equivalence:</strong> Matching test vectors across RTL, post-synthesis gate-level netlists, and final post-signoff netlists.</li>
+  <li><strong>Infrastructure Checks:</strong> Functional test suites verifying stand-alone radix-2 butterfly operations, CFU configurations, DMA data transfers, shared memory accessibility, and CPU print buffers.</li>
+  <li><strong>DFT &amp; Silicon Testability:</strong> Integrated sequential Design-for-Test (DFT) scan chains. Verification runs simulated scanning programs directly into VexRiscv memory to guarantee post-fabrication scan chain operation.</li>
+</ol>
+
+<h3 id="physical-design--tapeout">physical design &amp; tapeout</h3>
+
+<p>The chip layout was synthesized using <strong>Cadence Genus</strong> and placed and routed using <strong>Cadence Innovus</strong> in a 28nm process technology. Physical sign-off (DRC, LVS, antenna checks) was achieved using <strong>Siemens Calibre</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Metric</th>
+      <th style="text-align: left">Target Value</th>
+      <th style="text-align: left">Actual Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">**Technology Node**</td>
+      <td style="text-align: left">28nm</td>
+      <td style="text-align: left">28nm</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**Operating Frequency**</td>
+      <td style="text-align: left">$750\ \text{MHz}$</td>
+      <td style="text-align: left">$1.0\ \text{GHz}$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**Core Voltage**</td>
+      <td style="text-align: left">$0.9\ \text{V}$</td>
+      <td style="text-align: left">$0.9\ \text{V}$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**Power Consumption**</td>
+      <td style="text-align: left">$130.0\ \text{mW}$</td>
+      <td style="text-align: left">$135.2\ \text{mW}$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**Active Area**</td>
+      <td style="text-align: left">$0.5\ \text{mm} \times 0.5\ \text{mm}$</td>
+      <td style="text-align: left">$0.5\ \text{mm} \times 0.5\ \text{mm}$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**Area Utilization**</td>
+      <td style="text-align: left">-</td>
+      <td style="text-align: left">$41.3\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**DRC / LVS Sign-off**</td>
+      <td style="text-align: left">Pass</td>
+      <td style="text-align: left">Pass</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="power--floorplanning">power &amp; floorplanning</h4>
+<p>To optimize routing and limit IR drop, the layout uses three isolated power domains (Pad Ring, Clock Generators, and SoC Core) with power grids distributed on M4/M5 and M8/M9 metal layers.</p>
+
+<p>The floorplan splits memory macros to optimize access paths: CPU memory banks occupy the top half, while accelerator memories (data and twiddle factor banks) occupy the bottom half. Placing data banks opposite each other facilitates low-latency ping-pong access patterns for Cooley-Tukey stages.</p>
+
+<div style="text-align: center; margin-bottom: 24px;">
+  <img src="/assets/images/hydra/floorplan.png" alt="Final Chip Floorplan" style="border: 1px solid rgba(128,128,128,0.2); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); max-width: 100%;" />
+  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 8px; margin-bottom: 0;">Figure 6: Final Chip Floorplan.</p>
+</div>
+
+<div style="text-align: center; margin-bottom: 24px;">
+  <img src="/assets/images/hydra/layout.jpg" alt="Final Chip Layout" style="border: 1px solid rgba(128,128,128,0.2); border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); max-width: 100%;" />
+  <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 8px; margin-bottom: 0;">Figure 7: Final Tapeout GDS Layout.</p>
+</div>
+
+<h4 id="area-breakdown">area breakdown</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Unit</th>
+      <th style="text-align: left">Subunit</th>
+      <th style="text-align: left">Cell Count</th>
+      <th style="text-align: left">Area ($\mu\text{m}^2$)</th>
+      <th style="text-align: left">Area (%)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">**Vex CPU**</td>
+      <td style="text-align: left">Core</td>
+      <td style="text-align: left">$9,168$</td>
+      <td style="text-align: left">$55,083.859$</td>
+      <td style="text-align: left">$13.33\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Program Memory</td>
+      <td style="text-align: left">-</td>
+      <td style="text-align: left">$112,828.229$</td>
+      <td style="text-align: left">$27.31\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">DMA Engine</td>
+      <td style="text-align: left">$6,296$</td>
+      <td style="text-align: left">$16,927.982$</td>
+      <td style="text-align: left">$4.10\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**Hydra Accel**</td>
+      <td style="text-align: left">Codelet Datapath</td>
+      <td style="text-align: left">$31,161$</td>
+      <td style="text-align: left">$61,065.252$</td>
+      <td style="text-align: left">$14.78\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Controller</td>
+      <td style="text-align: left">$2,007$</td>
+      <td style="text-align: left">$5,154.163$</td>
+      <td style="text-align: left">$1.25\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Other</td>
+      <td style="text-align: left">$1,066$</td>
+      <td style="text-align: left">$2,675.452$</td>
+      <td style="text-align: left">$0.65\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**Shared Mem**</td>
+      <td style="text-align: left">Program Memory</td>
+      <td style="text-align: left">-</td>
+      <td style="text-align: left">$3,418.787$</td>
+      <td style="text-align: left">$0.83\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Data Memory</td>
+      <td style="text-align: left">-</td>
+      <td style="text-align: left">$77,922.016$</td>
+      <td style="text-align: left">$18.86\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**Other**</td>
+      <td style="text-align: left">Routing, clock, power</td>
+      <td style="text-align: left">$4,257$</td>
+      <td style="text-align: left">$78,002.178$</td>
+      <td style="text-align: left">$18.88\%$</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">**Total**</td>
+      <td style="text-align: left">-</td>
+      <td style="text-align: left">**$54,347$**</td>
+      <td style="text-align: left">**$413,077.918$**</td>
+      <td style="text-align: left">**$100.00\%$**</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>code49</name></author><category term="projects" /><category term="cmu" /><category term="projects" /><category term="rtl" /><category term="verification" /><category term="verilog" /><category term="physical-design" /><summary type="html"><![CDATA[18-725: advanced digital ic design teammates: sophia fu, kody liang, silvia song, kaylan zhang mentors: ken mai, larry tang, siddharth das]]></summary></entry><entry><title type="html">18-100: intro to ece</title><link href="https://davidlechan.dev/teaching/18100.html" rel="alternate" type="text/html" title="18-100: intro to ece" /><published>2025-12-31T00:00:00+00:00</published><updated>2025-12-31T00:00:00+00:00</updated><id>https://davidlechan.dev/teaching/18100</id><content type="html" xml:base="https://davidlechan.dev/teaching/18100.html"><![CDATA[<p><strong>professors: jian-gang (jimmy) zhu, mark budnik, greg kesden, tom zajdel</strong><br /></p>
+
+<p><strong>tools: a little bit of everything :P</strong><br />
+<strong><a href="https://courses.ece.cmu.edu/18100">course website</a></strong></p>
+
+<hr />
+
+<p>I first took <strong>18-100: Introduction to Electrical and Computer Engineering</strong> during my first semester at Carnegie Mellon. For me and most incoming students, this class was the gateway to the department. 18-100 does more than teach circuit fundamentals and code; it inspires students to pursue ECE while setting the foundation for collaborative problem-solving.</p>
+
+<p>The core philosophy of 18-100 centers on close, personal mentorship between TAs and students. Learning happens through small-group lab sessions, accessible office hours, and a dedicated team of TAs who support students beyond circuit analysis or programming.</p>
+
+<p>Because 18-100 recruits mostly freshman and sophomore TAs, it creates a near-peer mentorship model: first-year students gain accessible role models, while young TAs discover a passion for teaching while reinforcing fundamental engineering concepts.</p>
+
+<h3 id="teaching-assistant">teaching assistant</h3>
+
+<p>My desire to give back led me to join the course staff as a <strong>Teaching Assistant (TA)</strong> from August 2023 to January 2025:</p>
+<ul>
+  <li><strong>Small-Group Labs &amp; Recitations:</strong> Led weekly lab sections to translate theory into practical steps.</li>
+  <li><strong>Office Hours &amp; Debugging:</strong> Guided students to debug their own circuit problems, encouraging patience and persistence.</li>
+  <li><strong>Student Mentorship:</strong> Helped students navigate academic transitions and adapt to CMU’s rigorous environment.</li>
+  <li><strong>Grading &amp; Feedback:</strong> Graded assignments, lab reports, and exams with detailed feedback.</li>
+</ul>
+
+<h3 id="head-teaching-assistant">head teaching assistant</h3>
+
+<p>Building hands-on pedagogical experience prepared me to serve as <strong>Head TA</strong> from January to December 2025, managing course logistics and mentoring the teaching staff:</p>
+<ul>
+  <li><strong>TA Mentoring:</strong> Guided TAs on effective teaching practices, active listening, and supporting students through academic adversity.</li>
+  <li><strong>Course Direction &amp; Mascot:</strong> Collaborated with faculty to keep course content modern, engaging, and supportive. The staff even established a custom course mascot, <strong>Watt</strong>son!</li>
+</ul>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/18100/wattson.png" alt="Wattson Photo" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd><br />
+  <i>Wattson with a multimeter. Special thanks to Michelle and Angie for designing our stickers!</i>
+</p>
+
+<ul>
+  <li><strong>Course Material Development:</strong> Refined lecture slides, homework questions, and hands-on lab experiments alongside faculty.</li>
+  <li><strong>Course Logistics:</strong> Coordinated lab equipment, managed grading distributions for a team of 40 TAs, and maintained gradebooks.</li>
+</ul>
+
+<h3 id="resources">resources</h3>
+
+<p>During my time on the 18-100 staff, I developed several custom recitations and planning tools:</p>
+<ul>
+  <li><a href="/teaching/18100-equivalent-circuits.html">power and equivalent circuits recitation</a></li>
+  <li><a href="/teaching/18100-next-steps.html">next steps in ece recitation</a></li>
+  <li><a href="/teaching/18100-planning-sheet.html">ece degree planner</a></li>
+</ul>
+
+<h3 id="photos">photos</h3>
+
+<div id="photo-gallery-18100-gallery" class="photo-gallery-wrapper" style="opacity: 0; transition: opacity 0.3s ease;">
+  
+    <h3 class="showcase-title" style="text-transform: lowercase; margin-bottom: 20px;"></h3>
+  
+
+  <div class="gallery-container">
+    <button class="gallery-btn prev-btn" aria-label="Previous photo">&#10094;</button>
+    <div class="gallery-window">
+      <div class="gallery-track">
+        <!-- Slides injected dynamically -->
+      </div>
+    </div>
+    <button class="gallery-btn next-btn" aria-label="Next photo">&#10095;</button>
+  </div>
+  <div class="gallery-indicators">
+    <!-- Indicator dots injected dynamically -->
+  </div>
+</div>
+
+<script>
+(function() {
+  document.addEventListener("DOMContentLoaded", function() {
+    const wrapper = document.getElementById("photo-gallery-18100-gallery");
+    if (!wrapper) return;
+
+    const rawJsonUrl = "/assets/images/18100/carousel/photos_18100.json";
+    // Resolve relative URL based on site.baseurl if needed
+    const baseUrl = "";
+    const jsonUrl = rawJsonUrl.startsWith(baseUrl) ? rawJsonUrl : baseUrl + (rawJsonUrl.startsWith('/') ? '' : '/') + rawJsonUrl;
+
+    fetch(jsonUrl)
+      .then(response => {
+        if (!response.ok) throw new Error("Failed to load photo metadata JSON");
+        return response.json();
+      })
+      .then(photos => {
+        if (!photos || photos.length === 0) return;
+
+        const track = wrapper.querySelector(".gallery-track");
+        const indicatorsContainer = wrapper.querySelector(".gallery-indicators");
+
+        photos.forEach((photo, index) => {
+          const slide = document.createElement("div");
+          slide.className = "photo-slide";
+          
+          let captionHTML = "";
+          if (photo.caption && photo.caption.trim() !== "") {
+            captionHTML = `<div class="photo-slide-caption">${escapeHtml(photo.caption)}</div>`;
+          }
+
+          const resolvedPath = photo.path.startsWith(baseUrl) ? photo.path : baseUrl + (photo.path.startsWith('/') ? '' : '/') + photo.path;
+
+          slide.innerHTML = `
+            <div class="photo-slide-img-container">
+              <img src="${resolvedPath}" alt="${escapeHtml(photo.caption || '')}" class="photo-slide-img no-lightbox">
+            </div>
+            ${captionHTML}
+          `;
+          track.appendChild(slide);
+
+          // Add indicator dot
+          const dot = document.createElement("span");
+          dot.className = `gallery-indicator-dot${index === 0 ? ' active' : ''}`;
+          dot.addEventListener("click", () => goToSlide(index));
+          indicatorsContainer.appendChild(dot);
+        });
+
+        let currentIndex = 0;
+        const slides = track.querySelectorAll(".photo-slide");
+        const dots = indicatorsContainer.querySelectorAll(".gallery-indicator-dot");
+        const totalSlides = photos.length;
+
+        function updateGallery() {
+          track.style.transform = `translateX(-${currentIndex * 100}%)`;
+          dots.forEach((dot, idx) => {
+            dot.classList.toggle("active", idx === currentIndex);
+          });
+        }
+
+        function nextSlide() {
+          currentIndex = (currentIndex + 1) % totalSlides;
+          updateGallery();
+        }
+
+        function prevSlide() {
+          currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+          updateGallery();
+        }
+
+        function goToSlide(index) {
+          currentIndex = index;
+          updateGallery();
+          resetInterval();
+        }
+
+        // Set buttons
+        wrapper.querySelector(".next-btn").addEventListener("click", () => {
+          nextSlide();
+          resetInterval();
+        });
+        wrapper.querySelector(".prev-btn").addEventListener("click", () => {
+          prevSlide();
+          resetInterval();
+        });
+
+        // Auto rotate
+        let intervalId = setInterval(nextSlide, 8000);
+        function resetInterval() {
+          clearInterval(intervalId);
+          intervalId = setInterval(nextSlide, 8000);
+        }
+
+        // Touch Swipe Support
+        let startX = 0;
+        let isSwiping = false;
+
+        track.addEventListener("touchstart", (e) => {
+          startX = e.touches[0].clientX;
+          isSwiping = true;
+        }, { passive: true });
+
+        track.addEventListener("touchend", (e) => {
+          if (!isSwiping) return;
+          const diffX = e.changedTouches[0].clientX - startX;
+          if (Math.abs(diffX) > 50) {
+            if (diffX > 0) {
+              prevSlide();
+            } else {
+              nextSlide();
+            }
+            resetInterval();
+          }
+          isSwiping = false;
+        });
+
+        // Reveal container once loaded
+        wrapper.style.opacity = "1";
+      })
+      .catch(err => {
+        console.error("Error loading photo gallery carousel:", err);
+      });
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  });
+})();
+</script>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/18100/F25_staff.jpg" alt="Fall 2025 Staff" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd><br />
+  <i>Fall 2025 Staff Photo.</i>
+</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/18100/F24_staff.png" alt="Fall 2024 Staff" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd><br />
+  <i>Fall 2024 Staff Photo.</i>
+</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/18100/F23_staff.png" alt="Fall 2023 Staff" style="display: block; margin: 0 auto; border: 1px solid black;" />
+  </kbd><br />
+  <i>Fall 2023 Staff Photo.</i>
+</p>
+
+<h3 id="acknowledgements">acknowledgements</h3>
+
+<p>Thank you to all the students, fellow TAs, staff, and professors who made 18-100 such a special experience.</p>
+
+<p>To Megan, Bex, Malcom, and the ECE academic services and logistics teams: thank you for your support at every turn, and apologies for the endless late-night lab crises.</p>
+
+<p>To the TAs and students I worked with: thank you for your patience, passion, and care. You will go far.</p>
+
+<p>To the head TAs before me (Nora, Owen, Liam, and Kaitlyn): thank you for inspiring our team and shielding the TA staff so they could focus on teaching.</p>
+
+<p>To my fellow head TAs (Julius, Shirley, and Calla): thank you for the mutual support. It was an absolute privilege to lead alongside such a dedicated team.</p>
+
+<p>Above all, thank you to professors Jimmy Zhu, Mark Budnik, Greg Kesden, and Tom Zajdel for giving me this opportunity and mentoring me every step of the way.</p>]]></content><author><name>code49</name></author><category term="teaching" /><category term="cmu" /><category term="teaching" /><summary type="html"><![CDATA[professors: jian-gang (jimmy) zhu, mark budnik, greg kesden, tom zajdel]]></summary></entry><entry><title type="html">sram</title><link href="https://davidlechan.dev/projects/sram.html" rel="alternate" type="text/html" title="sram" /><published>2025-11-25T00:00:00+00:00</published><updated>2025-11-25T00:00:00+00:00</updated><id>https://davidlechan.dev/projects/sram</id><content type="html" xml:base="https://davidlechan.dev/projects/sram.html"><![CDATA[<p><strong>18-622: digital ic design</strong><br />
+<strong>teammates: kody liang</strong></p>
+
+<p><strong>tools: virtuoso</strong></p>
+
+<hr />
+
+<div class="practical-applications-box">
+  <div class="box-title">💡 practical application</div>
+  <p>Static Random-Access Memory (SRAM) is the ultra-fast memory built directly inside computer processors (L1/L2 caches) to hold data for immediate calculation. Because SRAM cells operate at gigahertz speeds, they determine how quickly a chip can access data. This project designed a 4,096-cell SRAM memory chip at the individual transistor level on a 45-nanometer silicon process, optimizing layout geometry so memory reads and writes execute in under a nanosecond.</p>
+</div>
+
+<h3 id="intro">intro</h3>
+
+<p>This project designed a custom transistor-level <strong>256 words × 16 bits SRAM</strong> (4,096 memory cells total) in Cadence <strong>Virtuoso</strong> using the <strong>GPDK045 (45nm)</strong> process technology. We optimized the architecture for speed, power, and layout density, achieving a clock frequency of <strong>1.096 GHz</strong> in the worst-case TTLH process corner with a cell area efficiency of <strong>58.26%</strong>.</p>
+
+<h3 id="architecture--floorplan">architecture &amp; floorplan</h3>
+
+<p>The memory array uses a <strong>pseudo-inverted-T floorplan</strong> to balance wordline and bitline delays:</p>
+<ul>
+  <li><strong>Subarray Partitioning:</strong> The 4,096 cells split into two symmetric <strong>$64 \times 32$ cell subarrays</strong>.</li>
+  <li><strong>Central Row Decoders:</strong> Row decoders sit in a central column between the subarrays. Driving wordlines (WL) from the center halves wire resistance to array edges, cutting propagation delay.</li>
+  <li><strong>Column Multiplexing:</strong> Implemented a <strong>4:1 column multiplexing factor</strong>. Each group of 4 columns shares a bitline reset block at the top and a cell I/O block at the bottom.</li>
+  <li><strong>I/O Pitch Matching:</strong> Read/write column muxes, StrongArm sense amplifiers, and write drivers fit within the vertical pitch of 4 cell columns, eliminating routing congestion.</li>
+</ul>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/sram/floorplan.png" alt="SRAM Pseudo-Inverted-T Floorplan" style="display: block; margin: 0 auto; border: 1px solid black; max-width: 65%;" />
+  </kbd>
+  <br /><i>Pseudo-inverted-T floorplan diagram spanning two symmetric 64x32 cell arrays with central row decoders.</i>
+</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/sram/cell_io_layout.png" alt="Cell I/O Layout" style="display: block; margin: 0 auto; border: 1px solid black; max-width: 85%;" />
+  </kbd>
+  <br /><i>Layout of Cell I/O block, containing read/write multiplexers, StrongArm sense amplifier, and write driver.</i>
+</p>
+
+<h3 id="circuit-design--cell-optimization">circuit design &amp; cell optimization</h3>
+
+<p>To ensure robust operation across PVT variations, every component was sized through static noise margin analysis:</p>
+<ul>
+  <li><strong>6T SRAM Cell:</strong> The core storage element is a standard 6-transistor (6T) cell. Transistors were sized to balance read stability and writeability, achieving a Read Static Noise Margin (<strong>Read SNM</strong>) of <strong>498.8 mV</strong> and a maximum read current of <strong>563.7 nA</strong>.</li>
+  <li><strong>StrongArm Sense Amplifier:</strong> Utilized a StrongArm Sense-Amplifier Flip-Flop (SAFF) at the bottom of the read multiplexer. The latch-based structure resolves small bitline differentials quickly with zero static power dissipation.</li>
+  <li><strong>Control Signal Generation:</strong> Bypassed replica bitline overhead by designing local inverter delay chains to generate clock-relative control pulses (<code class="language-plaintext highlighter-rouge">WL_en</code>, <code class="language-plaintext highlighter-rouge">SE</code>, <code class="language-plaintext highlighter-rouge">WE</code>, <code class="language-plaintext highlighter-rouge">bl_rst_b</code>).</li>
+</ul>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/sram/6t_cell_schematic.png" alt="6T SRAM Cell Schematic" style="display: block; margin: 0 auto; border: 1px solid black; max-width: 65%;" />
+  </kbd>
+  <br /><i>Transistor-level schematic of the 6T SRAM cell (two cross-coupled inverters with access transistors).</i>
+</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/sram/6t_cell_layout.png" alt="6T SRAM Cell Layout" style="display: block; margin: 0 auto; border: 1px solid black; max-width: 45%;" />
+  </kbd>
+  <br /><i>Physical symmetric layout of the 6T cell in Cadence Virtuoso (GPDK045 process).</i>
+</p>
+
+<h3 id="verification--layout-results">verification &amp; layout results</h3>
+
+<p>Interconnect resistance and capacitance for global wires (clock, Metal 6/2 wordlines, Metal 3 bitlines) were modeled with RC $\pi$-networks and verified using post-layout parasitic extraction (Assura AV_extract):</p>
+<ul>
+  <li><strong>Performance:</strong> Achieved a <strong>912 ps cycle time</strong> (1.096 GHz) under the worst-case TTLH process corner.</li>
+  <li><strong>Power:</strong> Consumes <strong>2.053 mW</strong> of total power at a 50/50 read/write mix (1.662 mW dynamic, 391 $\mu$W static).</li>
+  <li><strong>Area:</strong> The complete layout fits in a bounding box of <strong>$115.7 \mu m \times 44.865 \mu m$</strong> ($5,191 \mu m^2$), yielding an overall cell area efficiency of <strong>58.26%</strong>.</li>
+</ul>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/sram/final_layout.png" alt="SRAM Final Bounding Box Silicon Layout" style="display: block; margin: 0 auto; border: 1px solid black; max-width: 85%;" />
+  </kbd>
+  <br /><i>Complete silicon layout bounding box (115.7μm x 44.865μm) showing the pseudo-inverted-T symmetry.</i>
+</p>
+
+<p align="center">
+  <kbd>
+    <img src="/assets/images/sram/worst_case_simulation.png" alt="Worst-Case Simulation Waveforms" style="display: block; margin: 0 auto; border: 1px solid black; max-width: 85%;" />
+  </kbd>
+  <br /><i>Analog simulation waveforms exercising the critical path read operation under worst-case timing.</i>
+</p>]]></content><author><name>code49</name></author><category term="projects" /><category term="cmu" /><category term="projects" /><category term="physical-design" /><summary type="html"><![CDATA[18-622: digital ic design teammates: kody liang]]></summary></entry><entry><title type="html">next steps in ece recitation</title><link href="https://davidlechan.dev/teaching/18100-next-steps.html" rel="alternate" type="text/html" title="next steps in ece recitation" /><published>2025-10-31T00:00:00+00:00</published><updated>2025-10-31T00:00:00+00:00</updated><id>https://davidlechan.dev/teaching/18100-next-steps</id><content type="html" xml:base="https://davidlechan.dev/teaching/18100-next-steps.html"><![CDATA[<h3 id="intro">intro</h3>
+
+<p>To help students navigate the transition from introductory coursework to upper-level ECE electives, I overhauled our “Next Steps in ECE” workshop. The revised curriculum converted a passive lecture into an interactive session with personalized feedback and Q&amp;A to help students plan their degree requirements.</p>
+
+<h3 id="presentation">presentation</h3>
+
+<p>Designed as a streamlined guide breaking down core ECE pathways, explaining specialization options, and offering time management strategies to avoid academic burnout:</p>
+
+<object data="/assets/misc/ece-recitation-presentation.pdf" type="application/pdf" width="100%" height="600px">
+    <blockquote>It appears your browser doesn't support embedded PDFs. 
+    <a href="/assets/misc/ece-recitation-presentation.pdf" target="_blank">Click here to download the PDF instead</a>.</blockquote>
+</object>
+
+<p><br />
+See also the accompanying <a href="/teaching/18100-planning-sheet.html">degree planner sheet</a> developed for this workshop.</p>]]></content><author><name>code49</name></author><category term="teaching" /><category term="cmu" /><category term="teaching" /><summary type="html"><![CDATA[intro]]></summary></entry></feed>
