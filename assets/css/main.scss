@@ -2091,8 +2091,9 @@ html[data-theme="light"] {
       color: #444444;
 
       &:hover, &.active {
-        color: #a32a2a;
+        color: var(--pill-color, #a32a2a);
         border-color: var(--pill-color, #a32a2a);
+        box-shadow: 0 0 8px var(--pill-color, rgba(163, 42, 42, 0.25));
       }
 
       &.active-all {

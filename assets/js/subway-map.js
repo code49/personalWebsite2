@@ -32,23 +32,23 @@
     if (isLight) {
       const LIGHT_PALETTE = {
         'core': '#a32a2a',
-        'fpga': '#b83232',
-        'cmu': '#2b5ca8',
-        'projects': '#2e7d32',
-        'experience': '#c0392b',
-        'rtl': '#8e24aa',
-        'verilog': '#00838f',
-        'python': '#d87000',
-        'teaching': '#e65100',
-        'verification': '#6a1b9a',
-        'physical-design': '#00695c',
-        'kicad': '#ad1457',
-        'php': '#2e7d32',
-        'javascript': '#d87000',
-        'nix': '#1565c0',
-        'random': '#0277bd',
-        'bash': '#2e7d32',
-        'raspberry-pi': '#ef6c00'
+        'fpga': '#7c4dff',
+        'cmu': '#2563eb',
+        'projects': '#10b981',
+        'experience': '#ef4444',
+        'rtl': '#a855f7',
+        'verilog': '#06b6d4',
+        'python': '#f59e0b',
+        'teaching': '#f97316',
+        'verification': '#d946ef',
+        'physical-design': '#14b8a6',
+        'kicad': '#ec4899',
+        'php': '#059669',
+        'javascript': '#eab308',
+        'nix': '#3b82f6',
+        'random': '#0284c7',
+        'bash': '#16a34a',
+        'raspberry-pi': '#f97316'
       };
       if (LIGHT_PALETTE[cleanTag]) return LIGHT_PALETTE[cleanTag];
       let hash = 0;
@@ -56,7 +56,7 @@
         hash = cleanTag.charCodeAt(i) + ((hash << 5) - hash);
       }
       const hue = Math.abs(hash) % 360;
-      return `hsl(${hue}, 65%, 40%)`;
+      return `hsl(${hue}, 75%, 50%)`;
     }
     if (COLOR_PALETTE[cleanTag]) return COLOR_PALETTE[cleanTag];
     let hash = 0;
