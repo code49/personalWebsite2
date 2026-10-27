@@ -1,0 +1,110 @@
+{
+  "version": "00",
+  "settings_version": "00",
+  "exported_at": "2026-10-27T00:00:00.000Z",
+  "settings": {
+    "settings_version": "00",
+    "user_name": "david",
+    "homepage_url": "https://davidlechan.dev",
+    "spotify_client_id": "",
+    "spotify_auto_pin": false,
+    "cal_feeds": [
+      {
+        "name": "personal",
+        "url": "https://calendar.google.com/calendar/ical/example/basic.ics"
+      }
+    ],
+    "cal_proxy": "https://calendar-worker.davidlechan.workers.dev/?url=",
+    "cal_view_mode": "smart",
+    "widget_overflow_mode": "rotating",
+    "widget_rotate_delay": 30,
+    "clock_rotate_delay": 10,
+    "primary_tz": "auto",
+    "card_configs": {
+      "spotify-card": {
+        "id": "spotify-card",
+        "name": "spotify",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "cal-card": {
+        "id": "cal-card",
+        "name": "calendar",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "world-clock-card": {
+        "id": "world-clock-card",
+        "name": "world clock",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "weather-card": {
+        "id": "weather-card",
+        "name": "weather",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      }
+    }
+  },
+  "data": {
+    "world_clocks": [
+      {
+        "name": "San Francisco",
+        "tz": "America/Los_Angeles"
+      },
+      {
+        "name": "Austin",
+        "tz": "America/Chicago"
+      },
+      {
+        "name": "Pittsburgh",
+        "tz": "America/New_York"
+      },
+      {
+        "name": "London",
+        "tz": "Europe/London"
+      },
+      {
+        "name": "Tokyo",
+        "tz": "Asia/Tokyo"
+      }
+    ],
+    "cal_events": [],
+    "scratchpad_notes": "",
+    "card_configs": {
+      "spotify-card": {
+        "id": "spotify-card",
+        "name": "spotify",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "cal-card": {
+        "id": "cal-card",
+        "name": "calendar",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "world-clock-card": {
+        "id": "world-clock-card",
+        "name": "world clock",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "weather-card": {
+        "id": "weather-card",
+        "name": "weather",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      }
+    }
+  }
+}

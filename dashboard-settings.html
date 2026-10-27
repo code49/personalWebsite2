@@ -503,7 +503,32 @@ sidebar: []
     </div>
   </div>
 
-  <!-- 0. Profile & Navigation Settings -->
+  <!-- 0. Config Backup & Transfer (Import / Export) -->
+  <div class="settings-card">
+    <div class="settings-card-title">
+      <span>config backup & transfer</span>
+      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">v<span id="settings-version-badge" style="color: var(--dash-accent);">00</span></span>
+    </div>
+
+    <div>
+      <p style="font-size: 0.82rem; color: var(--dash-text-sec); margin-top: 0; line-height: 1.45;">
+        all credentials, custom time zones, and settings live locally in your browser storage.
+        export your config to transfer setup to another machine or browser profile, or import a template.json.
+      </p>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button type="button" onclick="exportConfig()" class="dash-btn" style="flex: 1; min-width: 160px;">
+          export config.json
+        </button>
+        <button type="button" onclick="triggerImportConfig()" class="dash-btn" style="flex: 1; min-width: 160px;">
+          import config.json
+        </button>
+        <input type="file" id="config-file-input" accept=".json,application/json" onchange="handleConfigFileImport(event)" style="display: none;" />
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. Profile & Navigation Settings -->
   <div class="settings-card">
     <div class="settings-card-title">
       <span>profile & navigation</span>
@@ -744,31 +769,71 @@ sidebar: []
         <div class="dash-helper-text">
           most calendar providers block browser requests (cors). provide a custom cors proxy prefix or leave empty for automated fallback.
         </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- 4. Backup & Data Transfer -->
-  <div class="settings-card">
-    <div class="settings-card-title">
-      <span>config backup & transfer</span>
-      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">local storage</span>
-    </div>
+        <!-- Cloudflare Calendar Worker Setup Instructions -->
+        <details style="margin-top: 10px; background: var(--dash-sub-card-bg); border: 1px solid var(--dash-border); border-radius: 6px; padding: 12px 14px;">
+          <summary style="cursor: pointer; font-size: 0.78rem; font-weight: 600; color: var(--dash-accent); font-family: var(--dash-mono); user-select: none;">
+            cloudflare calendar worker setup guide ▾
+          </summary>
+          <div style="margin-top: 10px; font-size: 0.78rem; color: var(--dash-text-sec); line-height: 1.5;">
+            <p style="margin: 0 0 8px 0;">
+              Google Calendar, Apple iCloud, and Outlook block browser requests (CORS). Deploy a free Cloudflare Worker to proxy calendar feeds securely:
+            </p>
+            <ol style="margin: 0 0 10px 0; padding-left: 20px;">
+              <li style="margin-bottom: 4px;">Log in to <a href="https://workers.cloudflare.com" target="_blank" rel="noopener" style="color: var(--dash-accent); text-decoration: underline;">workers.cloudflare.com</a> and choose <strong>Workers & Pages &gt; Create Application &gt; Create Worker</strong>.</li>
+              <li style="margin-bottom: 4px;">Name your worker (e.g. <code>calendar-worker</code>) and click <strong>Deploy</strong>.</li>
+              <li style="margin-bottom: 4px;">Click <strong>Edit Code</strong> and replace the code with the script below:</li>
+            </ol>
+            <div style="position: relative; margin-bottom: 10px;">
+              <pre id="cloudflare-worker-code" class="dash-mono" style="margin: 0; padding: 10px 12px; background: var(--dash-bg); border: 1px solid var(--dash-border); border-radius: 4px; font-size: 0.72rem; color: var(--dash-text-pri); overflow-x: auto; white-space: pre;">export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    const targetUrl = url.searchParams.get('url');
+    if (!targetUrl) {
+      return new Response('Missing ?url= parameter', { status: 400 });
+    }
 
-    <div>
-      <p style="font-size: 0.82rem; color: var(--dash-text-sec); margin-top: 0; line-height: 1.45;">
-        all credentials, custom time zones, and settings live locally in your browser storage.
-        export your config to transfer setup to another machine or browser profile.
-      </p>
+    const corsHeaders = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': '*',
+    };
 
-      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <button type="button" onclick="exportConfig()" class="dash-btn" style="flex: 1; min-width: 160px;">
-          export config.json
-        </button>
-        <button type="button" onclick="triggerImportConfig()" class="dash-btn" style="flex: 1; min-width: 160px;">
-          import config.json
-        </button>
-        <input type="file" id="config-file-input" accept=".json,application/json" onchange="handleConfigFileImport(event)" style="display: none;" />
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { headers: corsHeaders });
+    }
+
+    try {
+      const res = await fetch(targetUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; CalendarWorker/1.0)' },
+      });
+      const body = await res.text();
+      return new Response(body, {
+        status: res.status,
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'text/calendar; charset=utf-8',
+          'Cache-Control': 'public, max-age=300',
+        },
+      });
+    } catch (err) {
+      return new Response('Proxy Error: ' + err.message, {
+        status: 502,
+        headers: corsHeaders,
+      });
+    }
+  },
+};</pre>
+              <button type="button" onclick="copyWorkerCode()" class="dash-btn" style="margin-top: 8px; font-size: 0.72rem; padding: 4px 10px;">
+                copy worker script
+              </button>
+            </div>
+            <ol start="4" style="margin: 0; padding-left: 20px;">
+              <li style="margin-bottom: 4px;">Click <strong>Deploy</strong>.</li>
+              <li>Copy your worker URL (e.g. <code>https://calendar-worker.&lt;subdomain&gt;.workers.dev/?url=</code>) into the input above and click <strong>Save Settings</strong>.</li>
+            </ol>
+          </div>
+        </details>
       </div>
     </div>
   </div>
@@ -795,6 +860,8 @@ sidebar: []
 <script>
   const KEY_DASHBOARD_NAME = 'dash_user_name';
   const KEY_DASHBOARD_HOMEPAGE = 'dash_homepage_url';
+  const KEY_SETTINGS_VERSION = 'dash_settings_version';
+  const CURRENT_SETTINGS_VERSION = '00';
   const KEY_SPOTIFY_CLIENT_ID = 'dash_spotify_client_id';
   const KEY_SPOTIFY_TOKEN = 'dash_spotify_token';
   const KEY_SPOTIFY_REFRESH = 'dash_spotify_refresh';
@@ -1328,6 +1395,16 @@ sidebar: []
     }
   }
 
+  function copyWorkerCode() {
+    const codeEl = document.getElementById('cloudflare-worker-code');
+    if (!codeEl) return;
+    navigator.clipboard.writeText(codeEl.innerText).then(() => {
+      showSaveToast('worker script copied to clipboard');
+    }).catch(() => {
+      showSaveToast('failed to copy script');
+    });
+  }
+
   // Config Backup Export & Import
   function exportConfig() {
     let calEvents = [];
@@ -1337,10 +1414,13 @@ sidebar: []
       calEvents = [];
     }
 
+    const activeVersion = localStorage.getItem(KEY_SETTINGS_VERSION) || CURRENT_SETTINGS_VERSION;
     const configData = {
-      version: 1,
+      version: activeVersion,
+      settings_version: activeVersion,
       exported_at: new Date().toISOString(),
       settings: {
+        settings_version: activeVersion,
         user_name: localStorage.getItem(KEY_DASHBOARD_NAME) || 'david',
         homepage_url: localStorage.getItem(KEY_DASHBOARD_HOMEPAGE) || 'https://davidlechan.dev',
         spotify_client_id: localStorage.getItem(KEY_SPOTIFY_CLIENT_ID) || '',
@@ -1390,6 +1470,9 @@ sidebar: []
     reader.onload = function(e) {
       try {
         const parsed = JSON.parse(e.target.result);
+        const importedVersion = parsed.settings_version || (parsed.settings && parsed.settings.settings_version) || parsed.version || CURRENT_SETTINGS_VERSION;
+        localStorage.setItem(KEY_SETTINGS_VERSION, String(importedVersion));
+
         if (parsed.settings) {
           if (parsed.settings.user_name !== undefined) {
             localStorage.setItem(KEY_DASHBOARD_NAME, parsed.settings.user_name);
@@ -1528,8 +1611,16 @@ sidebar: []
     renderCalendarFeedCards();
     populatePrimaryTzSelect();
     renderSpotifyStatus();
+    updateSettingsVersionDisplay();
     initSettingsThemeToggle();
     updateSettingsLogoLink();
+  }
+
+  function updateSettingsVersionDisplay() {
+    const badge = document.getElementById('settings-version-badge');
+    if (badge) {
+      badge.innerText = localStorage.getItem(KEY_SETTINGS_VERSION) || CURRENT_SETTINGS_VERSION;
+    }
   }
 
   function initSettingsThemeToggle() {
