@@ -13,7 +13,7 @@
     zlib
     libxml2
     libxslt
-    nodejs_20
+    nodejs
     
     # Standard libraries often needed by pre-compiled binaries
     stdenv.cc.cc.lib
