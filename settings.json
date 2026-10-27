@@ -7,6 +7,7 @@
     "user_name": "david",
     "homepage_url": "https://davidlechan.dev",
     "spotify_client_id": "",
+    "spotify_redirect_uri": "",
     "spotify_auto_pin": false,
     "cal_feeds": [
       {

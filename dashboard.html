@@ -1523,6 +1523,7 @@ sidebar: []
   const KEY_SETTINGS_VERSION = 'dash_settings_version';
   const CURRENT_SETTINGS_VERSION = '00';
   const KEY_SPOTIFY_CLIENT_ID = 'dash_spotify_client_id';
+  const KEY_SPOTIFY_REDIRECT_URI = 'dash_spotify_redirect_uri';
   const KEY_SPOTIFY_TOKEN = 'dash_spotify_token';
   const KEY_SPOTIFY_REFRESH = 'dash_spotify_refresh';
   const KEY_SPOTIFY_EXPIRY = 'dash_spotify_expiry';
@@ -1782,7 +1783,9 @@ sidebar: []
 
   // Spotify PKCE Helper
   function getRedirectUri() {
-    return window.location.origin + window.location.pathname;
+    const custom = (localStorage.getItem(KEY_SPOTIFY_REDIRECT_URI) || '').trim();
+    if (custom) return custom;
+    return window.location.origin + '/dashboard/';
   }
 
   async function sha256(plain) {
@@ -2326,6 +2329,7 @@ sidebar: []
     localStorage.setItem('dash_spotify_code_verifier', verifier);
 
     const redirectUri = getRedirectUri();
+    localStorage.setItem('dash_spotify_used_redirect_uri', redirectUri);
     const scope = 'user-read-currently-playing user-read-playback-state';
 
     const authUrl = new URL('https://accounts.spotify.com/authorize');
@@ -2344,7 +2348,8 @@ sidebar: []
   async function handleSpotifyCallback(code) {
     const clientId = localStorage.getItem(KEY_SPOTIFY_CLIENT_ID);
     const codeVerifier = localStorage.getItem('dash_spotify_code_verifier');
-    const redirectUri = getRedirectUri();
+    const redirectUri = localStorage.getItem('dash_spotify_used_redirect_uri') || getRedirectUri();
+    localStorage.removeItem('dash_spotify_used_redirect_uri');
 
     // Clean up query string immediately
     window.history.replaceState({}, document.title, window.location.pathname);

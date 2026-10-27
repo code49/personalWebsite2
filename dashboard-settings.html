@@ -606,9 +606,22 @@ sidebar: []
     <div>
       <label class="dash-field-label">spotify client id</label>
       <input type="text" id="setting-spotify-client-id" class="dash-input" placeholder="e.g. fe79fa8d..." />
-      <div class="dash-helper-text">
-        create an app in developer.spotify.com. set the redirect uri to:
-        <code id="spotify-redirect-uri-text" style="color: var(--dash-accent);"></code>
+      <div class="dash-helper-text" style="margin-bottom: 10px;">
+        in <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener" style="color: var(--dash-accent); text-decoration: underline;">developer.spotify.com</a>, add this exact redirect uri:
+        <div style="margin: 6px 0 4px 0;">
+          <code id="spotify-redirect-uri-text" style="color: var(--dash-accent); user-select: all; display: inline-block; padding: 3px 8px; background: var(--dash-bg); border: 1px solid var(--dash-border); border-radius: 4px;"></code>
+        </div>
+        <div style="font-size: 0.72rem; color: var(--dash-text-muted); margin-top: 4px;">
+          important: spotify requires <code>https://</code>. whitelist both <code>https://davidlechan.dev/dashboard/</code> and <code>https://davidlechan.dev/dashboard</code> to prevent matching errors.
+        </div>
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label class="dash-field-label">custom redirect uri (optional)</label>
+        <input type="text" id="setting-spotify-redirect-uri" class="dash-input" placeholder="e.g. https://davidlechan.dev/dashboard/ (leave empty for auto)" style="margin-bottom: 4px;" />
+        <div class="dash-helper-text">
+          override the redirect uri sent to spotify accounts oauth.
+        </div>
       </div>
 
       <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
@@ -863,6 +876,7 @@ sidebar: []
   const KEY_SETTINGS_VERSION = 'dash_settings_version';
   const CURRENT_SETTINGS_VERSION = '00';
   const KEY_SPOTIFY_CLIENT_ID = 'dash_spotify_client_id';
+  const KEY_SPOTIFY_REDIRECT_URI = 'dash_spotify_redirect_uri';
   const KEY_SPOTIFY_TOKEN = 'dash_spotify_token';
   const KEY_SPOTIFY_REFRESH = 'dash_spotify_refresh';
   const KEY_SPOTIFY_EXPIRY = 'dash_spotify_expiry';
@@ -941,6 +955,8 @@ sidebar: []
   ];
 
   function getRedirectUri() {
+    const custom = (localStorage.getItem(KEY_SPOTIFY_REDIRECT_URI) || '').trim();
+    if (custom) return custom;
     return window.location.origin + '/dashboard/';
   }
 
@@ -1242,6 +1258,7 @@ sidebar: []
     localStorage.setItem('dash_spotify_code_verifier', verifier);
 
     const redirectUri = getRedirectUri();
+    localStorage.setItem('dash_spotify_used_redirect_uri', redirectUri);
     const scope = 'user-read-currently-playing user-read-playback-state';
 
     const authUrl = new URL('https://accounts.spotify.com/authorize');
@@ -1424,6 +1441,7 @@ sidebar: []
         user_name: localStorage.getItem(KEY_DASHBOARD_NAME) || 'david',
         homepage_url: localStorage.getItem(KEY_DASHBOARD_HOMEPAGE) || 'https://davidlechan.dev',
         spotify_client_id: localStorage.getItem(KEY_SPOTIFY_CLIENT_ID) || '',
+        spotify_redirect_uri: localStorage.getItem(KEY_SPOTIFY_REDIRECT_URI) || '',
         spotify_auto_pin: getSpotifyAutoPin(),
         cal_feeds: loadCalendarFeeds(),
         cal_proxy: localStorage.getItem(KEY_CAL_PROXY) || '',
@@ -1486,6 +1504,13 @@ sidebar: []
           }
           if (parsed.settings.spotify_client_id !== undefined) {
             localStorage.setItem(KEY_SPOTIFY_CLIENT_ID, parsed.settings.spotify_client_id);
+          }
+          if (parsed.settings.spotify_redirect_uri !== undefined) {
+            if (parsed.settings.spotify_redirect_uri) {
+              localStorage.setItem(KEY_SPOTIFY_REDIRECT_URI, parsed.settings.spotify_redirect_uri);
+            } else {
+              localStorage.removeItem(KEY_SPOTIFY_REDIRECT_URI);
+            }
           }
           if (parsed.settings.spotify_auto_pin !== undefined) {
             localStorage.setItem(KEY_SPOTIFY_AUTO_PIN, parsed.settings.spotify_auto_pin ? 'true' : 'false');
@@ -1565,7 +1590,21 @@ sidebar: []
       };
     }
     document.getElementById('setting-spotify-client-id').value = localStorage.getItem(KEY_SPOTIFY_CLIENT_ID) || '';
-    document.getElementById('spotify-redirect-uri-text').innerText = getRedirectUri();
+
+    const redirInput = document.getElementById('setting-spotify-redirect-uri');
+    if (redirInput) {
+      redirInput.value = localStorage.getItem(KEY_SPOTIFY_REDIRECT_URI) || '';
+      redirInput.oninput = (e) => {
+        const val = e.target.value.trim();
+        if (val) {
+          localStorage.setItem(KEY_SPOTIFY_REDIRECT_URI, val);
+        } else {
+          localStorage.removeItem(KEY_SPOTIFY_REDIRECT_URI);
+        }
+        updateRedirectUriDisplay();
+      };
+    }
+    updateRedirectUriDisplay();
     const autoPinCheckbox = document.getElementById('setting-spotify-auto-pin');
     if (autoPinCheckbox) {
       autoPinCheckbox.checked = getSpotifyAutoPin();
@@ -1620,6 +1659,13 @@ sidebar: []
     const badge = document.getElementById('settings-version-badge');
     if (badge) {
       badge.innerText = localStorage.getItem(KEY_SETTINGS_VERSION) || CURRENT_SETTINGS_VERSION;
+    }
+  }
+
+  function updateRedirectUriDisplay() {
+    const textEl = document.getElementById('spotify-redirect-uri-text');
+    if (textEl) {
+      textEl.innerText = getRedirectUri();
     }
   }
 
