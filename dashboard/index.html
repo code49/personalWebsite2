@@ -1,0 +1,5426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>dashboard | david le chan</title>
+<meta name="generator" content="Jekyll v4.4.1">
+<meta property="og:title" content="dashboard">
+<meta name="author" content="code49">
+<meta property="og:locale" content="en">
+<meta name="description" content="Personal website for David Chan!">
+<meta property="og:description" content="Personal website for David Chan!">
+<link rel="canonical" href="https://davidlechan.dev/dashboard/">
+<meta property="og:url" content="https://davidlechan.dev/dashboard/">
+<meta property="og:site_name" content="david le chan">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="dashboard">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"code49"},"description":"Personal website for David Chan!","headline":"dashboard","url":"https://davidlechan.dev/dashboard/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/brand/favicon.ico?v=2">
+  <link rel="canonical" href="https://davidlechan.dev">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css?v=1793202725">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://davidlechan.dev/feed.xml" title="david le chan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #8f63ee;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: lowercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji):not(.no-lightbox)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&amp;display=swap" rel="stylesheet">
+
+<!-- GoatCounter Analytics -->
+<script data-goatcounter="https://code49.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="david le chan" src="/assets/brand/favicon.ico?v=2" onerror="this.style.display='none'">
+  david le chan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+            <div class="page-link" style="display: inline-block; vertical-align: middle; margin-right: 24px;">
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">☀️</p>
+      <p class="dark">🌙</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+        document.dispatchEvent(new Event('theme-changed'));
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+</div>
+<a class="page-link" href="/">home</a><a class="page-link" href="/tags">explore</a><a class="page-link" href="/contact/">contact</a><a class="page-link" href="/resume">resume</a>
+
+
+
+
+
+
+
+
+
+<div class="page-link" style="display: inline;">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<div class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese (Simplified)">
+          
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</div>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <style>
+  :root,
+  html[data-theme="light"] {
+    --dash-bg: #ffffff;
+    --dash-card-bg: #ffffff;
+    --dash-card-bg-solid: #ffffff;
+    --dash-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --dash-card-hover-border: rgba(163, 42, 42, 0.35);
+    --dash-card-hover-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
+
+    --dash-border: #e0e0e0;
+    --dash-border-subtle: #eaeaea;
+    --dash-sub-card-bg: #f8f9fa;
+    --dash-sub-card-border: #e5e7eb;
+
+    --dash-input-bg: #ffffff;
+    --dash-input-border: #d0d4dc;
+    --dash-input-focus-border: #a32a2a;
+    --dash-input-focus-shadow: rgba(163, 42, 42, 0.2);
+
+    --dash-text-pri: #1d1f21;
+    --dash-text-sec: #4a4d52;
+    --dash-text-muted: #71767b;
+
+    /* Primary Accent (Site light mode crimson #a32a2a) */
+    --dash-accent: #a32a2a;
+    --dash-accent-hover: #801b1b;
+    --dash-accent-dim: rgba(163, 42, 42, 0.08);
+    --dash-accent-border: rgba(163, 42, 42, 0.3);
+
+    /* Clock Card */
+    --dash-clock-card-bg: #fcfcff;
+    --dash-clock-card-border: rgba(163, 42, 42, 0.22);
+    --dash-clock-card-shadow: 0 2px 10px rgba(163, 42, 42, 0.05);
+    --dash-clock-card-hover-border: #a32a2a;
+    --dash-clock-card-hover-shadow: 0 4px 16px rgba(163, 42, 42, 0.12);
+    --dash-clock-time-color: #1d1f21;
+    --dash-clock-tz-color: #a32a2a;
+
+    /* Weather Card (Standardized with World Clock Primary Card) */
+    --dash-weather-card-bg: var(--dash-clock-card-bg);
+    --dash-weather-card-border: var(--dash-clock-card-border);
+    --dash-weather-card-shadow: var(--dash-clock-card-shadow);
+    --dash-weather-card-hover-border: var(--dash-clock-card-hover-border);
+    --dash-weather-card-hover-shadow: var(--dash-clock-card-hover-shadow);
+
+    /* Buttons */
+    --dash-btn-bg: #ffffff;
+    --dash-btn-border: #d8dce2;
+    --dash-btn-text: #33383f;
+    --dash-btn-hover-border: #a32a2a;
+    --dash-btn-hover-text: #a32a2a;
+    --dash-btn-hover-bg: #fdfaf9;
+
+    --dash-btn-pri-bg: #a32a2a;
+    --dash-btn-pri-color: #ffffff;
+    --dash-btn-pri-border: #a32a2a;
+    --dash-btn-pri-hover-bg: #801b1b;
+    --dash-btn-pri-hover-color: #ffffff;
+    --dash-btn-pri-hover-border: #801b1b;
+    --dash-btn-pri-hover-shadow: 0 4px 12px rgba(163, 42, 42, 0.25);
+
+    --dash-btn-danger-bg: rgba(217, 4, 41, 0.08);
+    --dash-btn-danger-color: #d90429;
+    --dash-btn-danger-border: rgba(217, 4, 41, 0.25);
+    --dash-btn-danger-hover-bg: #d90429;
+    --dash-btn-danger-hover-color: #ffffff;
+
+    /* Badges */
+    --dash-badge-active-bg: rgba(43, 147, 72, 0.1);
+    --dash-badge-active-color: #227c3e;
+    --dash-badge-active-border: rgba(43, 147, 72, 0.3);
+
+    --dash-badge-idle-bg: rgba(0, 0, 0, 0.05);
+    --dash-badge-idle-color: #666666;
+    --dash-badge-idle-border: #dcdcdc;
+
+    --dash-badge-warn-bg: rgba(224, 159, 62, 0.1);
+    --dash-badge-warn-color: #b07206;
+    --dash-badge-warn-border: rgba(224, 159, 62, 0.3);
+
+    /* Status Dots */
+    --dash-dot-active-bg: #2b9348;
+    --dash-dot-active-shadow: 0 0 6px rgba(43, 147, 72, 0.45);
+    --dash-dot-idle-bg: #e09f3e;
+    --dash-dot-idle-shadow: 0 0 6px rgba(224, 159, 62, 0.45);
+    --dash-dot-err-bg: #d90429;
+    --dash-dot-err-shadow: 0 0 6px rgba(217, 4, 41, 0.45);
+    --dash-dot-info-bg: #0284c7;
+    --dash-dot-info-shadow: 0 0 6px rgba(2, 132, 199, 0.45);
+
+    /* Day offset pills */
+    --dash-day-next-bg: rgba(43, 147, 72, 0.12);
+    --dash-day-next-color: #227c3e;
+    --dash-day-prev-bg: rgba(224, 159, 62, 0.12);
+    --dash-day-prev-color: #b07206;
+
+    /* Spotify Widget */
+    --dash-progress-track: #e9ecef;
+    --dash-progress-fill: #2b9348;
+    --dash-eq-bar: #2b9348;
+    --dash-art-border: #e0e0e0;
+    --dash-art-active-border: rgba(43, 147, 72, 0.5);
+    --dash-art-active-shadow: 0 0 10px rgba(43, 147, 72, 0.2);
+
+    /* Modal */
+    --dash-modal-backdrop: rgba(0, 0, 0, 0.45);
+    --dash-modal-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+
+    /* Monospace */
+    --dash-mono: "JetBrains Mono", "JetBrains Mono Nerd Font", ui-monospace, monospace;
+    --dash-purple: #a32a2a;
+    --dash-magenta: #801b1b;
+    --dash-green: #2b9348;
+    --dash-yellow: #e09f3e;
+    --dash-red: #d90429;
+    --dash-sky: #0284c7;
+  }
+
+  html[data-theme="dark"] {
+    --dash-bg: #1d1f21;
+    --dash-card-bg: rgba(40, 42, 46, 0.75);
+    --dash-card-bg-solid: #282a2e;
+    --dash-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    --dash-card-hover-border: rgba(189, 178, 255, 0.35);
+    --dash-card-hover-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+
+    --dash-border: #373b41;
+    --dash-border-subtle: rgba(55, 59, 65, 0.6);
+    --dash-sub-card-bg: rgba(29, 31, 33, 0.55);
+    --dash-sub-card-border: rgba(55, 59, 65, 0.45);
+
+    --dash-input-bg: #1d1f21;
+    --dash-input-border: #373b41;
+    --dash-input-focus-border: #bdb2ff;
+    --dash-input-focus-shadow: rgba(189, 178, 255, 0.25);
+
+    --dash-text-pri: #e0e0e0;
+    --dash-text-sec: #c5c8c6;
+    --dash-text-muted: #969896;
+
+    /* Primary Accent (Site dark mode lavender #bdb2ff) */
+    --dash-accent: #bdb2ff;
+    --dash-accent-hover: #8f63ee;
+    --dash-accent-dim: rgba(189, 178, 255, 0.15);
+    --dash-accent-border: rgba(189, 178, 255, 0.4);
+
+    /* Clock Card */
+    --dash-clock-card-bg: rgba(29, 31, 33, 0.75);
+    --dash-clock-card-border: rgba(189, 178, 255, 0.4);
+    --dash-clock-card-shadow: 0 0 10px rgba(189, 178, 255, 0.12);
+    --dash-clock-card-hover-border: #bdb2ff;
+    --dash-clock-card-hover-shadow: 0 0 14px rgba(189, 178, 255, 0.25);
+    --dash-clock-time-color: #9bf6ff;
+    --dash-clock-tz-color: #bdb2ff;
+
+    /* Weather Card (Standardized with World Clock Primary Card) */
+    --dash-weather-card-bg: var(--dash-clock-card-bg);
+    --dash-weather-card-border: var(--dash-clock-card-border);
+    --dash-weather-card-shadow: var(--dash-clock-card-shadow);
+    --dash-weather-card-hover-border: var(--dash-clock-card-hover-border);
+    --dash-weather-card-hover-shadow: var(--dash-clock-card-hover-shadow);
+
+    /* Buttons */
+    --dash-btn-bg: #282a2e;
+    --dash-btn-border: #373b41;
+    --dash-btn-text: #c5c8c6;
+    --dash-btn-hover-border: #bdb2ff;
+    --dash-btn-hover-text: #e0e0e0;
+    --dash-btn-hover-bg: #282a2e;
+
+    --dash-btn-pri-bg: rgba(189, 178, 255, 0.15);
+    --dash-btn-pri-color: #bdb2ff;
+    --dash-btn-pri-border: rgba(189, 178, 255, 0.4);
+    --dash-btn-pri-hover-bg: rgba(189, 178, 255, 0.25);
+    --dash-btn-pri-hover-color: #ffffff;
+    --dash-btn-pri-hover-border: rgba(189, 178, 255, 0.5);
+    --dash-btn-pri-hover-shadow: 0 0 10px rgba(189, 178, 255, 0.35);
+
+    --dash-btn-danger-bg: rgba(255, 173, 173, 0.12);
+    --dash-btn-danger-color: #ffadad;
+    --dash-btn-danger-border: rgba(255, 173, 173, 0.3);
+    --dash-btn-danger-hover-bg: rgba(255, 173, 173, 0.22);
+    --dash-btn-danger-hover-color: #ffffff;
+
+    /* Badges */
+    --dash-badge-active-bg: rgba(202, 255, 191, 0.15);
+    --dash-badge-active-color: #caffbf;
+    --dash-badge-active-border: rgba(202, 255, 191, 0.4);
+
+    --dash-badge-idle-bg: rgba(150, 152, 150, 0.15);
+    --dash-badge-idle-color: #969896;
+    --dash-badge-idle-border: #373b41;
+
+    --dash-badge-warn-bg: rgba(253, 255, 182, 0.15);
+    --dash-badge-warn-color: #fdffb6;
+    --dash-badge-warn-border: rgba(253, 255, 182, 0.4);
+
+    /* Status Dots */
+    --dash-dot-active-bg: #caffbf;
+    --dash-dot-active-shadow: 0 0 7px rgba(202, 255, 191, 0.7);
+    --dash-dot-idle-bg: #fdffb6;
+    --dash-dot-idle-shadow: 0 0 6px rgba(253, 255, 182, 0.5);
+    --dash-dot-err-bg: #ffadad;
+    --dash-dot-err-shadow: 0 0 6px rgba(255, 173, 173, 0.6);
+    --dash-dot-info-bg: #9bf6ff;
+    --dash-dot-info-shadow: 0 0 6px rgba(155, 246, 255, 0.6);
+
+    /* Day offset pills */
+    --dash-day-next-bg: rgba(202, 255, 191, 0.15);
+    --dash-day-next-color: #caffbf;
+    --dash-day-prev-bg: rgba(253, 255, 182, 0.15);
+    --dash-day-prev-color: #fdffb6;
+
+    /* Spotify Widget */
+    --dash-progress-track: #1d1f21;
+    --dash-progress-fill: #caffbf;
+    --dash-eq-bar: #caffbf;
+    --dash-art-border: #373b41;
+    --dash-art-active-border: rgba(202, 255, 191, 0.6);
+    --dash-art-active-shadow: 0 0 12px rgba(202, 255, 191, 0.25);
+
+    /* Modal */
+    --dash-modal-backdrop: rgba(0, 0, 0, 0.7);
+    --dash-modal-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+
+    /* Monospace */
+    --dash-mono: "JetBrains Mono", "JetBrains Mono Nerd Font", ui-monospace, monospace;
+    --dash-purple: #bdb2ff;
+    --dash-magenta: #daa9ff;
+    --dash-green: #caffbf;
+    --dash-yellow: #fdffb6;
+    --dash-red: #ffadad;
+    --dash-sky: #9bf6ff;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) {
+      --dash-bg: #1d1f21;
+      --dash-card-bg: rgba(40, 42, 46, 0.75);
+      --dash-card-bg-solid: #282a2e;
+      --dash-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      --dash-card-hover-border: rgba(189, 178, 255, 0.35);
+      --dash-card-hover-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+
+      --dash-border: #373b41;
+      --dash-border-subtle: rgba(55, 59, 65, 0.6);
+      --dash-sub-card-bg: rgba(29, 31, 33, 0.55);
+      --dash-sub-card-border: rgba(55, 59, 65, 0.45);
+
+      --dash-input-bg: #1d1f21;
+      --dash-input-border: #373b41;
+      --dash-input-focus-border: #bdb2ff;
+      --dash-input-focus-shadow: rgba(189, 178, 255, 0.25);
+
+      --dash-text-pri: #e0e0e0;
+      --dash-text-sec: #c5c8c6;
+      --dash-text-muted: #969896;
+
+      --dash-accent: #bdb2ff;
+      --dash-accent-hover: #8f63ee;
+      --dash-accent-dim: rgba(189, 178, 255, 0.15);
+      --dash-accent-border: rgba(189, 178, 255, 0.4);
+
+      --dash-clock-card-bg: rgba(29, 31, 33, 0.75);
+      --dash-clock-card-border: rgba(189, 178, 255, 0.4);
+      --dash-clock-card-shadow: 0 0 10px rgba(189, 178, 255, 0.12);
+      --dash-clock-card-hover-border: #bdb2ff;
+      --dash-clock-card-hover-shadow: 0 0 14px rgba(189, 178, 255, 0.25);
+      --dash-clock-time-color: #9bf6ff;
+      --dash-clock-tz-color: #bdb2ff;
+
+      --dash-weather-card-bg: var(--dash-clock-card-bg);
+      --dash-weather-card-border: var(--dash-clock-card-border);
+      --dash-weather-card-shadow: var(--dash-clock-card-shadow);
+      --dash-weather-card-hover-border: var(--dash-clock-card-hover-border);
+      --dash-weather-card-hover-shadow: var(--dash-clock-card-hover-shadow);
+
+      --dash-btn-bg: #282a2e;
+      --dash-btn-border: #373b41;
+      --dash-btn-text: #c5c8c6;
+      --dash-btn-hover-border: #bdb2ff;
+      --dash-btn-hover-text: #e0e0e0;
+      --dash-btn-hover-bg: #282a2e;
+
+      --dash-btn-pri-bg: rgba(189, 178, 255, 0.15);
+      --dash-btn-pri-color: #bdb2ff;
+      --dash-btn-pri-border: rgba(189, 178, 255, 0.4);
+      --dash-btn-pri-hover-bg: rgba(189, 178, 255, 0.25);
+      --dash-btn-pri-hover-color: #ffffff;
+      --dash-btn-pri-hover-border: rgba(189, 178, 255, 0.5);
+      --dash-btn-pri-hover-shadow: 0 0 10px rgba(189, 178, 255, 0.35);
+
+      --dash-btn-danger-bg: rgba(255, 173, 173, 0.12);
+      --dash-btn-danger-color: #ffadad;
+      --dash-btn-danger-border: rgba(255, 173, 173, 0.3);
+      --dash-btn-danger-hover-bg: rgba(255, 173, 173, 0.22);
+      --dash-btn-danger-hover-color: #ffffff;
+
+      --dash-badge-active-bg: rgba(202, 255, 191, 0.15);
+      --dash-badge-active-color: #caffbf;
+      --dash-badge-active-border: rgba(202, 255, 191, 0.4);
+
+      --dash-badge-idle-bg: rgba(150, 152, 150, 0.15);
+      --dash-badge-idle-color: #969896;
+      --dash-badge-idle-border: #373b41;
+
+      --dash-badge-warn-bg: rgba(253, 255, 182, 0.15);
+      --dash-badge-warn-color: #fdffb6;
+      --dash-badge-warn-border: rgba(253, 255, 182, 0.4);
+
+      --dash-dot-active-bg: #caffbf;
+      --dash-dot-active-shadow: 0 0 7px rgba(202, 255, 191, 0.7);
+      --dash-dot-idle-bg: #fdffb6;
+      --dash-dot-idle-shadow: 0 0 6px rgba(253, 255, 182, 0.5);
+      --dash-dot-err-bg: #ffadad;
+      --dash-dot-err-shadow: 0 0 6px rgba(255, 173, 173, 0.6);
+      --dash-dot-info-bg: #9bf6ff;
+      --dash-dot-info-shadow: 0 0 6px rgba(155, 246, 255, 0.6);
+
+      --dash-day-next-bg: rgba(202, 255, 191, 0.15);
+      --dash-day-next-color: #caffbf;
+      --dash-day-prev-bg: rgba(253, 255, 182, 0.15);
+      --dash-day-prev-color: #fdffb6;
+
+      --dash-progress-track: #1d1f21;
+      --dash-progress-fill: #caffbf;
+      --dash-eq-bar: #caffbf;
+      --dash-art-border: #373b41;
+      --dash-art-active-border: rgba(202, 255, 191, 0.6);
+      --dash-art-active-shadow: 0 0 12px rgba(202, 255, 191, 0.25);
+
+      --dash-modal-backdrop: rgba(0, 0, 0, 0.7);
+      --dash-modal-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+
+      --dash-purple: #bdb2ff;
+      --dash-magenta: #daa9ff;
+      --dash-green: #caffbf;
+      --dash-yellow: #fdffb6;
+      --dash-red: #ffadad;
+      --dash-sky: #9bf6ff;
+    }
+  }
+
+  /* Remove site top bar on dashboard view */
+  header.site-header {
+    display: none !important;
+  }
+  .page-content {
+    padding-top: 24px !important;
+  }
+  .page-content > .wrapper {
+    max-width: 1080px !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding-left: clamp(16px, 3vw, 32px) !important;
+    padding-right: clamp(16px, 3vw, 32px) !important;
+    box-sizing: border-box !important;
+  }
+
+  .dash-container {
+    font-family: inherit;
+    color: var(--dash-text-pri);
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 10px 0 40px 0;
+    box-sizing: border-box;
+  }
+
+  .dash-mono {
+    font-family: var(--dash-mono) !important;
+  }
+
+  .dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--dash-border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    gap: 16px;
+  }
+
+  .dash-header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .dash-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .dash-logo-link:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  .dash-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .dash-title-group h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dash-text-pri);
+    text-transform: lowercase;
+    line-height: 1;
+  }
+
+  .dash-subtitle {
+    margin: 4px 0 0 0;
+    font-size: 0.85rem;
+    color: var(--dash-text-muted);
+    font-family: var(--dash-mono);
+  }
+
+  .dash-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-family: var(--dash-mono);
+    text-transform: lowercase;
+    border: 1px solid var(--dash-border);
+  }
+
+  .dash-badge-active {
+    background: var(--dash-badge-active-bg);
+    color: var(--dash-badge-active-color);
+    border-color: var(--dash-badge-active-border);
+  }
+
+  .dash-badge-idle {
+    background: var(--dash-badge-idle-bg);
+    color: var(--dash-badge-idle-color);
+    border-color: var(--dash-badge-idle-border);
+  }
+
+  .dash-badge-warn {
+    background: var(--dash-badge-warn-bg);
+    color: var(--dash-badge-warn-color);
+    border-color: var(--dash-badge-warn-border);
+  }
+
+  .dash-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .dash-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-family: var(--dash-mono);
+    text-transform: lowercase;
+    cursor: pointer;
+    border: 1px solid var(--dash-btn-border);
+    background: var(--dash-btn-bg);
+    color: var(--dash-btn-text);
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .dash-btn:hover {
+    border-color: var(--dash-btn-hover-border);
+    color: var(--dash-btn-hover-text);
+    background: var(--dash-btn-hover-bg);
+    box-shadow: 0 0 8px rgba(189, 178, 255, 0.2);
+  }
+
+  .dash-btn-primary {
+    background: var(--dash-btn-pri-bg);
+    color: var(--dash-btn-pri-color);
+    border-color: var(--dash-btn-pri-border);
+  }
+
+  .dash-btn-primary:hover {
+    background: var(--dash-btn-pri-hover-bg);
+    color: var(--dash-btn-pri-hover-color);
+    border-color: var(--dash-btn-pri-hover-border);
+    box-shadow: var(--dash-btn-pri-hover-shadow);
+  }
+
+  .dash-btn-danger {
+    background: var(--dash-btn-danger-bg);
+    color: var(--dash-btn-danger-color);
+    border-color: var(--dash-btn-danger-border);
+  }
+
+  .dash-btn-danger:hover {
+    background: var(--dash-btn-danger-hover-bg);
+    color: var(--dash-btn-danger-hover-color);
+    box-shadow: 0 0 8px rgba(255, 173, 173, 0.3);
+  }
+
+  /* Cards Grid */
+  .dash-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: start;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .dash-card {
+    background: var(--dash-card-bg);
+    border: 1px solid var(--dash-border);
+    border-radius: 8px;
+    padding: 16px;
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: var(--dash-card-shadow);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .dash-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--dash-border-subtle);
+  }
+
+  .dash-card-title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: var(--dash-text-pri);
+  }
+
+  /* Full Screen card styling (stretches across both columns) */
+  .dash-card.dash-card-fullscreen,
+  .dash-card[data-fullscreen="true"] {
+    grid-column: 1 / -1 !important;
+    width: 100%;
+  }
+
+  /* Pinned card styling */
+  .dash-card.dash-card-pinned,
+  .dash-card[data-pinned="true"] {
+    border-color: rgba(189, 178, 255, 0.45);
+    box-shadow: 0 0 12px rgba(189, 178, 255, 0.08);
+  }
+
+  .dash-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    border-radius: 6px;
+    background: var(--dash-input-bg);
+    border: 1px solid var(--dash-input-border);
+    color: var(--dash-text-pri);
+    font-family: var(--dash-mono);
+    font-size: 0.9rem;
+    margin-bottom: 14px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .dash-input:focus {
+    border-color: var(--dash-input-focus-border);
+    box-shadow: 0 0 8px var(--dash-input-focus-shadow);
+  }
+
+  /* Spotify Widget Details */
+  #spotify-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  #spotify-connected {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .spotify-track-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .spotify-album-art {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-art-border);
+    object-fit: cover;
+    display: block;
+    box-shadow: var(--dash-weather-card-shadow);
+    transition: all 0.2s ease;
+    align-self: center;
+    margin: 0 auto;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  .spotify-album-art.is-playing {
+    border-color: var(--dash-art-active-border);
+    box-shadow: var(--dash-art-active-shadow);
+  }
+
+  .spotify-track-meta {
+    margin-top: 8px;
+    text-align: left;
+    width: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .spotify-track-name {
+    font-weight: 600;
+    font-size: 0.96rem;
+    line-height: 1.25;
+    color: var(--dash-text-pri);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+  }
+
+  .spotify-track-artist {
+    font-size: 0.8rem;
+    line-height: 1.25;
+    color: var(--dash-text-sec);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 2px;
+    text-align: left;
+  }
+
+  .spotify-progress-wrap {
+    margin-top: auto;
+    padding-top: 6px;
+    width: 100%;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  .spotify-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: var(--dash-progress-track);
+    border-radius: 2px;
+    overflow: hidden;
+    display: block;
+  }
+
+  .spotify-progress-fill {
+    height: 100%;
+    background: var(--dash-progress-fill);
+    width: 0%;
+    transition: width 0.25s linear;
+  }
+
+  /* Equalizer animation for playing badge */
+  .spotify-eq {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 10px;
+    margin-right: 2px;
+  }
+
+  .spotify-eq-bar {
+    width: 2px;
+    background: var(--dash-eq-bar);
+    border-radius: 1px;
+    height: 3px;
+  }
+
+  .dash-badge-active .spotify-eq-bar:nth-child(1) {
+    animation: eq-pulse 0.8s ease-in-out infinite alternate;
+  }
+  .dash-badge-active .spotify-eq-bar:nth-child(2) {
+    animation: eq-pulse 1.1s ease-in-out 0.2s infinite alternate;
+  }
+  .dash-badge-active .spotify-eq-bar:nth-child(3) {
+    animation: eq-pulse 0.9s ease-in-out 0.4s infinite alternate;
+  }
+
+  @keyframes eq-pulse {
+    0% { height: 2px; }
+    100% { height: 10px; }
+  }
+
+  .spotify-time-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: var(--dash-text-muted);
+    font-family: var(--dash-mono);
+    margin-top: 4px;
+  }
+
+  /* Calendar Widget Details */
+  #cal-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .dash-event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding-right: 2px;
+  }
+
+  .dash-event-list::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .dash-event-list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .dash-event-list::-webkit-scrollbar-thumb {
+    background: var(--dash-border);
+    border-radius: 4px;
+  }
+
+  .dash-event-list::-webkit-scrollbar-thumb:hover {
+    background: var(--dash-accent);
+  }
+
+  .dash-day-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 2px 2px 2px;
+    margin-top: 4px;
+    user-select: none;
+    list-style: none;
+  }
+
+  .dash-day-divider:first-child {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .dash-day-label {
+    font-size: 0.72rem;
+    font-family: var(--dash-mono);
+    font-weight: 600;
+    text-transform: lowercase;
+    color: var(--dash-text-muted);
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+
+  .dash-day-divider.is-today .dash-day-label {
+    color: var(--dash-accent);
+  }
+
+  .dash-day-line {
+    flex: 1 1 auto;
+    height: 1px;
+    background: var(--dash-border);
+    opacity: 0.5;
+  }
+
+  .dash-day-divider.is-today .dash-day-line {
+    background: var(--dash-accent);
+    opacity: 0.25;
+  }
+
+  .dash-event-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-sub-card-border);
+    min-width: 0;
+  }
+
+  .dash-event-time-badge {
+    font-family: var(--dash-mono);
+    padding: 3px 6px;
+    border-radius: 4px;
+    background: var(--dash-accent-dim);
+    color: var(--dash-accent);
+    border: 1px solid transparent;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.15;
+    min-width: 46px;
+    flex-shrink: 0;
+    text-align: center;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .dash-event-time-start {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+  }
+
+  .dash-event-time-end {
+    font-size: 0.63rem;
+    opacity: 0.72;
+    letter-spacing: -0.2px;
+  }
+
+  .dash-event-info {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .dash-event-title {
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--dash-text-pri);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dash-event-sub {
+    font-size: 0.73rem;
+    color: var(--dash-text-muted);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Calendar View Toggle */
+  .dash-view-toggle-btn {
+    font-family: var(--dash-mono);
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-border);
+    color: var(--dash-text-sec);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-transform: lowercase;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+
+  .dash-view-toggle-btn:hover {
+    border-color: var(--dash-accent);
+    color: var(--dash-text-pri);
+    background: var(--dash-card-bg-solid);
+  }
+
+  @keyframes dashFadeIn {
+    from { opacity: 0.4; transform: translateY(2px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .dash-row-active {
+    animation: dashFadeIn 0.22s ease-out;
+  }
+
+  /* Calendar Today Timeline */
+  .dash-cal-timeline-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding-top: 4px;
+  }
+
+  .dash-timeline-allday-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    margin-bottom: 6px;
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-sub-card-border);
+    border-radius: 5px;
+    flex-shrink: 0;
+    overflow-x: auto;
+  }
+
+  .dash-timeline-allday-label {
+    font-family: var(--dash-mono);
+    font-size: 0.65rem;
+    color: var(--dash-text-muted);
+    text-transform: lowercase;
+    white-space: nowrap;
+    padding-right: 4px;
+    border-right: 1px solid var(--dash-border);
+  }
+
+  .dash-timeline-allday-pill {
+    font-family: var(--dash-mono);
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 140px;
+    font-weight: 500;
+  }
+
+  .dash-timeline-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .dash-timeline-grid-line {
+    position: absolute;
+    left: 44px;
+    right: 0;
+    height: 1px;
+    background: var(--dash-border);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .dash-timeline-hour-label {
+    position: absolute;
+    left: 0;
+    width: 38px;
+    text-align: right;
+    font-family: var(--dash-mono);
+    font-size: 0.64rem;
+    color: var(--dash-text-muted);
+    transform: translateY(-50%);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .dash-timeline-events-layer {
+    position: absolute;
+    left: 48px;
+    right: 4px;
+    top: 0;
+    bottom: 0;
+    pointer-events: auto;
+  }
+
+  .dash-timeline-event-card {
+    position: absolute;
+    border-radius: 5px;
+    padding: 3px 6px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    line-height: 1.15;
+    cursor: default;
+    z-index: 2;
+  }
+
+  .dash-timeline-event-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dash-timeline-event-time {
+    font-family: var(--dash-mono);
+    font-size: 0.62rem;
+    opacity: 0.8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dash-timeline-now-line {
+    position: absolute;
+    left: 38px;
+    right: 0;
+    height: 2px;
+    background: #ffadad;
+    z-index: 20;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 6px rgba(255, 173, 173, 0.6);
+  }
+
+  .dash-timeline-now-dot {
+    position: absolute;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ffadad;
+    box-shadow: 0 0 8px rgba(255, 173, 173, 0.9);
+  }
+
+  .dash-timeline-now-badge {
+    position: absolute;
+    right: 4px;
+    top: -9px;
+    font-family: var(--dash-mono);
+    font-size: 0.62rem;
+    color: #ffadad;
+    background: var(--dash-card-bg-solid);
+    border: 1px solid rgba(255, 173, 173, 0.4);
+    padding: 0 4px;
+    border-radius: 3px;
+    line-height: 14px;
+  }
+
+  /* World Clock Widget Details */
+  #world-clock-card,
+  #weather-card {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+
+  .dash-clock-primary-card {
+    background: var(--dash-clock-card-bg);
+    border: 1px solid var(--dash-clock-card-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: var(--dash-clock-card-shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    min-height: 148px;
+  }
+
+  .dash-clock-primary-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .dash-clock-primary-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dash-text-pri);
+  }
+
+  .dash-clock-primary-tz {
+    font-family: var(--dash-mono);
+    font-size: 0.72rem;
+    color: var(--dash-clock-tz-color);
+  }
+
+  .dash-clock-primary-time {
+    font-family: var(--dash-mono);
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--dash-clock-time-color);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin: 4px 0 2px 0;
+  }
+
+  .dash-clock-primary-date {
+    font-family: var(--dash-mono);
+    font-size: 0.75rem;
+    color: var(--dash-text-muted);
+    text-transform: lowercase;
+  }
+
+  /* Alternate zones compact 3-list */
+  .dash-clock-alternate-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 112px;
+  }
+
+  .dash-clock-alt-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 5px;
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-sub-card-border);
+    transition: all 0.2s ease;
+  }
+
+  .dash-clock-alt-name {
+    font-family: var(--dash-mono);
+    font-size: 0.76rem;
+    white-space: pre;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+    display: inline-flex;
+    align-items: baseline;
+  }
+
+  .dash-clock-alt-city {
+    color: var(--dash-text-sec);
+    white-space: pre;
+  }
+
+  .dash-clock-alt-gmt {
+    color: var(--dash-text-muted);
+    font-size: 0.71rem;
+    white-space: pre;
+  }
+
+  .dash-clock-alt-time-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .dash-clock-alt-time {
+    font-family: var(--dash-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--dash-text-pri);
+  }
+
+  .dash-clock-day-offset {
+    font-family: var(--dash-mono);
+    font-size: 0.68rem;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  .dash-clock-day-next {
+    background: var(--dash-day-next-bg);
+    color: var(--dash-day-next-color);
+  }
+
+  .dash-clock-day-prev {
+    background: var(--dash-day-prev-bg);
+    color: var(--dash-day-prev-color);
+  }
+
+  /* Status Dot Lights */
+  .dash-status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .dash-status-dot.active {
+    background-color: var(--dash-dot-active-bg);
+    box-shadow: var(--dash-dot-active-shadow);
+  }
+
+  .dash-status-dot.idle,
+  .dash-status-dot.warn {
+    background-color: var(--dash-dot-idle-bg);
+    box-shadow: var(--dash-dot-idle-shadow);
+  }
+
+  .dash-status-dot.err {
+    background-color: var(--dash-dot-err-bg);
+    box-shadow: var(--dash-dot-err-shadow);
+  }
+
+  .dash-status-dot.info {
+    background-color: var(--dash-dot-info-bg);
+    box-shadow: var(--dash-dot-info-shadow);
+  }
+
+  /* Weather Widget Details (wttr.in ASCII style) */
+  .dash-weather-ascii-card {
+    background: var(--dash-weather-card-bg);
+    border: 1px solid var(--dash-weather-card-border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    box-shadow: var(--dash-weather-card-shadow);
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 148px;
+  }
+
+  .dash-weather-ascii {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-family: var(--dash-mono) !important;
+    font-size: 0.8rem;
+    line-height: 1.25;
+    color: var(--dash-text-pri) !important;
+    white-space: pre;
+    overflow-x: auto;
+    text-align: left;
+  }
+
+  .dash-weather-forecast-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 72px;
+  }
+
+  .dash-weather-forecast-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 5px;
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-sub-card-border);
+    font-family: var(--dash-mono);
+    font-size: 0.76rem;
+  }
+
+  .dash-weather-forecast-day {
+    color: var(--dash-text-sec);
+    font-weight: 500;
+    text-transform: lowercase;
+  }
+
+  .dash-weather-forecast-desc {
+    color: var(--dash-text-muted);
+    text-transform: lowercase;
+    text-align: right;
+  }
+</style>
+
+<div class="dash-container">
+  <!-- DASHBOARD VIEW -->
+  <div id="dashboard-view">
+    <!-- Dashboard Header -->
+    <div class="dash-header">
+      <div class="dash-header-left">
+        <a id="dash-logo-link" href="https://davidlechan.dev" class="dash-logo-link" title="visit homepage">
+          <img class="site-favicon" title="david le chan" src="/assets/brand/favicon.ico?v=2" onerror="this.style.display='none'" style="height: 34px; width: 34px; border-radius: 6px; background-color: #ffffff !important; object-fit: contain; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+        </a>
+        <div class="dash-title-group">
+          <h1>
+<span id="dash-name-display">david</span>'s personal dashboard</h1>
+        </div>
+      </div>
+
+      <div class="dash-header-controls">
+        <!-- Row Rotate Button (compact/rotating mode) -->
+        <button id="dash-row-rotate-btn" class="dash-view-toggle-btn" style="display: none;" onclick="toggleRotatingRow(true)" title="click to toggle row 1 / row 2">
+          <span id="dash-row-rotate-label">row 1/2</span>
+          <span style="font-size: 0.72rem; opacity: 0.7;">⇄</span>
+        </button>
+
+        <!-- Color Mode Switcher -->
+        <div class="theme-toggle">
+          <input type="checkbox" id="dash-theme-switch">
+          <label for="dash-theme-switch" title="toggle light/dark theme">
+            <div class="toggle"></div>
+            <div class="names">
+              <p class="light">☀️</p>
+              <p class="dark">🌙</p>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="dash-grid">
+      <!-- 1. Spotify Widget -->
+      <div id="spotify-card" class="dash-card">
+        <div class="dash-card-header">
+          <span class="dash-card-title">
+            <span id="spotify-dot" class="dash-status-dot idle"></span>spotify
+          </span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button id="spotify-pin-btn" class="dash-view-toggle-btn dash-pin-btn" onclick="toggleCardPinned('spotify-card')" title="pin / unpin widget">
+              <span>📌</span>
+              <span id="spotify-pin-label">pin</span>
+            </button>
+            <span id="spotify-badge" class="dash-badge dash-badge-idle">idle</span>
+          </div>
+        </div>
+
+        <div id="spotify-unconfigured" style="display: none; padding: 12px 0;">
+          <p style="font-size: 0.85rem; color: var(--dash-text-sec); margin-top: 0;">
+            connect your spotify app client id using pkce.
+          </p>
+          <a href="/dashboard-settings/" target="_blank" rel="noopener" class="dash-btn dash-btn-primary" style="width: 100%; text-align: center;">
+            configure spotify ↗
+          </a>
+        </div>
+
+        <div id="spotify-disconnected" style="display: none; padding: 12px 0;">
+          <p style="font-size: 0.85rem; color: var(--dash-text-sec); margin-top: 0;">
+            spotify client id configured. sign in to view live track.
+          </p>
+          <button onclick="connectSpotify()" class="dash-btn dash-btn-primary" style="width: 100%;">
+            sign in with spotify
+          </button>
+        </div>
+
+        <div id="spotify-connected" style="display: none;">
+          <div class="spotify-track-wrap">
+            <img id="spotify-art" class="spotify-album-art" src="data:image/svg+xml;utf8,&lt;svg%20xmlns='http://www.w3.org/2000/svg'%20width='300'%20height='300'%20viewBox='0%200%20300%20300'&gt;&lt;rect%20width='300'%20height='300'%20fill='%23282a2e'/&gt;&lt;circle%20cx='150'%20cy='150'%20r='50'%20fill='none'%20stroke='%23373b41'%20stroke-width='6'/&gt;&lt;circle%20cx='150'%20cy='150'%20r='16'%20fill='%23373b41'/&gt;&lt;/svg&gt;" alt="album art">
+            <div class="spotify-track-meta">
+              <div id="spotify-name" class="spotify-track-name">no track playing</div>
+              <div class="spotify-track-artist">
+                <span id="spotify-artist">spotify idle</span> <span id="spotify-album-wrap" style="color: var(--dash-text-muted);">| <span id="spotify-album">playback paused</span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="spotify-progress-wrap">
+            <div class="spotify-progress-bar">
+              <div id="spotify-progress-fill" class="spotify-progress-fill"></div>
+            </div>
+            <div class="spotify-time-row">
+              <span id="spotify-time-cur">0:00</span>
+              <span id="spotify-time-tot">0:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Upcoming Calendar Widget -->
+      <div id="cal-card" class="dash-card">
+        <div class="dash-card-header">
+          <span class="dash-card-title">
+            <span id="cal-dot" class="dash-status-dot active"></span>calendar
+          </span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button id="cal-pin-btn" class="dash-view-toggle-btn dash-pin-btn" onclick="toggleCardPinned('cal-card')" title="pin / unpin widget">
+              <span>📌</span>
+              <span id="cal-pin-label">pin</span>
+            </button>
+            <button id="cal-tz-toggle" class="dash-view-toggle-btn" onclick="toggleCalendarTzMode()" title="click to toggle calendar timezone mode">
+              <span id="cal-tz-label">tz: event</span>
+            </button>
+            <button id="cal-view-toggle" class="dash-view-toggle-btn" onclick="toggleCalendarView(true)" title="click to toggle agenda / today view">
+              <span id="cal-view-label">agenda</span>
+              <span style="font-size: 0.72rem; opacity: 0.7;">⇄</span>
+            </button>
+            <span id="cal-badge" class="dash-badge dash-badge-idle">local sync</span>
+          </div>
+        </div>
+
+        <ul id="cal-event-list" class="dash-event-list">
+          <!-- Sample or loaded events -->
+        </ul>
+
+        <div id="cal-timeline-view" class="dash-cal-timeline-wrap" style="display: none;">
+          <!-- Dynamically populated today 24h timeline -->
+        </div>
+      </div>
+
+      <!-- 3. World Clock Widget -->
+      <div id="world-clock-card" class="dash-card">
+        <div class="dash-card-header">
+          <span class="dash-card-title">
+            <span id="world-clock-dot" class="dash-status-dot active"></span>world clock
+          </span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button id="world-clock-pin-btn" class="dash-view-toggle-btn dash-pin-btn" onclick="toggleCardPinned('world-clock-card')" title="pin / unpin widget">
+              <span>📌</span>
+              <span id="world-clock-pin-label">pin</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Emphasized Primary Current Zone Card -->
+        <div id="world-clock-primary" class="dash-clock-primary-card">
+          <div class="dash-clock-primary-meta">
+            <span id="primary-clock-name" class="dash-clock-primary-name">—</span>
+            <span id="primary-clock-tz" class="dash-clock-primary-tz">—</span>
+          </div>
+          <div id="primary-clock-time" class="dash-clock-primary-time">00:00:00</div>
+          <div id="primary-clock-date" class="dash-clock-primary-date">—</div>
+        </div>
+
+        <!-- Alternate Time Zones (Compact 3-list with rolling cycle) -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span class="dash-mono" style="font-size: 0.68rem; color: var(--dash-text-muted); text-transform: lowercase;">alternate zones</span>
+            <span id="world-clock-cycle-indicator" class="dash-mono" style="font-size: 0.68rem; color: var(--dash-text-muted);"></span>
+          </div>
+          <div id="world-clock-alternate-list" class="dash-clock-alternate-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Weather Widget (wttr.in) -->
+      <div id="weather-card" class="dash-card">
+        <div class="dash-card-header">
+          <span class="dash-card-title">
+            <span id="weather-dot" class="dash-status-dot active"></span>weather
+          </span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button id="weather-pin-btn" class="dash-view-toggle-btn dash-pin-btn" onclick="toggleCardPinned('weather-card')" title="pin / unpin widget">
+              <span>📌</span>
+              <span id="weather-pin-label">pin</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- wttr.in ASCII Art Box -->
+        <div id="weather-ascii-card" class="dash-weather-ascii-card">
+          <pre id="weather-ascii-box" class="dash-weather-ascii" style="margin: 0 !important; padding: 0 !important; background: transparent !important; background-color: transparent !important; border: 0 !important; color: var(--dash-text-pri) !important; box-shadow: none !important; text-align: left;">loading weather...</pre>
+        </div>
+
+        <!-- Forecast Summary -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span class="dash-mono" style="font-size: 0.68rem; color: var(--dash-text-muted); text-transform: lowercase;">upcoming forecast</span>
+            <span id="weather-forecast-indicator" class="dash-mono" style="font-size: 0.68rem; color: var(--dash-text-muted);">next days</span>
+          </div>
+          <div id="weather-forecast-list" class="dash-weather-forecast-list">
+            <!-- Dynamically populated from wttr.in forecast -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Separator & Action Bar -->
+    <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 32px 0 20px 0;">
+
+    <div class="dash-footer-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div style="font-size: 0.75rem; color: var(--dash-text-muted);" class="dash-mono">
+        <span id="dash-footer-domain">davidlechan.dev</span> | personal dashboard
+      </div>
+      <div class="dash-actions">
+        <a id="dash-homepage-btn" href="https://davidlechan.dev" class="dash-btn" title="visit homepage">
+          <span>homepage ↗</span>
+        </a>
+        <a href="/dashboard-settings/" target="_blank" rel="noopener" class="dash-btn" title="open dashboard settings in a new tab">
+          <span>settings ↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+<script>
+  // Storage Keys
+  const KEY_DASHBOARD_NAME = 'dash_user_name';
+  const KEY_DASHBOARD_HOMEPAGE = 'dash_homepage_url';
+  const KEY_SETTINGS_VERSION = 'dash_settings_version';
+  const CURRENT_SETTINGS_VERSION = '00';
+  const KEY_SPOTIFY_CLIENT_ID = 'dash_spotify_client_id';
+  const KEY_SPOTIFY_REDIRECT_URI = 'dash_spotify_redirect_uri';
+  const KEY_SPOTIFY_TOKEN = 'dash_spotify_token';
+  const KEY_SPOTIFY_REFRESH = 'dash_spotify_refresh';
+  const KEY_SPOTIFY_EXPIRY = 'dash_spotify_expiry';
+  const KEY_CAL_FEED = 'dash_cal_feed';
+  const KEY_CAL_PROXY = 'dash_cal_proxy';
+  const KEY_CAL_VIEW_MODE = 'dash_cal_view_mode';
+  const KEY_CAL_TZ_MODE = 'dash_cal_tz_mode';
+  const KEY_CAL_EVENTS = 'dash_cal_events';
+  const KEY_NOTES = 'dash_scratchpad_notes';
+  const KEY_WORLD_CLOCKS = 'dash_world_clocks';
+  const KEY_PRIMARY_TZ = 'dash_primary_tz';
+  const KEY_CARD_CONFIGS = 'dash_card_configs';
+  const KEY_WIDGET_OVERFLOW_MODE = 'dash_widget_overflow_mode';
+  const KEY_WIDGET_ROTATE_DELAY = 'dash_widget_rotate_delay';
+  const KEY_CLOCK_ROTATE_DELAY = 'dash_clock_rotate_delay';
+  const KEY_SPOTIFY_AUTO_PIN = 'dash_spotify_auto_pin';
+
+  // Standardized Card Configurations
+  const DEFAULT_CARD_CONFIGS = {
+    'spotify-card': {
+      id: 'spotify-card',
+      name: 'spotify',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'cal-card': {
+      id: 'cal-card',
+      name: 'calendar',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'world-clock-card': {
+      id: 'world-clock-card',
+      name: 'world clock',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'weather-card': {
+      id: 'weather-card',
+      name: 'weather',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    }
+  };
+
+  function loadCardConfigs() {
+    try {
+      const raw = localStorage.getItem(KEY_CARD_CONFIGS);
+      if (!raw) return { ...DEFAULT_CARD_CONFIGS };
+      const parsed = JSON.parse(raw);
+      const merged = { ...DEFAULT_CARD_CONFIGS };
+      Object.keys(DEFAULT_CARD_CONFIGS).forEach(id => {
+        if (parsed[id]) {
+          merged[id] = { ...DEFAULT_CARD_CONFIGS[id], ...parsed[id] };
+        }
+      });
+      return merged;
+    } catch (e) {
+      console.warn('Failed to parse card configs:', e);
+      return { ...DEFAULT_CARD_CONFIGS };
+    }
+  }
+
+  function saveCardConfigs(configs) {
+    try {
+      localStorage.setItem(KEY_CARD_CONFIGS, JSON.stringify(configs));
+    } catch (e) {
+      console.error('Failed to save card configs:', e);
+    }
+  }
+
+  function getCardConfig(cardId) {
+    const configs = loadCardConfigs();
+    return configs[cardId] || { id: cardId, pinned: false, fullScreen: false, defaultHeight: null };
+  }
+
+  function updateCardConfig(cardId, updates) {
+    const configs = loadCardConfigs();
+    configs[cardId] = { ...(configs[cardId] || DEFAULT_CARD_CONFIGS[cardId] || { id: cardId }), ...updates };
+    saveCardConfigs(configs);
+    applyCardConfigs();
+    return configs[cardId];
+  }
+
+  function toggleCardPinned(cardId) {
+    if (getWidgetOverflowMode() !== 'rotating') {
+      return;
+    }
+    const configs = loadCardConfigs();
+    const current = configs[cardId] || { id: cardId, pinned: false, fullScreen: false };
+    const willPin = !current.pinned;
+
+    if (willPin) {
+      const isTargetFs = !!current.fullScreen;
+      const currentlyPinnedIds = Object.keys(configs).filter(id => id !== cardId && !!configs[id]?.pinned);
+
+      if (isTargetFs) {
+        if (currentlyPinnedIds.length > 0) {
+          alert('fullscreen widgets cannot be pinned while other widgets are pinned.');
+          return;
+        }
+      } else {
+        const hasFsPinned = currentlyPinnedIds.some(id => !!configs[id]?.fullScreen);
+        if (hasFsPinned) {
+          alert('cannot pin another widget while a fullscreen widget is pinned.');
+          return;
+        }
+        if (currentlyPinnedIds.length >= 2) {
+          alert('maximum of 2 widgets may be pinned.');
+          return;
+        }
+      }
+    }
+
+    updateCardConfig(cardId, { pinned: willPin });
+  }
+
+  function toggleCardFullScreen(cardId) {
+    const configs = loadCardConfigs();
+    const current = getCardConfig(cardId);
+    const willFs = !current.fullScreen;
+    if (willFs && current.pinned) {
+      // If this card is pinned, make sure no other cards are pinned
+      const otherPinned = Object.keys(configs).filter(id => id !== cardId && !!configs[id]?.pinned);
+      if (otherPinned.length > 0) {
+        otherPinned.forEach(id => {
+          if (configs[id]) configs[id].pinned = false;
+        });
+        saveCardConfigs(configs);
+      }
+    }
+    updateCardConfig(cardId, { fullScreen: willFs });
+  }
+
+  function setCardDefaultHeight(cardId, heightPx) {
+    const parsed = heightPx ? parseInt(heightPx, 10) : null;
+    updateCardConfig(cardId, { defaultHeight: parsed && parsed > 0 ? parsed : null });
+  }
+
+  function getSpotifyAutoPin() {
+    const val = localStorage.getItem(KEY_SPOTIFY_AUTO_PIN);
+    return val === null ? true : val === 'true';
+  }
+
+  function setSpotifyAutoPin(val) {
+    localStorage.setItem(KEY_SPOTIFY_AUTO_PIN, val ? 'true' : 'false');
+  }
+
+  function toggleSpotifyPinSetting(manual = true) {
+    const next = !getSpotifyAutoPin();
+    setSpotifyAutoPin(next);
+    applyCardConfigs();
+  }
+
+  function getEffectivePinnedCardIds() {
+    const configs = loadCardConfigs();
+    const manualPinned = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card']
+      .filter(id => !!configs[id]?.pinned);
+
+    // If any pinned widget is fullscreen, only that widget may be pinned
+    const fsPinned = manualPinned.find(id => !!configs[id]?.fullScreen);
+    if (fsPinned) {
+      return [fsPinned];
+    }
+
+    // Up to 2 manually pinned widgets
+    if (manualPinned.length >= 2) {
+      return manualPinned.slice(0, 2);
+    }
+
+    // If Spotify auto-pin is enabled and music is currently playing:
+    if (getSpotifyAutoPin() && spotifyTrackState?.isPlaying) {
+      if (!manualPinned.includes('spotify-card')) {
+        return [...manualPinned, 'spotify-card'];
+      }
+    }
+
+    return manualPinned;
+  }
+
+  function isSpotifyPinned() {
+    return getEffectivePinnedCardIds().includes('spotify-card');
+  }
+
+  function getNonPinnedCards() {
+    const effective = getEffectivePinnedCardIds();
+    const all = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card'];
+    const filtered = all.filter(id => !effective.includes(id));
+    return filtered.length > 0 ? filtered : ['cal-card'];
+  }
+
+  let clockRollIndex = 0;
+
+  const DEFAULT_WORLD_CLOCKS = [
+    { name: 'San Francisco', tz: 'America/Los_Angeles' },
+    { name: 'Austin', tz: 'America/Chicago' },
+    { name: 'Pittsburgh', tz: 'America/New_York' },
+    { name: 'London', tz: 'Europe/London' },
+    { name: 'Tokyo', tz: 'Asia/Tokyo' }
+  ];
+
+  function getPrimaryTz() {
+    const saved = localStorage.getItem(KEY_PRIMARY_TZ);
+    if (saved && saved !== 'auto') {
+      return saved;
+    }
+    try {
+      return Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York';
+    } catch (e) {
+      return 'America/New_York';
+    }
+  }
+
+  function getDayOffset(now, homeTz, targetTz) {
+    try {
+      const homeStr = new Intl.DateTimeFormat('en-CA', { timeZone: homeTz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
+      const targetStr = new Intl.DateTimeFormat('en-CA', { timeZone: targetTz, year: 'numeric', month: '2-digit', day: '2-digit' }).format(now);
+      if (targetStr > homeStr) return '+1';
+      if (targetStr < homeStr) return '-1';
+    } catch (e) {}
+    return '';
+  }
+
+  function getGmtOffsetString(timeZone, date = new Date()) {
+    try {
+      const utcDate = new Date(date.toLocaleString('en-US', { timeZone: 'UTC' }));
+      const tzDate = new Date(date.toLocaleString('en-US', { timeZone }));
+      const diffMinutes = Math.round((tzDate.getTime() - utcDate.getTime()) / 60000);
+      const sign = diffMinutes >= 0 ? '+' : '-';
+      const absMin = Math.abs(diffMinutes);
+      const hours = Math.floor(absMin / 60);
+      const mins = absMin % 60;
+      if (mins === 0) {
+        return `GMT${sign}${hours}`;
+      }
+      return `GMT${sign}${hours}:${String(mins).padStart(2, '0')}`;
+    } catch (e) {
+      return 'GMT';
+    }
+  }
+
+  function loadWorldClocks() {
+    const stored = localStorage.getItem(KEY_WORLD_CLOCKS);
+    let clocks = [];
+    if (stored) {
+      try { clocks = JSON.parse(stored); } catch (e) { clocks = []; }
+    }
+    if (!clocks || clocks.length === 0) {
+      clocks = DEFAULT_WORLD_CLOCKS;
+      localStorage.setItem(KEY_WORLD_CLOCKS, JSON.stringify(clocks));
+    }
+    return clocks;
+  }
+
+  // Spotify PKCE Helper
+  function getRedirectUri() {
+    const custom = (localStorage.getItem(KEY_SPOTIFY_REDIRECT_URI) || '').trim();
+    if (custom) return custom;
+    return window.location.origin + '/dashboard/';
+  }
+
+  async function sha256(plain) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(plain);
+    const hash = await window.crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hash))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  function generateRandomString(length) {
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+    let text = '';
+    for (let i = 0; i < length; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  }
+
+  async function generateCodeChallenge(codeVerifier) {
+    const digest = await window.crypto.subtle.digest(
+      'SHA-256',
+      new TextEncoder().encode(codeVerifier)
+    );
+    return btoa(String.fromCharCode(...new Uint8Array(digest)))
+      .replace(/=/g, '')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_');
+  }
+
+  // Dashboard Initialization
+  function initDashboard() {
+    updateDashboardName();
+    updateDashboardHomepage();
+    initDashboardThemeToggle();
+
+    // Standardized Card Configurations & Geometry
+    applyCardConfigs();
+    window.addEventListener('storage', (e) => {
+      if (e.key === KEY_CARD_CONFIGS) {
+        applyCardConfigs();
+      }
+    });
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Initialize Weather
+    fetchWeather();
+
+    // Initialize Calendar & View Mode
+    updateCalendarTzButton();
+    loadCalendarEvents();
+    const calCard = document.getElementById('cal-card');
+    if (calCard) {
+      calCard.addEventListener('mouseenter', () => { calendarIsHovered = true; });
+      calCard.addEventListener('mouseleave', () => { calendarIsHovered = false; });
+    }
+
+    // Initialize Spotify
+    initSpotify();
+
+    // Sync widget and card heights
+    initCardHeightSync();
+  }
+
+  function updateDashboardName() {
+    const saved = localStorage.getItem(KEY_DASHBOARD_NAME);
+    const name = (saved && saved.trim()) ? saved.trim() : 'david';
+    const nameEl = document.getElementById('dash-name-display');
+    if (nameEl) nameEl.innerText = name.toLowerCase();
+  }
+
+  function updateDashboardHomepage() {
+    const saved = localStorage.getItem(KEY_DASHBOARD_HOMEPAGE);
+    let url = (saved && saved.trim()) ? saved.trim() : 'https://davidlechan.dev';
+    if (!/^https?:\/\//i.test(url) && !url.startsWith('/')) {
+      url = 'https://' + url;
+    }
+    const btn = document.getElementById('dash-homepage-btn');
+    if (btn) btn.href = url;
+    const logo = document.getElementById('dash-logo-link');
+    if (logo) logo.href = url;
+    const domainEl = document.getElementById('dash-footer-domain');
+    if (domainEl) {
+      try {
+        const u = new URL(url.startsWith('http') ? url : 'https://' + url);
+        domainEl.innerText = u.hostname || 'davidlechan.dev';
+      } catch (e) {
+        domainEl.innerText = 'davidlechan.dev';
+      }
+    }
+  }
+
+  function initDashboardThemeToggle() {
+    const dashSw = document.getElementById('dash-theme-switch');
+    if (!dashSw) return;
+
+    function sync() {
+      dashSw.checked = document.documentElement.dataset.theme === 'dark';
+    }
+
+    sync();
+
+    dashSw.addEventListener('change', () => {
+      const siteSw = document.getElementById('theme-switch');
+      if (siteSw) {
+        siteSw.click();
+      } else {
+        const next = dashSw.checked ? 'dark' : 'light';
+        document.documentElement.dataset.theme = next;
+        sessionStorage.setItem('theme', JSON.stringify({ nightShift: dashSw.checked, autoToggleAt: 0 }));
+      }
+    });
+
+    document.addEventListener('theme-changed', sync);
+    new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+
+  function updateClock() {
+    updateWorldClocks();
+    if (calendarCurrentView === 'today') {
+      updateTimelineRedLine();
+    }
+    const now = new Date();
+    if (getCalendarViewMode() === 'smart' && now.getSeconds() === 0) {
+      applyCalendarViewMode();
+    }
+  }
+
+  let _lastClockCapacity = 3;
+  let _lastWeatherCapacity = 2;
+
+  function getClockCardCapacity() {
+    const card = document.getElementById('world-clock-card');
+    const list = document.getElementById('world-clock-alternate-list');
+    if (!card || !list) return 3;
+
+    const cardRect = card.getBoundingClientRect();
+    const listRect = list.getBoundingClientRect();
+    if (!cardRect.height || !listRect.height) return 3;
+
+    const listTop = listRect.top - cardRect.top;
+    const padBottom = 16;
+    const availableH = cardRect.height - listTop - padBottom;
+    if (availableH <= 0) return 3;
+
+    const itemHeight = 40; // 34px item + 6px gap
+    const gap = 6;
+    const slots = Math.floor((availableH + gap) / itemHeight);
+    return Math.max(3, slots);
+  }
+
+  function getWeatherCardCapacity() {
+    const card = document.getElementById('weather-card');
+    const list = document.getElementById('weather-forecast-list');
+    if (!card || !list) return 2;
+
+    const cardRect = card.getBoundingClientRect();
+    const listRect = list.getBoundingClientRect();
+    if (!cardRect.height || !listRect.height) return 2;
+
+    const listTop = listRect.top - cardRect.top;
+    const padBottom = 16;
+    const availableH = cardRect.height - listTop - padBottom;
+    if (availableH <= 0) return 2;
+
+    const itemHeight = 40; // 34px item + 6px gap
+    const gap = 6;
+    const slots = Math.floor((availableH + gap) / itemHeight);
+    return Math.max(2, slots);
+  }
+
+  function updateWorldClocks(shouldSync = true) {
+    const allClocks = loadWorldClocks();
+    const primaryTz = getPrimaryTz();
+    const savedPrimary = localStorage.getItem(KEY_PRIMARY_TZ);
+    const isAuto = !savedPrimary || savedPrimary === 'auto';
+    const now = new Date();
+
+    // 1. Render Emphasized Primary Zone Card
+    const matchedPrimary = allClocks.find(c => c.tz === primaryTz);
+    let primaryName = matchedPrimary ? matchedPrimary.name : '';
+    if (!primaryName) {
+      primaryName = isAuto ? 'Local System' : primaryTz.split('/').pop().replace('_', ' ');
+    }
+
+    try {
+      const pTimeStr = new Intl.DateTimeFormat([], {
+        timeZone: primaryTz,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      }).format(now);
+
+      const pTzParts = new Intl.DateTimeFormat([], {
+        timeZone: primaryTz,
+        timeZoneName: 'short'
+      }).formatToParts(now);
+      const pTzAbbr = pTzParts.find(p => p.type === 'timeZoneName')?.value || '';
+
+      const pDateStr = new Intl.DateTimeFormat([], {
+        timeZone: primaryTz,
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(now).toLowerCase();
+
+      document.getElementById('primary-clock-name').innerText = primaryName;
+      document.getElementById('primary-clock-tz').innerText = `${primaryTz} | ${pTzAbbr}`;
+      document.getElementById('primary-clock-time').innerText = pTimeStr;
+      document.getElementById('primary-clock-date').innerText = pDateStr;
+    } catch (e) {
+      document.getElementById('primary-clock-name').innerText = primaryName;
+      document.getElementById('primary-clock-tz').innerText = primaryTz;
+      document.getElementById('primary-clock-time').innerText = '--:--:--';
+      document.getElementById('primary-clock-date').innerText = '--';
+    }
+
+    const clockDot = document.getElementById('world-clock-dot');
+    if (clockDot) clockDot.className = 'dash-status-dot active';
+
+    // 2. Render Alternate Time Zones (calculated slots based on widget height)
+    const altClocks = allClocks.filter(c => c.tz !== primaryTz);
+    const altContainer = document.getElementById('world-clock-alternate-list');
+    const indicator = document.getElementById('world-clock-cycle-indicator');
+
+    if (!altContainer) return;
+
+    if (altClocks.length === 0) {
+      altContainer.innerHTML = '<div style="font-size:0.75rem; color:var(--dash-text-muted); padding:14px 0; text-align:center;">no alternate time zones configured</div>';
+      if (indicator) indicator.innerText = '';
+      return;
+    }
+
+    const capacity = getClockCardCapacity();
+    _lastClockCapacity = capacity;
+
+    let visibleClocks = [];
+    if (altClocks.length <= capacity) {
+      visibleClocks = altClocks;
+      if (indicator) indicator.innerText = `${altClocks.length} zone${altClocks.length === 1 ? '' : 's'}`;
+    } else {
+      const start = clockRollIndex % altClocks.length;
+      for (let i = 0; i < capacity; i++) {
+        visibleClocks.push(altClocks[(start + i) % altClocks.length]);
+      }
+      if (indicator) {
+        indicator.innerText = `${start + 1}\u2013${Math.min(altClocks.length, start + capacity)} of ${altClocks.length}`;
+      }
+    }
+
+    // Compute max city name length for alignment (1 space after longest city name)
+    const maxCityLen = visibleClocks.reduce((max, c) => {
+      const city = (c.name || c.tz.split('/').pop().replace(/_/g, ' ')).toLowerCase().trim();
+      return Math.max(max, city.length);
+    }, 0);
+
+    let html = '';
+    visibleClocks.forEach(c => {
+      const city = (c.name || c.tz.split('/').pop().replace(/_/g, ' ')).toLowerCase().trim();
+      const paddedCity = city.padEnd(maxCityLen + 1, ' ');
+
+      try {
+        const timeStr = new Intl.DateTimeFormat([], {
+          timeZone: c.tz,
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        }).format(now);
+
+        const gmtStr = getGmtOffsetString(c.tz, now);
+
+        const offset = getDayOffset(now, primaryTz, c.tz);
+        let offsetHtml = '';
+        if (offset === '+1') {
+          offsetHtml = '<span class="dash-clock-day-offset dash-clock-day-next">+1</span>';
+        } else if (offset === '-1') {
+          offsetHtml = '<span class="dash-clock-day-offset dash-clock-day-prev">-1</span>';
+        }
+
+        html += `
+          <div class="dash-clock-alt-item">
+            <span class="dash-clock-alt-name" title="${escapeHtml(c.name || c.tz)}">
+              <span class="dash-clock-alt-city">${escapeHtml(paddedCity)}</span><span class="dash-clock-alt-gmt">(${escapeHtml(gmtStr)})</span>
+            </span>
+            <div class="dash-clock-alt-time-wrap">
+              <span class="dash-clock-alt-time">${timeStr}</span>
+              ${offsetHtml}
+            </div>
+          </div>
+        `;
+      } catch (err) {
+        html += `
+          <div class="dash-clock-alt-item">
+            <span class="dash-clock-alt-name" style="color:var(--dash-red);" title="${escapeHtml(c.tz)}">
+              <span class="dash-clock-alt-city">${escapeHtml(paddedCity)}</span>
+            </span>
+            <span class="dash-clock-alt-time" style="color:var(--dash-text-muted);">&mdash;</span>
+          </div>
+        `;
+      }
+    });
+
+    altContainer.innerHTML = html;
+    if (shouldSync) {
+      syncBottomCardsHeight();
+    }
+  }
+
+  // Weather Logic (wttr.in)
+  let lastWeatherSyncTime = 0;
+  let weatherFetchInProgress = false;
+
+  function cleanWeatherText(rawText) {
+    if (!rawText) return '';
+    let text = rawText;
+    if (text.includes('<html') || text.includes('<div class="term-container">')) {
+      try {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+        const term = doc.querySelector('.term-container');
+        if (term) text = term.textContent || '';
+      } catch (e) {}
+    }
+    // Force remove any ANSI color escape sequences
+    text = text.replace(/\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])/g, '');
+    return text;
+  }
+
+  async function fetchWeather(force = false) {
+    if (weatherFetchInProgress) return;
+    const now = Date.now();
+    if (!force && now - lastWeatherSyncTime < 600000 && lastWeatherSyncTime !== 0) {
+      return;
+    }
+
+    const primaryTz = getPrimaryTz();
+    const allClocks = loadWorldClocks();
+    const matched = allClocks.find(c => c.tz === primaryTz);
+
+    let cityQuery = '';
+    if (matched && matched.name) {
+      cityQuery = matched.name.trim();
+    } else if (primaryTz && primaryTz !== 'auto') {
+      cityQuery = primaryTz.split('/').pop().replace('_', ' ');
+    }
+
+    const dotEl = document.getElementById('weather-dot');
+    if (dotEl) dotEl.className = 'dash-status-dot info';
+
+    const asciiUrl = cityQuery
+      ? `https://wttr.in/${encodeURIComponent(cityQuery)}?A0qTm`
+      : `https://wttr.in/?A0qTm`;
+
+    const jsonUrl = cityQuery
+      ? `https://wttr.in/${encodeURIComponent(cityQuery)}?format=j1`
+      : `https://wttr.in/?format=j1`;
+
+    weatherFetchInProgress = true;
+    try {
+      const [asciiRes, jsonRes] = await Promise.all([
+        fetch(asciiUrl),
+        fetch(jsonUrl)
+      ]);
+
+      if (!asciiRes.ok) throw new Error('ASCII fetch failed');
+      const asciiText = await asciiRes.text();
+      let jsonData = null;
+      if (jsonRes.ok) {
+        try { jsonData = await jsonRes.json(); } catch (e) {}
+      }
+
+      renderWeather(asciiText, jsonData, cityQuery);
+      lastWeatherSyncTime = Date.now();
+      if (dotEl) dotEl.className = 'dash-status-dot active';
+    } catch (err) {
+      console.error('Weather fetch error:', err);
+      const preEl = document.getElementById('weather-ascii-box');
+      if (preEl) preEl.innerText = 'weather offline (query failed)';
+      if (dotEl) dotEl.className = 'dash-status-dot err';
+      syncBottomCardsHeight();
+    } finally {
+      weatherFetchInProgress = false;
+    }
+  }
+
+  let lastWeatherData = null;
+
+  function renderWeather(asciiText, jsonData, requestedCity) {
+    lastWeatherData = { asciiText, jsonData, requestedCity };
+
+    const preEl = document.getElementById('weather-ascii-box');
+    const cleaned = cleanWeatherText(asciiText);
+    if (preEl && cleaned) {
+      preEl.innerText = cleaned.trimEnd();
+    }
+
+    let locLabel = requestedCity;
+    if (!locLabel && jsonData && jsonData.nearest_area && jsonData.nearest_area[0]) {
+      const area = jsonData.nearest_area[0];
+      const city = area.areaName?.[0]?.value || '';
+      const reg = area.region?.[0]?.value || '';
+      locLabel = reg ? `${city}, ${reg}` : city;
+    }
+    if (!locLabel) locLabel = 'local';
+    const locBadge = document.getElementById('weather-location');
+    if (locBadge) locBadge.innerText = locLabel.toLowerCase();
+
+    renderWeatherForecast();
+    if (typeof syncRow2PrimaryCards === 'function') syncRow2PrimaryCards();
+    syncBottomCardsHeight();
+  }
+
+  function renderWeatherForecast() {
+    const forecastList = document.getElementById('weather-forecast-list');
+    if (!forecastList) return;
+
+    const jsonData = lastWeatherData?.jsonData;
+    const capacity = getWeatherCardCapacity();
+    _lastWeatherCapacity = capacity;
+
+    const indicator = document.getElementById('weather-forecast-indicator');
+
+    let fHtml = '';
+    if (jsonData && jsonData.weather && jsonData.weather.length > 1) {
+      const futureDays = jsonData.weather.slice(1);
+      let daysToShow = [];
+
+      if (capacity > futureDays.length && jsonData.weather[0]) {
+        daysToShow.push({ isToday: true, w: jsonData.weather[0] });
+        for (let i = 0; i < futureDays.length && daysToShow.length < capacity; i++) {
+          daysToShow.push({ isToday: false, dayOffset: i + 1, w: futureDays[i] });
+        }
+      } else {
+        for (let i = 0; i < Math.min(capacity, futureDays.length); i++) {
+          daysToShow.push({ isToday: false, dayOffset: i + 1, w: futureDays[i] });
+        }
+      }
+
+      if (indicator) {
+        indicator.innerText = `${daysToShow.length} day${daysToShow.length === 1 ? '' : 's'}`;
+      }
+
+      daysToShow.forEach(item => {
+        const w = item.w;
+        let dayName = 'forecast';
+        if (w.date) {
+          const dateObj = new Date(w.date + 'T12:00:00');
+          dayName = dateObj.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+        }
+
+        const middayDesc = (w.hourly && w.hourly.length >= 5)
+          ? w.hourly[4].weatherDesc?.[0]?.value
+          : w.hourly?.[0]?.weatherDesc?.[0]?.value || 'clear';
+
+        const minC = w.mintempC || '--';
+        const maxC = w.maxtempC || '--';
+        const minF = w.mintempF || '--';
+        const maxF = w.maxtempF || '--';
+
+        fHtml += `
+          <div class="dash-weather-forecast-item">
+            <span class="dash-weather-forecast-day">${escapeHtml(dayName)}</span>
+            <span class="dash-weather-forecast-desc">${escapeHtml(middayDesc.toLowerCase())} | ${minC}\u2013${maxC}\u00b0c (${minF}\u2013${maxF}\u00b0f)</span>
+          </div>
+        `;
+      });
+    } else {
+      fHtml = `<div class="dash-weather-forecast-item"><span class="dash-weather-forecast-day">forecast</span><span class="dash-weather-forecast-desc">synced</span></div>`;
+      if (indicator) indicator.innerText = 'next days';
+    }
+    forecastList.innerHTML = fHtml;
+  }
+
+  // Spotify Logic
+  async function initSpotify() {
+    // Check if handling OAuth callback code
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+
+    if (code) {
+      await handleSpotifyCallback(code);
+      return;
+    }
+
+    renderSpotifyState();
+  }
+
+  async function renderSpotifyState() {
+    const clientId = localStorage.getItem(KEY_SPOTIFY_CLIENT_ID);
+    const token = localStorage.getItem(KEY_SPOTIFY_TOKEN);
+
+    const unconfEl = document.getElementById('spotify-unconfigured');
+    const disconnEl = document.getElementById('spotify-disconnected');
+    const connEl = document.getElementById('spotify-connected');
+    const badgeEl = document.getElementById('spotify-badge');
+    const dotEl = document.getElementById('spotify-dot');
+
+    if (!clientId) {
+      unconfEl.style.display = 'block';
+      disconnEl.style.display = 'none';
+      connEl.style.display = 'none';
+      badgeEl.innerText = 'unconfigured';
+      badgeEl.className = 'dash-badge dash-badge-idle';
+      if (dotEl) dotEl.className = 'dash-status-dot idle';
+      setTimeout(syncCalendarCardHeight, 50);
+      return;
+    }
+
+    if (!token) {
+      unconfEl.style.display = 'none';
+      disconnEl.style.display = 'block';
+      connEl.style.display = 'none';
+      badgeEl.innerText = 'disconnected';
+      badgeEl.className = 'dash-badge dash-badge-warn';
+      if (dotEl) dotEl.className = 'dash-status-dot idle';
+      setTimeout(syncCalendarCardHeight, 50);
+      return;
+    }
+
+    unconfEl.style.display = 'none';
+    disconnEl.style.display = 'none';
+    connEl.style.display = 'flex';
+    fetchSpotifyNowPlaying();
+    fitSpotifyArt();
+    setTimeout(syncCalendarCardHeight, 50);
+  }
+
+  async function connectSpotify() {
+    const clientId = localStorage.getItem(KEY_SPOTIFY_CLIENT_ID);
+    if (!clientId) {
+      window.open('/dashboard-settings/', '_blank');
+      return;
+    }
+
+    const verifier = generateRandomString(64);
+    const challenge = await generateCodeChallenge(verifier);
+    localStorage.setItem('dash_spotify_code_verifier', verifier);
+
+    const redirectUri = getRedirectUri();
+    localStorage.setItem('dash_spotify_used_redirect_uri', redirectUri);
+    const scope = 'user-read-currently-playing user-read-playback-state';
+
+    const authUrl = new URL('https://accounts.spotify.com/authorize');
+    authUrl.search = new URLSearchParams({
+      response_type: 'code',
+      client_id: clientId,
+      scope: scope,
+      code_challenge_method: 'S256',
+      code_challenge: challenge,
+      redirect_uri: redirectUri,
+    }).toString();
+
+    window.location.href = authUrl.toString();
+  }
+
+  async function handleSpotifyCallback(code) {
+    const clientId = localStorage.getItem(KEY_SPOTIFY_CLIENT_ID);
+    const codeVerifier = localStorage.getItem('dash_spotify_code_verifier');
+    const redirectUri = localStorage.getItem('dash_spotify_used_redirect_uri') || getRedirectUri();
+    localStorage.removeItem('dash_spotify_used_redirect_uri');
+
+    // Clean up query string immediately
+    window.history.replaceState({}, document.title, window.location.pathname);
+
+    if (!clientId || !codeVerifier) {
+      console.error('Missing client ID or code verifier');
+      renderSpotifyState();
+      return;
+    }
+
+    try {
+      const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          client_id: clientId,
+          grant_type: 'authorization_code',
+          code: code,
+          redirect_uri: redirectUri,
+          code_verifier: codeVerifier,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.access_token) {
+        localStorage.setItem(KEY_SPOTIFY_TOKEN, data.access_token);
+        if (data.refresh_token) {
+          localStorage.setItem(KEY_SPOTIFY_REFRESH, data.refresh_token);
+        }
+        localStorage.setItem(KEY_SPOTIFY_EXPIRY, Date.now() + (data.expires_in * 1000));
+        localStorage.removeItem('dash_spotify_code_verifier');
+        renderSpotifyState();
+      } else {
+        console.error('Token error:', data);
+        renderSpotifyState();
+      }
+    } catch (err) {
+      console.error('Exchange error:', err);
+      renderSpotifyState();
+    }
+  }
+
+  async function refreshSpotifyToken() {
+    const clientId = localStorage.getItem(KEY_SPOTIFY_CLIENT_ID);
+    const refreshToken = localStorage.getItem(KEY_SPOTIFY_REFRESH);
+    if (!clientId || !refreshToken) return null;
+
+    try {
+      const response = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          client_id: clientId,
+          grant_type: 'refresh_token',
+          refresh_token: refreshToken,
+        }),
+      });
+      const data = await response.json();
+      if (data.access_token) {
+        localStorage.setItem(KEY_SPOTIFY_TOKEN, data.access_token);
+        if (data.refresh_token) {
+          localStorage.setItem(KEY_SPOTIFY_REFRESH, data.refresh_token);
+        }
+        localStorage.setItem(KEY_SPOTIFY_EXPIRY, Date.now() + (data.expires_in * 1000));
+        return data.access_token;
+      }
+    } catch (e) {
+      console.error('Token refresh failed', e);
+    }
+    return null;
+  }
+
+  const SPOTIFY_POLL_INTERVAL_MS = 30000; // 30 seconds (matches displayThingy)
+  let lastSpotifySyncTime = 0;
+  let isSpotifySyncing = false;
+  let spotifyTrackState = null;
+  let _lastSpotifyPlaying = null;
+
+  async function fetchSpotifyNowPlaying() {
+    if (isSpotifySyncing) return;
+    let token = localStorage.getItem(KEY_SPOTIFY_TOKEN);
+    const expiry = Number(localStorage.getItem(KEY_SPOTIFY_EXPIRY) || 0);
+
+    if (Date.now() > expiry - 60000) {
+      token = await refreshSpotifyToken();
+      if (!token) {
+        renderSpotifyState();
+        return;
+      }
+    }
+
+    isSpotifySyncing = true;
+    try {
+      const res = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      lastSpotifySyncTime = Date.now();
+
+      if (res.status === 204 || res.status === 404) {
+        showNoTrack();
+        return;
+      }
+
+      if (res.status === 401) {
+        token = await refreshSpotifyToken();
+        if (token) fetchSpotifyNowPlaying();
+        return;
+      }
+
+      const data = await res.json();
+      if (data && data.item) {
+        displayTrack(data);
+      } else {
+        showNoTrack();
+      }
+    } catch (err) {
+      console.error('Now playing error:', err);
+      showNoTrack();
+      const dotEl = document.getElementById('spotify-dot');
+      if (dotEl) dotEl.className = 'dash-status-dot err';
+    } finally {
+      isSpotifySyncing = false;
+    }
+  }
+
+  function displayTrack(data) {
+    const item = data.item;
+    const isPlaying = !!data.is_playing;
+    const progressMs = data.progress_ms || 0;
+    const durationMs = item.duration_ms || 1;
+
+    spotifyTrackState = {
+      isPlaying: isPlaying,
+      progressMs: progressMs,
+      durationMs: durationMs,
+      syncTime: Date.now(),
+    };
+
+    document.getElementById('spotify-name').innerText = item.name;
+    const artistStr = item.artists.map(a => a.name).join(', ');
+    document.getElementById('spotify-artist').innerText = artistStr;
+    const albumEl = document.getElementById('spotify-album');
+    const albumWrap = document.getElementById('spotify-album-wrap');
+    if (albumEl) {
+      if (item.album && item.album.name) {
+        albumEl.innerText = item.album.name;
+        if (albumWrap) albumWrap.style.display = 'inline';
+      } else if (albumWrap) {
+        albumWrap.style.display = 'none';
+      }
+    }
+
+    const artEl = document.getElementById('spotify-art');
+    if (item.album.images && item.album.images.length > 0) {
+      artEl.src = item.album.images[0].url;
+    }
+
+    const badge = document.getElementById('spotify-badge');
+    const dotEl = document.getElementById('spotify-dot');
+    if (isPlaying) {
+      artEl.classList.add('is-playing');
+      badge.className = 'dash-badge dash-badge-active';
+      if (dotEl) dotEl.className = 'dash-status-dot active';
+      badge.innerHTML = `
+        <span class="spotify-eq">
+          <span class="spotify-eq-bar"></span>
+          <span class="spotify-eq-bar"></span>
+          <span class="spotify-eq-bar"></span>
+        </span>
+        <span>playing</span>
+      `;
+    } else {
+      artEl.classList.remove('is-playing');
+      badge.className = 'dash-badge dash-badge-idle';
+      badge.innerHTML = 'paused';
+      if (dotEl) dotEl.className = 'dash-status-dot idle';
+    }
+
+    renderInterpolatedProgress();
+
+    const wasPlaying = _lastSpotifyPlaying;
+    _lastSpotifyPlaying = isPlaying;
+    if (wasPlaying !== isPlaying) {
+      applyCardConfigs();
+    }
+  }
+
+  function renderInterpolatedProgress() {
+    if (!spotifyTrackState) return;
+
+    let currentMs = spotifyTrackState.progressMs;
+    if (spotifyTrackState.isPlaying) {
+      const elapsed = Date.now() - spotifyTrackState.syncTime;
+      currentMs = Math.min(spotifyTrackState.durationMs, spotifyTrackState.progressMs + elapsed);
+
+      // Smart Sync: if song reaches end, poll early after at least 2 seconds
+      if (currentMs >= spotifyTrackState.durationMs && !isSpotifySyncing) {
+        if (Date.now() - lastSpotifySyncTime > 2000) {
+          fetchSpotifyNowPlaying();
+          return;
+        }
+      }
+    }
+
+    const pct = Math.min(100, Math.max(0, (currentMs / spotifyTrackState.durationMs) * 100));
+    document.getElementById('spotify-progress-fill').style.width = pct.toFixed(1) + '%';
+    document.getElementById('spotify-time-cur').innerText = formatMs(currentMs);
+    document.getElementById('spotify-time-tot').innerText = formatMs(spotifyTrackState.durationMs);
+  }
+
+  function showNoTrack() {
+    spotifyTrackState = null;
+    const artEl = document.getElementById('spotify-art');
+    artEl.classList.remove('is-playing');
+    artEl.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'><rect width='300' height='300' fill='%23282a2e'/><circle cx='150' cy='150' r='50' fill='none' stroke='%23373b41' stroke-width='6'/><circle cx='150' cy='150' r='16' fill='%23373b41'/></svg>";
+
+    document.getElementById('spotify-name').innerText = 'no track playing';
+    document.getElementById('spotify-artist').innerText = 'spotify idle';
+    const albumEl = document.getElementById('spotify-album');
+    const albumWrap = document.getElementById('spotify-album-wrap');
+    if (albumEl) albumEl.innerText = 'playback paused';
+    if (albumWrap) albumWrap.style.display = 'inline';
+    document.getElementById('spotify-progress-fill').style.width = '0%';
+    document.getElementById('spotify-time-cur').innerText = '0:00';
+    document.getElementById('spotify-time-tot').innerText = '0:00';
+
+    const badge = document.getElementById('spotify-badge');
+    badge.className = 'dash-badge dash-badge-idle';
+    badge.innerText = 'idle';
+
+    const dotEl = document.getElementById('spotify-dot');
+    if (dotEl) dotEl.className = 'dash-status-dot idle';
+
+    const wasPlaying = _lastSpotifyPlaying;
+    _lastSpotifyPlaying = false;
+    if (wasPlaying) {
+      applyCardConfigs();
+    }
+  }
+
+  function formatMs(ms) {
+    const totalSec = Math.floor(ms / 1000);
+    const min = Math.floor(totalSec / 60);
+    const sec = totalSec % 60;
+    return `${min}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  function disconnectSpotify() {
+    localStorage.removeItem(KEY_SPOTIFY_TOKEN);
+    localStorage.removeItem(KEY_SPOTIFY_REFRESH);
+    localStorage.removeItem(KEY_SPOTIFY_EXPIRY);
+    closeSettingsModal();
+    renderSpotifyState();
+  }
+
+  // Calendar Logic & iCalendar Feed Parser
+  const _calendarFeedCache = {};
+  let _cachedAllCalendarEvents = [];
+  let calendarCurrentView = 'agenda';
+  let calendarRotateInterval = null;
+  let calendarIsHovered = false;
+  const CALENDAR_ROTATION_MS = 14000;
+
+  function loadCalendarFeeds() {
+    const stored = localStorage.getItem(KEY_CAL_FEED);
+    if (!stored) return [];
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) return parsed;
+    } catch (e) {}
+    return stored.split('\n')
+      .map(u => u.trim())
+      .filter(Boolean)
+      .map(u => ({ name: 'feed', url: u }));
+  }
+
+  async function fetchFeedText(url) {
+    let cleanUrl = url.trim();
+    if (cleanUrl.startsWith('webcal://')) {
+      cleanUrl = 'https://' + cleanUrl.slice(9);
+    }
+
+    const now = Date.now();
+    if (_calendarFeedCache[cleanUrl] && (now - _calendarFeedCache[cleanUrl].timestamp < 300000)) {
+      return _calendarFeedCache[cleanUrl].data;
+    }
+
+    const customProxy = (localStorage.getItem(KEY_CAL_PROXY) || '').trim();
+    const candidateUrls = [];
+
+    const activeProxy = customProxy || 'https://calendar-worker.davidlechan.workers.dev/?url=';
+
+    if (activeProxy.includes('{url}')) {
+      candidateUrls.push(activeProxy.replace('{url}', encodeURIComponent(cleanUrl)));
+    } else {
+      let pfx = activeProxy;
+      if (!pfx.includes('?')) {
+        if (!pfx.endsWith('/')) pfx += '/';
+        pfx += '?url=';
+      }
+      candidateUrls.push(pfx + encodeURIComponent(cleanUrl));
+    }
+
+    // Direct fetch fallback
+    candidateUrls.push(cleanUrl);
+
+    let lastErr = null;
+    for (const targetUrl of candidateUrls) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2500);
+        const resp = await fetch(targetUrl, { signal: controller.signal, cache: 'no-cache' });
+        clearTimeout(timeoutId);
+        if (resp.ok) {
+          const txt = await resp.text();
+          if (txt && (txt.includes('BEGIN:VCALENDAR') || txt.includes('BEGIN:VEVENT'))) {
+            _calendarFeedCache[cleanUrl] = { data: txt, timestamp: now };
+            return txt;
+          }
+        }
+      } catch (err) {
+        lastErr = err;
+      }
+    }
+    throw lastErr || new Error('failed to fetch calendar feed');
+  }
+
+  function unescapeIcsText(str) {
+    if (!str) return '';
+    return str
+      .replace(/\\n/gi, ' ')
+      .replace(/\\,/g, ',')
+      .replace(/\\;/g, ';')
+      .replace(/\\\\/g, '\\')
+      .trim();
+  }
+
+  const KNOWN_TZ_MAP = {
+    'pacific standard time': 'America/Los_Angeles',
+    'pacific daylight time': 'America/Los_Angeles',
+    'mountain standard time': 'America/Denver',
+    'mountain daylight time': 'America/Denver',
+    'central standard time': 'America/Chicago',
+    'central daylight time': 'America/Chicago',
+    'eastern standard time': 'America/New_York',
+    'eastern daylight time': 'America/New_York',
+    'greenwich mean time': 'UTC',
+    'pst': 'America/Los_Angeles',
+    'pdt': 'America/Los_Angeles',
+    'mst': 'America/Denver',
+    'mdt': 'America/Denver',
+    'cst': 'America/Chicago',
+    'cdt': 'America/Chicago',
+    'est': 'America/New_York',
+    'edt': 'America/New_York',
+    'utc': 'UTC',
+    'gmt': 'UTC'
+  };
+
+  function resolveIanaTimeZone(rawTz) {
+    if (!rawTz) return null;
+    let clean = String(rawTz).trim().replace(/^["'\\]+|["'\\]+$/g, '').replace(/^[\/\\]+/, '');
+    const lower = clean.toLowerCase();
+    if (KNOWN_TZ_MAP[lower]) return KNOWN_TZ_MAP[lower];
+    try {
+      Intl.DateTimeFormat(undefined, { timeZone: clean });
+      return clean;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function parseDateTimeInTz(y, m, d, hr, mn, sc, tz) {
+    let guess = Date.UTC(y, m - 1, d, hr, mn, sc);
+    if (!tz) return new Date(guess);
+    const dtf = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz,
+      hour12: false,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    for (let iter = 0; iter < 3; iter++) {
+      const parts = dtf.formatToParts(new Date(guess));
+      const getPart = type => parseInt(parts.find(p => p.type === type).value, 10);
+      const pY = getPart('year');
+      const pM = getPart('month');
+      const pD = getPart('day');
+      let pH = getPart('hour');
+      if (pH === 24) pH = 0;
+      const pMin = getPart('minute');
+      const pS = getPart('second');
+      const asUtcInTz = Date.UTC(pY, pM - 1, pD, pH, pMin, pS);
+      const targetUtc = Date.UTC(y, m - 1, d, hr, mn, sc);
+      const diff = asUtcInTz - targetUtc;
+      guess -= diff;
+      if (diff === 0) break;
+    }
+    return new Date(guess);
+  }
+
+  function getDatePartsInTz(date, timeZone) {
+    if (!date || isNaN(date.getTime())) {
+      const n = new Date();
+      return { year: n.getFullYear(), month: n.getMonth() + 1, day: n.getDate(), weekday: '', hour: 0, minute: 0 };
+    }
+    try {
+      const dtf = new Intl.DateTimeFormat('en-US', {
+        timeZone: timeZone || undefined,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        weekday: 'long',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+      const parts = dtf.formatToParts(date);
+      const getPart = t => parts.find(p => p.type === t)?.value;
+      return {
+        year: parseInt(getPart('year'), 10),
+        month: parseInt(getPart('month'), 10),
+        day: parseInt(getPart('day'), 10),
+        weekday: (getPart('weekday') || '').toLowerCase(),
+        hour: parseInt(getPart('hour') === '24' ? '0' : getPart('hour'), 10),
+        minute: parseInt(getPart('minute'), 10)
+      };
+    } catch (e) {
+      return {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate(),
+        weekday: date.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase(),
+        hour: date.getHours(),
+        minute: date.getMinutes()
+      };
+    }
+  }
+
+  function getTimeInTz(date, timeZone) {
+    if (!date || isNaN(date.getTime())) return '00:00';
+    try {
+      const dtf = new Intl.DateTimeFormat('en-US', {
+        timeZone: timeZone || undefined,
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      return dtf.format(date);
+    } catch (e) {
+      const h = String(date.getHours()).padStart(2, '0');
+      const m = String(date.getMinutes()).padStart(2, '0');
+      return `${h}:${m}`;
+    }
+  }
+
+  function getTzAbbreviation(date, timeZone) {
+    if (!date || isNaN(date.getTime()) || !timeZone) return '';
+    try {
+      const dtf = new Intl.DateTimeFormat('en-US', {
+        timeZone: timeZone,
+        timeZoneName: 'short'
+      });
+      const tzPart = dtf.formatToParts(date).find(p => p.type === 'timeZoneName');
+      return tzPart ? tzPart.value.toLowerCase() : '';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function formatDayDividerLabelInTz(eventDate, timeZone) {
+    const now = new Date();
+    const todayParts = getDatePartsInTz(now, timeZone);
+    const eventParts = getDatePartsInTz(eventDate, timeZone);
+
+    const todayMidnight = parseDateTimeInTz(todayParts.year, todayParts.month, todayParts.day, 0, 0, 0, timeZone);
+    const eventMidnight = parseDateTimeInTz(eventParts.year, eventParts.month, eventParts.day, 0, 0, 0, timeZone);
+    const diffDays = Math.round((eventMidnight.getTime() - todayMidnight.getTime()) / 86400000);
+
+    const weekdayLong = eventParts.weekday;
+    const monthDay = eventDate.toLocaleDateString('en-US', { timeZone, month: 'short', day: 'numeric' }).toLowerCase();
+
+    return { isToday: diffDays === 0, text: `${weekdayLong} \u2014 ${monthDay}` };
+  }
+
+  function formatEventDateLabelInTz(eventDate, timeZone) {
+    const now = new Date();
+    const todayParts = getDatePartsInTz(now, timeZone);
+    const eventParts = getDatePartsInTz(eventDate, timeZone);
+
+    const todayMidnight = parseDateTimeInTz(todayParts.year, todayParts.month, todayParts.day, 0, 0, 0, timeZone);
+    const eventMidnight = parseDateTimeInTz(eventParts.year, eventParts.month, eventParts.day, 0, 0, 0, timeZone);
+    const diffDays = Math.round((eventMidnight.getTime() - todayMidnight.getTime()) / 86400000);
+
+    const weekdayLong = eventParts.weekday;
+    if (diffDays >= 0 && diffDays < 7) {
+      return weekdayLong;
+    }
+    const monthDay = eventDate.toLocaleDateString('en-US', { timeZone, month: 'short', day: 'numeric' }).toLowerCase();
+    return `${weekdayLong}, ${monthDay}`;
+  }
+
+  function formatEventDisplay(ev, calTzMode, primaryTz, localTz) {
+    if (ev.allDay) {
+      return { startStr: 'all', endStr: 'day', tzAbbr: '', tzInfo: '', displayTz: localTz };
+    }
+    let displayTz = localTz;
+    let tzInfo = '';
+
+    if (calTzMode === 'event') {
+      displayTz = ev.origTz || primaryTz || localTz;
+      if (ev.origTz && ev.origTz !== localTz) {
+        const locTime = getTimeInTz(ev.startDate, localTz);
+        const locAbbr = getTzAbbreviation(ev.startDate, localTz);
+        tzInfo = `${locTime} ${locAbbr} local`;
+      }
+    } else if (calTzMode === 'primary') {
+      displayTz = primaryTz;
+      if (ev.origTz && ev.origTz !== primaryTz) {
+        const origTime = getTimeInTz(ev.startDate, ev.origTz);
+        const origAbbr = getTzAbbreviation(ev.startDate, ev.origTz);
+        tzInfo = `orig ${origTime} ${origAbbr}`;
+      }
+    } else {
+      displayTz = localTz;
+      if (ev.origTz && ev.origTz !== localTz) {
+        const origTime = getTimeInTz(ev.startDate, ev.origTz);
+        const origAbbr = getTzAbbreviation(ev.startDate, ev.origTz);
+        tzInfo = `orig ${origTime} ${origAbbr}`;
+      }
+    }
+
+    const startStr = getTimeInTz(ev.startDate, displayTz);
+    const endStr = getTimeInTz(ev.endDate, displayTz);
+    const tzAbbr = getTzAbbreviation(ev.startDate, displayTz);
+
+    return { startStr, endStr, tzAbbr, tzInfo, displayTz };
+  }
+
+  function getCalendarTzMode() {
+    return localStorage.getItem(KEY_CAL_TZ_MODE) || 'event';
+  }
+
+  function setCalendarTzMode(mode) {
+    if (['event', 'primary', 'local'].includes(mode)) {
+      localStorage.setItem(KEY_CAL_TZ_MODE, mode);
+      updateCalendarTzButton();
+      renderCalendarEventsDisplay();
+      syncCalendarCardHeight();
+    }
+  }
+
+  function toggleCalendarTzMode() {
+    const current = getCalendarTzMode();
+    const modes = ['event', 'primary', 'local'];
+    const next = modes[(modes.indexOf(current) + 1) % modes.length];
+    setCalendarTzMode(next);
+  }
+
+  function updateCalendarTzButton() {
+    const btn = document.getElementById('cal-tz-toggle');
+    const label = document.getElementById('cal-tz-label');
+    if (!btn || !label) return;
+    const mode = getCalendarTzMode();
+    label.innerText = `tz: ${mode}`;
+    btn.setAttribute('title', `calendar timezone mode: ${mode} (click to toggle: event, primary, or local)`);
+  }
+
+  function parseIcsFeed(icsText, feedName, configuredFeedTz) {
+    if (!icsText) return [];
+    const unfolded = icsText.replace(/\r?\n[ \t]/g, '');
+    const lines = unfolded.split(/\r?\n/);
+
+    let feedTz = configuredFeedTz ? resolveIanaTimeZone(configuredFeedTz) : null;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith('X-WR-TIMEZONE:')) {
+        const rawTz = line.slice('X-WR-TIMEZONE:'.length).trim();
+        feedTz = resolveIanaTimeZone(rawTz) || feedTz;
+        break;
+      }
+    }
+
+    const rawEvents = [];
+    let cur = null;
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (!line) continue;
+      if (line === 'BEGIN:VEVENT') {
+        cur = { feedName: feedName || 'calendar', feedTz };
+      } else if (line === 'END:VEVENT') {
+        if (cur) rawEvents.push(cur);
+        cur = null;
+      } else if (cur) {
+        const colonIdx = line.indexOf(':');
+        if (colonIdx > 0) {
+          const keyPart = line.slice(0, colonIdx);
+          const val = line.slice(colonIdx + 1);
+          const parts = keyPart.split(';');
+          const key = parts[0].toUpperCase();
+          const params = {};
+          for (let p = 1; p < parts.length; p++) {
+            const eq = parts[p].indexOf('=');
+            if (eq > 0) {
+              params[parts[p].slice(0, eq).toUpperCase()] = parts[p].slice(eq + 1);
+            }
+          }
+          if (key === 'SUMMARY') cur.summary = unescapeIcsText(val);
+          else if (key === 'DTSTART') cur.dtstart = { val, params };
+          else if (key === 'DTEND') cur.dtend = { val, params };
+          else if (key === 'DURATION') cur.duration = val;
+          else if (key === 'RRULE') cur.rrule = val;
+          else if (key === 'STATUS') cur.status = val.toUpperCase();
+          else if (key === 'UID') cur.uid = val.trim();
+          else if (key === 'RECURRENCE-ID') cur.recurrenceId = val.trim();
+          else if (key === 'EXDATE') {
+            if (!cur.exdates) cur.exdates = [];
+            val.split(',').forEach(d => {
+              const p = parseIcsDateTime({ val: d.trim() }, cur.feedTz);
+              if (p && p.date) cur.exdates.push(p.date.getTime());
+            });
+          }
+        }
+      }
+    }
+    return rawEvents;
+  }
+
+  function parseIcsDateTime(obj, feedTz) {
+    if (!obj || !obj.val) return null;
+    const val = obj.val.trim();
+    if (/^\d{8}$/.test(val)) {
+      const y = parseInt(val.slice(0, 4), 10);
+      const m = parseInt(val.slice(4, 6), 10);
+      const d = parseInt(val.slice(6, 8), 10);
+      return { date: new Date(y, m - 1, d, 0, 0, 0), allDay: true, origTz: null, origTzAbbr: '' };
+    }
+    const match = val.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})(Z)?/);
+    if (match) {
+      const [_, y, m, d, hr, mn, sc, isUtc] = match;
+      if (isUtc) {
+        const date = new Date(Date.UTC(+y, +m - 1, +d, +hr, +mn, +sc));
+        const targetTz = resolveIanaTimeZone(obj?.params?.TZID) || feedTz || null;
+        if (targetTz) {
+          return { date, allDay: false, origTz: targetTz, origTzAbbr: getTzAbbreviation(date, targetTz) };
+        }
+        return { date, allDay: false, origTz: 'UTC', origTzAbbr: 'utc' };
+      }
+      const targetTz = resolveIanaTimeZone(obj?.params?.TZID) || feedTz || getPrimaryTz();
+      const date = parseDateTimeInTz(+y, +m, +d, +hr, +mn, +sc, targetTz);
+      const origTzAbbr = getTzAbbreviation(date, targetTz);
+      return {
+        date,
+        allDay: false,
+        origTz: targetTz,
+        origTzAbbr
+      };
+    }
+    return null;
+  }
+
+  function parseIcsDuration(durStr) {
+    if (!durStr) return 0;
+    const match = durStr.match(/P(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?/);
+    if (!match) return 0;
+    const days = parseInt(match[1] || '0', 10);
+    const hours = parseInt(match[2] || '0', 10);
+    const mins = parseInt(match[3] || '0', 10);
+    const secs = parseInt(match[4] || '0', 10);
+    return ((days * 24 + hours) * 60 + mins) * 60000 + secs * 1000;
+  }
+
+  const CAL_PALETTE_DARK = {
+    'core': '#c4b5fd',
+    'fpga': '#bdb2ff',
+    'cmu': '#a0c4ff',
+    'projects': '#caffbf',
+    'experience': '#ffadad',
+    'rtl': '#daa9ff',
+    'verilog': '#9bf6ff',
+    'python': '#fdffb6',
+    'teaching': '#ffd6a5',
+    'verification': '#e7c6ff',
+    'physical-design': '#b5ead7',
+    'kicad': '#ffc6ff',
+    'php': '#d0f4de',
+    'javascript': '#fcf6bd',
+    'nix': '#a3c4f3',
+    'random': '#90e0ef',
+    'bash': '#b9fbc0',
+    'raspberry-pi': '#ffbf69',
+    'work': '#a0c4ff',
+    'personal': '#bdb2ff',
+    'school': '#fdffb6',
+    'classes': '#ffd6a5',
+    'calendar': '#bdb2ff'
+  };
+
+  const CAL_PALETTE_LIGHT = {
+    'core': '#a32a2a',
+    'fpga': '#7c4dff',
+    'cmu': '#2563eb',
+    'projects': '#10b981',
+    'experience': '#ef4444',
+    'rtl': '#a855f7',
+    'verilog': '#06b6d4',
+    'python': '#f59e0b',
+    'teaching': '#f97316',
+    'verification': '#d946ef',
+    'physical-design': '#14b8a6',
+    'kicad': '#ec4899',
+    'php': '#059669',
+    'javascript': '#eab308',
+    'nix': '#3b82f6',
+    'random': '#0284c7',
+    'bash': '#16a34a',
+    'raspberry-pi': '#f97316',
+    'work': '#2563eb',
+    'personal': '#7c4dff',
+    'school': '#d97706',
+    'classes': '#ea580c',
+    'calendar': '#7c4dff'
+  };
+
+  function getCalendarFeedColor(feedName) {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const cleanTag = String(feedName || 'calendar').toLowerCase().trim();
+
+    let hash = 0;
+    for (let i = 0; i < cleanTag.length; i++) {
+      hash = cleanTag.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const hue = Math.abs(hash) % 360;
+
+    if (isLight) {
+      if (CAL_PALETTE_LIGHT[cleanTag]) {
+        const hex = CAL_PALETTE_LIGHT[cleanTag];
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return {
+          color: hex,
+          bg: `rgba(${r}, ${g}, ${b}, 0.12)`,
+          border: `rgba(${r}, ${g}, ${b}, 0.28)`
+        };
+      }
+      return {
+        color: `hsl(${hue}, 75%, 45%)`,
+        bg: `hsla(${hue}, 75%, 45%, 0.12)`,
+        border: `hsla(${hue}, 75%, 45%, 0.28)`
+      };
+    }
+
+    if (CAL_PALETTE_DARK[cleanTag]) {
+      const hex = CAL_PALETTE_DARK[cleanTag];
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return {
+        color: hex,
+        bg: `rgba(${r}, ${g}, ${b}, 0.16)`,
+        border: `rgba(${r}, ${g}, ${b}, 0.35)`
+      };
+    }
+
+    return {
+      color: `hsl(${hue}, 85%, 78%)`,
+      bg: `hsla(${hue}, 85%, 78%, 0.16)`,
+      border: `hsla(${hue}, 85%, 78%, 0.35)`
+    };
+  }
+
+  function expandIcsEvents(rawEvents, now, endWindow) {
+    const results = [];
+    const dayMap = { SU: 0, MO: 1, TU: 2, WE: 3, TH: 4, FR: 5, SA: 6 };
+    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    // Map cancelled recurrence instances
+    const cancelledMap = new Set();
+    for (const item of rawEvents) {
+      if (item.recurrenceId && item.status === 'CANCELLED' && item.uid) {
+        const parsedRecur = parseIcsDateTime({ val: item.recurrenceId }, item.feedTz);
+        if (parsedRecur && parsedRecur.date) {
+          cancelledMap.add(`${item.uid}_${parsedRecur.date.getTime()}`);
+        }
+      }
+    }
+
+    for (const item of rawEvents) {
+      if (item.status === 'CANCELLED') continue;
+      const parsedStart = parseIcsDateTime(item.dtstart, item.feedTz);
+      if (!parsedStart || !parsedStart.date || isNaN(parsedStart.date.getTime())) continue;
+
+      const parsedEnd = parseIcsDateTime(item.dtend, item.feedTz);
+      let durationMs = 0;
+      if (parsedEnd && parsedEnd.date && !isNaN(parsedEnd.date.getTime())) {
+        durationMs = Math.max(0, parsedEnd.date.getTime() - parsedStart.date.getTime());
+      } else if (item.duration) {
+        durationMs = parseIcsDuration(item.duration);
+      } else if (parsedStart.allDay) {
+        durationMs = 24 * 3600 * 1000;
+      } else {
+        durationMs = 60 * 60 * 1000;
+      }
+
+      const title = item.summary || 'untitled event';
+      const allDay = parsedStart.allDay;
+      const tag = (item.feedName || 'calendar').toLowerCase();
+
+      function addInstanceIfFuture(occStart, origTz, origTzAbbr) {
+        if (!occStart || isNaN(occStart.getTime())) return;
+        const occEnd = new Date(occStart.getTime() + durationMs);
+
+        // 1. Filter out past events that ended before today started
+        if (occEnd <= todayStart) return;
+
+        // 2. Reject stale multi-month or multi-year milestones
+        if (occStart < todayStart && occStart < new Date(todayStart.getTime() - 48 * 3600 * 1000)) return;
+
+        // 3. Reject events beyond upcoming window
+        if (occStart > endWindow) return;
+
+        // 4. Check recurrence cancellations and EXDATE exclusions
+        if (item.uid && cancelledMap.has(`${item.uid}_${occStart.getTime()}`)) return;
+        if (item.exdates && item.exdates.length > 0) {
+          const occTime = occStart.getTime();
+          const isEx = item.exdates.some(ex => Math.abs(ex - occTime) < 60000 || (allDay && Math.abs(ex - occTime) < 86400000));
+          if (isEx) return;
+        }
+
+        results.push({
+          title,
+          startDate: occStart,
+          endDate: occEnd,
+          allDay,
+          origTz: origTz || parsedStart.origTz || null,
+          origTzAbbr: origTzAbbr || parsedStart.origTzAbbr || '',
+          tag,
+          feedName: item.feedName || tag || 'calendar',
+        });
+      }
+
+      if (!item.rrule) {
+        addInstanceIfFuture(parsedStart.date, parsedStart.origTz, parsedStart.origTzAbbr);
+      } else {
+        const rruleMap = {};
+        item.rrule.split(';').forEach(p => {
+          const [k, v] = p.split('=');
+          if (k && v) rruleMap[k.toUpperCase()] = v;
+        });
+
+        const freq = rruleMap.FREQ;
+        const interval = parseInt(rruleMap.INTERVAL || '1', 10);
+        let untilDate = null;
+        if (rruleMap.UNTIL) {
+          const parsedUntil = parseIcsDateTime({ val: rruleMap.UNTIL }, item.feedTz);
+          if (parsedUntil && parsedUntil.date) {
+            untilDate = parsedUntil.date;
+            if (untilDate < todayStart) continue;
+          }
+        }
+
+        let maxCount = null;
+        if (rruleMap.COUNT) {
+          maxCount = parseInt(rruleMap.COUNT, 10);
+          if (isNaN(maxCount) || maxCount <= 0) maxCount = null;
+        }
+
+        if (maxCount) {
+          const totalDays = (now.getTime() - parsedStart.date.getTime()) / 86400000;
+          if (freq === 'WEEKLY' && Math.floor(totalDays / (7 * interval)) >= maxCount) continue;
+          if (freq === 'DAILY' && Math.floor(totalDays / interval) >= maxCount) continue;
+        }
+
+        const origParts = (parsedStart.origTz && !parsedStart.allDay) ? getDatePartsInTz(parsedStart.date, parsedStart.origTz) : null;
+        const origHr = origParts ? origParts.hour : parsedStart.date.getHours();
+        const origMin = origParts ? origParts.minute : parsedStart.date.getMinutes();
+        const origSec = origParts ? 0 : parsedStart.date.getSeconds();
+
+        if (freq === 'WEEKLY') {
+          const targetDays = rruleMap.BYDAY
+            ? rruleMap.BYDAY.split(',').map(d => dayMap[d.trim().toUpperCase()]).filter(n => n !== undefined)
+            : [parsedStart.date.getDay()];
+
+          let weekCursor = new Date(parsedStart.date.getTime());
+          weekCursor.setDate(weekCursor.getDate() - weekCursor.getDay());
+
+          if (weekCursor < now) {
+            const diffWeeks = Math.floor((now.getTime() - weekCursor.getTime()) / (7 * 86400000));
+            const skipWeeks = Math.max(0, Math.floor(diffWeeks / interval) * interval);
+            weekCursor.setDate(weekCursor.getDate() + skipWeeks * 7);
+          }
+
+          let safety = 0;
+          while (weekCursor <= endWindow && safety < 120) {
+            safety++;
+            for (const dayNum of targetDays) {
+              let occ;
+              if (parsedStart.origTz && !parsedStart.allDay) {
+                const curOcc = new Date(weekCursor.getTime());
+                curOcc.setDate(curOcc.getDate() + dayNum);
+                occ = parseDateTimeInTz(curOcc.getFullYear(), curOcc.getMonth() + 1, curOcc.getDate(), origHr, origMin, origSec, parsedStart.origTz);
+              } else {
+                occ = new Date(weekCursor.getTime());
+                occ.setDate(occ.getDate() + dayNum);
+                occ.setHours(origHr, origMin, origSec, 0);
+              }
+
+              if (occ < parsedStart.date) continue;
+              if (untilDate && occ > untilDate) break;
+              addInstanceIfFuture(occ, parsedStart.origTz, parsedStart.origTzAbbr);
+            }
+            weekCursor.setDate(weekCursor.getDate() + interval * 7);
+          }
+        } else if (freq === 'DAILY') {
+          let dayCursor = new Date(parsedStart.date.getTime());
+          if (dayCursor < now) {
+            const diffDays = Math.floor((now.getTime() - dayCursor.getTime()) / 86400000);
+            const skipDays = Math.max(0, Math.floor(diffDays / interval) * interval);
+            dayCursor.setDate(dayCursor.getDate() + skipDays);
+          }
+
+          let safety = 0;
+          while (dayCursor <= endWindow && safety < 120) {
+            safety++;
+            if (untilDate && dayCursor > untilDate) break;
+            let occ;
+            if (parsedStart.origTz && !parsedStart.allDay) {
+              occ = parseDateTimeInTz(dayCursor.getFullYear(), dayCursor.getMonth() + 1, dayCursor.getDate(), origHr, origMin, origSec, parsedStart.origTz);
+            } else {
+              occ = new Date(dayCursor.getTime());
+            }
+            addInstanceIfFuture(occ, parsedStart.origTz, parsedStart.origTzAbbr);
+            dayCursor.setDate(dayCursor.getDate() + interval);
+          }
+        } else {
+          addInstanceIfFuture(parsedStart.date, parsedStart.origTz, parsedStart.origTzAbbr);
+        }
+      }
+    }
+    return results;
+  }
+
+  async function loadCalendarEvents() {
+    const listEl = document.getElementById('cal-event-list');
+    const badgeEl = document.getElementById('cal-badge');
+    const dotEl = document.getElementById('cal-dot');
+    if (!listEl) return;
+
+    // Purge legacy local mock events
+    localStorage.removeItem(KEY_CAL_EVENTS);
+
+    const feeds = loadCalendarFeeds();
+
+    if (feeds.length === 0) {
+      if (badgeEl) {
+        badgeEl.innerText = 'no feeds';
+        badgeEl.className = 'dash-badge dash-badge-idle';
+      }
+      if (dotEl) dotEl.className = 'dash-status-dot idle';
+      listEl.innerHTML = `
+        <li style="padding: 16px; text-align: center; color: var(--dash-text-muted); font-size: 0.8rem; background: var(--dash-sub-card-bg); border: 1px dashed var(--dash-border); border-radius: 6px;">
+          no calendar feeds configured &bull; add feeds in <a href="/dashboard-settings/" style="color: var(--dash-accent); text-decoration: underline;">settings</a>
+        </li>
+      `;
+      syncCalendarCardHeight();
+      return;
+    }
+
+    if (badgeEl) {
+      badgeEl.innerText = 'syncing...';
+      badgeEl.className = 'dash-badge dash-badge-idle';
+    }
+    if (dotEl) dotEl.className = 'dash-status-dot active';
+
+    let allEvents = [];
+    let hasSuccess = false;
+    const failedFeeds = [];
+
+    const now = new Date();
+    const calTzMode = getCalendarTzMode();
+    const primaryTz = getPrimaryTz();
+    let localTz = 'America/New_York';
+    try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+    const activeTz = calTzMode === 'primary' ? primaryTz : localTz;
+    const nowParts = getDatePartsInTz(now, activeTz);
+    const todayStart = parseDateTimeInTz(nowParts.year, nowParts.month, nowParts.day, 0, 0, 0, activeTz);
+    const endWindow = new Date(now.getTime() + 30 * 86400 * 1000);
+
+    for (const feed of feeds) {
+      try {
+        const icsText = await fetchFeedText(feed.url);
+        const parsedItems = parseIcsFeed(icsText, feed.name, feed.tz);
+        const expanded = expandIcsEvents(parsedItems, now, endWindow);
+        allEvents = allEvents.concat(expanded);
+        hasSuccess = true;
+      } catch (err) {
+        console.warn('Failed to load feed:', feed.name, err);
+        failedFeeds.push(feed.name || 'feed');
+      }
+    }
+
+    if (hasSuccess) {
+      allEvents = allEvents.filter(ev => {
+        if (!ev.startDate || !ev.endDate) return false;
+        if (ev.endDate < todayStart) return false;
+        return true;
+      });
+
+      allEvents.sort((a, b) => (a.startDate || 0) - (b.startDate || 0));
+      _cachedAllCalendarEvents = allEvents;
+
+      if (badgeEl) {
+        if (failedFeeds.length > 0) {
+          badgeEl.innerText = `synced (${failedFeeds.length} warn)`;
+          badgeEl.className = 'dash-badge dash-badge-warn';
+        } else {
+          badgeEl.innerText = `${feeds.length} feed${feeds.length > 1 ? 's' : ''}`;
+          badgeEl.className = 'dash-badge dash-badge-active';
+        }
+      }
+
+      renderCalendarEventsDisplay();
+    } else {
+      if (badgeEl) {
+        badgeEl.innerText = 'cors / sync error';
+        badgeEl.className = 'dash-badge dash-badge-warn';
+      }
+      if (dotEl) dotEl.className = 'dash-status-dot idle';
+
+      listEl.innerHTML = `
+        <li style="padding: 12px; background: var(--dash-sub-card-bg); border: 1px dashed var(--dash-border); border-radius: 6px; font-size: 0.78rem; color: var(--dash-text-sec); line-height: 1.45;">
+          <div style="font-weight: 600; color: var(--dash-red); margin-bottom: 4px;">could not sync calendar feeds</div>
+          <div>browser blocked cross-origin requests (cors) to ${escapeHtml(failedFeeds.join(', '))}.</div>
+          <div style="margin-top: 6px; font-size: 0.72rem; color: var(--dash-text-muted);">
+            configure a cors proxy bridge in <a href="/dashboard-settings/" style="color: var(--dash-accent); text-decoration: underline;">settings</a> or provide feeds with cors headers.
+          </div>
+        </li>
+      `;
+    }
+
+    syncCalendarCardHeight();
+  }
+
+  function renderCalendarEventsDisplay() {
+    renderCalendarAgendaList();
+    renderTodayTimeline();
+    applyCalendarViewMode();
+  }
+
+  function renderCalendarAgendaList() {
+    const listEl = document.getElementById('cal-event-list');
+    if (!listEl) return;
+    const feeds = loadCalendarFeeds();
+    if (feeds.length === 0) return;
+
+    const calTzMode = getCalendarTzMode();
+    const primaryTz = getPrimaryTz();
+    let localTz = 'America/New_York';
+    try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+
+    const now = new Date();
+    const agendaEvents = _cachedAllCalendarEvents.filter(ev => {
+      if (ev.endDate < now && !ev.allDay) return false;
+      return true;
+    });
+    const displayEvents = agendaEvents.slice(0, 30);
+
+    listEl.innerHTML = '';
+    if (displayEvents.length === 0) {
+      listEl.innerHTML = `
+        <li style="padding: 16px; text-align: center; color: var(--dash-text-muted); font-size: 0.8rem; background: var(--dash-sub-card-bg); border: 1px dashed var(--dash-border); border-radius: 6px;">
+          no upcoming events in the next 30 days
+        </li>
+      `;
+      return;
+    }
+
+    let lastDayKey = null;
+    displayEvents.forEach(ev => {
+      const disp = formatEventDisplay(ev, calTzMode, primaryTz, localTz);
+      const dParts = getDatePartsInTz(ev.startDate, disp.displayTz);
+      const dayKey = `${dParts.year}-${String(dParts.month).padStart(2, '0')}-${String(dParts.day).padStart(2, '0')}`;
+
+      if (dayKey !== lastDayKey) {
+        lastDayKey = dayKey;
+        const dayInfo = formatDayDividerLabelInTz(ev.startDate, disp.displayTz);
+        const divLi = document.createElement('li');
+        divLi.className = `dash-day-divider${dayInfo.isToday ? ' is-today' : ''}`;
+        divLi.innerHTML = `
+          <span class="dash-day-label">${escapeHtml(dayInfo.text)}</span>
+          <span class="dash-day-line"></span>
+        `;
+        listEl.appendChild(divLi);
+      }
+
+      const feedColor = getCalendarFeedColor(ev.feedName || ev.tag || 'calendar');
+      const dateLabel = formatEventDateLabelInTz(ev.startDate, disp.displayTz);
+      const subParts = [dateLabel];
+      if (disp.tzInfo) subParts.push(disp.tzInfo);
+      subParts.push(ev.tag || 'calendar');
+
+      const li = document.createElement('li');
+      li.className = 'dash-event-item';
+      li.innerHTML = `
+        <div class="dash-event-time-badge" style="background: ${feedColor.bg}; color: ${feedColor.color}; border-color: ${feedColor.border};">
+          <span class="dash-event-time-start">${escapeHtml(disp.startStr)}</span>
+          <span class="dash-event-time-end">${escapeHtml(disp.endStr)}</span>
+          ${disp.tzAbbr ? `<span class="dash-event-time-tz" style="font-size: 0.58rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.2px;">${escapeHtml(disp.tzAbbr)}</span>` : ''}
+        </div>
+        <div class="dash-event-info">
+          <div class="dash-event-title" title="${escapeHtml(ev.title)}">${escapeHtml(ev.title)}</div>
+          <div class="dash-event-sub">${escapeHtml(subParts.join(' \u2022 '))}</div>
+        </div>
+      `;
+      listEl.appendChild(li);
+    });
+  }
+
+  function getCalendarViewMode() {
+    return localStorage.getItem(KEY_CAL_VIEW_MODE) || 'smart';
+  }
+
+  function applyCalendarViewMode(manualViewOverride = null) {
+    const mode = getCalendarViewMode();
+
+    if (calendarRotateInterval) {
+      clearInterval(calendarRotateInterval);
+      calendarRotateInterval = null;
+    }
+
+    if (manualViewOverride) {
+      setCalendarView(manualViewOverride);
+      return;
+    }
+
+    if (mode === 'agenda') {
+      setCalendarView('agenda');
+    } else if (mode === 'today') {
+      setCalendarView('today');
+    } else if (mode === 'rotate') {
+      startCalendarRotation();
+      setCalendarView(calendarCurrentView || 'agenda');
+    } else {
+      // 'smart' mode:
+      // Checks how many events remain in current day.
+      const calTzMode = getCalendarTzMode();
+      const primaryTz = getPrimaryTz();
+      let localTz = 'America/New_York';
+      try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+      const timelineTz = calTzMode === 'primary' ? primaryTz : localTz;
+
+      const now = new Date();
+      const nowParts = getDatePartsInTz(now, timelineTz);
+      const todayStart = parseDateTimeInTz(nowParts.year, nowParts.month, nowParts.day, 0, 0, 0, timelineTz);
+      const tomorrowStart = new Date(todayStart.getTime() + 86400000);
+
+      const remainingEventsToday = _cachedAllCalendarEvents.filter(ev => {
+        if (!ev.startDate || !ev.endDate) return false;
+        if (ev.startDate >= tomorrowStart || ev.endDate < todayStart) return false;
+        if (ev.allDay) return true;
+        return ev.endDate >= now;
+      });
+
+      if (remainingEventsToday.length > 0) {
+        setCalendarView('today');
+      } else {
+        setCalendarView('agenda');
+      }
+    }
+  }
+
+  function setCalendarView(viewName) {
+    calendarCurrentView = viewName;
+    const listEl = document.getElementById('cal-event-list');
+    const timeEl = document.getElementById('cal-timeline-view');
+    const viewLabel = document.getElementById('cal-view-label');
+
+    if (viewName === 'today') {
+      if (listEl) listEl.style.display = 'none';
+      if (timeEl) timeEl.style.display = 'flex';
+      if (viewLabel) viewLabel.innerText = 'today';
+      renderTodayTimeline();
+    } else {
+      if (listEl) listEl.style.display = 'flex';
+      if (timeEl) timeEl.style.display = 'none';
+      if (viewLabel) viewLabel.innerText = 'agenda';
+    }
+
+    syncCalendarCardHeight();
+  }
+
+  function toggleCalendarView(manual = true) {
+    const nextView = calendarCurrentView === 'agenda' ? 'today' : 'agenda';
+    setCalendarView(nextView);
+
+    const mode = getCalendarViewMode();
+    if (mode === 'rotate') {
+      startCalendarRotation();
+    }
+  }
+
+  function startCalendarRotation() {
+    if (calendarRotateInterval) clearInterval(calendarRotateInterval);
+    calendarRotateInterval = setInterval(() => {
+      if (!calendarIsHovered) {
+        const next = calendarCurrentView === 'agenda' ? 'today' : 'agenda';
+        setCalendarView(next);
+      }
+    }, CALENDAR_ROTATION_MS);
+  }
+
+  function layoutTimelineEvents(events) {
+    if (!events || events.length === 0) return [];
+    const sorted = [...events].sort((a, b) => {
+      if (a.sMin !== b.sMin) return a.sMin - b.sMin;
+      return (b.eMin - b.sMin) - (a.eMin - a.sMin);
+    });
+
+    const placed = [];
+    sorted.forEach(ev => {
+      let col = 0;
+      while (true) {
+        const collides = placed.some(p => p.col === col && Math.max(ev.sMin, p.sMin) < Math.min(ev.eMin, p.eMin));
+        if (!collides) break;
+        col++;
+      }
+      placed.push({ ...ev, col });
+    });
+
+    placed.forEach(item => {
+      const cluster = placed.filter(p => Math.max(item.sMin, p.sMin) < Math.min(item.eMin, p.eMin));
+      const maxCol = cluster.reduce((m, p) => Math.max(m, p.col), 0);
+      item.totalCols = Math.max(1, maxCol + 1);
+    });
+
+    return placed;
+  }
+
+  function getTimelineTimeRange(timelineTz) {
+    if (!timelineTz) {
+      const calTzMode = getCalendarTzMode();
+      const primaryTz = getPrimaryTz();
+      let localTz = 'America/New_York';
+      try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+      timelineTz = calTzMode === 'primary' ? primaryTz : localTz;
+    }
+
+    const now = new Date();
+    const nowParts = getDatePartsInTz(now, timelineTz);
+    const todayStart = parseDateTimeInTz(nowParts.year, nowParts.month, nowParts.day, 0, 0, 0, timelineTz);
+    const tomorrowStart = new Date(todayStart.getTime() + 86400000);
+
+    const timedEvents = _cachedAllCalendarEvents.filter(ev => {
+      if (!ev.startDate || !ev.endDate || ev.allDay) return false;
+      return ev.startDate < tomorrowStart && ev.endDate >= todayStart;
+    });
+
+    // Default window: 8:00 AM (8) to 8:00 PM (20)
+    // Or 1 hour before the first event (earlier) and 1 hour after the last event (later)
+    let startHour = 8;
+    let endHour = 20;
+
+    if (timedEvents.length > 0) {
+      const minEventStartMin = Math.min(...timedEvents.map(ev => {
+        return Math.max(0, (ev.startDate.getTime() - todayStart.getTime()) / 60000);
+      }));
+      const maxEventEndMin = Math.max(...timedEvents.map(ev => {
+        return Math.min(1440, (ev.endDate.getTime() - todayStart.getTime()) / 60000);
+      }));
+
+      const eventStartHour = Math.floor((minEventStartMin - 60) / 60);
+      const eventEndHour = Math.ceil((maxEventEndMin + 60) / 60);
+
+      startHour = Math.max(0, Math.min(startHour, eventStartHour));
+      endHour = Math.min(24, Math.max(endHour, eventEndHour));
+    }
+
+    const startMin = startHour * 60;
+    const endMin = endHour * 60;
+    const totalMinutes = Math.max(60, endMin - startMin);
+
+    return { startHour, endHour, startMin, endMin, totalMinutes, todayStart, tomorrowStart, timedEvents };
+  }
+
+  function renderTodayTimeline() {
+    const container = document.getElementById('cal-timeline-view');
+    if (!container) return;
+
+    const calTzMode = getCalendarTzMode();
+    const primaryTz = getPrimaryTz();
+    let localTz = 'America/New_York';
+    try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+    const timelineTz = calTzMode === 'primary' ? primaryTz : localTz;
+
+    const { startHour, endHour, startMin, endMin, totalMinutes, todayStart, tomorrowStart, timedEvents } = getTimelineTimeRange(timelineTz);
+    const now = new Date();
+    const nowParts = getDatePartsInTz(now, timelineTz);
+
+    const allDayEvents = _cachedAllCalendarEvents.filter(ev => {
+      if (!ev.startDate || !ev.endDate || !ev.allDay) return false;
+      return ev.startDate < tomorrowStart && ev.endDate >= todayStart;
+    });
+
+    const nowMin = nowParts.hour * 60 + nowParts.minute + now.getSeconds() / 60;
+    const nowPct = ((nowMin - startMin) / totalMinutes) * 100;
+    const nowTimeStr = `${String(nowParts.hour).padStart(2, '0')}:${String(nowParts.minute).padStart(2, '0')}`;
+
+    let html = '';
+
+    // 1. All-Day Bar (if any all-day events on today)
+    if (allDayEvents.length > 0) {
+      html += `<div class="dash-timeline-allday-row">`;
+      html += `<span class="dash-timeline-allday-label">all-day</span>`;
+      allDayEvents.forEach(ev => {
+        const feedColor = getCalendarFeedColor(ev.feedName || ev.tag || 'calendar');
+        html += `
+          <div class="dash-timeline-allday-pill" style="background:${feedColor.bg}; color:${feedColor.color}; border:1px solid ${feedColor.border};" title="${escapeHtml(ev.title)} (${escapeHtml(ev.feedName || ev.tag || 'calendar')})">
+            ${escapeHtml(ev.title)}
+          </div>
+        `;
+      });
+      html += `</div>`;
+    }
+
+    // 2. Timeline Body (startHour:00 to 24:00)
+    html += `<div class="dash-timeline-body">`;
+
+    // Hour markers and grid lines
+    for (let h = startHour; h <= endHour; h++) {
+      if (h === startHour || h === endHour || h % 2 === 0) {
+        const pct = ((h - startHour) / (endHour - startHour)) * 100;
+        const label = `${String(h).padStart(2, '0')}:00`;
+        html += `
+          <span class="dash-timeline-hour-label" style="top: ${pct.toFixed(2)}%;">${label}</span>
+          <span class="dash-timeline-grid-line" style="top: ${pct.toFixed(2)}%;"></span>
+        `;
+      }
+    }
+
+    // Layer for timed events
+    html += `<div class="dash-timeline-events-layer">`;
+
+    if (timedEvents.length === 0 && allDayEvents.length === 0) {
+      html += `
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--dash-text-muted); font-size: 0.75rem; font-family: var(--dash-mono); text-align: center; pointer-events: none; opacity: 0.7;">
+          no events scheduled today
+        </div>
+      `;
+    } else {
+      const mappedEvents = timedEvents.map(ev => {
+        let rawS = (ev.startDate.getTime() - todayStart.getTime()) / 60000;
+        let rawE = (ev.endDate.getTime() - todayStart.getTime()) / 60000;
+        const sMin = Math.max(startMin, Math.min(endMin, rawS));
+        const eMin = Math.max(startMin, Math.min(endMin, rawE));
+        const durMin = Math.max(15, eMin - sMin);
+        const topPct = ((sMin - startMin) / totalMinutes) * 100;
+        const heightPct = Math.max(4.5, (durMin / totalMinutes) * 100);
+        return {
+          ...ev,
+          sMin,
+          eMin,
+          topPct,
+          heightPct,
+          isPast: rawE < nowMin,
+          isCurrent: rawS <= nowMin && rawE >= nowMin
+        };
+      });
+
+      const laidOut = layoutTimelineEvents(mappedEvents);
+
+      laidOut.forEach(item => {
+        const feedColor = getCalendarFeedColor(item.feedName || item.tag || 'calendar');
+        const widthPct = (100 / item.totalCols) - 1.5;
+        const leftPct = (item.col * (100 / item.totalCols)) + 0.5;
+        const opacityStyle = item.isPast ? 'opacity: 0.6;' : '';
+        const glowStyle = item.isCurrent ? `box-shadow: 0 0 10px ${feedColor.border};` : '';
+
+        const tzDisp = formatEventDisplay(item, calTzMode, primaryTz, localTz);
+        const cardTimeStr = `${tzDisp.startStr} \u2013 ${tzDisp.endStr}${tzDisp.tzAbbr ? ' ' + tzDisp.tzAbbr : ''}`;
+
+        html += `
+          <div class="dash-timeline-event-card"
+               style="top: ${item.topPct.toFixed(2)}%; height: ${item.heightPct.toFixed(2)}%; left: ${leftPct.toFixed(2)}%; width: ${widthPct.toFixed(2)}%; background: ${feedColor.bg}; color: ${feedColor.color}; border: 1px solid ${feedColor.border}; border-left: 3px solid ${feedColor.color}; ${opacityStyle} ${glowStyle}"
+               title="${escapeHtml(item.title)} (${cardTimeStr}${tzDisp.tzInfo ? ' \u2022 ' + escapeHtml(tzDisp.tzInfo) : ''}) | ${escapeHtml(item.feedName || item.tag || 'calendar')}">
+            <div class="dash-timeline-event-title">${escapeHtml(item.title)}</div>
+            <div class="dash-timeline-event-time">${escapeHtml(cardTimeStr)}</div>
+          </div>
+        `;
+      });
+    }
+
+    html += `</div>`; // end events layer
+
+    // 3. Current Time Red Line
+    const redLineDisplay = (nowMin >= startMin && nowMin <= endMin) ? 'block' : 'none';
+    const clampedPct = Math.max(0, Math.min(100, nowPct));
+    html += `
+      <div id="cal-timeline-now-line" class="dash-timeline-now-line" style="top: ${clampedPct.toFixed(2)}%; display: ${redLineDisplay};">
+        <span class="dash-timeline-now-dot"></span>
+        <span id="cal-timeline-now-time" class="dash-timeline-now-badge">${nowTimeStr}</span>
+      </div>
+    `;
+
+    html += `</div>`; // end timeline body
+
+    container.innerHTML = html;
+
+    // If an event's box is too short to fit both name and time, remove the time and only show the event name
+    container.querySelectorAll('.dash-timeline-event-card').forEach(card => {
+      const timeEl = card.querySelector('.dash-timeline-event-time');
+      const titleEl = card.querySelector('.dash-timeline-event-title');
+      if (!timeEl || !titleEl) return;
+      if (card.clientHeight < 32 || (titleEl.offsetHeight + timeEl.offsetHeight + 6 > card.clientHeight)) {
+        timeEl.style.display = 'none';
+      }
+    });
+  }
+
+  function updateTimelineRedLine() {
+    const lineEl = document.getElementById('cal-timeline-now-line');
+    const badgeEl = document.getElementById('cal-timeline-now-time');
+    if (!lineEl) return;
+
+    const calTzMode = getCalendarTzMode();
+    const primaryTz = getPrimaryTz();
+    let localTz = 'America/New_York';
+    try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+    const timelineTz = calTzMode === 'primary' ? primaryTz : localTz;
+
+    const { startMin, endMin, totalMinutes } = getTimelineTimeRange(timelineTz);
+    const now = new Date();
+    const nowParts = getDatePartsInTz(now, timelineTz);
+    const nowMin = nowParts.hour * 60 + nowParts.minute + now.getSeconds() / 60;
+
+    if (nowMin < startMin || nowMin > endMin) {
+      lineEl.style.display = 'none';
+    } else {
+      lineEl.style.display = 'block';
+      const nowPct = Math.max(0, Math.min(100, ((nowMin - startMin) / totalMinutes) * 100));
+      lineEl.style.top = `${nowPct.toFixed(2)}%`;
+      if (badgeEl) {
+        const hh = String(nowParts.hour).padStart(2, '0');
+        const mm = String(nowParts.minute).padStart(2, '0');
+        badgeEl.innerText = `${hh}:${mm}`;
+      }
+    }
+  }
+
+  let _syncingCardConfigs = false;
+  let _rowRotateInterval = null;
+  let _currentRotatingRow = 0; // 0: row 1 (spotify & calendar), 1: row 2 (world clock & weather)
+  let _pinnedSubRotateIndex = 0; // index into getNonPinnedCards() when spotify is pinned
+  let _gridIsHovered = false;
+  let _cachedSpNatural = 240;
+  let _cachedRow2Baseline = 334;
+
+  function getWidgetOverflowMode() {
+    return localStorage.getItem(KEY_WIDGET_OVERFLOW_MODE) || 'rotating';
+  }
+
+  function getWidgetRotateDelay() {
+    const d = parseInt(localStorage.getItem(KEY_WIDGET_ROTATE_DELAY), 10);
+    return (d && d >= 3 && d <= 300) ? d : 30;
+  }
+
+  function getClockRotateDelay() {
+    const d = parseInt(localStorage.getItem(KEY_CLOCK_ROTATE_DELAY), 10);
+    return (d && d >= 2 && d <= 300) ? d : 10;
+  }
+
+  function startRowRotationTimer() {
+    if (_rowRotateInterval) return;
+    const delaySec = getWidgetRotateDelay();
+    _rowRotateInterval = setInterval(() => {
+      if (!_gridIsHovered) {
+        const effective = getEffectivePinnedCardIds();
+        if (effective.length === 1) {
+          const conf = getCardConfig(effective[0]);
+          if (!conf.fullScreen) {
+            const eligible = getNonPinnedCards();
+            _pinnedSubRotateIndex = (_pinnedSubRotateIndex + 1) % eligible.length;
+            applyCardConfigs();
+            return;
+          }
+        } else if (effective.length >= 2) {
+          return;
+        }
+
+        _currentRotatingRow = (_currentRotatingRow === 0 ? 1 : 0);
+        applyCardConfigs();
+      }
+    }, delaySec * 1000);
+  }
+
+  function stopRowRotationTimer() {
+    if (_rowRotateInterval) {
+      clearInterval(_rowRotateInterval);
+      _rowRotateInterval = null;
+    }
+  }
+
+  function toggleRotatingRow(manual = true) {
+    const effective = getEffectivePinnedCardIds();
+    if (effective.length === 1) {
+      const conf = getCardConfig(effective[0]);
+      if (!conf.fullScreen) {
+        const eligible = getNonPinnedCards();
+        _pinnedSubRotateIndex = (_pinnedSubRotateIndex + 1) % eligible.length;
+        if (manual) {
+          stopRowRotationTimer();
+          startRowRotationTimer();
+        }
+        applyCardConfigs();
+        return;
+      }
+    } else if (effective.length >= 2) {
+      return;
+    }
+
+    _currentRotatingRow = (_currentRotatingRow === 0 ? 1 : 0);
+    if (manual) {
+      stopRowRotationTimer();
+      startRowRotationTimer();
+    }
+    applyCardConfigs();
+  }
+
+  function getAvailableGridVerticalSpace(desiredGridHeight = 0) {
+    const headerEl = document.querySelector('.dash-header');
+    const gridEl = document.querySelector('.dash-grid');
+    const footerEl = document.querySelector('.dash-footer-bar');
+    const hrEl = document.querySelector('.dash-container hr');
+
+    // 1. Space consumed above the grid:
+    // Measures distance from top of viewport, including body padding,
+    // wrapper padding, and the entire {name}'s personal dashboard header with margins
+    let topSpace = 110;
+    if (gridEl) {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      topSpace = gridEl.getBoundingClientRect().top + scrollY;
+    } else if (headerEl) {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const hRect = headerEl.getBoundingClientRect();
+      topSpace = hRect.top + scrollY + headerEl.offsetHeight + 24;
+    }
+
+    // 2. Space consumed below the grid:
+    // Footer action bar, separator hr line, and bottom margins
+    const footerH = footerEl ? footerEl.offsetHeight : 36;
+    const hrH = hrEl
+      ? (parseFloat(window.getComputedStyle(hrEl).marginTop) + parseFloat(window.getComputedStyle(hrEl).marginBottom) + 1)
+      : 53;
+    const bottomSpace = footerH + hrH + 24;
+    const bottomBuffer = 16;
+
+    const spaceWithFooter = window.innerHeight - topSpace - bottomSpace;
+    const spaceWithoutFooter = window.innerHeight - topSpace - bottomBuffer;
+
+    // When vertical space is too small to fit the desired grid and footer comfortably,
+    // ignore the footer (hrule + homepage/settings buttons) since it can be reached via scrolling.
+    if (desiredGridHeight > 0) {
+      if (spaceWithFooter >= desiredGridHeight) {
+        return Math.max(260, spaceWithFooter);
+      }
+      return Math.max(260, spaceWithoutFooter);
+    }
+
+    if (spaceWithFooter < 600 || window.innerHeight < 850) {
+      return Math.max(260, spaceWithoutFooter);
+    }
+    return Math.max(260, spaceWithFooter);
+  }
+
+  function syncRow2PrimaryCards() {
+    const clockPrim = document.getElementById('world-clock-primary');
+    const weatherPrim = document.getElementById('weather-ascii-card');
+    if (!clockPrim || !weatherPrim) return;
+
+    clockPrim.style.height = '';
+    weatherPrim.style.height = '';
+    const primH = Math.max(148, clockPrim.offsetHeight, weatherPrim.offsetHeight);
+    clockPrim.style.height = `${primH}px`;
+    weatherPrim.style.height = `${primH}px`;
+  }
+
+  function fitSpotifyArt() {
+    const spCard = document.getElementById('spotify-card');
+    const spArt = document.getElementById('spotify-art');
+    const spConn = document.getElementById('spotify-connected');
+    const spMeta = spCard ? spCard.querySelector('.spotify-track-meta') : null;
+    const spProg = spCard ? spCard.querySelector('.spotify-progress-wrap') : null;
+    const spHeader = spCard ? spCard.querySelector('.dash-card-header') : null;
+
+    if (!spCard || !spArt) return;
+
+    if (!spConn || spConn.style.display === 'none') {
+      spArt.style.maxHeight = '';
+      spArt.style.maxWidth = '';
+      spArt.style.height = '';
+      spArt.style.width = '';
+      return;
+    }
+
+    const computedStyle = window.getComputedStyle(spCard);
+    const padTop = parseFloat(computedStyle.paddingTop) || 16;
+    const padBottom = parseFloat(computedStyle.paddingBottom) || 16;
+    const padLeft = parseFloat(computedStyle.paddingLeft) || 16;
+    const padRight = parseFloat(computedStyle.paddingRight) || 16;
+    const innerW = spCard.clientWidth > 0 ? (spCard.clientWidth - padLeft - padRight) : 0;
+    const innerH = spCard.clientHeight - padTop - padBottom;
+
+    const overflowMode = getWidgetOverflowMode();
+    const isRotating = (overflowMode === 'rotating');
+
+    if (!isRotating) {
+      // In scrolling mode: album art scaled to 70% of available horizontal space
+      const targetSide = Math.max(32, Math.floor(innerW * 0.70));
+      spArt.style.width = `${targetSide}px`;
+      spArt.style.maxWidth = '100%';
+      spArt.style.height = `${targetSide}px`;
+      spArt.style.maxHeight = `${targetSide}px`;
+      return;
+    }
+
+    if (innerH > 0) {
+      const headerH = spHeader
+        ? (spHeader.offsetHeight + (parseFloat(window.getComputedStyle(spHeader).marginBottom) || 14))
+        : 44;
+      const metaH = spMeta
+        ? (spMeta.offsetHeight + (parseFloat(window.getComputedStyle(spMeta).marginTop) || 8))
+        : 40;
+      const progH = spProg
+        ? (spProg.offsetHeight + (parseFloat(window.getComputedStyle(spProg).marginTop) || 8))
+        : 32;
+      const safetyGap = 6;
+
+      const nonArtH = headerH + metaH + progH + safetyGap;
+      const availH = Math.max(32, Math.floor(innerH - nonArtH));
+      const maxSide = Math.min(availH, Math.max(32, innerW));
+
+      spArt.style.maxHeight = `${maxSide}px`;
+      spArt.style.maxWidth = `${maxSide}px`;
+      spArt.style.height = `${maxSide}px`;
+      spArt.style.width = `${maxSide}px`;
+    } else {
+      spArt.style.maxHeight = '';
+      spArt.style.maxWidth = '';
+      spArt.style.height = '';
+      spArt.style.width = '';
+    }
+  }
+
+  function applyCardConfigs() {
+    if (_syncingCardConfigs) return;
+    _syncingCardConfigs = true;
+
+    const configs = loadCardConfigs();
+
+    const overflowMode = getWidgetOverflowMode();
+    const isRotating = (overflowMode === 'rotating');
+
+    // 1. Determine effectively pinned cards (only active in rotating mode)
+    const effectivePinned = isRotating ? getEffectivePinnedCardIds() : [];
+    const ALL_CARD_IDS = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card'];
+    const CARD_NAMES = {
+      'spotify-card': 'spotify',
+      'cal-card': 'calendar',
+      'world-clock-card': 'world clock',
+      'weather-card': 'weather'
+    };
+
+    ALL_CARD_IDS.forEach(cardId => {
+      const cardEl = document.getElementById(cardId);
+      if (!cardEl) return;
+      const conf = configs[cardId] || {};
+      const isPinned = effectivePinned.includes(cardId);
+
+      cardEl.setAttribute('data-pinned', isPinned ? 'true' : 'false');
+      cardEl.classList.toggle('dash-card-pinned', isPinned);
+
+      const isFs = !!conf.fullScreen;
+      cardEl.setAttribute('data-fullscreen', isFs ? 'true' : 'false');
+      cardEl.classList.toggle('dash-card-fullscreen', isFs);
+
+      if (conf.defaultHeight && conf.defaultHeight > 0) {
+        cardEl.setAttribute('data-default-height', String(conf.defaultHeight));
+      } else {
+        cardEl.removeAttribute('data-default-height');
+      }
+
+      const prefix = cardId.replace('-card', '');
+      const pinBtn = document.getElementById(`${prefix}-pin-btn`);
+      const pinLabel = document.getElementById(`${prefix}-pin-label`);
+      if (pinBtn) {
+        if (!isRotating) {
+          pinBtn.style.display = 'none';
+        } else {
+          pinBtn.style.display = 'inline-flex';
+          pinBtn.classList.toggle('dash-btn-active', isPinned);
+          if (isPinned) {
+            pinBtn.style.borderColor = 'var(--dash-accent)';
+            pinBtn.style.color = 'var(--dash-accent)';
+            pinBtn.style.background = 'rgba(189, 178, 255, 0.12)';
+          } else {
+            pinBtn.style.borderColor = '';
+            pinBtn.style.color = '';
+            pinBtn.style.background = '';
+          }
+          if (pinLabel) {
+            pinLabel.innerText = isPinned ? 'pinned' : 'pin';
+          }
+        }
+      }
+    });
+
+    const spCard = document.getElementById('spotify-card');
+    const calCard = document.getElementById('cal-card');
+    const clockCard = document.getElementById('world-clock-card');
+    const weatherCard = document.getElementById('weather-card');
+    const clockPrim = document.getElementById('world-clock-primary');
+    const weatherPrim = document.getElementById('weather-ascii-card');
+
+    if (!spCard || !calCard || !clockCard || !weatherCard) {
+      _syncingCardConfigs = false;
+      return;
+    }
+
+    const spConf = configs['spotify-card'] || {};
+    const calConf = configs['cal-card'] || {};
+    const clockConf = configs['world-clock-card'] || {};
+    const weatherConf = configs['weather-card'] || {};
+
+    // 2. Dynamic & baseline heights for widgets (generous default sizing)
+    const computedSpStyle = window.getComputedStyle(spCard);
+    const spPadLeft = parseFloat(computedSpStyle.paddingLeft) || 16;
+    const spPadRight = parseFloat(computedSpStyle.paddingRight) || 16;
+    const spPadTop = parseFloat(computedSpStyle.paddingTop) || 16;
+    const spPadBottom = parseFloat(computedSpStyle.paddingBottom) || 16;
+
+    let spInnerW = spCard.clientWidth > 0 ? (spCard.clientWidth - spPadLeft - spPadRight) : 0;
+    if (spInnerW <= 0) {
+      const containerW = Math.min(window.innerWidth - 32, 1080);
+      spInnerW = Math.max(260, Math.floor((containerW - 16) / 2 - 32));
+    }
+
+    const spHeaderEl = spCard.querySelector('.dash-card-header');
+    const spMetaEl = spCard.querySelector('.spotify-track-meta');
+    const spProgEl = spCard.querySelector('.spotify-progress-wrap');
+    const spHHeader = spHeaderEl ? (spHeaderEl.offsetHeight + (parseFloat(window.getComputedStyle(spHeaderEl).marginBottom) || 14)) : 54;
+    const spHMeta = spMetaEl ? (spMetaEl.offsetHeight + (parseFloat(window.getComputedStyle(spMetaEl).marginTop) || 8)) : 46;
+    const spHProg = spProgEl ? (spProgEl.offsetHeight + (parseFloat(window.getComputedStyle(spProgEl).marginTop) || 8)) : 36;
+    const spNonArtH = spHHeader + spHMeta + spHProg + spPadTop + spPadBottom + 16;
+    const targetSide = Math.max(32, Math.floor(spInnerW * 0.70));
+    const spScrollingRequiredH = Math.round(targetSide + spNonArtH);
+
+    const ROW1_BASELINE_HEIGHT = 440;
+    const ROW2_BASELINE_HEIGHT = 400;
+    const spNatural = isRotating ? ROW1_BASELINE_HEIGHT : Math.max(ROW1_BASELINE_HEIGHT, spScrollingRequiredH);
+    const row2Baseline = ROW2_BASELINE_HEIGHT;
+
+    // 3. Resolve conflicting defaults by taking the taller widget's height
+    // Calendar widget matches Spotify widget by default unless calConf.defaultHeight is explicitly configured
+    const spReq = spConf.defaultHeight && spConf.defaultHeight > 0 ? spConf.defaultHeight : spNatural;
+    const calReq = calConf.defaultHeight && calConf.defaultHeight > 0 ? calConf.defaultHeight : spReq;
+    let desiredRow1 = (calConf.defaultHeight && calConf.defaultHeight > 0) ? Math.max(spReq, calReq) : spReq;
+
+    const clockReq = clockConf.defaultHeight && clockConf.defaultHeight > 0 ? clockConf.defaultHeight : row2Baseline;
+    const weatherReq = weatherConf.defaultHeight && weatherConf.defaultHeight > 0 ? weatherConf.defaultHeight : row2Baseline;
+    let desiredRow2 = Math.max(clockReq, weatherReq);
+
+    const isRow1Fs = spConf.fullScreen || calConf.fullScreen;
+    const isRow2Fs = clockConf.fullScreen || weatherConf.fullScreen;
+    const gridGap = 16;
+    const totalDesiredGridH = (isRow1Fs || isRow2Fs)
+      ? (desiredRow1 + desiredRow2 + 48)
+      : (desiredRow1 + desiredRow2 + gridGap);
+
+    // 4. Calculate vertical space cap from window sizing (accounting for {name}'s dashboard header)
+    const availableGridH = getAvailableGridVerticalSpace(totalDesiredGridH);
+
+    const rotateBtn = document.getElementById('dash-row-rotate-btn');
+    const rotateLabel = document.getElementById('dash-row-rotate-label');
+
+    // 5. Pinned Layout Handling (enforces up to 2 pinned cards, fullscreen exclusivity, and sub-rotation)
+    if (effectivePinned.length >= 2) {
+      // Exactly 2 widgets pinned: display both fixed side-by-side
+      const pinnedA = effectivePinned[0];
+      const pinnedB = effectivePinned[1];
+      const singleRowH = Math.max(ROW1_BASELINE_HEIGHT, availableGridH);
+
+      ALL_CARD_IDS.forEach(cardId => {
+        const cardEl = document.getElementById(cardId);
+        if (!cardEl) return;
+        if (cardId === pinnedA) {
+          cardEl.style.display = 'flex';
+          cardEl.style.height = `${singleRowH}px`;
+          cardEl.style.order = '0';
+          cardEl.classList.add('dash-row-active');
+          if (cardId === 'cal-card') cardEl.style.maxHeight = `${singleRowH}px`;
+        } else if (cardId === pinnedB) {
+          cardEl.style.display = 'flex';
+          cardEl.style.height = `${singleRowH}px`;
+          cardEl.style.order = '1';
+          cardEl.classList.add('dash-row-active');
+          if (cardId === 'cal-card') cardEl.style.maxHeight = `${singleRowH}px`;
+        } else {
+          cardEl.style.display = 'none';
+          cardEl.style.order = '';
+          cardEl.classList.remove('dash-row-active');
+        }
+      });
+
+      stopRowRotationTimer();
+      if (rotateBtn) rotateBtn.style.display = 'inline-flex';
+      if (rotateLabel) {
+        rotateLabel.innerText = `📌 ${CARD_NAMES[pinnedA]} + ${CARD_NAMES[pinnedB]}`;
+      }
+
+      if (effectivePinned.includes('spotify-card')) fitSpotifyArt();
+      if (effectivePinned.includes('cal-card') && calendarCurrentView === 'today') renderTodayTimeline();
+      if (effectivePinned.includes('world-clock-card') && typeof getClockCardCapacity === 'function') updateWorldClocks(false);
+      if (effectivePinned.includes('weather-card') && typeof getWeatherCardCapacity === 'function') renderWeatherForecast();
+
+      requestAnimationFrame(() => { _syncingCardConfigs = false; });
+      return;
+    }
+
+    if (effectivePinned.length === 1) {
+      const pinnedId = effectivePinned[0];
+      const pinnedConf = configs[pinnedId] || {};
+      const singleRowH = Math.max(ROW1_BASELINE_HEIGHT, availableGridH);
+
+      if (pinnedConf.fullScreen) {
+        // Fullscreen pinned card occupies both columns
+        ALL_CARD_IDS.forEach(cardId => {
+          const cardEl = document.getElementById(cardId);
+          if (!cardEl) return;
+          if (cardId === pinnedId) {
+            cardEl.style.display = 'flex';
+            cardEl.style.height = `${singleRowH}px`;
+            cardEl.style.order = '';
+            cardEl.classList.add('dash-row-active');
+            if (cardId === 'cal-card') cardEl.style.maxHeight = `${singleRowH}px`;
+          } else {
+            cardEl.style.display = 'none';
+            cardEl.style.order = '';
+            cardEl.classList.remove('dash-row-active');
+          }
+        });
+
+        stopRowRotationTimer();
+        if (rotateBtn) rotateBtn.style.display = 'inline-flex';
+        if (rotateLabel) rotateLabel.innerText = `📌 ${CARD_NAMES[pinnedId]} (fullscreen)`;
+
+        if (pinnedId === 'spotify-card') fitSpotifyArt();
+        if (pinnedId === 'cal-card' && calendarCurrentView === 'today') renderTodayTimeline();
+        if (pinnedId === 'world-clock-card' && typeof getClockCardCapacity === 'function') updateWorldClocks(false);
+        if (pinnedId === 'weather-card' && typeof getWeatherCardCapacity === 'function') renderWeatherForecast();
+
+        requestAnimationFrame(() => { _syncingCardConfigs = false; });
+        return;
+      }
+
+      // Non-fullscreen: pinned widget fixed in slot 1 (order: 0), other slot (order: 1) rotates through all 3 non-pinned widgets
+      const nonPinned = ALL_CARD_IDS.filter(id => id !== pinnedId);
+      const activeRotatedId = nonPinned[_pinnedSubRotateIndex % nonPinned.length];
+
+      ALL_CARD_IDS.forEach(cardId => {
+        const cardEl = document.getElementById(cardId);
+        if (!cardEl) return;
+        if (cardId === pinnedId) {
+          cardEl.style.display = 'flex';
+          cardEl.style.height = `${singleRowH}px`;
+          cardEl.style.order = '0';
+          cardEl.classList.add('dash-row-active');
+          if (cardId === 'cal-card') cardEl.style.maxHeight = `${singleRowH}px`;
+        } else if (cardId === activeRotatedId) {
+          cardEl.style.display = 'flex';
+          cardEl.style.height = `${singleRowH}px`;
+          cardEl.style.order = '1';
+          cardEl.classList.add('dash-row-active');
+          if (cardId === 'cal-card') cardEl.style.maxHeight = `${singleRowH}px`;
+        } else {
+          cardEl.style.display = 'none';
+          cardEl.style.order = '';
+          cardEl.classList.remove('dash-row-active');
+        }
+      });
+
+      startRowRotationTimer();
+      if (rotateBtn) rotateBtn.style.display = 'inline-flex';
+      if (rotateLabel) {
+        rotateLabel.innerText = `📌 ${CARD_NAMES[pinnedId]} + ${CARD_NAMES[activeRotatedId]}`;
+      }
+
+      const visiblePair = [pinnedId, activeRotatedId];
+      if (visiblePair.includes('spotify-card')) fitSpotifyArt();
+      if (visiblePair.includes('cal-card') && calendarCurrentView === 'today') renderTodayTimeline();
+      if (visiblePair.includes('world-clock-card') && typeof getClockCardCapacity === 'function') updateWorldClocks(false);
+      if (visiblePair.includes('weather-card') && typeof getWeatherCardCapacity === 'function') renderWeatherForecast();
+
+      requestAnimationFrame(() => { _syncingCardConfigs = false; });
+      return;
+    }
+
+    // Reset order when 0 widgets are pinned
+    ALL_CARD_IDS.forEach(cardId => {
+      const cardEl = document.getElementById(cardId);
+      if (cardEl) cardEl.style.order = '';
+    });
+
+    // 6. Evaluate display mode: Rotating vs Scrolling
+    const isRotatingActive = isRotating;
+
+    if (isRotatingActive) {
+      if (rotateBtn) rotateBtn.style.display = 'inline-flex';
+      if (rotateLabel) rotateLabel.innerText = _currentRotatingRow === 0 ? 'row 1/2' : 'row 2/2';
+      startRowRotationTimer();
+
+      // In rotating mode, the active visible row takes on the largest fitting vertical space
+      const singleRowH = Math.max(ROW1_BASELINE_HEIGHT, availableGridH);
+
+      if (_currentRotatingRow === 0) {
+        // Show Row 1 (Spotify + Calendar)
+        spCard.style.display = 'flex';
+        calCard.style.display = 'flex';
+        spCard.style.height = `${singleRowH}px`;
+        calCard.style.height = `${singleRowH}px`;
+        calCard.style.maxHeight = `${singleRowH}px`;
+        spCard.classList.add('dash-row-active');
+        calCard.classList.add('dash-row-active');
+
+        // Hide Row 2
+        clockCard.style.display = 'none';
+        weatherCard.style.display = 'none';
+        clockCard.classList.remove('dash-row-active');
+        weatherCard.classList.remove('dash-row-active');
+
+        fitSpotifyArt();
+
+        if (calendarCurrentView === 'today') {
+          renderTodayTimeline();
+        }
+      } else {
+        // Hide Row 1
+        spCard.style.display = 'none';
+        calCard.style.display = 'none';
+        spCard.classList.remove('dash-row-active');
+        calCard.classList.remove('dash-row-active');
+
+        // Show Row 2 (World Clock + Weather)
+        clockCard.style.display = 'flex';
+        weatherCard.style.display = 'flex';
+        clockCard.style.height = `${singleRowH}px`;
+        weatherCard.style.height = `${singleRowH}px`;
+        clockCard.classList.add('dash-row-active');
+        weatherCard.classList.add('dash-row-active');
+
+        syncRow2PrimaryCards();
+      }
+
+      // Update slot capacities for clock and weather when Row 2 is visible
+      if (typeof getClockCardCapacity === 'function' && _currentRotatingRow === 1) {
+        const clockCap = getClockCardCapacity();
+        if (clockCap !== _lastClockCapacity) {
+          updateWorldClocks(false);
+        }
+      }
+      if (typeof getWeatherCardCapacity === 'function' && _currentRotatingRow === 1) {
+        const weatherCap = getWeatherCardCapacity();
+        if (weatherCap !== _lastWeatherCapacity) {
+          renderWeatherForecast();
+        }
+      }
+
+      requestAnimationFrame(() => {
+        _syncingCardConfigs = false;
+      });
+      return;
+    }
+
+    // Dual-row display mode (both rows visible)
+    stopRowRotationTimer();
+    if (rotateBtn) rotateBtn.style.display = 'none';
+
+    spCard.style.display = 'flex';
+    calCard.style.display = 'flex';
+    clockCard.style.display = 'flex';
+    weatherCard.style.display = 'flex';
+    spCard.classList.remove('dash-row-active');
+    calCard.classList.remove('dash-row-active');
+    clockCard.classList.remove('dash-row-active');
+    weatherCard.classList.remove('dash-row-active');
+
+    if (!isRow1Fs && !isRow2Fs) {
+      // In scrolling mode, rows display at their full comfortable baseline heights
+      spCard.style.height = `${desiredRow1}px`;
+      calCard.style.height = `${desiredRow1}px`;
+      calCard.style.maxHeight = `${desiredRow1}px`;
+
+      clockCard.style.height = `${desiredRow2}px`;
+      weatherCard.style.height = `${desiredRow2}px`;
+    } else {
+      // Handle fullscreen cards: each fullscreen card spans its own row
+      if (spConf.fullScreen) {
+        spCard.style.height = `${Math.min(availableGridH, spReq)}px`;
+      }
+      if (calConf.fullScreen) {
+        calCard.style.height = `${Math.min(availableGridH, calReq)}px`;
+        calCard.style.maxHeight = `${Math.min(availableGridH, calReq)}px`;
+      }
+      if (!spConf.fullScreen && !calConf.fullScreen) {
+        spCard.style.height = `${desiredRow1}px`;
+        calCard.style.height = `${desiredRow1}px`;
+        calCard.style.maxHeight = `${desiredRow1}px`;
+      }
+
+      if (clockConf.fullScreen) {
+        clockCard.style.height = `${Math.min(availableGridH, clockReq)}px`;
+      }
+      if (weatherConf.fullScreen) {
+        weatherCard.style.height = `${Math.min(availableGridH, weatherReq)}px`;
+      }
+      if (!clockConf.fullScreen && !weatherConf.fullScreen) {
+        clockCard.style.height = `${desiredRow2}px`;
+        weatherCard.style.height = `${desiredRow2}px`;
+      }
+    }
+
+    // 5. Sync emphasized primary cards in Row 2
+    syncRow2PrimaryCards();
+
+    // 6. Update dynamic slot capacity for clock and weather
+    if (typeof getClockCardCapacity === 'function') {
+      const clockCap = getClockCardCapacity();
+      if (clockCap !== _lastClockCapacity) {
+        updateWorldClocks(false);
+      }
+    }
+    if (typeof getWeatherCardCapacity === 'function') {
+      const weatherCap = getWeatherCardCapacity();
+      if (weatherCap !== _lastWeatherCapacity) {
+        renderWeatherForecast();
+      }
+    }
+
+    fitSpotifyArt();
+
+    requestAnimationFrame(() => {
+      _syncingCardConfigs = false;
+    });
+  }
+
+  function syncCalendarCardHeight() {
+    applyCardConfigs();
+  }
+
+  function syncBottomCardsHeight() {
+    applyCardConfigs();
+  }
+
+  function initCardHeightSync() {
+    applyCardConfigs();
+
+    window.addEventListener('resize', () => {
+      applyCardConfigs();
+    });
+
+    const gridEl = document.querySelector('.dash-grid');
+    if (gridEl) {
+      gridEl.addEventListener('mouseenter', () => { _gridIsHovered = true; });
+      gridEl.addEventListener('mouseleave', () => { _gridIsHovered = false; });
+    }
+
+    const art = document.getElementById('spotify-art');
+    if (art) {
+      art.addEventListener('load', () => {
+        fitSpotifyArt();
+      });
+    }
+  }
+
+  function escapeHtml(str) {
+    return (str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Cross-tab real-time sync with dashboard-settings
+  window.addEventListener('storage', (e) => {
+    if (e.key === KEY_DASHBOARD_NAME) {
+      updateDashboardName();
+    } else if (e.key === KEY_DASHBOARD_HOMEPAGE) {
+      updateDashboardHomepage();
+    } else if (e.key === KEY_WORLD_CLOCKS || e.key === KEY_PRIMARY_TZ) {
+      updateWorldClocks();
+      fetchWeather(true);
+    } else if (e.key === KEY_CAL_EVENTS || e.key === KEY_CAL_FEED || e.key === KEY_CAL_PROXY) {
+      for (const k in _calendarFeedCache) delete _calendarFeedCache[k];
+      loadCalendarEvents();
+    } else if (e.key === KEY_CAL_VIEW_MODE) {
+      applyCalendarViewMode();
+    } else if (e.key === KEY_CAL_TZ_MODE) {
+      updateCalendarTzButton();
+      renderCalendarEventsDisplay();
+    } else if (e.key === KEY_SPOTIFY_TOKEN || e.key === KEY_SPOTIFY_CLIENT_ID) {
+      renderSpotifyState();
+    } else if (e.key === KEY_WIDGET_OVERFLOW_MODE || e.key === KEY_WIDGET_ROTATE_DELAY || e.key === KEY_CARD_CONFIGS || e.key === KEY_SPOTIFY_AUTO_PIN) {
+      stopRowRotationTimer();
+      applyCardConfigs();
+    } else if (e.key === KEY_CLOCK_ROTATE_DELAY) {
+      startClockRollTimer();
+    }
+  });
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', () => {
+      initDashboard();
+    });
+  } else {
+    initDashboard();
+  }
+
+  // World clock rolling interval: advances based on clock rotate delay if alternate zones exceed card capacity
+  let _clockRollInterval = null;
+  function startClockRollTimer() {
+    if (_clockRollInterval) clearInterval(_clockRollInterval);
+    const delaySec = getClockRotateDelay();
+    _clockRollInterval = setInterval(() => {
+      if (_gridIsHovered) return;
+      const allClocks = loadWorldClocks();
+      const primaryTz = getPrimaryTz();
+      const altClocks = allClocks.filter(c => c.tz !== primaryTz);
+      const capacity = typeof getClockCardCapacity === 'function' ? getClockCardCapacity() : 3;
+      if (altClocks.length > capacity) {
+        clockRollIndex = (clockRollIndex + 1) % altClocks.length;
+        updateWorldClocks();
+      }
+    }, delaySec * 1000);
+  }
+
+  startClockRollTimer();
+
+  // Weather polling loop: refreshes every 10 minutes
+  setInterval(() => {
+    fetchWeather();
+  }, 600000);
+
+  // Spotify polling loop: checks every second, fires every 30 seconds
+  setInterval(() => {
+    if (localStorage.getItem(KEY_SPOTIFY_TOKEN)) {
+      const now = Date.now();
+      if (now - lastSpotifySyncTime >= SPOTIFY_POLL_INTERVAL_MS && !isSpotifySyncing) {
+        fetchSpotifyNowPlaying();
+      }
+    }
+  }, 1000);
+
+  // Smooth animation & progress interpolation tick (runs every 250ms)
+  setInterval(() => {
+    if (spotifyTrackState) {
+      renderInterpolatedProgress();
+    }
+  }, 250);
+</script>
+
+
+
+
+    </div>
+
+
+<div class="post-comments"></div>
+</div>
+
+
+  </article></section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --></section>
+</div>
+
+      </section>
+</div>
+    <footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+      <a href="/" style="flex-shrink: 0; display: block;">
+        <img src="/assets/brand/favicon.ico?v=2" alt="logo" style="width: 48px; height: 48px; border-radius: 6px; border: 1.5px solid rgba(128, 128, 128, 0.2); background-color: #ffffff !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);" class="no-lightbox">
+      </a>
+      <div class="footer-text-block">
+<div>david le chan</div>
+        <div>
+<a href="/about">about</a> | <a href="/contact">contact</a> | <a href="/resume">resume</a>
+</div>
+        <div>powered by <a title="Jekyll is a simple, blog-aware, static site
+        generator." href="https://jekyllrb.com/">jekyll</a> &amp; <a title="Yat, yet
+        another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">yat theme</a>
+</div>
+      </div>
+      <div class="footer-track-line"></div>
+    </div>
+  </div>
+</footer>
+</div></main>
+</body>
+</html>

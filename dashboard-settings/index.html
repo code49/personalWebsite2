@@ -1,0 +1,2665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-translate-customization" content="108d9124921d80c3-80e20d618ff053c8-g4f02ec6f3dba68b7-c">
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>dashboard settings | david le chan</title>
+<meta name="generator" content="Jekyll v4.4.1">
+<meta property="og:title" content="dashboard settings">
+<meta name="author" content="code49">
+<meta property="og:locale" content="en">
+<meta name="description" content="Personal website for David Chan!">
+<meta property="og:description" content="Personal website for David Chan!">
+<link rel="canonical" href="https://davidlechan.dev/dashboard-settings/">
+<meta property="og:url" content="https://davidlechan.dev/dashboard-settings/">
+<meta property="og:site_name" content="david le chan">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="dashboard settings">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","author":{"@type":"Person","name":"code49"},"description":"Personal website for David Chan!","headline":"dashboard settings","url":"https://davidlechan.dev/dashboard-settings/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="icon" href="/assets/brand/favicon.ico?v=2">
+  <link rel="canonical" href="https://davidlechan.dev">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-noto-sans@0.0.72/index.min.css">
+  <link rel="stylesheet" href="/assets/css/main.css?v=1793202725">
+  <script src="/assets/js/main.js"></script><link type="application/atom+xml" rel="alternate" href="https://davidlechan.dev/feed.xml" title="david le chan">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<!-- and it's easy to individually load additional languages -->
+<script charset="UTF-8" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/go.min.js" async></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Init highlight js
+document.addEventListener('DOMContentLoaded', function(event) {
+  var els = document.querySelectorAll('pre code')
+
+  function addLangData(block) {
+    var outer = block.parentElement.parentElement.parentElement;
+    var lang = block.getAttribute('data-lang');
+    for (var i = 0; i < outer.classList.length; i++) {
+      var cls = outer.classList[i];
+      if (cls.startsWith('language-')) {
+        lang = cls;
+        break;
+      }
+    }
+    if (!lang) {
+      cls = block.getAttribute('class');
+      lang = cls ? cls.replace('hljs ', '') : '';
+    }
+    if (lang.startsWith('language-')) {
+      lang = lang.substr(9);
+    }
+    block.setAttribute('class', 'hljs ' + lang);
+    block.parentNode.setAttribute('data-lang', lang);
+  }
+
+  function addBadge(block) {
+    var enabled = ('true' || 'true').toLowerCase();
+    if (enabled == 'true') {
+      var pre = block.parentElement;
+      pre.classList.add('badge');
+    }
+  }
+
+  function handle(block) {
+    addLangData(block);
+    addBadge(block)
+    hljs.highlightBlock(block);
+  }
+
+  for (var i = 0; i < els.length; i++) {
+    var el = els[i];
+    handle(el);
+  }
+});
+</script>
+
+<style>
+  /* code language badge */
+  pre.badge::before {
+    content: attr(data-lang);
+    color: #fff;
+    background-color: #8f63ee;
+    padding: 0 .5em;
+    border-radius: 0 2px;
+    text-transform: lowercase;
+    text-align: center;
+    min-width: 32px;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+  }
+
+  /* fix wrong badge display for firefox browser */
+  code > table pre::before {
+    display: none;
+  }
+</style>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe-lightbox.umd.min.js" async></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/umd/photoswipe.umd.min.js" async></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.7/photoswipe.min.css" rel="stylesheet">
+<style>
+  .pswp .pswp__container .pswp__img {
+    background-color: white;
+  }
+</style>
+
+<script>
+  function initPhotoSwipe() {
+    let customOptions = {};
+
+    try {
+      const data = ``.replaceAll("=>", ":");
+      customOptions = JSON.parse(data);
+    } catch (e) {
+      console.info("Invalid custom photo previewer options! " + e.message);
+    }
+
+    // Define object and gallery options
+    const options = Object.assign(
+      {
+        gallery: "section.main",
+        children: "a.photo-swipe",
+        photo_scale: 2,
+        // dynamic import is not supported in UMD version
+        pswpModule: PhotoSwipe,
+      },
+      customOptions
+    );
+
+    const galleryEl = document.querySelector(options.gallery);
+    if (!galleryEl) {
+      return;
+    }
+
+    const imgEls = [];
+    const els = galleryEl.querySelectorAll("img:not(.emoji):not(.no-lightbox)");
+    els.forEach((el) => {
+      if (el.src.trim() == "") {
+        return;
+      }
+      if (!imgEls.includes(el)) {
+        imgEls.push(el);
+      }
+    });
+
+    if (imgEls.length === 0) {
+      return;
+    }
+
+    imgEls.forEach((imgEl) => {
+      imgEl.outerHTML = `
+      <a class="photo-swipe"
+        href="${imgEl.src}"
+        data-pswp-width="${
+          Math.max(imgEl.naturalWidth, imgEl.width) * options.photo_scale
+        }"
+        data-pswp-height="${
+          Math.max(imgEl.naturalHeight, imgEl.height) * options.photo_scale
+        }"
+        data-pswp-caption="${imgEl.getAttribute("caption") || imgEl.alt}"
+        target="_blank">
+        ${imgEl.outerHTML}
+      </a>`;
+    });
+
+    // Initialize PhotoSwipe 5
+    var lightbox = new PhotoSwipeLightbox(options);
+
+    lightbox.init();
+  }
+
+  window.addEventListener("load", initPhotoSwipe);
+</script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&amp;display=swap" rel="stylesheet">
+
+<!-- GoatCounter Analytics -->
+<script data-goatcounter="https://code49.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<header class="site-header " role="banner">
+
+  <div class="wrapper">
+    <div class="site-header-inner">
+<span class="site-brand"><a class="site-brand-inner" rel="author" href="/">
+  <img class="site-favicon" title="david le chan" src="/assets/brand/favicon.ico?v=2" onerror="this.style.display='none'">
+  david le chan
+</a>
+</span><nav class="site-nav">
+          <input type="checkbox" id="nav-trigger" class="nav-trigger">
+          <label for="nav-trigger">
+            <span class="menu-icon">
+              <svg viewbox="0 0 18 15" width="18px" height="15px">
+                <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+              </svg>
+            </span>
+          </label>
+
+          <div class="trigger">
+            <div class="page-link" style="display: inline-block; vertical-align: middle; margin-right: 24px;">
+<div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch">
+    <div class="toggle"></div>
+    <div class="names">
+      <p class="light">☀️</p>
+      <p class="dark">🌙</p>
+    </div>
+  </label>
+</div>
+
+
+
+
+<script>
+  (function() {
+    var sw = document.getElementById('theme-switch');
+    var html = document.getElementsByTagName('html')[0];
+    var nightModeOption = ('auto' || 'auto').toLowerCase();
+    var storage = nightModeOption === 'manual'
+        ? localStorage
+        : sessionStorage;
+    var themeData = loadThemeData();
+
+    function saveThemeData(data) {
+      storage.setItem('theme', JSON.stringify(data));
+    }
+
+    function loadThemeData() {
+      var data = storage.getItem('theme');
+      try {
+        data = JSON.parse(data ? data : '');
+      } catch(e) {
+        data = { nightShift: undefined, autoToggleAt: 0 };
+        saveThemeData(data);
+      }
+      return data;
+    }
+
+    function handleThemeToggle(nightShift) {
+      themeData.nightShift = nightShift;
+      saveThemeData(themeData);
+      html.dataset.theme = nightShift ? 'dark' : 'light';
+      setTimeout(function() {
+        sw.checked = nightShift ? true : false;
+        document.dispatchEvent(new Event('theme-changed'));
+      }, 50);
+    }
+
+    function autoThemeToggle() {
+      // Next time point of theme toggle
+      var now = new Date();
+      var toggleAt = new Date();
+      var hours = now.getHours();
+      var nightShift = hours >= 19 || hours <=7;
+
+      if (nightShift) {
+        if (hours > 7) {
+          toggleAt.setDate(toggleAt.getDate() + 1);
+        }
+        toggleAt.setHours(7);
+      } else {
+        toggleAt.setHours(19);
+      }
+
+      toggleAt.setMinutes(0);
+      toggleAt.setSeconds(0);
+      toggleAt.setMilliseconds(0)
+
+      var delay = toggleAt.getTime() - now.getTime();
+
+      // auto toggle theme mode
+      setTimeout(function() {
+        handleThemeToggle(!nightShift);
+      }, delay);
+
+      return {
+        nightShift: nightShift,
+        toggleAt: toggleAt.getTime()
+      };
+    }
+
+    // Listen the theme toggle event
+    sw.addEventListener('change', function(event) {
+      handleThemeToggle(event.target.checked);
+    });
+
+    if (nightModeOption == 'auto') {
+      var data = autoThemeToggle();
+
+      // Toggle theme by local setting
+      if (data.toggleAt > themeData.autoToggleAt) {
+        themeData.autoToggleAt = data.toggleAt;
+        handleThemeToggle(data.nightShift);
+      } else {
+        handleThemeToggle(themeData.nightShift);
+      }
+    } else if (nightModeOption == 'manual') {
+      handleThemeToggle(themeData.nightShift);
+    } else {
+      var nightShift = themeData.nightShift;
+      if (nightShift === undefined) {
+        nightShift = nightModeOption === 'on';
+      }
+      handleThemeToggle(nightShift);
+    }
+  })();
+</script>
+</div>
+<a class="page-link" href="/">home</a><a class="page-link" href="/tags">explore</a><a class="page-link" href="/contact/">contact</a><a class="page-link" href="/resume">resume</a>
+
+
+
+
+
+
+
+
+
+<div class="page-link" style="display: inline;">
+
+
+
+<div id="google_translate_element" style="display: none;">
+</div>
+
+<div class="ct-language">
+  <ul class="list-unstyled ct-language-dropdown">
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="en">
+          
+          <img src="https://cdn.countryflags.com/thumbs/united-states-of-america/flag-400.png" title="English">
+          
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" class="lang-select" data-lang="zh-CN">
+          
+          <img src="https://cdn.countryflags.com/thumbs/china/flag-400.png" title="Chinese (Simplified)">
+          
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'en',
+    autoDisplay: false,
+    layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+  }, 'google_translate_element');
+
+  // Links to cross-origin destinations are unsafe
+  var gll = document.getElementsByClassName('goog-logo-link')[0];
+  if (gll) {
+    gll.setAttribute('rel', 'noopener');
+  }
+
+  function restoreLang() {
+    var iframe = document.getElementsByClassName('goog-te-banner-frame')[0];
+    if (!iframe) return;
+
+    var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+    var restore_el = innerDoc.getElementsByTagName("button");
+
+    for (var i = 0; i < restore_el.length; i++) {
+      if (restore_el[i].id.indexOf("restore") >= 0) {
+        restore_el[i].click();
+        var close_el = innerDoc.getElementsByClassName("goog-close-link");
+        close_el[0].click();
+        return;
+      }
+    }
+  }
+
+  function triggerHtmlEvent(element, eventName) {
+    var event;
+    if (document.createEvent) {
+      event = document.createEvent('HTMLEvents');
+      event.initEvent(eventName, true, true);
+      element.dispatchEvent(event);
+    } else {
+      event = document.createEventObject();
+      event.eventType = eventName;
+      element.fireEvent('on' + event.eventType, event);
+    }
+  }
+
+  var googleCombo = document.querySelector("select.goog-te-combo");
+  var langSelect = document.querySelector('.ct-language');
+  langSelect.addEventListener('click', function(event) {
+    if (!event.target) {
+      return;
+    }
+
+    var selected = document.querySelector('.ct-language .ct-language-selected');
+    if (selected) {
+      selected.classList.remove('ct-language-selected');
+    }
+
+    var target = event.target;
+    while (target && target !== langSelect ) {
+      if (target.matches('.lang-select')) {
+        break;
+      }
+      target = target.parentElement;
+    }
+
+    if (target && target.matches('.lang-select')) {
+      var lang = target.getAttribute('data-lang');
+      if (googleCombo.value == lang) {
+        restoreLang();
+      } else {
+        target.parentElement.classList.add('ct-language-selected');
+        googleCombo.value = lang;
+        triggerHtmlEvent(googleCombo, 'change');
+      }
+    }
+
+    event.preventDefault();
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+</div>
+</div>
+        </nav>
+</div>
+  </div>
+</header>
+
+<script>
+  function initHeader() {
+    var lastScrollY = getScrollPos().y;
+    var documentElement = document.documentElement;
+
+    function storeScrollData() {
+      var y = getScrollPos().y;var scrollStatus = "";
+
+      if (y <= 0) {
+        scrollStatus = "top";
+      } else if ((window.innerHeight + y) >= document.body.offsetHeight) {
+        scrollStatus = "bottom";
+      } else {
+        var isScrollDown = (y - lastScrollY > 0) ? true : false;
+        scrollStatus = isScrollDown ? "down" : "up";
+      }
+
+      lastScrollY = y;
+      documentElement.setAttribute("data-scroll-status", scrollStatus);
+    }
+
+    window.addEventListener('scroll', function(e) {
+      storeScrollData();
+    });
+
+    storeScrollData();
+  }
+  document.addEventListener('DOMContentLoaded', initHeader);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  function hashLocate(hashValue) {
+    hashValue = hashValue.replace(/^.*#h-/, '');
+    hashValue = decodeURIComponent(hashValue);
+    var element = document.getElementById(hashValue);
+
+    if (!element) {
+      return;
+    }
+
+    var header = document.querySelector('header.site-header');
+    var headerRect = header.getBoundingClientRect();
+    var headerTop = Math.floor(headerRect.top);
+    var headerHeight = Math.floor(headerRect.height);
+    var scrollPos = getScrollPos();
+    var offsetY = element.offsetTop - (headerTop + headerHeight + 20);
+
+    if (offsetY == scrollPos.y) {
+      return;
+    }
+
+    if (headerTop == 0  && offsetY > scrollPos.y) {
+      offsetY += headerHeight + 2;
+    } else if (headerTop < 0  && offsetY < scrollPos.y) {
+      offsetY -= headerHeight - 2;
+    }
+
+    smoothScrollTo(offsetY);
+  }
+
+  // The first event occurred
+  window.addEventListener('load', function(event) {
+    if (window.location.hash) {
+      hashLocate(window.location.hash);
+    }
+  });
+
+  // The first event occurred
+  window.addEventListener('click', function(event) {
+    if (event.target.tagName.toLowerCase() == 'a') {
+      hashLocate(event.target.getAttribute('href'));
+    }
+  });
+</script>
+<div id="click-to-top" class="click-to-top">
+  <i class="fa fa-arrow-up"></i>
+</div>
+<script>
+  (function () {
+    const clickToTop = document.getElementById('click-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        clickToTop.classList.add('show')
+      }else {
+        clickToTop.classList.remove('show')
+      }
+    });
+    clickToTop.addEventListener('click', () => {
+      window.smoothScrollTo(0);
+    });
+  })();
+</script>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="framework">
+  <section class="main">
+
+     <div class="post">
+  <section>
+
+
+
+
+
+
+
+
+
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="post-content e-content" itemprop="articleBody">
+
+      <style>
+  :root,
+  html[data-theme="light"] {
+    --dash-bg: #ffffff;
+    --dash-card-bg: #ffffff;
+    --dash-card-bg-solid: #ffffff;
+    --dash-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    --dash-card-hover-border: rgba(163, 42, 42, 0.35);
+    --dash-card-hover-shadow: 0 6px 20px rgba(0, 0, 0, 0.09);
+
+    --dash-border: #e0e0e0;
+    --dash-border-subtle: #eaeaea;
+    --dash-sub-card-bg: #f8f9fa;
+    --dash-sub-card-border: #e5e7eb;
+
+    --dash-input-bg: #ffffff;
+    --dash-input-border: #d0d4dc;
+    --dash-input-focus-border: #a32a2a;
+    --dash-input-focus-shadow: rgba(163, 42, 42, 0.2);
+
+    --dash-text-pri: #1d1f21;
+    --dash-text-sec: #4a4d52;
+    --dash-text-muted: #71767b;
+
+    --dash-accent: #a32a2a;
+    --dash-accent-hover: #801b1b;
+    --dash-accent-dim: rgba(163, 42, 42, 0.08);
+    --dash-accent-border: rgba(163, 42, 42, 0.3);
+
+    --dash-btn-bg: #ffffff;
+    --dash-btn-border: #d8dce2;
+    --dash-btn-text: #33383f;
+    --dash-btn-hover-border: #a32a2a;
+    --dash-btn-hover-text: #a32a2a;
+    --dash-btn-hover-bg: #fdfaf9;
+
+    --dash-btn-pri-bg: #a32a2a;
+    --dash-btn-pri-color: #ffffff;
+    --dash-btn-pri-border: #a32a2a;
+    --dash-btn-pri-hover-bg: #801b1b;
+    --dash-btn-pri-hover-color: #ffffff;
+    --dash-btn-pri-hover-border: #801b1b;
+    --dash-btn-pri-hover-shadow: 0 4px 12px rgba(163, 42, 42, 0.25);
+
+    --dash-btn-danger-bg: rgba(217, 4, 41, 0.08);
+    --dash-btn-danger-color: #d90429;
+    --dash-btn-danger-border: rgba(217, 4, 41, 0.25);
+    --dash-btn-danger-hover-bg: #d90429;
+    --dash-btn-danger-hover-color: #ffffff;
+
+    --dash-badge-active-bg: rgba(43, 147, 72, 0.1);
+    --dash-badge-active-color: #227c3e;
+    --dash-badge-active-border: rgba(43, 147, 72, 0.3);
+
+    --dash-badge-idle-bg: rgba(0, 0, 0, 0.05);
+    --dash-badge-idle-color: #666666;
+    --dash-badge-idle-border: #dcdcdc;
+
+    --dash-badge-warn-bg: rgba(224, 159, 62, 0.1);
+    --dash-badge-warn-color: #b07206;
+    --dash-badge-warn-border: rgba(224, 159, 62, 0.3);
+
+    --dash-mono: "JetBrains Mono", "JetBrains Mono Nerd Font", ui-monospace, monospace;
+    --dash-green: #2b9348;
+    --dash-yellow: #e09f3e;
+    --dash-red: #d90429;
+    --dash-sky: #0284c7;
+  }
+
+  html[data-theme="dark"] {
+    --dash-bg: #1d1f21;
+    --dash-card-bg: rgba(40, 42, 46, 0.75);
+    --dash-card-bg-solid: #282a2e;
+    --dash-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    --dash-card-hover-border: rgba(189, 178, 255, 0.35);
+    --dash-card-hover-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+
+    --dash-border: #373b41;
+    --dash-border-subtle: rgba(55, 59, 65, 0.6);
+    --dash-sub-card-bg: rgba(29, 31, 33, 0.55);
+    --dash-sub-card-border: rgba(55, 59, 65, 0.45);
+
+    --dash-input-bg: #1d1f21;
+    --dash-input-border: #373b41;
+    --dash-input-focus-border: #bdb2ff;
+    --dash-input-focus-shadow: rgba(189, 178, 255, 0.25);
+
+    --dash-text-pri: #e0e0e0;
+    --dash-text-sec: #c5c8c6;
+    --dash-text-muted: #969896;
+
+    --dash-accent: #bdb2ff;
+    --dash-accent-hover: #8f63ee;
+    --dash-accent-dim: rgba(189, 178, 255, 0.15);
+    --dash-accent-border: rgba(189, 178, 255, 0.4);
+
+    --dash-btn-bg: #282a2e;
+    --dash-btn-border: #373b41;
+    --dash-btn-text: #c5c8c6;
+    --dash-btn-hover-border: #bdb2ff;
+    --dash-btn-hover-text: #e0e0e0;
+    --dash-btn-hover-bg: #282a2e;
+
+    --dash-btn-pri-bg: rgba(189, 178, 255, 0.15);
+    --dash-btn-pri-color: #bdb2ff;
+    --dash-btn-pri-border: rgba(189, 178, 255, 0.4);
+    --dash-btn-pri-hover-bg: rgba(189, 178, 255, 0.25);
+    --dash-btn-pri-hover-color: #ffffff;
+    --dash-btn-pri-hover-border: rgba(189, 178, 255, 0.5);
+    --dash-btn-pri-hover-shadow: 0 0 10px rgba(189, 178, 255, 0.35);
+
+    --dash-btn-danger-bg: rgba(255, 173, 173, 0.12);
+    --dash-btn-danger-color: #ffadad;
+    --dash-btn-danger-border: rgba(255, 173, 173, 0.3);
+    --dash-btn-danger-hover-bg: rgba(255, 173, 173, 0.22);
+    --dash-btn-danger-hover-color: #ffffff;
+
+    --dash-badge-active-bg: rgba(202, 255, 191, 0.15);
+    --dash-badge-active-color: #caffbf;
+    --dash-badge-active-border: rgba(202, 255, 191, 0.4);
+
+    --dash-badge-idle-bg: rgba(150, 152, 150, 0.15);
+    --dash-badge-idle-color: #969896;
+    --dash-badge-idle-border: #373b41;
+
+    --dash-badge-warn-bg: rgba(253, 255, 182, 0.15);
+    --dash-badge-warn-color: #fdffb6;
+    --dash-badge-warn-border: rgba(253, 255, 182, 0.4);
+
+    --dash-mono: "JetBrains Mono", "JetBrains Mono Nerd Font", ui-monospace, monospace;
+    --dash-green: #caffbf;
+    --dash-yellow: #fdffb6;
+    --dash-red: #ffadad;
+    --dash-sky: #9bf6ff;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]) {
+      --dash-bg: #1d1f21;
+      --dash-card-bg: rgba(40, 42, 46, 0.75);
+      --dash-card-bg-solid: #282a2e;
+      --dash-card-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      --dash-card-hover-border: rgba(189, 178, 255, 0.35);
+      --dash-card-hover-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+      --dash-border: #373b41;
+      --dash-border-subtle: rgba(55, 59, 65, 0.6);
+      --dash-sub-card-bg: rgba(29, 31, 33, 0.55);
+      --dash-sub-card-border: rgba(55, 59, 65, 0.45);
+      --dash-input-bg: #1d1f21;
+      --dash-input-border: #373b41;
+      --dash-input-focus-border: #bdb2ff;
+      --dash-input-focus-shadow: rgba(189, 178, 255, 0.25);
+      --dash-text-pri: #e0e0e0;
+      --dash-text-sec: #c5c8c6;
+      --dash-text-muted: #969896;
+      --dash-accent: #bdb2ff;
+      --dash-accent-hover: #8f63ee;
+      --dash-accent-dim: rgba(189, 178, 255, 0.15);
+      --dash-accent-border: rgba(189, 178, 255, 0.4);
+      --dash-btn-bg: #282a2e;
+      --dash-btn-border: #373b41;
+      --dash-btn-text: #c5c8c6;
+      --dash-btn-hover-border: #bdb2ff;
+      --dash-btn-hover-text: #e0e0e0;
+      --dash-btn-hover-bg: #282a2e;
+      --dash-btn-pri-bg: rgba(189, 178, 255, 0.15);
+      --dash-btn-pri-color: #bdb2ff;
+      --dash-btn-pri-border: rgba(189, 178, 255, 0.4);
+      --dash-btn-pri-hover-bg: rgba(189, 178, 255, 0.25);
+      --dash-btn-pri-hover-color: #ffffff;
+      --dash-btn-pri-hover-border: rgba(189, 178, 255, 0.5);
+      --dash-btn-pri-hover-shadow: 0 0 10px rgba(189, 178, 255, 0.35);
+      --dash-btn-danger-bg: rgba(255, 173, 173, 0.12);
+      --dash-btn-danger-color: #ffadad;
+      --dash-btn-danger-border: rgba(255, 173, 173, 0.3);
+      --dash-btn-danger-hover-bg: rgba(255, 173, 173, 0.22);
+      --dash-btn-danger-hover-color: #ffffff;
+      --dash-badge-active-bg: rgba(202, 255, 191, 0.15);
+      --dash-badge-active-color: #caffbf;
+      --dash-badge-active-border: rgba(202, 255, 191, 0.4);
+      --dash-badge-idle-bg: rgba(150, 152, 150, 0.15);
+      --dash-badge-idle-color: #969896;
+      --dash-badge-idle-border: #373b41;
+      --dash-badge-warn-bg: rgba(253, 255, 182, 0.15);
+      --dash-badge-warn-color: #fdffb6;
+      --dash-badge-warn-border: rgba(253, 255, 182, 0.4);
+      --dash-mono: "JetBrains Mono", "JetBrains Mono Nerd Font", ui-monospace, monospace;
+      --dash-green: #caffbf;
+      --dash-yellow: #fdffb6;
+      --dash-red: #ffadad;
+      --dash-sky: #9bf6ff;
+    }
+  }
+
+  /* Remove site top bar on dashboard settings view */
+  header.site-header {
+    display: none !important;
+  }
+  .page-content {
+    padding-top: 24px !important;
+  }
+
+  .dash-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .dash-logo-link:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  .settings-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 10px 0 40px 0;
+    color: var(--dash-text-pri);
+  }
+
+  .settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--dash-border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    gap: 16px;
+  }
+
+  .settings-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dash-text-pri);
+    text-transform: lowercase;
+    line-height: 1;
+  }
+
+  .settings-subtitle {
+    margin: 4px 0 0 0;
+    font-size: 0.85rem;
+    color: var(--dash-text-muted);
+    font-family: var(--dash-mono);
+  }
+
+  .settings-card {
+    background: var(--dash-card-bg);
+    border: 1px solid var(--dash-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--dash-card-shadow);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .settings-card:hover {
+    border-color: var(--dash-card-hover-border);
+  }
+
+  .settings-sub-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-border-subtle);
+    border-radius: 8px;
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+  }
+
+  .settings-sub-card:hover {
+    border-color: var(--dash-card-hover-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+
+  .settings-card-title {
+    font-size: 0.96rem;
+    font-weight: 600;
+    text-transform: lowercase;
+    margin: 0 0 14px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--dash-border-subtle);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dash-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    border-radius: 6px;
+    background: var(--dash-input-bg);
+    border: 1px solid var(--dash-input-border);
+    color: var(--dash-text-pri);
+    font-family: var(--dash-mono);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .dash-input:focus {
+    border-color: var(--dash-input-focus-border);
+    box-shadow: 0 0 8px var(--dash-input-focus-shadow);
+  }
+
+  .dash-field-label {
+    display: block;
+    font-size: 0.78rem;
+    font-family: var(--dash-mono);
+    color: var(--dash-text-sec);
+    text-transform: lowercase;
+    margin-bottom: 6px;
+  }
+
+  .dash-helper-text {
+    font-size: 0.72rem;
+    color: var(--dash-text-muted);
+    font-family: var(--dash-mono);
+    margin-top: -4px;
+    margin-bottom: 14px;
+    line-height: 1.4;
+  }
+
+  .dash-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-family: var(--dash-mono);
+    text-transform: lowercase;
+    cursor: pointer;
+    border: 1px solid var(--dash-btn-border);
+    background: var(--dash-btn-bg);
+    color: var(--dash-btn-text);
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .dash-btn:hover {
+    border-color: var(--dash-btn-hover-border);
+    color: var(--dash-btn-hover-text);
+    background: var(--dash-btn-hover-bg);
+  }
+
+  .dash-btn-primary {
+    background: var(--dash-btn-pri-bg);
+    color: var(--dash-btn-pri-color);
+    border-color: var(--dash-btn-pri-border);
+  }
+
+  .dash-btn-primary:hover {
+    background: var(--dash-btn-pri-hover-bg);
+    color: var(--dash-btn-pri-hover-color);
+    border-color: var(--dash-btn-pri-hover-border);
+    box-shadow: var(--dash-btn-pri-hover-shadow);
+  }
+
+  .dash-btn-danger {
+    background: var(--dash-btn-danger-bg);
+    color: var(--dash-btn-danger-color);
+    border-color: var(--dash-btn-danger-border);
+  }
+
+  .dash-btn-danger:hover {
+    background: var(--dash-btn-danger-hover-bg);
+    color: var(--dash-btn-danger-hover-color);
+  }
+
+  .dash-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-family: var(--dash-mono);
+    text-transform: lowercase;
+    border: 1px solid var(--dash-border);
+  }
+
+  .dash-badge-active {
+    background: var(--dash-badge-active-bg);
+    color: var(--dash-badge-active-color);
+    border-color: var(--dash-badge-active-border);
+  }
+
+  .dash-badge-idle {
+    background: var(--dash-badge-idle-bg);
+    color: var(--dash-badge-idle-color);
+    border-color: var(--dash-badge-idle-border);
+  }
+
+  .dash-badge-warn {
+    background: var(--dash-badge-warn-bg);
+    color: var(--dash-badge-warn-color);
+    border-color: var(--dash-badge-warn-border);
+  }
+
+  .dash-mono {
+    font-family: var(--dash-mono) !important;
+  }
+
+  /* View Mode Selector Cards */
+  .dash-view-mode-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .dash-view-mode-option {
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    display: flex;
+  }
+
+  .dash-view-mode-option input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .dash-view-mode-card {
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-sub-card-border);
+    border-radius: 6px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+  }
+
+  .dash-view-mode-card:hover {
+    border-color: var(--dash-border);
+    background: var(--dash-card-bg-solid);
+  }
+
+  .dash-view-mode-option input:checked + .dash-view-mode-card {
+    border-color: var(--dash-accent);
+    background: var(--dash-accent-dim);
+    box-shadow: 0 0 8px var(--dash-accent-dim);
+  }
+
+  .dash-view-mode-title {
+    font-family: var(--dash-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--dash-text-pri);
+    text-transform: lowercase;
+  }
+
+  .dash-view-mode-option input:checked + .dash-view-mode-card .dash-view-mode-title {
+    color: var(--dash-accent);
+  }
+
+  .dash-view-mode-desc {
+    font-size: 0.68rem;
+    color: var(--dash-text-muted);
+    line-height: 1.3;
+  }
+</style>
+
+<div class="settings-container">
+  <div class="settings-header">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a id="settings-logo-link" href="https://davidlechan.dev" class="dash-logo-link" title="visit homepage">
+        <img class="site-favicon" title="david le chan" src="/assets/brand/favicon.ico?v=2" onerror="this.style.display='none'" style="height: 34px; width: 34px; border-radius: 6px; background-color: #ffffff !important; object-fit: contain; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
+      </a>
+      <h1 class="settings-title" style="margin: 0; line-height: 1;">dashboard settings</h1>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div class="theme-toggle">
+        <input type="checkbox" id="settings-theme-switch">
+        <label for="settings-theme-switch" title="toggle light/dark theme">
+          <div class="toggle"></div>
+          <div class="names">
+            <p class="light">☀️</p>
+            <p class="dark">🌙</p>
+          </div>
+        </label>
+      </div>
+      <a href="/dashboard/" class="dash-btn dash-btn-primary">
+        <span>← back to dashboard</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 0. Config Backup & Transfer (Import / Export) -->
+  <div class="settings-card">
+    <div class="settings-card-title">
+      <span>config backup &amp; transfer</span>
+      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">v<span id="settings-version-badge" style="color: var(--dash-accent);">00</span></span>
+    </div>
+
+    <div>
+      <p style="font-size: 0.82rem; color: var(--dash-text-sec); margin-top: 0; line-height: 1.45;">
+        all credentials, custom time zones, and settings live locally in your browser storage.
+        export your config to transfer setup to another machine or browser profile, or import a template.json.
+      </p>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button type="button" onclick="exportConfig()" class="dash-btn" style="flex: 1; min-width: 160px;">
+          export config.json
+        </button>
+        <button type="button" onclick="triggerImportConfig()" class="dash-btn" style="flex: 1; min-width: 160px;">
+          import config.json
+        </button>
+        <input type="file" id="config-file-input" accept=".json,application/json" onchange="handleConfigFileImport(event)" style="display: none;">
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. Profile & Navigation Settings -->
+  <div class="settings-card">
+    <div class="settings-card-title">
+      <span>profile &amp; navigation</span>
+      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">customization</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div>
+        <label class="dash-field-label">your name</label>
+        <input type="text" id="setting-user-name" class="dash-input" placeholder="david">
+        <div class="dash-helper-text">
+          customizes the dashboard header title ("{name}'s personal dashboard").
+        </div>
+      </div>
+
+      <div>
+        <label class="dash-field-label">homepage redirect url</label>
+        <input type="text" id="setting-homepage-url" class="dash-input" placeholder="https://davidlechan.dev">
+        <div class="dash-helper-text">
+          destination for the dashboard header homepage button and logo (default: https://davidlechan.dev).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 0b. Layout & Overflow Mode -->
+  <div class="settings-card">
+    <div class="settings-card-title">
+      <span>layout &amp; overflow mode</span>
+      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">display</span>
+    </div>
+
+    <div>
+      <label class="dash-field-label">widget layout mode</label>
+      <div class="dash-view-mode-selector">
+        <label class="dash-view-mode-option">
+          <input type="radio" name="widget-overflow-mode" value="rotating" onchange="saveWidgetOverflowMode('rotating')">
+          <div class="dash-view-mode-card">
+            <span class="dash-view-mode-title">rotating</span>
+            <span class="dash-view-mode-desc">show one row at full fitting height and auto-swap rows</span>
+          </div>
+        </label>
+        <label class="dash-view-mode-option">
+          <input type="radio" name="widget-overflow-mode" value="scrolling" onchange="saveWidgetOverflowMode('scrolling')">
+          <div class="dash-view-mode-card">
+            <span class="dash-view-mode-title">scrolling</span>
+            <span class="dash-view-mode-desc">show all rows simultaneously with page scrolling</span>
+          </div>
+        </label>
+      </div>
+      <div class="dash-helper-text">
+        select rotating mode to cycle rows at full height, or scrolling mode to display all rows.
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dash-border);">
+        <label class="dash-field-label">rotation delay (seconds)</label>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <input type="number" id="setting-widget-rotate-delay" class="dash-input" min="3" max="300" placeholder="30" style="max-width: 140px; margin-bottom: 0;" onchange="saveWidgetRotateDelay(this.value)">
+          <span class="dash-mono" style="font-size: 0.78rem; color: var(--dash-text-muted);">seconds (default: 30s)</span>
+        </div>
+        <div class="dash-helper-text">
+          time to display each widget row before rotating to the next row.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. Spotify Application Settings -->
+  <div class="settings-card">
+    <div class="settings-card-title">
+      <span>spotify integration</span>
+      <span id="spotify-conn-badge" class="dash-badge dash-badge-idle">unconfigured</span>
+    </div>
+
+    <div>
+      <label class="dash-field-label">spotify client id</label>
+      <input type="text" id="setting-spotify-client-id" class="dash-input" placeholder="e.g. fe79fa8d...">
+      <div class="dash-helper-text" style="margin-bottom: 10px;">
+        in <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener" style="color: var(--dash-accent); text-decoration: underline;">developer.spotify.com</a>, add this exact redirect uri:
+        <div style="margin: 6px 0 4px 0;">
+          <code id="spotify-redirect-uri-text" style="color: var(--dash-accent); user-select: all; display: inline-block; padding: 3px 8px; background: var(--dash-bg); border: 1px solid var(--dash-border); border-radius: 4px;"></code>
+        </div>
+        <div style="font-size: 0.72rem; color: var(--dash-text-muted); margin-top: 4px;">
+          important: spotify requires <code>https://</code>. whitelist both <code>https://davidlechan.dev/dashboard/</code> and <code>https://davidlechan.dev/dashboard</code> to prevent matching errors.
+        </div>
+      </div>
+
+      <div style="margin-bottom: 14px;">
+        <label class="dash-field-label">custom redirect uri (optional)</label>
+        <input type="text" id="setting-spotify-redirect-uri" class="dash-input" placeholder="e.g. https://davidlechan.dev/dashboard/ (leave empty for auto)" style="margin-bottom: 4px;">
+        <div class="dash-helper-text">
+          override the redirect uri sent to spotify accounts oauth.
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <button type="button" id="spotify-auth-btn" onclick="toggleSpotifyAuth()" class="dash-btn">
+          sign in with spotify
+        </button>
+        <span id="spotify-auth-status" class="dash-mono" style="font-size: 0.75rem; color: var(--dash-text-muted);">
+          pkce flow | no client secrets stored
+        </span>
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dash-border);">
+        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none;">
+          <input type="checkbox" id="setting-spotify-auto-pin" onchange="saveSpotifyAutoPin(this.checked)" style="cursor: pointer;">
+          <span style="font-size: 0.85rem; color: var(--dash-text-sec);">pin spotify widget while music is playing</span>
+        </label>
+        <div class="dash-helper-text" style="margin-top: 4px;">
+          when active and music plays, spotify stays pinned in slot 1 while the other slot cycles through all non-pinned widgets.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. World Clock & Time Zones -->
+  <div class="settings-card">
+    <div class="settings-card-title">
+      <span>world clock &amp; primary time zone</span>
+      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">multi-zone</span>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+      <label class="dash-field-label">primary / home time zone</label>
+      <select id="setting-primary-tz" class="dash-input" style="cursor: pointer;" onchange="savePrimaryTz(this.value)">
+        <option value="auto">auto-detect (infer from system time)</option>
+      </select>
+      <div class="dash-helper-text">
+        the primary zone receives emphasized visual placement with live seconds and date.
+      </div>
+    </div>
+
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <label class="dash-field-label" style="margin-bottom: 0;">alternate time zones</label>
+        <span class="dash-mono" style="font-size: 0.7rem; color: var(--dash-text-muted);">cards list</span>
+      </div>
+
+      <div id="settings-tz-cards" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+        <!-- Dynamically populated timezone cards -->
+      </div>
+
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <input type="text" id="new-tz-name" class="dash-input" placeholder="name (e.g. Pittsburgh)" style="margin-bottom: 0; flex: 1; min-width: 140px;">
+        <input type="text" id="new-tz-iana" class="dash-input" placeholder="zone (e.g. America/New_York)" style="margin-bottom: 0; flex: 1.4; min-width: 180px;" list="common-iana-zones">
+        <datalist id="common-iana-zones">
+          <option value="America/New_York">Pittsburgh / New York (EST/EDT)</option>
+          <option value="America/Chicago">Austin / Chicago (CST/CDT)</option>
+          <option value="America/Denver">Denver (MST/MDT)</option>
+          <option value="America/Los_Angeles">San Francisco (PST/PDT)</option>
+          <option value="Europe/London">London (GMT/BST)</option>
+          <option value="Europe/Paris">Paris / Berlin (CET/CEST)</option>
+          <option value="Asia/Tokyo">Tokyo (JST)</option>
+          <option value="Asia/Hong_Kong">Hong Kong (HKT)</option>
+          <option value="Asia/Shanghai">Shanghai / Beijing (CST)</option>
+          <option value="Asia/Singapore">Singapore (SGT)</option>
+          <option value="Asia/Seoul">Seoul (KST)</option>
+          <option value="Australia/Sydney">Sydney (AEST/AEDT)</option>
+          <option value="UTC">UTC</option>
+        </datalist>
+        <button type="button" onclick="addTimeZoneCard()" class="dash-btn dash-btn-primary" style="white-space: nowrap; padding: 10px 14px;">
+          + add zone
+        </button>
+      </div>
+      <div id="tz-error-msg" style="color: var(--dash-red); font-size: 0.72rem; margin-top: 6px; display: none;"></div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dash-border);">
+        <label class="dash-field-label">alternate zones rotation delay (seconds)</label>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <input type="number" id="setting-clock-rotate-delay" class="dash-input" min="2" max="300" placeholder="10" style="max-width: 140px; margin-bottom: 0;" onchange="saveClockRotateDelay(this.value)">
+          <span class="dash-mono" style="font-size: 0.78rem; color: var(--dash-text-muted);">seconds (default: 10s)</span>
+        </div>
+        <div class="dash-helper-text">
+          time to display each set of alternate time zone rows before cycling to the next set.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Calendar Feeds -->
+  <div class="settings-card">
+    <div class="settings-card-title">
+      <span>calendar feeds</span>
+      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">ical / ics</span>
+    </div>
+
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <label class="dash-field-label" style="margin-bottom: 0;">subscribed ical feeds</label>
+        <span class="dash-mono" style="font-size: 0.7rem; color: var(--dash-text-muted);">remote calendars</span>
+      </div>
+
+      <div id="settings-cal-feed-cards" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+        <!-- Dynamically populated calendar feed cards -->
+      </div>
+
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <input type="text" id="new-cal-feed-name" class="dash-input" placeholder="feed name (e.g. Work, School)" style="margin-bottom: 0; flex: 1; min-width: 140px;">
+        <input type="url" id="new-cal-feed-url" class="dash-input" placeholder="ical/ics url (https://.../basic.ics)" style="margin-bottom: 0; flex: 2; min-width: 220px;">
+        <input type="text" id="new-cal-feed-tz" class="dash-input" placeholder="tz (optional, e.g. America/Los_Angeles)" style="margin-bottom: 0; flex: 1; min-width: 140px;">
+        <button type="button" onclick="addCalendarFeedCard()" class="dash-btn dash-btn-primary" style="white-space: nowrap; padding: 10px 14px;">
+          + add feed
+        </button>
+      </div>
+      <div id="cal-feed-error-msg" style="color: var(--dash-red); font-size: 0.72rem; margin-top: 6px; display: none;"></div>
+
+      <div class="dash-helper-text" style="margin-top: 10px;">
+        enter private or public ics feed links from google calendar, apple calendar, or outlook.
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dash-border);">
+        <label class="dash-field-label">calendar display mode</label>
+        <div class="dash-view-mode-selector">
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-view-mode" value="smart" onchange="saveCalViewMode('smart')">
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">smart</span>
+              <span class="dash-view-mode-desc">today if events remain, otherwise agenda</span>
+            </div>
+          </label>
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-view-mode" value="rotate" onchange="saveCalViewMode('rotate')">
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">rotate</span>
+              <span class="dash-view-mode-desc">auto-rotate every 14s between views</span>
+            </div>
+          </label>
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-view-mode" value="agenda" onchange="saveCalViewMode('agenda')">
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">agenda</span>
+              <span class="dash-view-mode-desc">always show upcoming scrollable list</span>
+            </div>
+          </label>
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-view-mode" value="today" onchange="saveCalViewMode('today')">
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">today</span>
+              <span class="dash-view-mode-desc">always show 24h timeline with red line</span>
+            </div>
+          </label>
+        </div>
+        <div class="dash-helper-text">
+          select how the calendar widget displays events on your dashboard.
+        </div>
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dash-border);">
+        <label class="dash-field-label">calendar time zone display</label>
+        <div class="dash-view-mode-selector">
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-tz-mode" value="event" onchange="saveCalTzMode('event')">
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">event tz</span>
+              <span class="dash-view-mode-desc">show in event native time zone with local conversion</span>
+            </div>
+          </label>
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-tz-mode" value="primary" onchange="saveCalTzMode('primary')">
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">primary tz</span>
+              <span class="dash-view-mode-desc">convert all events to dashboard primary time zone</span>
+            </div>
+          </label>
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-tz-mode" value="local" onchange="saveCalTzMode('local')">
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">local tz</span>
+              <span class="dash-view-mode-desc">convert all events to browser local time zone</span>
+            </div>
+          </label>
+        </div>
+        <div class="dash-helper-text">
+          select the reference time zone for displaying event times and badges in the calendar widget.
+        </div>
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dash-border);">
+        <label class="dash-field-label">cors proxy bridge (optional)</label>
+        <input type="text" id="setting-cal-proxy" class="dash-input" placeholder="e.g. https://calendar-worker.davidlechan.workers.dev/?url=" style="margin-bottom: 4px;">
+        <div class="dash-helper-text">
+          most calendar providers block browser requests (cors). provide a custom cors proxy prefix or leave empty for automated fallback.
+        </div>
+
+        <!-- Cloudflare Calendar Worker Setup Instructions -->
+        <details style="margin-top: 10px; background: var(--dash-sub-card-bg); border: 1px solid var(--dash-border); border-radius: 6px; padding: 12px 14px;">
+          <summary style="cursor: pointer; font-size: 0.78rem; font-weight: 600; color: var(--dash-accent); font-family: var(--dash-mono); user-select: none;">
+            cloudflare calendar worker setup guide ▾
+          </summary>
+          <div style="margin-top: 10px; font-size: 0.78rem; color: var(--dash-text-sec); line-height: 1.5;">
+            <p style="margin: 0 0 8px 0;">
+              Google Calendar, Apple iCloud, and Outlook block browser requests (CORS). Deploy a free Cloudflare Worker to proxy calendar feeds securely:
+            </p>
+            <ol style="margin: 0 0 10px 0; padding-left: 20px;">
+              <li style="margin-bottom: 4px;">Log in to <a href="https://workers.cloudflare.com" target="_blank" rel="noopener" style="color: var(--dash-accent); text-decoration: underline;">workers.cloudflare.com</a> and choose <strong>Workers &amp; Pages &gt; Create Application &gt; Create Worker</strong>.</li>
+              <li style="margin-bottom: 4px;">Name your worker (e.g. <code>calendar-worker</code>) and click <strong>Deploy</strong>.</li>
+              <li style="margin-bottom: 4px;">Click <strong>Edit Code</strong> and replace the code with the script below:</li>
+            </ol>
+            <div style="position: relative; margin-bottom: 10px;">
+              <pre id="cloudflare-worker-code" class="dash-mono" style="margin: 0; padding: 10px 12px; background: var(--dash-bg); border: 1px solid var(--dash-border); border-radius: 4px; font-size: 0.72rem; color: var(--dash-text-pri); overflow-x: auto; white-space: pre;">export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+    const targetUrl = url.searchParams.get('url');
+    if (!targetUrl) {
+      return new Response('Missing ?url= parameter', { status: 400 });
+    }
+
+    const corsHeaders = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, OPTIONS',
+      'Access-Control-Allow-Headers': '*',
+    };
+
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { headers: corsHeaders });
+    }
+
+    try {
+      const res = await fetch(targetUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; CalendarWorker/1.0)' },
+      });
+      const body = await res.text();
+      return new Response(body, {
+        status: res.status,
+        headers: {
+          ...corsHeaders,
+          'Content-Type': 'text/calendar; charset=utf-8',
+          'Cache-Control': 'public, max-age=300',
+        },
+      });
+    } catch (err) {
+      return new Response('Proxy Error: ' + err.message, {
+        status: 502,
+        headers: corsHeaders,
+      });
+    }
+  },
+};</pre>
+              <button type="button" onclick="copyWorkerCode()" class="dash-btn" style="margin-top: 8px; font-size: 0.72rem; padding: 4px 10px;">
+                copy worker script
+              </button>
+            </div>
+            <ol start="4" style="margin: 0; padding-left: 20px;">
+              <li style="margin-bottom: 4px;">Click <strong>Deploy</strong>.</li>
+              <li>Copy your worker URL (e.g. <code>https://calendar-worker.&lt;subdomain&gt;.workers.dev/?url=</code>) into the input above and click <strong>Save Settings</strong>.</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Save Action Bar -->
+  <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 30px 0 20px 0;">
+
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+    <div id="save-status-msg" class="dash-mono" style="font-size: 0.78rem; color: var(--dash-green); display: none;">
+      settings saved
+    </div>
+    <div style="display: flex; gap: 10px; margin-left: auto;">
+      <a href="/dashboard/" class="dash-btn">
+        view dashboard ↗
+      </a>
+      <button type="button" onclick="saveAllSettings()" class="dash-btn dash-btn-primary" style="padding: 9px 20px;">
+        save settings
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const KEY_DASHBOARD_NAME = 'dash_user_name';
+  const KEY_DASHBOARD_HOMEPAGE = 'dash_homepage_url';
+  const KEY_SETTINGS_VERSION = 'dash_settings_version';
+  const CURRENT_SETTINGS_VERSION = '00';
+  const KEY_SPOTIFY_CLIENT_ID = 'dash_spotify_client_id';
+  const KEY_SPOTIFY_REDIRECT_URI = 'dash_spotify_redirect_uri';
+  const KEY_SPOTIFY_TOKEN = 'dash_spotify_token';
+  const KEY_SPOTIFY_REFRESH = 'dash_spotify_refresh';
+  const KEY_SPOTIFY_EXPIRY = 'dash_spotify_expiry';
+  const KEY_CAL_FEED = 'dash_cal_feed';
+  const KEY_CAL_PROXY = 'dash_cal_proxy';
+  const KEY_CAL_VIEW_MODE = 'dash_cal_view_mode';
+  const KEY_CAL_TZ_MODE = 'dash_cal_tz_mode';
+  const KEY_CAL_EVENTS = 'dash_cal_events';
+  const KEY_NOTES = 'dash_scratchpad_notes';
+  const KEY_WORLD_CLOCKS = 'dash_world_clocks';
+  const KEY_PRIMARY_TZ = 'dash_primary_tz';
+  const KEY_CARD_CONFIGS = 'dash_card_configs';
+  const KEY_WIDGET_OVERFLOW_MODE = 'dash_widget_overflow_mode';
+  const KEY_WIDGET_ROTATE_DELAY = 'dash_widget_rotate_delay';
+  const KEY_CLOCK_ROTATE_DELAY = 'dash_clock_rotate_delay';
+  const KEY_SPOTIFY_AUTO_PIN = 'dash_spotify_auto_pin';
+
+  // Standardized Card Configurations
+  const DEFAULT_CARD_CONFIGS = {
+    'spotify-card': {
+      id: 'spotify-card',
+      name: 'spotify',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'cal-card': {
+      id: 'cal-card',
+      name: 'calendar',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'world-clock-card': {
+      id: 'world-clock-card',
+      name: 'world clock',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'weather-card': {
+      id: 'weather-card',
+      name: 'weather',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    }
+  };
+
+  function loadCardConfigs() {
+    try {
+      const raw = localStorage.getItem(KEY_CARD_CONFIGS);
+      if (!raw) return { ...DEFAULT_CARD_CONFIGS };
+      const parsed = JSON.parse(raw);
+      const merged = { ...DEFAULT_CARD_CONFIGS };
+      Object.keys(DEFAULT_CARD_CONFIGS).forEach(id => {
+        if (parsed[id]) {
+          merged[id] = { ...DEFAULT_CARD_CONFIGS[id], ...parsed[id] };
+        }
+      });
+      return merged;
+    } catch (e) {
+      return { ...DEFAULT_CARD_CONFIGS };
+    }
+  }
+
+  function saveCardConfigs(configs) {
+    localStorage.setItem(KEY_CARD_CONFIGS, JSON.stringify(configs));
+  }
+
+  const DEFAULT_WORLD_CLOCKS = [
+    { name: 'San Francisco', tz: 'America/Los_Angeles' },
+    { name: 'Austin', tz: 'America/Chicago' },
+    { name: 'Pittsburgh', tz: 'America/New_York' },
+    { name: 'London', tz: 'Europe/London' },
+    { name: 'Tokyo', tz: 'Asia/Tokyo' }
+  ];
+
+  function getRedirectUri() {
+    const custom = (localStorage.getItem(KEY_SPOTIFY_REDIRECT_URI) || '').trim();
+    if (custom) return custom;
+    return window.location.origin + '/dashboard/';
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function loadWorldClocks() {
+    const stored = localStorage.getItem(KEY_WORLD_CLOCKS);
+    let clocks = [];
+    if (stored) {
+      try { clocks = JSON.parse(stored); } catch (e) { clocks = []; }
+    }
+    if (!clocks || clocks.length === 0) {
+      clocks = DEFAULT_WORLD_CLOCKS;
+      localStorage.setItem(KEY_WORLD_CLOCKS, JSON.stringify(clocks));
+    }
+    return clocks;
+  }
+
+  function saveWorldClocks(clocks) {
+    localStorage.setItem(KEY_WORLD_CLOCKS, JSON.stringify(clocks));
+    renderSettingsTzCards();
+    populatePrimaryTzSelect();
+  }
+
+  function renderSettingsTzCards() {
+    const container = document.getElementById('settings-tz-cards');
+    if (!container) return;
+    const clocks = loadWorldClocks();
+    const primaryTz = localStorage.getItem(KEY_PRIMARY_TZ) || 'auto';
+    let sysTz = 'America/New_York';
+    try { sysTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+    const activePrimary = primaryTz === 'auto' ? sysTz : primaryTz;
+
+    if (clocks.length === 0) {
+      container.innerHTML = `
+        <div style="padding: 16px; text-align: center; color: var(--dash-text-muted); font-size: 0.8rem; background: var(--dash-sub-card-bg); border: 1px dashed var(--dash-border); border-radius: 8px;">
+          no alternate time zones configured
+        </div>`;
+      return;
+    }
+
+    const now = new Date();
+    let html = '';
+    clocks.forEach((c, idx) => {
+      let curTime = '';
+      try {
+        curTime = new Intl.DateTimeFormat([], { timeZone: c.tz, hour: '2-digit', minute: '2-digit', timeZoneName: 'short', hour12: false }).format(now);
+      } catch (e) {
+        curTime = 'invalid tz';
+      }
+      const isPrimary = c.tz === activePrimary;
+
+      html += `
+        <div class="settings-sub-card">
+          <div>
+            <div style="font-weight: 600; font-size: 0.88rem; color: var(--dash-text-pri);">${escapeHtml(c.name)}</div>
+            <div class="dash-mono" style="font-size: 0.74rem; color: var(--dash-text-muted); margin-top: 2px;">
+              ${escapeHtml(c.tz)} &bull; ${escapeHtml(curTime)}
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            ${isPrimary ? '<span class="dash-badge dash-badge-active" style="font-size: 0.68rem; padding: 2px 8px;">primary</span>' : ''}
+            <button type="button" onclick="removeTimeZoneCard(${idx})" class="dash-btn dash-btn-danger" style="padding: 4px 8px; font-size: 0.72rem;" title="remove time zone">
+              remove
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function addTimeZoneCard() {
+    const nameInput = document.getElementById('new-tz-name');
+    const ianaInput = document.getElementById('new-tz-iana');
+    const errEl = document.getElementById('tz-error-msg');
+
+    const name = nameInput.value.trim();
+    const tz = ianaInput.value.trim();
+
+    if (!name || !tz) {
+      errEl.innerText = 'please provide both a label and iana time zone';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    try {
+      new Intl.DateTimeFormat([], { timeZone: tz });
+    } catch (e) {
+      errEl.innerText = 'invalid iana time zone (e.g. America/New_York)';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    errEl.style.display = 'none';
+    const clocks = loadWorldClocks();
+    clocks.push({ name, tz });
+    saveWorldClocks(clocks);
+
+    nameInput.value = '';
+    ianaInput.value = '';
+    showSaveToast('zone added');
+  }
+
+  function removeTimeZoneCard(idx) {
+    const clocks = loadWorldClocks();
+    clocks.splice(idx, 1);
+    saveWorldClocks(clocks);
+    showSaveToast('zone removed');
+  }
+
+  function savePrimaryTz(tz) {
+    if (tz) {
+      localStorage.setItem(KEY_PRIMARY_TZ, tz);
+      renderSettingsTzCards();
+      showSaveToast('primary zone saved');
+    }
+  }
+
+  function populatePrimaryTzSelect() {
+    const pSelect = document.getElementById('setting-primary-tz');
+    if (!pSelect) return;
+    const savedPrimary = localStorage.getItem(KEY_PRIMARY_TZ) || 'auto';
+    let sysTz = 'America/New_York';
+    try { sysTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+
+    let opts = `<option value="auto"${savedPrimary === 'auto' ? ' selected' : ''}>auto-detect (local: ${sysTz})</option>`;
+    const clocks = loadWorldClocks();
+    clocks.forEach(c => {
+      const isSel = savedPrimary === c.tz ? ' selected' : '';
+      opts += `<option value="${escapeHtml(c.tz)}"${isSel}>${escapeHtml(c.name)} (${escapeHtml(c.tz)})</option>`;
+    });
+    pSelect.innerHTML = opts;
+  }
+
+  // Calendar Feeds Logic
+  function loadCalendarFeeds() {
+    const stored = localStorage.getItem(KEY_CAL_FEED);
+    if (!stored) return [];
+    try {
+      const parsed = JSON.parse(stored);
+      if (Array.isArray(parsed)) return parsed;
+    } catch (e) {}
+    return stored.split('\n')
+      .map(u => u.trim())
+      .filter(Boolean)
+      .map(u => ({ name: 'calendar feed', url: u }));
+  }
+
+  function saveCalendarFeeds(feeds) {
+    localStorage.setItem(KEY_CAL_FEED, JSON.stringify(feeds));
+    renderCalendarFeedCards();
+  }
+
+  function renderCalendarFeedCards() {
+    const container = document.getElementById('settings-cal-feed-cards');
+    if (!container) return;
+    const feeds = loadCalendarFeeds();
+
+    if (feeds.length === 0) {
+      container.innerHTML = `
+        <div style="padding: 16px; text-align: center; color: var(--dash-text-muted); font-size: 0.8rem; background: var(--dash-sub-card-bg); border: 1px dashed var(--dash-border); border-radius: 8px;">
+          no calendar feeds added
+        </div>`;
+      return;
+    }
+
+    let html = '';
+    feeds.forEach((feed, idx) => {
+      html += `
+        <div class="settings-sub-card">
+          <div style="overflow: hidden; max-width: 80%;">
+            <div style="font-weight: 600; font-size: 0.88rem; color: var(--dash-text-pri); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
+              ${escapeHtml(feed.name || 'calendar feed')}
+              ${feed.tz ? `<span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-accent); font-weight: normal; margin-left: 6px;">[${escapeHtml(feed.tz)}]</span>` : ''}
+            </div>
+            <div class="dash-mono" style="font-size: 0.74rem; color: var(--dash-text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap; margin-top: 2px;" title="${escapeHtml(feed.url)}">
+              ${escapeHtml(feed.url)}
+            </div>
+          </div>
+          <div style="flex-shrink: 0;">
+            <button type="button" onclick="removeCalendarFeedCard(${idx})" class="dash-btn dash-btn-danger" style="padding: 4px 8px; font-size: 0.72rem;" title="remove feed">
+              remove
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function addCalendarFeedCard() {
+    const nameInput = document.getElementById('new-cal-feed-name');
+    const urlInput = document.getElementById('new-cal-feed-url');
+    const tzInput = document.getElementById('new-cal-feed-tz');
+    const errEl = document.getElementById('cal-feed-error-msg');
+
+    let name = nameInput.value.trim();
+    const url = urlInput.value.trim();
+    const tz = tzInput ? tzInput.value.trim() : '';
+
+    if (!url) {
+      errEl.innerText = 'please provide a valid calendar feed url';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    if (!name) {
+      try {
+        const u = new URL(url.startsWith('webcal://') ? url.replace('webcal://', 'https://') : url);
+        name = u.hostname.replace('www.', '') + ' feed';
+      } catch (e) {
+        name = 'calendar feed';
+      }
+    }
+
+    errEl.style.display = 'none';
+    const feeds = loadCalendarFeeds();
+    const newFeed = { name, url };
+    if (tz) newFeed.tz = tz;
+    feeds.push(newFeed);
+    saveCalendarFeeds(feeds);
+
+    nameInput.value = '';
+    urlInput.value = '';
+    if (tzInput) tzInput.value = '';
+    showSaveToast('feed added');
+  }
+
+  function removeCalendarFeedCard(idx) {
+    const feeds = loadCalendarFeeds();
+    feeds.splice(idx, 1);
+    saveCalendarFeeds(feeds);
+    showSaveToast('feed removed');
+  }
+
+  function renderSpotifyStatus() {
+    const clientId = localStorage.getItem(KEY_SPOTIFY_CLIENT_ID);
+    const token = localStorage.getItem(KEY_SPOTIFY_TOKEN);
+    const badge = document.getElementById('spotify-conn-badge');
+    const authBtn = document.getElementById('spotify-auth-btn');
+    const statusText = document.getElementById('spotify-auth-status');
+
+    if (!clientId) {
+      badge.innerText = 'unconfigured';
+      badge.className = 'dash-badge dash-badge-idle';
+      authBtn.innerText = 'configure client id';
+      authBtn.className = 'dash-btn';
+      statusText.innerText = 'enter client id above and save';
+      return;
+    }
+
+    if (!token) {
+      badge.innerText = 'disconnected';
+      badge.className = 'dash-badge dash-badge-warn';
+      authBtn.innerText = 'sign in with spotify';
+      authBtn.className = 'dash-btn dash-btn-primary';
+      statusText.innerText = 'client id saved. authorize app playback.';
+      return;
+    }
+
+    badge.innerText = 'connected';
+    badge.className = 'dash-badge dash-badge-active';
+    authBtn.innerText = 'disconnect spotify';
+    authBtn.className = 'dash-btn dash-btn-danger';
+    statusText.innerText = 'oauth pkce active | token saved in browser';
+  }
+
+  function getSpotifyAutoPin() {
+    const val = localStorage.getItem(KEY_SPOTIFY_AUTO_PIN);
+    return val === null ? true : val === 'true';
+  }
+
+  function saveSpotifyAutoPin(checked) {
+    localStorage.setItem(KEY_SPOTIFY_AUTO_PIN, checked ? 'true' : 'false');
+    showSaveToast(checked ? 'spotify auto-pin enabled' : 'spotify auto-pin disabled');
+  }
+
+  async function toggleSpotifyAuth() {
+    const token = localStorage.getItem(KEY_SPOTIFY_TOKEN);
+    if (token) {
+      // Disconnect
+      localStorage.removeItem(KEY_SPOTIFY_TOKEN);
+      localStorage.removeItem(KEY_SPOTIFY_REFRESH);
+      localStorage.removeItem(KEY_SPOTIFY_EXPIRY);
+      renderSpotifyStatus();
+      showSaveToast('spotify disconnected');
+      return;
+    }
+
+    const clientIdInput = document.getElementById('setting-spotify-client-id').value.trim();
+    if (!clientIdInput) {
+      alert('please enter a spotify client id first');
+      return;
+    }
+    localStorage.setItem(KEY_SPOTIFY_CLIENT_ID, clientIdInput);
+
+    // PKCE flow redirecting to /dashboard/
+    const verifier = generateRandomString(64);
+    const challenge = await generateCodeChallenge(verifier);
+    localStorage.setItem('dash_spotify_code_verifier', verifier);
+
+    const redirectUri = getRedirectUri();
+    localStorage.setItem('dash_spotify_used_redirect_uri', redirectUri);
+    const scope = 'user-read-currently-playing user-read-playback-state';
+
+    const authUrl = new URL('https://accounts.spotify.com/authorize');
+    authUrl.search = new URLSearchParams({
+      response_type: 'code',
+      client_id: clientIdInput,
+      scope: scope,
+      code_challenge_method: 'S256',
+      code_challenge: challenge,
+      redirect_uri: redirectUri,
+    }).toString();
+
+    window.location.href = authUrl.toString();
+  }
+
+  function generateRandomString(length) {
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+    let text = '';
+    for (let i = 0; i < length; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+  }
+
+  async function generateCodeChallenge(codeVerifier) {
+    const digest = await window.crypto.subtle.digest(
+      'SHA-256',
+      new TextEncoder().encode(codeVerifier)
+    );
+    return btoa(String.fromCharCode(...new Uint8Array(digest)))
+      .replace(/=/g, '')
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_');
+  }
+
+  function saveAllSettings() {
+    const userName = document.getElementById('setting-user-name').value.trim();
+    const homepageUrl = document.getElementById('setting-homepage-url').value.trim();
+    const clientId = document.getElementById('setting-spotify-client-id').value.trim();
+    const primaryTz = document.getElementById('setting-primary-tz').value;
+    const calProxy = document.getElementById('setting-cal-proxy') ? document.getElementById('setting-cal-proxy').value.trim() : '';
+
+    if (userName) {
+      localStorage.setItem(KEY_DASHBOARD_NAME, userName);
+    } else {
+      localStorage.setItem(KEY_DASHBOARD_NAME, 'david');
+    }
+
+    if (homepageUrl) {
+      localStorage.setItem(KEY_DASHBOARD_HOMEPAGE, homepageUrl);
+    } else {
+      localStorage.setItem(KEY_DASHBOARD_HOMEPAGE, 'https://davidlechan.dev');
+    }
+
+    if (clientId) {
+      localStorage.setItem(KEY_SPOTIFY_CLIENT_ID, clientId);
+    } else {
+      localStorage.removeItem(KEY_SPOTIFY_CLIENT_ID);
+    }
+
+    if (calProxy) {
+      localStorage.setItem(KEY_CAL_PROXY, calProxy);
+    } else {
+      localStorage.removeItem(KEY_CAL_PROXY);
+    }
+
+    if (primaryTz) {
+      localStorage.setItem(KEY_PRIMARY_TZ, primaryTz);
+    }
+
+    const viewModeRadio = document.querySelector('input[name="cal-view-mode"]:checked');
+    if (viewModeRadio) {
+      localStorage.setItem(KEY_CAL_VIEW_MODE, viewModeRadio.value);
+    }
+
+    const tzModeRadio = document.querySelector('input[name="cal-tz-mode"]:checked');
+    if (tzModeRadio) {
+      localStorage.setItem(KEY_CAL_TZ_MODE, tzModeRadio.value);
+    }
+
+    const overflowRadio = document.querySelector('input[name="widget-overflow-mode"]:checked');
+    if (overflowRadio) {
+      localStorage.setItem(KEY_WIDGET_OVERFLOW_MODE, overflowRadio.value);
+    }
+    const rotateDelayInput = document.getElementById('setting-widget-rotate-delay');
+    if (rotateDelayInput && rotateDelayInput.value) {
+      const d = parseInt(rotateDelayInput.value, 10);
+      if (d && d >= 3 && d <= 300) {
+        localStorage.setItem(KEY_WIDGET_ROTATE_DELAY, String(d));
+      }
+    }
+    const clockRotateDelayInput = document.getElementById('setting-clock-rotate-delay');
+    if (clockRotateDelayInput && clockRotateDelayInput.value) {
+      const d = parseInt(clockRotateDelayInput.value, 10);
+      if (d && d >= 2 && d <= 300) {
+        localStorage.setItem(KEY_CLOCK_ROTATE_DELAY, String(d));
+      }
+    }
+
+    const autoPinCheckbox = document.getElementById('setting-spotify-auto-pin');
+    if (autoPinCheckbox) {
+      localStorage.setItem(KEY_SPOTIFY_AUTO_PIN, autoPinCheckbox.checked ? 'true' : 'false');
+    }
+
+    renderSpotifyStatus();
+    renderSettingsTzCards();
+    renderCalendarFeedCards();
+    showSaveToast('all settings saved');
+  }
+
+  function saveWidgetOverflowMode(val) {
+    localStorage.setItem(KEY_WIDGET_OVERFLOW_MODE, val);
+    showSaveToast(`window mode set to ${val}`);
+  }
+
+  function saveWidgetRotateDelay(val) {
+    const num = parseInt(val, 10);
+    if (num && num >= 3 && num <= 300) {
+      localStorage.setItem(KEY_WIDGET_ROTATE_DELAY, String(num));
+      showSaveToast(`rotation delay set to ${num}s`);
+    } else {
+      localStorage.removeItem(KEY_WIDGET_ROTATE_DELAY);
+      showSaveToast('rotation delay reset to default (30s)');
+    }
+  }
+
+  function getClockRotateDelay() {
+    const d = parseInt(localStorage.getItem(KEY_CLOCK_ROTATE_DELAY), 10);
+    return (d && d >= 2 && d <= 300) ? d : 10;
+  }
+
+  function saveClockRotateDelay(val) {
+    const num = parseInt(val, 10);
+    if (num && num >= 2 && num <= 300) {
+      localStorage.setItem(KEY_CLOCK_ROTATE_DELAY, String(num));
+      showSaveToast(`clock rotation delay set to ${num}s`);
+    } else {
+      localStorage.removeItem(KEY_CLOCK_ROTATE_DELAY);
+      showSaveToast('clock rotation delay reset to default (10s)');
+    }
+  }
+
+  function saveCalViewMode(val) {
+    localStorage.setItem(KEY_CAL_VIEW_MODE, val);
+    showSaveToast(`calendar mode set to ${val}`);
+  }
+
+  function saveCalTzMode(val) {
+    localStorage.setItem(KEY_CAL_TZ_MODE, val);
+    showSaveToast(`calendar timezone display set to ${val}`);
+  }
+
+  function showSaveToast(msg = 'settings saved') {
+    const toast = document.getElementById('save-status-msg');
+    if (toast) {
+      toast.innerText = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 2500);
+    }
+  }
+
+  function copyWorkerCode() {
+    const codeEl = document.getElementById('cloudflare-worker-code');
+    if (!codeEl) return;
+    navigator.clipboard.writeText(codeEl.innerText).then(() => {
+      showSaveToast('worker script copied to clipboard');
+    }).catch(() => {
+      showSaveToast('failed to copy script');
+    });
+  }
+
+  // Config Backup Export & Import
+  function exportConfig() {
+    let calEvents = [];
+    try {
+      calEvents = JSON.parse(localStorage.getItem(KEY_CAL_EVENTS) || '[]');
+    } catch (e) {
+      calEvents = [];
+    }
+
+    const activeVersion = localStorage.getItem(KEY_SETTINGS_VERSION) || CURRENT_SETTINGS_VERSION;
+    const configData = {
+      version: activeVersion,
+      settings_version: activeVersion,
+      exported_at: new Date().toISOString(),
+      settings: {
+        settings_version: activeVersion,
+        user_name: localStorage.getItem(KEY_DASHBOARD_NAME) || 'david',
+        homepage_url: localStorage.getItem(KEY_DASHBOARD_HOMEPAGE) || 'https://davidlechan.dev',
+        spotify_client_id: localStorage.getItem(KEY_SPOTIFY_CLIENT_ID) || '',
+        spotify_redirect_uri: localStorage.getItem(KEY_SPOTIFY_REDIRECT_URI) || '',
+        spotify_auto_pin: getSpotifyAutoPin(),
+        cal_feeds: loadCalendarFeeds(),
+        cal_proxy: localStorage.getItem(KEY_CAL_PROXY) || '',
+        cal_view_mode: localStorage.getItem(KEY_CAL_VIEW_MODE) || 'smart',
+        cal_tz_mode: localStorage.getItem(KEY_CAL_TZ_MODE) || 'event',
+        widget_overflow_mode: localStorage.getItem(KEY_WIDGET_OVERFLOW_MODE) || 'rotating',
+        widget_rotate_delay: parseInt(localStorage.getItem(KEY_WIDGET_ROTATE_DELAY), 10) || 30,
+        clock_rotate_delay: getClockRotateDelay(),
+        primary_tz: localStorage.getItem(KEY_PRIMARY_TZ) || 'auto',
+        card_configs: loadCardConfigs(),
+      },
+      data: {
+        world_clocks: loadWorldClocks(),
+        cal_events: calEvents,
+        scratchpad_notes: localStorage.getItem(KEY_NOTES) || '',
+        card_configs: loadCardConfigs(),
+      }
+    };
+
+    const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'dashboard-config.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showSaveToast('config exported');
+  }
+
+  function triggerImportConfig() {
+    const input = document.getElementById('config-file-input');
+    if (input) {
+      input.value = '';
+      input.click();
+    }
+  }
+
+  function handleConfigFileImport(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const parsed = JSON.parse(e.target.result);
+        const importedVersion = parsed.settings_version || (parsed.settings && parsed.settings.settings_version) || parsed.version || CURRENT_SETTINGS_VERSION;
+        localStorage.setItem(KEY_SETTINGS_VERSION, String(importedVersion));
+
+        if (parsed.settings) {
+          if (parsed.settings.user_name !== undefined) {
+            localStorage.setItem(KEY_DASHBOARD_NAME, parsed.settings.user_name);
+          } else if (parsed.settings.name !== undefined) {
+            localStorage.setItem(KEY_DASHBOARD_NAME, parsed.settings.name);
+          }
+          if (parsed.settings.homepage_url !== undefined) {
+            localStorage.setItem(KEY_DASHBOARD_HOMEPAGE, parsed.settings.homepage_url);
+          } else if (parsed.settings.homepage !== undefined) {
+            localStorage.setItem(KEY_DASHBOARD_HOMEPAGE, parsed.settings.homepage);
+          }
+          if (parsed.settings.spotify_client_id !== undefined) {
+            localStorage.setItem(KEY_SPOTIFY_CLIENT_ID, parsed.settings.spotify_client_id);
+          }
+          if (parsed.settings.spotify_redirect_uri !== undefined) {
+            if (parsed.settings.spotify_redirect_uri) {
+              localStorage.setItem(KEY_SPOTIFY_REDIRECT_URI, parsed.settings.spotify_redirect_uri);
+            } else {
+              localStorage.removeItem(KEY_SPOTIFY_REDIRECT_URI);
+            }
+          }
+          if (parsed.settings.spotify_auto_pin !== undefined) {
+            localStorage.setItem(KEY_SPOTIFY_AUTO_PIN, parsed.settings.spotify_auto_pin ? 'true' : 'false');
+          }
+          if (parsed.settings.cal_feeds !== undefined) {
+            saveCalendarFeeds(parsed.settings.cal_feeds);
+          } else if (parsed.settings.cal_feed_url !== undefined) {
+            if (typeof parsed.settings.cal_feed_url === 'string') {
+              saveCalendarFeeds([{ name: 'calendar feed', url: parsed.settings.cal_feed_url }]);
+            } else if (Array.isArray(parsed.settings.cal_feed_url)) {
+              saveCalendarFeeds(parsed.settings.cal_feed_url);
+            }
+          }
+          if (parsed.settings.cal_proxy !== undefined) {
+            localStorage.setItem(KEY_CAL_PROXY, parsed.settings.cal_proxy);
+          }
+          if (parsed.settings.cal_view_mode !== undefined) {
+            localStorage.setItem(KEY_CAL_VIEW_MODE, parsed.settings.cal_view_mode);
+          }
+          if (parsed.settings.cal_tz_mode !== undefined) {
+            localStorage.setItem(KEY_CAL_TZ_MODE, parsed.settings.cal_tz_mode);
+          }
+          if (parsed.settings.widget_overflow_mode !== undefined) {
+            localStorage.setItem(KEY_WIDGET_OVERFLOW_MODE, parsed.settings.widget_overflow_mode);
+          }
+          if (parsed.settings.widget_rotate_delay !== undefined) {
+            localStorage.setItem(KEY_WIDGET_ROTATE_DELAY, String(parsed.settings.widget_rotate_delay));
+          }
+          if (parsed.settings.clock_rotate_delay !== undefined) {
+            localStorage.setItem(KEY_CLOCK_ROTATE_DELAY, String(parsed.settings.clock_rotate_delay));
+          }
+          if (parsed.settings.primary_tz !== undefined) {
+            localStorage.setItem(KEY_PRIMARY_TZ, parsed.settings.primary_tz);
+          }
+          if (parsed.settings.card_configs !== undefined) {
+            localStorage.setItem(KEY_CARD_CONFIGS, JSON.stringify(parsed.settings.card_configs));
+          }
+        }
+        if (parsed.data) {
+          if (parsed.data.world_clocks !== undefined) {
+            localStorage.setItem(KEY_WORLD_CLOCKS, JSON.stringify(parsed.data.world_clocks));
+          }
+          if (parsed.data.cal_events !== undefined) {
+            localStorage.setItem(KEY_CAL_EVENTS, JSON.stringify(parsed.data.cal_events));
+          }
+          if (parsed.data.scratchpad_notes !== undefined) {
+            localStorage.setItem(KEY_NOTES, parsed.data.scratchpad_notes);
+          }
+          if (parsed.data.card_configs !== undefined && parsed.settings?.card_configs === undefined) {
+            localStorage.setItem(KEY_CARD_CONFIGS, JSON.stringify(parsed.data.card_configs));
+          }
+        }
+
+        initSettingsPage();
+        showSaveToast('config imported successfully');
+        alert('dashboard config imported successfully');
+      } catch (err) {
+        alert('failed to import config: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function initSettingsPage() {
+    localStorage.removeItem(KEY_CAL_EVENTS);
+    const nameInput = document.getElementById('setting-user-name');
+    if (nameInput) {
+      nameInput.value = localStorage.getItem(KEY_DASHBOARD_NAME) || 'david';
+      nameInput.oninput = (e) => {
+        const val = e.target.value.trim() || 'david';
+        localStorage.setItem(KEY_DASHBOARD_NAME, val);
+      };
+    }
+    const homeInput = document.getElementById('setting-homepage-url');
+    if (homeInput) {
+      homeInput.value = localStorage.getItem(KEY_DASHBOARD_HOMEPAGE) || 'https://davidlechan.dev';
+      homeInput.oninput = (e) => {
+        const val = e.target.value.trim() || 'https://davidlechan.dev';
+        localStorage.setItem(KEY_DASHBOARD_HOMEPAGE, val);
+      };
+    }
+    document.getElementById('setting-spotify-client-id').value = localStorage.getItem(KEY_SPOTIFY_CLIENT_ID) || '';
+
+    const redirInput = document.getElementById('setting-spotify-redirect-uri');
+    if (redirInput) {
+      redirInput.value = localStorage.getItem(KEY_SPOTIFY_REDIRECT_URI) || '';
+      redirInput.oninput = (e) => {
+        const val = e.target.value.trim();
+        if (val) {
+          localStorage.setItem(KEY_SPOTIFY_REDIRECT_URI, val);
+        } else {
+          localStorage.removeItem(KEY_SPOTIFY_REDIRECT_URI);
+        }
+        updateRedirectUriDisplay();
+      };
+    }
+    updateRedirectUriDisplay();
+    const autoPinCheckbox = document.getElementById('setting-spotify-auto-pin');
+    if (autoPinCheckbox) {
+      autoPinCheckbox.checked = getSpotifyAutoPin();
+    }
+
+    const proxyInput = document.getElementById('setting-cal-proxy');
+    if (proxyInput) {
+      proxyInput.value = localStorage.getItem(KEY_CAL_PROXY) || '';
+      proxyInput.oninput = (e) => {
+        const v = e.target.value.trim();
+        if (v) localStorage.setItem(KEY_CAL_PROXY, v);
+        else localStorage.removeItem(KEY_CAL_PROXY);
+      };
+    }
+
+    const currentViewMode = localStorage.getItem(KEY_CAL_VIEW_MODE) || 'smart';
+    const modeRadio = document.querySelector(`input[name="cal-view-mode"][value="${currentViewMode}"]`);
+    if (modeRadio) modeRadio.checked = true;
+
+    const currentTzMode = localStorage.getItem(KEY_CAL_TZ_MODE) || 'event';
+    const tzRadio = document.querySelector(`input[name="cal-tz-mode"][value="${currentTzMode}"]`);
+    if (tzRadio) tzRadio.checked = true;
+
+    const currentOverflowMode = localStorage.getItem(KEY_WIDGET_OVERFLOW_MODE) || 'rotating';
+    const overflowRadio = document.querySelector(`input[name="widget-overflow-mode"][value="${currentOverflowMode}"]`);
+    if (overflowRadio) overflowRadio.checked = true;
+
+    const delayInput = document.getElementById('setting-widget-rotate-delay');
+    if (delayInput) {
+      const savedDelay = localStorage.getItem(KEY_WIDGET_ROTATE_DELAY);
+      delayInput.value = savedDelay || '30';
+      delayInput.oninput = (e) => {
+        saveWidgetRotateDelay(e.target.value);
+      };
+    }
+
+    const clockDelayInput = document.getElementById('setting-clock-rotate-delay');
+    if (clockDelayInput) {
+      const savedClockDelay = localStorage.getItem(KEY_CLOCK_ROTATE_DELAY);
+      clockDelayInput.value = savedClockDelay || '10';
+      clockDelayInput.oninput = (e) => {
+        saveClockRotateDelay(e.target.value);
+      };
+    }
+
+    renderSettingsTzCards();
+    renderCalendarFeedCards();
+    populatePrimaryTzSelect();
+    renderSpotifyStatus();
+    updateSettingsVersionDisplay();
+    initSettingsThemeToggle();
+    updateSettingsLogoLink();
+  }
+
+  function updateSettingsVersionDisplay() {
+    const badge = document.getElementById('settings-version-badge');
+    if (badge) {
+      badge.innerText = localStorage.getItem(KEY_SETTINGS_VERSION) || CURRENT_SETTINGS_VERSION;
+    }
+  }
+
+  function updateRedirectUriDisplay() {
+    const textEl = document.getElementById('spotify-redirect-uri-text');
+    if (textEl) {
+      textEl.innerText = getRedirectUri();
+    }
+  }
+
+  function initSettingsThemeToggle() {
+    const sw = document.getElementById('settings-theme-switch');
+    if (!sw) return;
+
+    function sync() {
+      sw.checked = document.documentElement.dataset.theme === 'dark';
+    }
+    sync();
+
+    sw.addEventListener('change', () => {
+      const siteSw = document.getElementById('theme-switch');
+      if (siteSw) {
+        siteSw.click();
+      } else {
+        const next = sw.checked ? 'dark' : 'light';
+        document.documentElement.dataset.theme = next;
+        sessionStorage.setItem('theme', JSON.stringify({ nightShift: sw.checked, autoToggleAt: 0 }));
+      }
+    });
+
+    document.addEventListener('theme-changed', sync);
+    new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
+
+  function updateSettingsLogoLink() {
+    const saved = localStorage.getItem(KEY_DASHBOARD_HOMEPAGE);
+    let url = (saved && saved.trim()) ? saved.trim() : 'https://davidlechan.dev';
+    if (!/^https?:\/\//i.test(url) && !url.startsWith('/')) {
+      url = 'https://' + url;
+    }
+    const logo = document.getElementById('settings-logo-link');
+    if (logo) logo.href = url;
+  }
+
+  if (document.readyState === 'loading') {
+    window.addEventListener('DOMContentLoaded', () => {
+      initSettingsPage();
+    });
+  } else {
+    initSettingsPage();
+  }
+</script>
+
+
+
+
+    </div>
+
+</article>
+<div class="post-comments"></div></section>
+</div>
+
+
+  </section>
+  <section class="sidebar" style="margin-left: 15px;">
+    <!-- Get sidebar items --></section>
+</div>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="site-footer-inner">
+      <a href="/" style="flex-shrink: 0; display: block;">
+        <img src="/assets/brand/favicon.ico?v=2" alt="logo" style="width: 48px; height: 48px; border-radius: 6px; border: 1.5px solid rgba(128, 128, 128, 0.2); background-color: #ffffff !important; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);" class="no-lightbox">
+      </a>
+      <div class="footer-text-block">
+<div>david le chan</div>
+        <div>
+<a href="/about">about</a> | <a href="/contact">contact</a> | <a href="/resume">resume</a>
+</div>
+        <div>powered by <a title="Jekyll is a simple, blog-aware, static site
+        generator." href="https://jekyllrb.com/">jekyll</a> &amp; <a title="Yat, yet
+        another theme." href="https://github.com/jeffreytse/jekyll-theme-yat">yat theme</a>
+</div>
+      </div>
+      <div class="footer-track-line"></div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
