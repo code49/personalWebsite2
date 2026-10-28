@@ -1412,6 +1412,9 @@ sidebar: []
               <span>📌</span>
               <span id="cal-pin-label">pin</span>
             </button>
+            <button id="cal-tz-toggle" class="dash-view-toggle-btn" onclick="toggleCalendarTzMode()" title="click to toggle calendar timezone mode">
+              <span id="cal-tz-label">tz: event</span>
+            </button>
             <button id="cal-view-toggle" class="dash-view-toggle-btn" onclick="toggleCalendarView(true)" title="click to toggle agenda / today view">
               <span id="cal-view-label">agenda</span>
               <span style="font-size: 0.72rem; opacity: 0.7;">⇄</span>
@@ -1530,6 +1533,7 @@ sidebar: []
   const KEY_CAL_FEED = 'dash_cal_feed';
   const KEY_CAL_PROXY = 'dash_cal_proxy';
   const KEY_CAL_VIEW_MODE = 'dash_cal_view_mode';
+  const KEY_CAL_TZ_MODE = 'dash_cal_tz_mode';
   const KEY_CAL_EVENTS = 'dash_cal_events';
   const KEY_NOTES = 'dash_scratchpad_notes';
   const KEY_WORLD_CLOCKS = 'dash_world_clocks';
@@ -1838,6 +1842,7 @@ sidebar: []
     fetchWeather();
 
     // Initialize Calendar & View Mode
+    updateCalendarTzButton();
     loadCalendarEvents();
     const calCard = document.getElementById('cal-card');
     if (calCard) {
@@ -2688,10 +2693,254 @@ sidebar: []
       .trim();
   }
 
-  function parseIcsFeed(icsText, feedName) {
+  const KNOWN_TZ_MAP = {
+    'pacific standard time': 'America/Los_Angeles',
+    'pacific daylight time': 'America/Los_Angeles',
+    'mountain standard time': 'America/Denver',
+    'mountain daylight time': 'America/Denver',
+    'central standard time': 'America/Chicago',
+    'central daylight time': 'America/Chicago',
+    'eastern standard time': 'America/New_York',
+    'eastern daylight time': 'America/New_York',
+    'greenwich mean time': 'UTC',
+    'pst': 'America/Los_Angeles',
+    'pdt': 'America/Los_Angeles',
+    'mst': 'America/Denver',
+    'mdt': 'America/Denver',
+    'cst': 'America/Chicago',
+    'cdt': 'America/Chicago',
+    'est': 'America/New_York',
+    'edt': 'America/New_York',
+    'utc': 'UTC',
+    'gmt': 'UTC'
+  };
+
+  function resolveIanaTimeZone(rawTz) {
+    if (!rawTz) return null;
+    let clean = String(rawTz).trim().replace(/^["'\\]+|["'\\]+$/g, '').replace(/^[\/\\]+/, '');
+    const lower = clean.toLowerCase();
+    if (KNOWN_TZ_MAP[lower]) return KNOWN_TZ_MAP[lower];
+    try {
+      Intl.DateTimeFormat(undefined, { timeZone: clean });
+      return clean;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function parseDateTimeInTz(y, m, d, hr, mn, sc, tz) {
+    let guess = Date.UTC(y, m - 1, d, hr, mn, sc);
+    if (!tz) return new Date(guess);
+    const dtf = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz,
+      hour12: false,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    for (let iter = 0; iter < 3; iter++) {
+      const parts = dtf.formatToParts(new Date(guess));
+      const getPart = type => parseInt(parts.find(p => p.type === type).value, 10);
+      const pY = getPart('year');
+      const pM = getPart('month');
+      const pD = getPart('day');
+      let pH = getPart('hour');
+      if (pH === 24) pH = 0;
+      const pMin = getPart('minute');
+      const pS = getPart('second');
+      const asUtcInTz = Date.UTC(pY, pM - 1, pD, pH, pMin, pS);
+      const targetUtc = Date.UTC(y, m - 1, d, hr, mn, sc);
+      const diff = asUtcInTz - targetUtc;
+      guess -= diff;
+      if (diff === 0) break;
+    }
+    return new Date(guess);
+  }
+
+  function getDatePartsInTz(date, timeZone) {
+    if (!date || isNaN(date.getTime())) {
+      const n = new Date();
+      return { year: n.getFullYear(), month: n.getMonth() + 1, day: n.getDate(), weekday: '', hour: 0, minute: 0 };
+    }
+    try {
+      const dtf = new Intl.DateTimeFormat('en-US', {
+        timeZone: timeZone || undefined,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        weekday: 'long',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      });
+      const parts = dtf.formatToParts(date);
+      const getPart = t => parts.find(p => p.type === t)?.value;
+      return {
+        year: parseInt(getPart('year'), 10),
+        month: parseInt(getPart('month'), 10),
+        day: parseInt(getPart('day'), 10),
+        weekday: (getPart('weekday') || '').toLowerCase(),
+        hour: parseInt(getPart('hour') === '24' ? '0' : getPart('hour'), 10),
+        minute: parseInt(getPart('minute'), 10)
+      };
+    } catch (e) {
+      return {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate(),
+        weekday: date.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase(),
+        hour: date.getHours(),
+        minute: date.getMinutes()
+      };
+    }
+  }
+
+  function getTimeInTz(date, timeZone) {
+    if (!date || isNaN(date.getTime())) return '00:00';
+    try {
+      const dtf = new Intl.DateTimeFormat('en-US', {
+        timeZone: timeZone || undefined,
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      return dtf.format(date);
+    } catch (e) {
+      const h = String(date.getHours()).padStart(2, '0');
+      const m = String(date.getMinutes()).padStart(2, '0');
+      return `${h}:${m}`;
+    }
+  }
+
+  function getTzAbbreviation(date, timeZone) {
+    if (!date || isNaN(date.getTime()) || !timeZone) return '';
+    try {
+      const dtf = new Intl.DateTimeFormat('en-US', {
+        timeZone: timeZone,
+        timeZoneName: 'short'
+      });
+      const tzPart = dtf.formatToParts(date).find(p => p.type === 'timeZoneName');
+      return tzPart ? tzPart.value.toLowerCase() : '';
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function formatDayDividerLabelInTz(eventDate, timeZone) {
+    const now = new Date();
+    const todayParts = getDatePartsInTz(now, timeZone);
+    const eventParts = getDatePartsInTz(eventDate, timeZone);
+
+    const todayMidnight = parseDateTimeInTz(todayParts.year, todayParts.month, todayParts.day, 0, 0, 0, timeZone);
+    const eventMidnight = parseDateTimeInTz(eventParts.year, eventParts.month, eventParts.day, 0, 0, 0, timeZone);
+    const diffDays = Math.round((eventMidnight.getTime() - todayMidnight.getTime()) / 86400000);
+
+    const weekdayLong = eventParts.weekday;
+    const monthDay = eventDate.toLocaleDateString('en-US', { timeZone, month: 'short', day: 'numeric' }).toLowerCase();
+
+    return { isToday: diffDays === 0, text: `${weekdayLong} \u2014 ${monthDay}` };
+  }
+
+  function formatEventDateLabelInTz(eventDate, timeZone) {
+    const now = new Date();
+    const todayParts = getDatePartsInTz(now, timeZone);
+    const eventParts = getDatePartsInTz(eventDate, timeZone);
+
+    const todayMidnight = parseDateTimeInTz(todayParts.year, todayParts.month, todayParts.day, 0, 0, 0, timeZone);
+    const eventMidnight = parseDateTimeInTz(eventParts.year, eventParts.month, eventParts.day, 0, 0, 0, timeZone);
+    const diffDays = Math.round((eventMidnight.getTime() - todayMidnight.getTime()) / 86400000);
+
+    const weekdayLong = eventParts.weekday;
+    if (diffDays >= 0 && diffDays < 7) {
+      return weekdayLong;
+    }
+    const monthDay = eventDate.toLocaleDateString('en-US', { timeZone, month: 'short', day: 'numeric' }).toLowerCase();
+    return `${weekdayLong}, ${monthDay}`;
+  }
+
+  function formatEventDisplay(ev, calTzMode, primaryTz, localTz) {
+    if (ev.allDay) {
+      return { startStr: 'all', endStr: 'day', tzAbbr: '', tzInfo: '', displayTz: localTz };
+    }
+    let displayTz = localTz;
+    let tzInfo = '';
+
+    if (calTzMode === 'event') {
+      displayTz = ev.origTz || primaryTz || localTz;
+      if (ev.origTz && ev.origTz !== localTz) {
+        const locTime = getTimeInTz(ev.startDate, localTz);
+        const locAbbr = getTzAbbreviation(ev.startDate, localTz);
+        tzInfo = `${locTime} ${locAbbr} local`;
+      }
+    } else if (calTzMode === 'primary') {
+      displayTz = primaryTz;
+      if (ev.origTz && ev.origTz !== primaryTz) {
+        const origTime = getTimeInTz(ev.startDate, ev.origTz);
+        const origAbbr = getTzAbbreviation(ev.startDate, ev.origTz);
+        tzInfo = `orig ${origTime} ${origAbbr}`;
+      }
+    } else {
+      displayTz = localTz;
+      if (ev.origTz && ev.origTz !== localTz) {
+        const origTime = getTimeInTz(ev.startDate, ev.origTz);
+        const origAbbr = getTzAbbreviation(ev.startDate, ev.origTz);
+        tzInfo = `orig ${origTime} ${origAbbr}`;
+      }
+    }
+
+    const startStr = getTimeInTz(ev.startDate, displayTz);
+    const endStr = getTimeInTz(ev.endDate, displayTz);
+    const tzAbbr = getTzAbbreviation(ev.startDate, displayTz);
+
+    return { startStr, endStr, tzAbbr, tzInfo, displayTz };
+  }
+
+  function getCalendarTzMode() {
+    return localStorage.getItem(KEY_CAL_TZ_MODE) || 'event';
+  }
+
+  function setCalendarTzMode(mode) {
+    if (['event', 'primary', 'local'].includes(mode)) {
+      localStorage.setItem(KEY_CAL_TZ_MODE, mode);
+      updateCalendarTzButton();
+      renderCalendarEventsDisplay();
+      syncCalendarCardHeight();
+    }
+  }
+
+  function toggleCalendarTzMode() {
+    const current = getCalendarTzMode();
+    const modes = ['event', 'primary', 'local'];
+    const next = modes[(modes.indexOf(current) + 1) % modes.length];
+    setCalendarTzMode(next);
+  }
+
+  function updateCalendarTzButton() {
+    const btn = document.getElementById('cal-tz-toggle');
+    const label = document.getElementById('cal-tz-label');
+    if (!btn || !label) return;
+    const mode = getCalendarTzMode();
+    label.innerText = `tz: ${mode}`;
+    btn.setAttribute('title', `calendar timezone mode: ${mode} (click to toggle: event, primary, or local)`);
+  }
+
+  function parseIcsFeed(icsText, feedName, configuredFeedTz) {
     if (!icsText) return [];
     const unfolded = icsText.replace(/\r?\n[ \t]/g, '');
     const lines = unfolded.split(/\r?\n/);
+
+    let feedTz = configuredFeedTz ? resolveIanaTimeZone(configuredFeedTz) : null;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith('X-WR-TIMEZONE:')) {
+        const rawTz = line.slice('X-WR-TIMEZONE:'.length).trim();
+        feedTz = resolveIanaTimeZone(rawTz) || feedTz;
+        break;
+      }
+    }
 
     const rawEvents = [];
     let cur = null;
@@ -2700,7 +2949,7 @@ sidebar: []
       const line = lines[i].trim();
       if (!line) continue;
       if (line === 'BEGIN:VEVENT') {
-        cur = { feedName: feedName || 'calendar' };
+        cur = { feedName: feedName || 'calendar', feedTz };
       } else if (line === 'END:VEVENT') {
         if (cur) rawEvents.push(cur);
         cur = null;
@@ -2729,7 +2978,7 @@ sidebar: []
           else if (key === 'EXDATE') {
             if (!cur.exdates) cur.exdates = [];
             val.split(',').forEach(d => {
-              const p = parseIcsDateTime({ val: d.trim() });
+              const p = parseIcsDateTime({ val: d.trim() }, cur.feedTz);
               if (p && p.date) cur.exdates.push(p.date.getTime());
             });
           }
@@ -2739,27 +2988,34 @@ sidebar: []
     return rawEvents;
   }
 
-  function parseIcsDateTime(obj) {
+  function parseIcsDateTime(obj, feedTz) {
     if (!obj || !obj.val) return null;
     const val = obj.val.trim();
     if (/^\d{8}$/.test(val)) {
       const y = parseInt(val.slice(0, 4), 10);
-      const m = parseInt(val.slice(4, 6), 10) - 1;
+      const m = parseInt(val.slice(4, 6), 10);
       const d = parseInt(val.slice(6, 8), 10);
-      return { date: new Date(y, m, d, 0, 0, 0), allDay: true };
+      return { date: new Date(y, m - 1, d, 0, 0, 0), allDay: true, origTz: null, origTzAbbr: '' };
     }
     const match = val.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})(Z)?/);
     if (match) {
       const [_, y, m, d, hr, mn, sc, isUtc] = match;
       if (isUtc) {
-        return {
-          date: new Date(Date.UTC(+y, +m - 1, +d, +hr, +mn, +sc)),
-          allDay: false
-        };
+        const date = new Date(Date.UTC(+y, +m - 1, +d, +hr, +mn, +sc));
+        const targetTz = resolveIanaTimeZone(obj?.params?.TZID) || feedTz || null;
+        if (targetTz) {
+          return { date, allDay: false, origTz: targetTz, origTzAbbr: getTzAbbreviation(date, targetTz) };
+        }
+        return { date, allDay: false, origTz: 'UTC', origTzAbbr: 'utc' };
       }
+      const targetTz = resolveIanaTimeZone(obj?.params?.TZID) || feedTz || getPrimaryTz();
+      const date = parseDateTimeInTz(+y, +m, +d, +hr, +mn, +sc, targetTz);
+      const origTzAbbr = getTzAbbreviation(date, targetTz);
       return {
-        date: new Date(+y, +m - 1, +d, +hr, +mn, +sc),
-        allDay: false
+        date,
+        allDay: false,
+        origTz: targetTz,
+        origTzAbbr
       };
     }
     return null;
@@ -2774,47 +3030,6 @@ sidebar: []
     const mins = parseInt(match[3] || '0', 10);
     const secs = parseInt(match[4] || '0', 10);
     return ((days * 24 + hours) * 60 + mins) * 60000 + secs * 1000;
-  }
-
-  function formatEventDateLabel(eventDate, allDay) {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const eventDay = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
-    const diffDays = Math.round((eventDay - today) / (86400 * 1000));
-
-    const weekdayLong = eventDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
-    if (diffDays >= 0 && diffDays < 7) {
-      return weekdayLong;
-    }
-    const monthDay = eventDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toLowerCase();
-    return `${weekdayLong}, ${monthDay}`;
-  }
-
-  function formatDayDividerLabel(eventDate) {
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const eventDay = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
-    const diffDays = Math.round((eventDay - today) / (86400 * 1000));
-
-    const weekdayLong = eventDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
-    const monthDay = eventDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }).toLowerCase();
-
-    return { isToday: diffDays === 0, text: `${weekdayLong} \u2014 ${monthDay}` };
-  }
-
-  function formatEventTimeBadge(startDt, endDt, allDay) {
-    if (allDay) {
-      return { startStr: 'all', endStr: 'day' };
-    }
-    const fmt = (d) => {
-      const h = d.getHours().toString().padStart(2, '0');
-      const m = d.getMinutes().toString().padStart(2, '0');
-      return `${h}:${m}`;
-    };
-    return {
-      startStr: fmt(startDt),
-      endStr: fmt(endDt)
-    };
   }
 
   const CAL_PALETTE_DARK = {
@@ -2926,7 +3141,7 @@ sidebar: []
     const cancelledMap = new Set();
     for (const item of rawEvents) {
       if (item.recurrenceId && item.status === 'CANCELLED' && item.uid) {
-        const parsedRecur = parseIcsDateTime({ val: item.recurrenceId });
+        const parsedRecur = parseIcsDateTime({ val: item.recurrenceId }, item.feedTz);
         if (parsedRecur && parsedRecur.date) {
           cancelledMap.add(`${item.uid}_${parsedRecur.date.getTime()}`);
         }
@@ -2935,10 +3150,10 @@ sidebar: []
 
     for (const item of rawEvents) {
       if (item.status === 'CANCELLED') continue;
-      const parsedStart = parseIcsDateTime(item.dtstart);
+      const parsedStart = parseIcsDateTime(item.dtstart, item.feedTz);
       if (!parsedStart || !parsedStart.date || isNaN(parsedStart.date.getTime())) continue;
 
-      const parsedEnd = parseIcsDateTime(item.dtend);
+      const parsedEnd = parseIcsDateTime(item.dtend, item.feedTz);
       let durationMs = 0;
       if (parsedEnd && parsedEnd.date && !isNaN(parsedEnd.date.getTime())) {
         durationMs = Math.max(0, parsedEnd.date.getTime() - parsedStart.date.getTime());
@@ -2954,14 +3169,14 @@ sidebar: []
       const allDay = parsedStart.allDay;
       const tag = (item.feedName || 'calendar').toLowerCase();
 
-      function addInstanceIfFuture(occStart) {
+      function addInstanceIfFuture(occStart, origTz, origTzAbbr) {
         if (!occStart || isNaN(occStart.getTime())) return;
         const occEnd = new Date(occStart.getTime() + durationMs);
 
         // 1. Filter out past events that ended before today started
         if (occEnd <= todayStart) return;
 
-        // 2. Reject stale multi-month or multi-year milestones from 2022/2023/2024
+        // 2. Reject stale multi-month or multi-year milestones
         if (occStart < todayStart && occStart < new Date(todayStart.getTime() - 48 * 3600 * 1000)) return;
 
         // 3. Reject events beyond upcoming window
@@ -2975,22 +3190,20 @@ sidebar: []
           if (isEx) return;
         }
 
-        const timeObj = formatEventTimeBadge(occStart, occEnd, allDay);
         results.push({
           title,
           startDate: occStart,
           endDate: occEnd,
           allDay,
-          startStr: timeObj.startStr,
-          endStr: timeObj.endStr,
-          dateStr: formatEventDateLabel(occStart, allDay),
+          origTz: origTz || parsedStart.origTz || null,
+          origTzAbbr: origTzAbbr || parsedStart.origTzAbbr || '',
           tag,
           feedName: item.feedName || tag || 'calendar',
         });
       }
 
       if (!item.rrule) {
-        addInstanceIfFuture(parsedStart.date);
+        addInstanceIfFuture(parsedStart.date, parsedStart.origTz, parsedStart.origTzAbbr);
       } else {
         const rruleMap = {};
         item.rrule.split(';').forEach(p => {
@@ -3002,10 +3215,9 @@ sidebar: []
         const interval = parseInt(rruleMap.INTERVAL || '1', 10);
         let untilDate = null;
         if (rruleMap.UNTIL) {
-          const parsedUntil = parseIcsDateTime({ val: rruleMap.UNTIL });
+          const parsedUntil = parseIcsDateTime({ val: rruleMap.UNTIL }, item.feedTz);
           if (parsedUntil && parsedUntil.date) {
             untilDate = parsedUntil.date;
-            // If the entire series concluded before today, skip it
             if (untilDate < todayStart) continue;
           }
         }
@@ -3021,6 +3233,11 @@ sidebar: []
           if (freq === 'WEEKLY' && Math.floor(totalDays / (7 * interval)) >= maxCount) continue;
           if (freq === 'DAILY' && Math.floor(totalDays / interval) >= maxCount) continue;
         }
+
+        const origParts = (parsedStart.origTz && !parsedStart.allDay) ? getDatePartsInTz(parsedStart.date, parsedStart.origTz) : null;
+        const origHr = origParts ? origParts.hour : parsedStart.date.getHours();
+        const origMin = origParts ? origParts.minute : parsedStart.date.getMinutes();
+        const origSec = origParts ? 0 : parsedStart.date.getSeconds();
 
         if (freq === 'WEEKLY') {
           const targetDays = rruleMap.BYDAY
@@ -3040,13 +3257,20 @@ sidebar: []
           while (weekCursor <= endWindow && safety < 120) {
             safety++;
             for (const dayNum of targetDays) {
-              const occ = new Date(weekCursor.getTime());
-              occ.setDate(occ.getDate() + dayNum);
-              occ.setHours(parsedStart.date.getHours(), parsedStart.date.getMinutes(), parsedStart.date.getSeconds(), 0);
+              let occ;
+              if (parsedStart.origTz && !parsedStart.allDay) {
+                const curOcc = new Date(weekCursor.getTime());
+                curOcc.setDate(curOcc.getDate() + dayNum);
+                occ = parseDateTimeInTz(curOcc.getFullYear(), curOcc.getMonth() + 1, curOcc.getDate(), origHr, origMin, origSec, parsedStart.origTz);
+              } else {
+                occ = new Date(weekCursor.getTime());
+                occ.setDate(occ.getDate() + dayNum);
+                occ.setHours(origHr, origMin, origSec, 0);
+              }
 
               if (occ < parsedStart.date) continue;
               if (untilDate && occ > untilDate) break;
-              addInstanceIfFuture(occ);
+              addInstanceIfFuture(occ, parsedStart.origTz, parsedStart.origTzAbbr);
             }
             weekCursor.setDate(weekCursor.getDate() + interval * 7);
           }
@@ -3062,11 +3286,17 @@ sidebar: []
           while (dayCursor <= endWindow && safety < 120) {
             safety++;
             if (untilDate && dayCursor > untilDate) break;
-            addInstanceIfFuture(new Date(dayCursor.getTime()));
+            let occ;
+            if (parsedStart.origTz && !parsedStart.allDay) {
+              occ = parseDateTimeInTz(dayCursor.getFullYear(), dayCursor.getMonth() + 1, dayCursor.getDate(), origHr, origMin, origSec, parsedStart.origTz);
+            } else {
+              occ = new Date(dayCursor.getTime());
+            }
+            addInstanceIfFuture(occ, parsedStart.origTz, parsedStart.origTzAbbr);
             dayCursor.setDate(dayCursor.getDate() + interval);
           }
         } else {
-          addInstanceIfFuture(parsedStart.date);
+          addInstanceIfFuture(parsedStart.date, parsedStart.origTz, parsedStart.origTzAbbr);
         }
       }
     }
@@ -3110,13 +3340,19 @@ sidebar: []
     const failedFeeds = [];
 
     const now = new Date();
-    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const calTzMode = getCalendarTzMode();
+    const primaryTz = getPrimaryTz();
+    let localTz = 'America/New_York';
+    try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+    const activeTz = calTzMode === 'primary' ? primaryTz : localTz;
+    const nowParts = getDatePartsInTz(now, activeTz);
+    const todayStart = parseDateTimeInTz(nowParts.year, nowParts.month, nowParts.day, 0, 0, 0, activeTz);
     const endWindow = new Date(now.getTime() + 30 * 86400 * 1000);
 
     for (const feed of feeds) {
       try {
         const icsText = await fetchFeedText(feed.url);
-        const parsedItems = parseIcsFeed(icsText, feed.name);
+        const parsedItems = parseIcsFeed(icsText, feed.name, feed.tz);
         const expanded = expandIcsEvents(parsedItems, now, endWindow);
         allEvents = allEvents.concat(expanded);
         hasSuccess = true;
@@ -3136,13 +3372,6 @@ sidebar: []
       allEvents.sort((a, b) => (a.startDate || 0) - (b.startDate || 0));
       _cachedAllCalendarEvents = allEvents;
 
-      // Filter upcoming events for Agenda view (events ending >= now or today's all-day)
-      const agendaEvents = allEvents.filter(ev => {
-        if (ev.endDate < now && !ev.allDay) return false;
-        return true;
-      });
-      const displayEvents = agendaEvents.slice(0, 30);
-
       if (badgeEl) {
         if (failedFeeds.length > 0) {
           badgeEl.innerText = `synced (${failedFeeds.length} warn)`;
@@ -3153,53 +3382,7 @@ sidebar: []
         }
       }
 
-      listEl.innerHTML = '';
-      if (displayEvents.length === 0) {
-        listEl.innerHTML = `
-          <li style="padding: 16px; text-align: center; color: var(--dash-text-muted); font-size: 0.8rem; background: var(--dash-sub-card-bg); border: 1px dashed var(--dash-border); border-radius: 6px;">
-            no upcoming events in the next 30 days
-          </li>
-        `;
-      } else {
-        let lastDayKey = null;
-        displayEvents.forEach(ev => {
-          const d = ev.startDate;
-          const dayKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-
-          if (dayKey !== lastDayKey) {
-            lastDayKey = dayKey;
-            const dayInfo = formatDayDividerLabel(d);
-            const divLi = document.createElement('li');
-            divLi.className = `dash-day-divider${dayInfo.isToday ? ' is-today' : ''}`;
-            divLi.innerHTML = `
-              <span class="dash-day-label">${escapeHtml(dayInfo.text)}</span>
-              <span class="dash-day-line"></span>
-            `;
-            listEl.appendChild(divLi);
-          }
-
-          const feedColor = getCalendarFeedColor(ev.feedName || ev.tag || 'calendar');
-          const li = document.createElement('li');
-          li.className = 'dash-event-item';
-          li.innerHTML = `
-            <div class="dash-event-time-badge" style="background: ${feedColor.bg}; color: ${feedColor.color}; border-color: ${feedColor.border};">
-              <span class="dash-event-time-start">${escapeHtml(ev.startStr)}</span>
-              <span class="dash-event-time-end">${escapeHtml(ev.endStr)}</span>
-            </div>
-            <div class="dash-event-info">
-              <div class="dash-event-title" title="${escapeHtml(ev.title)}">${escapeHtml(ev.title)}</div>
-              <div class="dash-event-sub">${escapeHtml(ev.dateStr)} | ${escapeHtml(ev.tag || 'calendar')}</div>
-            </div>
-          `;
-          listEl.appendChild(li);
-        });
-      }
-
-      // Render today's timeline view
-      renderTodayTimeline();
-
-      // Apply calendar view mode (smart, rotate, agenda, today)
-      applyCalendarViewMode();
+      renderCalendarEventsDisplay();
     } else {
       if (badgeEl) {
         badgeEl.innerText = 'cors / sync error';
@@ -3219,6 +3402,81 @@ sidebar: []
     }
 
     syncCalendarCardHeight();
+  }
+
+  function renderCalendarEventsDisplay() {
+    renderCalendarAgendaList();
+    renderTodayTimeline();
+    applyCalendarViewMode();
+  }
+
+  function renderCalendarAgendaList() {
+    const listEl = document.getElementById('cal-event-list');
+    if (!listEl) return;
+    const feeds = loadCalendarFeeds();
+    if (feeds.length === 0) return;
+
+    const calTzMode = getCalendarTzMode();
+    const primaryTz = getPrimaryTz();
+    let localTz = 'America/New_York';
+    try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+
+    const now = new Date();
+    const agendaEvents = _cachedAllCalendarEvents.filter(ev => {
+      if (ev.endDate < now && !ev.allDay) return false;
+      return true;
+    });
+    const displayEvents = agendaEvents.slice(0, 30);
+
+    listEl.innerHTML = '';
+    if (displayEvents.length === 0) {
+      listEl.innerHTML = `
+        <li style="padding: 16px; text-align: center; color: var(--dash-text-muted); font-size: 0.8rem; background: var(--dash-sub-card-bg); border: 1px dashed var(--dash-border); border-radius: 6px;">
+          no upcoming events in the next 30 days
+        </li>
+      `;
+      return;
+    }
+
+    let lastDayKey = null;
+    displayEvents.forEach(ev => {
+      const disp = formatEventDisplay(ev, calTzMode, primaryTz, localTz);
+      const dParts = getDatePartsInTz(ev.startDate, disp.displayTz);
+      const dayKey = `${dParts.year}-${String(dParts.month).padStart(2, '0')}-${String(dParts.day).padStart(2, '0')}`;
+
+      if (dayKey !== lastDayKey) {
+        lastDayKey = dayKey;
+        const dayInfo = formatDayDividerLabelInTz(ev.startDate, disp.displayTz);
+        const divLi = document.createElement('li');
+        divLi.className = `dash-day-divider${dayInfo.isToday ? ' is-today' : ''}`;
+        divLi.innerHTML = `
+          <span class="dash-day-label">${escapeHtml(dayInfo.text)}</span>
+          <span class="dash-day-line"></span>
+        `;
+        listEl.appendChild(divLi);
+      }
+
+      const feedColor = getCalendarFeedColor(ev.feedName || ev.tag || 'calendar');
+      const dateLabel = formatEventDateLabelInTz(ev.startDate, disp.displayTz);
+      const subParts = [dateLabel];
+      if (disp.tzInfo) subParts.push(disp.tzInfo);
+      subParts.push(ev.tag || 'calendar');
+
+      const li = document.createElement('li');
+      li.className = 'dash-event-item';
+      li.innerHTML = `
+        <div class="dash-event-time-badge" style="background: ${feedColor.bg}; color: ${feedColor.color}; border-color: ${feedColor.border};">
+          <span class="dash-event-time-start">${escapeHtml(disp.startStr)}</span>
+          <span class="dash-event-time-end">${escapeHtml(disp.endStr)}</span>
+          ${disp.tzAbbr ? `<span class="dash-event-time-tz" style="font-size: 0.58rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.2px;">${escapeHtml(disp.tzAbbr)}</span>` : ''}
+        </div>
+        <div class="dash-event-info">
+          <div class="dash-event-title" title="${escapeHtml(ev.title)}">${escapeHtml(ev.title)}</div>
+          <div class="dash-event-sub">${escapeHtml(subParts.join(' \u2022 '))}</div>
+        </div>
+      `;
+      listEl.appendChild(li);
+    });
   }
 
   function getCalendarViewMode() {
@@ -3248,9 +3506,15 @@ sidebar: []
     } else {
       // 'smart' mode:
       // Checks how many events remain in current day.
-      // If none, show 'agenda' for next few days. If so, show 'today'.
+      const calTzMode = getCalendarTzMode();
+      const primaryTz = getPrimaryTz();
+      let localTz = 'America/New_York';
+      try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+      const timelineTz = calTzMode === 'primary' ? primaryTz : localTz;
+
       const now = new Date();
-      const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+      const nowParts = getDatePartsInTz(now, timelineTz);
+      const todayStart = parseDateTimeInTz(nowParts.year, nowParts.month, nowParts.day, 0, 0, 0, timelineTz);
       const tomorrowStart = new Date(todayStart.getTime() + 86400000);
 
       const remainingEventsToday = _cachedAllCalendarEvents.filter(ev => {
@@ -3335,9 +3599,18 @@ sidebar: []
     return placed;
   }
 
-  function getTimelineTimeRange() {
+  function getTimelineTimeRange(timelineTz) {
+    if (!timelineTz) {
+      const calTzMode = getCalendarTzMode();
+      const primaryTz = getPrimaryTz();
+      let localTz = 'America/New_York';
+      try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+      timelineTz = calTzMode === 'primary' ? primaryTz : localTz;
+    }
+
     const now = new Date();
-    const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
+    const nowParts = getDatePartsInTz(now, timelineTz);
+    const todayStart = parseDateTimeInTz(nowParts.year, nowParts.month, nowParts.day, 0, 0, 0, timelineTz);
     const tomorrowStart = new Date(todayStart.getTime() + 86400000);
 
     const timedEvents = _cachedAllCalendarEvents.filter(ev => {
@@ -3376,17 +3649,24 @@ sidebar: []
     const container = document.getElementById('cal-timeline-view');
     if (!container) return;
 
-    const { startHour, endHour, startMin, endMin, totalMinutes, todayStart, tomorrowStart, timedEvents } = getTimelineTimeRange();
+    const calTzMode = getCalendarTzMode();
+    const primaryTz = getPrimaryTz();
+    let localTz = 'America/New_York';
+    try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+    const timelineTz = calTzMode === 'primary' ? primaryTz : localTz;
+
+    const { startHour, endHour, startMin, endMin, totalMinutes, todayStart, tomorrowStart, timedEvents } = getTimelineTimeRange(timelineTz);
     const now = new Date();
+    const nowParts = getDatePartsInTz(now, timelineTz);
 
     const allDayEvents = _cachedAllCalendarEvents.filter(ev => {
       if (!ev.startDate || !ev.endDate || !ev.allDay) return false;
       return ev.startDate < tomorrowStart && ev.endDate >= todayStart;
     });
 
-    const nowMin = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+    const nowMin = nowParts.hour * 60 + nowParts.minute + now.getSeconds() / 60;
     const nowPct = ((nowMin - startMin) / totalMinutes) * 100;
-    const nowTimeStr = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    const nowTimeStr = `${String(nowParts.hour).padStart(2, '0')}:${String(nowParts.minute).padStart(2, '0')}`;
 
     let html = '';
 
@@ -3458,12 +3738,15 @@ sidebar: []
         const opacityStyle = item.isPast ? 'opacity: 0.6;' : '';
         const glowStyle = item.isCurrent ? `box-shadow: 0 0 10px ${feedColor.border};` : '';
 
+        const tzDisp = formatEventDisplay(item, calTzMode, primaryTz, localTz);
+        const cardTimeStr = `${tzDisp.startStr} \u2013 ${tzDisp.endStr}${tzDisp.tzAbbr ? ' ' + tzDisp.tzAbbr : ''}`;
+
         html += `
           <div class="dash-timeline-event-card"
                style="top: ${item.topPct.toFixed(2)}%; height: ${item.heightPct.toFixed(2)}%; left: ${leftPct.toFixed(2)}%; width: ${widthPct.toFixed(2)}%; background: ${feedColor.bg}; color: ${feedColor.color}; border: 1px solid ${feedColor.border}; border-left: 3px solid ${feedColor.color}; ${opacityStyle} ${glowStyle}"
-               title="${escapeHtml(item.title)} (${escapeHtml(item.startStr)} - ${escapeHtml(item.endStr)}) | ${escapeHtml(item.feedName || item.tag || 'calendar')}">
+               title="${escapeHtml(item.title)} (${cardTimeStr}${tzDisp.tzInfo ? ' \u2022 ' + escapeHtml(tzDisp.tzInfo) : ''}) | ${escapeHtml(item.feedName || item.tag || 'calendar')}">
             <div class="dash-timeline-event-title">${escapeHtml(item.title)}</div>
-            <div class="dash-timeline-event-time">${escapeHtml(item.startStr)} &ndash; ${escapeHtml(item.endStr)}</div>
+            <div class="dash-timeline-event-time">${escapeHtml(cardTimeStr)}</div>
           </div>
         `;
       });
@@ -3501,9 +3784,16 @@ sidebar: []
     const badgeEl = document.getElementById('cal-timeline-now-time');
     if (!lineEl) return;
 
-    const { startMin, endMin, totalMinutes } = getTimelineTimeRange();
+    const calTzMode = getCalendarTzMode();
+    const primaryTz = getPrimaryTz();
+    let localTz = 'America/New_York';
+    try { localTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'America/New_York'; } catch (e) {}
+    const timelineTz = calTzMode === 'primary' ? primaryTz : localTz;
+
+    const { startMin, endMin, totalMinutes } = getTimelineTimeRange(timelineTz);
     const now = new Date();
-    const nowMin = now.getHours() * 60 + now.getMinutes() + now.getSeconds() / 60;
+    const nowParts = getDatePartsInTz(now, timelineTz);
+    const nowMin = nowParts.hour * 60 + nowParts.minute + now.getSeconds() / 60;
 
     if (nowMin < startMin || nowMin > endMin) {
       lineEl.style.display = 'none';
@@ -3512,8 +3802,8 @@ sidebar: []
       const nowPct = Math.max(0, Math.min(100, ((nowMin - startMin) / totalMinutes) * 100));
       lineEl.style.top = `${nowPct.toFixed(2)}%`;
       if (badgeEl) {
-        const hh = String(now.getHours()).padStart(2, '0');
-        const mm = String(now.getMinutes()).padStart(2, '0');
+        const hh = String(nowParts.hour).padStart(2, '0');
+        const mm = String(nowParts.minute).padStart(2, '0');
         badgeEl.innerText = `${hh}:${mm}`;
       }
     }
@@ -4171,6 +4461,9 @@ sidebar: []
       loadCalendarEvents();
     } else if (e.key === KEY_CAL_VIEW_MODE) {
       applyCalendarViewMode();
+    } else if (e.key === KEY_CAL_TZ_MODE) {
+      updateCalendarTzButton();
+      renderCalendarEventsDisplay();
     } else if (e.key === KEY_SPOTIFY_TOKEN || e.key === KEY_SPOTIFY_CLIENT_ID) {
       renderSpotifyState();
     } else if (e.key === KEY_WIDGET_OVERFLOW_MODE || e.key === KEY_WIDGET_ROTATE_DELAY || e.key === KEY_CARD_CONFIGS || e.key === KEY_SPOTIFY_AUTO_PIN) {

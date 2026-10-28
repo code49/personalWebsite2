@@ -729,6 +729,7 @@ sidebar: []
       <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
         <input type="text" id="new-cal-feed-name" class="dash-input" placeholder="feed name (e.g. Work, School)" style="margin-bottom: 0; flex: 1; min-width: 140px;" />
         <input type="url" id="new-cal-feed-url" class="dash-input" placeholder="ical/ics url (https://.../basic.ics)" style="margin-bottom: 0; flex: 2; min-width: 220px;" />
+        <input type="text" id="new-cal-feed-tz" class="dash-input" placeholder="tz (optional, e.g. America/Los_Angeles)" style="margin-bottom: 0; flex: 1; min-width: 140px;" />
         <button type="button" onclick="addCalendarFeedCard()" class="dash-btn dash-btn-primary" style="white-space: nowrap; padding: 10px 14px;">
           + add feed
         </button>
@@ -773,6 +774,36 @@ sidebar: []
         </div>
         <div class="dash-helper-text">
           select how the calendar widget displays events on your dashboard.
+        </div>
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dash-border);">
+        <label class="dash-field-label">calendar time zone display</label>
+        <div class="dash-view-mode-selector">
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-tz-mode" value="event" onchange="saveCalTzMode('event')" />
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">event tz</span>
+              <span class="dash-view-mode-desc">show in event native time zone with local conversion</span>
+            </div>
+          </label>
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-tz-mode" value="primary" onchange="saveCalTzMode('primary')" />
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">primary tz</span>
+              <span class="dash-view-mode-desc">convert all events to dashboard primary time zone</span>
+            </div>
+          </label>
+          <label class="dash-view-mode-option">
+            <input type="radio" name="cal-tz-mode" value="local" onchange="saveCalTzMode('local')" />
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">local tz</span>
+              <span class="dash-view-mode-desc">convert all events to browser local time zone</span>
+            </div>
+          </label>
+        </div>
+        <div class="dash-helper-text">
+          select the reference time zone for displaying event times and badges in the calendar widget.
         </div>
       </div>
 
@@ -883,6 +914,7 @@ sidebar: []
   const KEY_CAL_FEED = 'dash_cal_feed';
   const KEY_CAL_PROXY = 'dash_cal_proxy';
   const KEY_CAL_VIEW_MODE = 'dash_cal_view_mode';
+  const KEY_CAL_TZ_MODE = 'dash_cal_tz_mode';
   const KEY_CAL_EVENTS = 'dash_cal_events';
   const KEY_NOTES = 'dash_scratchpad_notes';
   const KEY_WORLD_CLOCKS = 'dash_world_clocks';
@@ -1134,6 +1166,7 @@ sidebar: []
           <div style="overflow: hidden; max-width: 80%;">
             <div style="font-weight: 600; font-size: 0.88rem; color: var(--dash-text-pri); text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">
               ${escapeHtml(feed.name || 'calendar feed')}
+              ${feed.tz ? `<span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-accent); font-weight: normal; margin-left: 6px;">[${escapeHtml(feed.tz)}]</span>` : ''}
             </div>
             <div class="dash-mono" style="font-size: 0.74rem; color: var(--dash-text-muted); text-overflow: ellipsis; overflow: hidden; white-space: nowrap; margin-top: 2px;" title="${escapeHtml(feed.url)}">
               ${escapeHtml(feed.url)}
@@ -1154,10 +1187,12 @@ sidebar: []
   function addCalendarFeedCard() {
     const nameInput = document.getElementById('new-cal-feed-name');
     const urlInput = document.getElementById('new-cal-feed-url');
+    const tzInput = document.getElementById('new-cal-feed-tz');
     const errEl = document.getElementById('cal-feed-error-msg');
 
     let name = nameInput.value.trim();
     const url = urlInput.value.trim();
+    const tz = tzInput ? tzInput.value.trim() : '';
 
     if (!url) {
       errEl.innerText = 'please provide a valid calendar feed url';
@@ -1176,11 +1211,14 @@ sidebar: []
 
     errEl.style.display = 'none';
     const feeds = loadCalendarFeeds();
-    feeds.push({ name, url });
+    const newFeed = { name, url };
+    if (tz) newFeed.tz = tz;
+    feeds.push(newFeed);
     saveCalendarFeeds(feeds);
 
     nameInput.value = '';
     urlInput.value = '';
+    if (tzInput) tzInput.value = '';
     showSaveToast('feed added');
   }
 
@@ -1334,6 +1372,11 @@ sidebar: []
       localStorage.setItem(KEY_CAL_VIEW_MODE, viewModeRadio.value);
     }
 
+    const tzModeRadio = document.querySelector('input[name="cal-tz-mode"]:checked');
+    if (tzModeRadio) {
+      localStorage.setItem(KEY_CAL_TZ_MODE, tzModeRadio.value);
+    }
+
     const overflowRadio = document.querySelector('input[name="widget-overflow-mode"]:checked');
     if (overflowRadio) {
       localStorage.setItem(KEY_WIDGET_OVERFLOW_MODE, overflowRadio.value);
@@ -1401,6 +1444,11 @@ sidebar: []
     showSaveToast(`calendar mode set to ${val}`);
   }
 
+  function saveCalTzMode(val) {
+    localStorage.setItem(KEY_CAL_TZ_MODE, val);
+    showSaveToast(`calendar timezone display set to ${val}`);
+  }
+
   function showSaveToast(msg = 'settings saved') {
     const toast = document.getElementById('save-status-msg');
     if (toast) {
@@ -1446,6 +1494,7 @@ sidebar: []
         cal_feeds: loadCalendarFeeds(),
         cal_proxy: localStorage.getItem(KEY_CAL_PROXY) || '',
         cal_view_mode: localStorage.getItem(KEY_CAL_VIEW_MODE) || 'smart',
+        cal_tz_mode: localStorage.getItem(KEY_CAL_TZ_MODE) || 'event',
         widget_overflow_mode: localStorage.getItem(KEY_WIDGET_OVERFLOW_MODE) || 'rotating',
         widget_rotate_delay: parseInt(localStorage.getItem(KEY_WIDGET_ROTATE_DELAY), 10) || 30,
         clock_rotate_delay: getClockRotateDelay(),
@@ -1529,6 +1578,9 @@ sidebar: []
           }
           if (parsed.settings.cal_view_mode !== undefined) {
             localStorage.setItem(KEY_CAL_VIEW_MODE, parsed.settings.cal_view_mode);
+          }
+          if (parsed.settings.cal_tz_mode !== undefined) {
+            localStorage.setItem(KEY_CAL_TZ_MODE, parsed.settings.cal_tz_mode);
           }
           if (parsed.settings.widget_overflow_mode !== undefined) {
             localStorage.setItem(KEY_WIDGET_OVERFLOW_MODE, parsed.settings.widget_overflow_mode);
@@ -1623,6 +1675,10 @@ sidebar: []
     const currentViewMode = localStorage.getItem(KEY_CAL_VIEW_MODE) || 'smart';
     const modeRadio = document.querySelector(`input[name="cal-view-mode"][value="${currentViewMode}"]`);
     if (modeRadio) modeRadio.checked = true;
+
+    const currentTzMode = localStorage.getItem(KEY_CAL_TZ_MODE) || 'event';
+    const tzRadio = document.querySelector(`input[name="cal-tz-mode"][value="${currentTzMode}"]`);
+    if (tzRadio) tzRadio.checked = true;
 
     const currentOverflowMode = localStorage.getItem(KEY_WIDGET_OVERFLOW_MODE) || 'rotating';
     const overflowRadio = document.querySelector(`input[name="widget-overflow-mode"][value="${currentOverflowMode}"]`);

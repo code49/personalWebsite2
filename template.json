@@ -17,6 +17,7 @@
     ],
     "cal_proxy": "https://calendar-worker.davidlechan.workers.dev/?url=",
     "cal_view_mode": "smart",
+    "cal_tz_mode": "event",
     "widget_overflow_mode": "rotating",
     "widget_rotate_delay": 30,
     "clock_rotate_delay": 10,
