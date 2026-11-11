@@ -1335,6 +1335,27 @@ sidebar: []
     flex: 1 1 auto;
     overflow: hidden;
     border-radius: 6px;
+    position: relative;
+  }
+
+  .dash-stocks-overview-wrap .tradingview-widget-container,
+  .dash-stocks-market-wrap .tradingview-widget-container {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .dash-stocks-overview-wrap .tradingview-widget-container iframe,
+  .dash-stocks-market-wrap .tradingview-widget-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    border: none !important;
   }
 
   .dash-stocks-tape-wrap {
@@ -1775,11 +1796,11 @@ sidebar: []
         </div>
 
         <div class="dash-timer-container">
-          <!-- Presets (5m, 15m, 1h) -->
+          <!-- Presets (5m, 15m, 60m) -->
           <div class="dash-timer-presets">
             <button type="button" class="dash-timer-preset-btn" data-preset="5m" onclick="setTimerPreset('5m')">5m</button>
             <button type="button" class="dash-timer-preset-btn active" data-preset="15m" onclick="setTimerPreset('15m')">15m</button>
-            <button type="button" class="dash-timer-preset-btn" data-preset="1h" onclick="setTimerPreset('1h')">1h</button>
+            <button type="button" class="dash-timer-preset-btn" data-preset="60m" onclick="setTimerPreset('60m')">60m</button>
           </div>
 
           <!-- Circular Progress & Digital Readout -->
@@ -4317,6 +4338,7 @@ sidebar: []
         locale: 'en',
         width: '100%',
         height: '100%',
+        autosize: true,
         largeChartUrl: '',
         isTransparent: false,
         showSymbolLogo: true,
@@ -4358,7 +4380,8 @@ sidebar: []
   const TIMER_PRESETS = {
     '5m': { label: '5m', sec: 300 },
     '15m': { label: '15m', sec: 900 },
-    '1h': { label: '1h', sec: 3600 }
+    '60m': { label: '60m', sec: 3600 },
+    '1h': { label: '60m', sec: 3600 }
   };
 
   const TIMER_CIRCUMFERENCE = 2 * Math.PI * 80; // ~502.65 for r=80
@@ -4378,8 +4401,10 @@ sidebar: []
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed && typeof parsed.durationSec === 'number') {
+          let preset = parsed.preset || '5m';
+          if (preset === '1h') preset = '60m';
           return {
-            preset: parsed.preset || '5m',
+            preset: preset,
             durationSec: parsed.durationSec || 300,
             remainingSec: typeof parsed.remainingSec === 'number' ? parsed.remainingSec : (parsed.durationSec || 300),
             isRunning: !!parsed.isRunning,
@@ -4521,12 +4546,8 @@ sidebar: []
 
   function formatTimerDigits(sec) {
     const s = Math.max(0, Math.floor(sec));
-    const h = Math.floor(s / 3600);
-    const m = Math.floor((s % 3600) / 60);
+    const m = Math.floor(s / 60);
     const remS = s % 60;
-    if (h > 0) {
-      return `${h}:${String(m).padStart(2, '0')}:${String(remS).padStart(2, '0')}`;
-    }
     return `${String(m).padStart(2, '0')}:${String(remS).padStart(2, '0')}`;
   }
 
