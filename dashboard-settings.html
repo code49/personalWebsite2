@@ -507,7 +507,7 @@ sidebar: []
   <div class="settings-card">
     <div class="settings-card-title">
       <span>config backup & transfer</span>
-      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">v<span id="settings-version-badge" style="color: var(--dash-accent);">00</span></span>
+      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);"><span id="settings-version-badge" style="color: var(--dash-accent);">v1</span></span>
     </div>
 
     <div>
@@ -969,7 +969,7 @@ sidebar: []
   const KEY_DASHBOARD_NAME = 'dash_user_name';
   const KEY_DASHBOARD_HOMEPAGE = 'dash_homepage_url';
   const KEY_SETTINGS_VERSION = 'dash_settings_version';
-  const CURRENT_SETTINGS_VERSION = '00';
+  const CURRENT_SETTINGS_VERSION = 'v1';
   const KEY_SPOTIFY_CLIENT_ID = 'dash_spotify_client_id';
   const KEY_SPOTIFY_REDIRECT_URI = 'dash_spotify_redirect_uri';
   const KEY_SPOTIFY_TOKEN = 'dash_spotify_token';
@@ -1596,6 +1596,9 @@ sidebar: []
       localStorage.setItem(KEY_SPOTIFY_AUTO_PIN, autoPinCheckbox.checked ? 'true' : 'false');
     }
 
+    localStorage.setItem(KEY_SETTINGS_VERSION, CURRENT_SETTINGS_VERSION);
+    updateSettingsVersionDisplay();
+
     renderSpotifyStatus();
     renderSettingsTzCards();
     renderCalendarFeedCards();
@@ -1929,7 +1932,8 @@ sidebar: []
   function updateSettingsVersionDisplay() {
     const badge = document.getElementById('settings-version-badge');
     if (badge) {
-      badge.innerText = localStorage.getItem(KEY_SETTINGS_VERSION) || CURRENT_SETTINGS_VERSION;
+      const raw = localStorage.getItem(KEY_SETTINGS_VERSION) || CURRENT_SETTINGS_VERSION;
+      badge.innerText = raw.startsWith('v') ? raw : `v${raw}`;
     }
   }
 

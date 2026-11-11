@@ -1,9 +1,9 @@
 {
-  "version": "00",
-  "settings_version": "00",
+  "version": "v1",
+  "settings_version": "v1",
   "exported_at": "2026-10-27T00:00:00.000Z",
   "settings": {
-    "settings_version": "00",
+    "settings_version": "v1",
     "user_name": "david",
     "homepage_url": "https://davidlechan.dev",
     "spotify_client_id": "",
