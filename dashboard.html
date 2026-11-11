@@ -1746,8 +1746,8 @@ sidebar: []
               <span>📌</span>
               <span id="stocks-pin-label">pin</span>
             </button>
-            <button id="stocks-view-toggle" class="dash-view-toggle-btn" onclick="toggleStocksView()" title="click to toggle overview / ticker tape view">
-              <span id="stocks-view-label">overview</span>
+            <button id="stocks-view-toggle" class="dash-view-toggle-btn" onclick="toggleStocksView()" title="click to toggle market watchlist / symbol overview">
+              <span id="stocks-view-label">view: market</span>
               <span style="font-size: 0.72rem; opacity: 0.7;">⇄</span>
             </button>
             <span id="stocks-badge" class="dash-badge dash-badge-active">5 symbols</span>
@@ -4176,17 +4176,18 @@ sidebar: []
 
   function getStocksViewMode() {
     const mode = localStorage.getItem(KEY_STOCKS_VIEW);
-    return (mode === 'market' || mode === 'tape') ? 'market' : 'overview';
+    if (!mode || mode === 'tape') return 'market';
+    return (mode === 'overview') ? 'overview' : 'market';
   }
 
   function setStocksViewMode(mode) {
-    const m = (mode === 'market' || mode === 'tape') ? 'market' : 'overview';
+    const m = (mode === 'overview') ? 'overview' : 'market';
     localStorage.setItem(KEY_STOCKS_VIEW, m);
   }
 
   function toggleStocksView() {
     const current = getStocksViewMode();
-    const next = current === 'overview' ? 'market' : 'overview';
+    const next = (current === 'overview') ? 'market' : 'overview';
     setStocksViewMode(next);
     updateStocksViewToggleLabel();
     renderStocksWidget(true);
@@ -4343,13 +4344,11 @@ sidebar: []
   }
 
   function initStocksWidget() {
-    updateStocksViewToggleLabel();
-    const toggleBtn = document.getElementById('stocks-view-toggle');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
-        toggleStocksView();
-      });
+    if (!localStorage.getItem('dash_stocks_v2_migrated')) {
+      localStorage.setItem(KEY_STOCKS_VIEW, 'market');
+      localStorage.setItem('dash_stocks_v2_migrated', 'true');
     }
+    updateStocksViewToggleLabel();
     renderStocksWidget(true);
   }
 
@@ -4596,27 +4595,6 @@ sidebar: []
   function initTimerWidget() {
     _timerState = loadTimerState();
     updateTimerPresetButtons();
-
-    document.querySelectorAll('.dash-timer-preset-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const p = btn.getAttribute('data-preset');
-        setTimerPreset(p);
-      });
-    });
-
-    const toggleBtn = document.getElementById('timer-toggle-btn');
-    if (toggleBtn) {
-      toggleBtn.addEventListener('click', () => {
-        toggleTimerRunning();
-      });
-    }
-
-    const resetBtn = document.getElementById('timer-reset-btn');
-    if (resetBtn) {
-      resetBtn.addEventListener('click', () => {
-        resetTimer();
-      });
-    }
 
     if (_timerState.isRunning && _timerState.endTimestamp) {
       const left = Math.max(0, Math.ceil((_timerState.endTimestamp - Date.now()) / 1000));

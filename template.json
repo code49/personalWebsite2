@@ -29,7 +29,7 @@
       "AAPL",
       "MSFT"
     ],
-    "stocks_view": "overview",
+    "stocks_view": "market",
     "card_configs": {
       "spotify-card": {
         "id": "spotify-card",

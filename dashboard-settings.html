@@ -915,17 +915,17 @@ sidebar: []
         <label class="dash-field-label">default stocks view</label>
         <div class="dash-view-mode-selector">
           <label class="dash-view-mode-option">
-            <input type="radio" name="stocks-view-mode" value="overview" onchange="saveStocksViewMode('overview')" />
-            <div class="dash-view-mode-card">
-              <span class="dash-view-mode-title">symbol overview</span>
-              <span class="dash-view-mode-desc">interactive 1-week area chart with tabs per symbol</span>
-            </div>
-          </label>
-          <label class="dash-view-mode-option">
             <input type="radio" name="stocks-view-mode" value="market" onchange="saveStocksViewMode('market')" />
             <div class="dash-view-mode-card">
               <span class="dash-view-mode-title">market overview</span>
               <span class="dash-view-mode-desc">watchlist table with live prices, 1-week deltas, and sparklines</span>
+            </div>
+          </label>
+          <label class="dash-view-mode-option">
+            <input type="radio" name="stocks-view-mode" value="overview" onchange="saveStocksViewMode('overview')" />
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">symbol overview</span>
+              <span class="dash-view-mode-desc">interactive 1-week area chart with tabs per symbol</span>
             </div>
           </label>
         </div>
@@ -1326,7 +1326,8 @@ sidebar: []
 
   function getStocksViewMode() {
     const mode = localStorage.getItem(KEY_STOCKS_VIEW);
-    return (mode === 'market' || mode === 'tape') ? 'market' : 'overview';
+    if (!mode || mode === 'tape') return 'market';
+    return (mode === 'overview') ? 'overview' : 'market';
   }
 
   function saveStocksViewMode(mode) {
