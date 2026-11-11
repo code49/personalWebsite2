@@ -2036,6 +2036,16 @@ sidebar: []
     return localStorage.getItem(KEY_TIMER_AUTO_PIN) !== 'false';
   }
 
+  function isTimerActive() {
+    if (typeof _timerState === 'undefined' || !_timerState) return false;
+    if (_timerState.isRunning) return true;
+    if (typeof _timerState.remainingSec === 'number') {
+      if (_timerState.remainingSec <= 0) return true;
+      if (_timerState.remainingSec < _timerState.durationSec) return true;
+    }
+    return false;
+  }
+
   function getEffectivePinnedCardIds() {
     const configs = loadCardConfigs();
     const manualPinned = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card', 'stocks-card', 'timer-card']
@@ -2049,8 +2059,8 @@ sidebar: []
 
     const effective = [...manualPinned];
 
-    // If Timer auto-pin is active and timer is currently running:
-    if (getTimerAutoPin() && _timerState?.isRunning) {
+    // If Timer auto-pin is active and timer is running, paused, or finished (not idle):
+    if (getTimerAutoPin() && isTimerActive()) {
       if (!effective.includes('timer-card') && effective.length < 2) {
         effective.push('timer-card');
       }
