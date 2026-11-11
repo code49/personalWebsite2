@@ -30,6 +30,7 @@
       "MSFT"
     ],
     "stocks_view": "market",
+    "timer_auto_pin": true,
     "card_configs": {
       "spotify-card": {
         "id": "spotify-card",

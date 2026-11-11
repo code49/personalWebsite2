@@ -1874,6 +1874,7 @@ sidebar: []
   const KEY_STOCKS_SYMBOLS = 'dash_stocks_symbols';
   const KEY_STOCKS_VIEW = 'dash_stocks_view';
   const KEY_TIMER_STATE = 'dash_timer_state';
+  const KEY_TIMER_AUTO_PIN = 'dash_timer_auto_pin';
   const DEFAULT_STOCKS_SYMBOLS = ['KLAC', 'GOOGL', 'NVDA', 'AAPL', 'MSFT'];
 
   // Standardized Card Configurations
@@ -2031,6 +2032,10 @@ sidebar: []
     applyCardConfigs();
   }
 
+  function getTimerAutoPin() {
+    return localStorage.getItem(KEY_TIMER_AUTO_PIN) !== 'false';
+  }
+
   function getEffectivePinnedCardIds() {
     const configs = loadCardConfigs();
     const manualPinned = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card', 'stocks-card', 'timer-card']
@@ -2042,19 +2047,23 @@ sidebar: []
       return [fsPinned];
     }
 
-    // Up to 2 manually pinned widgets
-    if (manualPinned.length >= 2) {
-      return manualPinned.slice(0, 2);
+    const effective = [...manualPinned];
+
+    // If Timer auto-pin is active and timer is currently running:
+    if (getTimerAutoPin() && _timerState?.isRunning) {
+      if (!effective.includes('timer-card') && effective.length < 2) {
+        effective.push('timer-card');
+      }
     }
 
     // If Spotify auto-pin is enabled and music is currently playing:
     if (getSpotifyAutoPin() && spotifyTrackState?.isPlaying) {
-      if (!manualPinned.includes('spotify-card')) {
-        return [...manualPinned, 'spotify-card'];
+      if (!effective.includes('spotify-card') && effective.length < 2) {
+        effective.push('spotify-card');
       }
     }
 
-    return manualPinned;
+    return effective.slice(0, 2);
   }
 
   function isSpotifyPinned() {
@@ -4440,6 +4449,7 @@ sidebar: []
     saveTimerState();
     updateTimerPresetButtons();
     updateTimerDisplay('idle');
+    applyCardConfigs();
   }
 
   function updateTimerPresetButtons() {
@@ -4461,6 +4471,7 @@ sidebar: []
       stopTimerCountdownLoop();
       saveTimerState();
       updateTimerDisplay('paused');
+      applyCardConfigs();
     } else {
       // Start
       if (_timerState.remainingSec <= 0) {
@@ -4471,6 +4482,7 @@ sidebar: []
       saveTimerState();
       startTimerCountdownLoop();
       updateTimerDisplay('running');
+      applyCardConfigs();
     }
   }
 
@@ -4481,6 +4493,7 @@ sidebar: []
     stopTimerCountdownLoop();
     saveTimerState();
     updateTimerDisplay('idle');
+    applyCardConfigs();
   }
 
   function startTimerCountdownLoop() {
@@ -4511,6 +4524,7 @@ sidebar: []
   function onTimerComplete() {
     updateTimerDisplay('finished');
     playTimerChime();
+    applyCardConfigs();
   }
 
   function playTimerChime() {
@@ -4611,6 +4625,7 @@ sidebar: []
       stopTimerCountdownLoop();
       updateTimerDisplay();
     }
+    applyCardConfigs();
   }
 
   function initTimerWidget() {
@@ -5370,7 +5385,7 @@ sidebar: []
       renderCalendarEventsDisplay();
     } else if (e.key === KEY_SPOTIFY_TOKEN || e.key === KEY_SPOTIFY_CLIENT_ID) {
       renderSpotifyState();
-    } else if (e.key === KEY_WIDGET_OVERFLOW_MODE || e.key === KEY_WIDGET_ROTATE_DELAY || e.key === KEY_CARD_CONFIGS || e.key === KEY_SPOTIFY_AUTO_PIN) {
+    } else if (e.key === KEY_WIDGET_OVERFLOW_MODE || e.key === KEY_WIDGET_ROTATE_DELAY || e.key === KEY_CARD_CONFIGS || e.key === KEY_SPOTIFY_AUTO_PIN || e.key === KEY_TIMER_AUTO_PIN) {
       stopRowRotationTimer();
       applyCardConfigs();
     } else if (e.key === KEY_CLOCK_ROTATE_DELAY) {
