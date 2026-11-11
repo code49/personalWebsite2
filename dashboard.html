@@ -1327,7 +1327,8 @@ sidebar: []
     position: relative;
   }
 
-  .dash-stocks-overview-wrap {
+  .dash-stocks-overview-wrap,
+  .dash-stocks-market-wrap {
     width: 100%;
     height: 100%;
     min-height: 0;
@@ -4165,18 +4166,27 @@ sidebar: []
     localStorage.setItem(KEY_STOCKS_SYMBOLS, JSON.stringify(symbols));
   }
 
+  function resolveTvExchangeSymbol(sym) {
+    const s = String(sym || '').trim().toUpperCase();
+    if (s.includes(':')) return s;
+    const nyse = ['IBM', 'DIS', 'GE', 'KO', 'JNJ', 'WMT', 'V', 'MA', 'JPM', 'BA', 'NKE', 'PG', 'XOM', 'CVX'];
+    if (nyse.includes(s)) return `NYSE:${s}`;
+    return `NASDAQ:${s}`;
+  }
+
   function getStocksViewMode() {
     const mode = localStorage.getItem(KEY_STOCKS_VIEW);
-    return (mode === 'tape') ? 'tape' : 'overview';
+    return (mode === 'market' || mode === 'tape') ? 'market' : 'overview';
   }
 
   function setStocksViewMode(mode) {
-    localStorage.setItem(KEY_STOCKS_VIEW, mode);
+    const m = (mode === 'market' || mode === 'tape') ? 'market' : 'overview';
+    localStorage.setItem(KEY_STOCKS_VIEW, m);
   }
 
   function toggleStocksView() {
     const current = getStocksViewMode();
-    const next = current === 'overview' ? 'tape' : 'overview';
+    const next = current === 'overview' ? 'market' : 'overview';
     setStocksViewMode(next);
     updateStocksViewToggleLabel();
     renderStocksWidget(true);
@@ -4186,7 +4196,7 @@ sidebar: []
     const labelEl = document.getElementById('stocks-view-label');
     if (labelEl) {
       const mode = getStocksViewMode();
-      labelEl.innerText = `view: ${mode}`;
+      labelEl.innerText = (mode === 'market') ? 'view: market' : 'view: overview';
     }
   }
 
@@ -4228,7 +4238,10 @@ sidebar: []
       script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js';
       script.async = true;
 
-      const tvSymbols = symbols.map(s => [s, `${s}|1W`]);
+      const tvSymbols = symbols.map(s => {
+        const full = resolveTvExchangeSymbol(s);
+        return [s, `${full}|1W`];
+      });
 
       const config = {
         symbols: tvSymbols,
@@ -4271,13 +4284,9 @@ sidebar: []
       container.appendChild(wrap);
 
     } else {
-      // 2. TradingView Ticker Tape + Watchlist cards
+      // 2. TradingView Market Overview (Watchlist table with live prices, 1-week sparklines, and chart)
       const wrap = document.createElement('div');
-      wrap.className = 'dash-stocks-tape-wrap';
-
-      // Top slot: Scrolling ticker tape
-      const tapeSlot = document.createElement('div');
-      tapeSlot.className = 'dash-stocks-tape-slot';
+      wrap.className = 'dash-stocks-market-wrap';
 
       const tvContainer = document.createElement('div');
       tvContainer.className = 'tradingview-widget-container';
@@ -4286,52 +4295,49 @@ sidebar: []
 
       const widgetSlot = document.createElement('div');
       widgetSlot.className = 'tradingview-widget-container__widget';
+      widgetSlot.style.width = '100%';
+      widgetSlot.style.height = '100%';
       tvContainer.appendChild(widgetSlot);
 
       const script = document.createElement('script');
       script.type = 'text/javascript';
-      script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+      script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js';
       script.async = true;
 
-      const tvSymbols = symbols.map(s => ({ proName: s, title: s }));
+      const tvSymbols = symbols.map(s => {
+        const full = resolveTvExchangeSymbol(s);
+        return { s: full, d: s };
+      });
 
       const config = {
-        symbols: tvSymbols,
-        showSymbolLogo: true,
         colorTheme: themeStr,
-        isTransparent: true,
-        displayMode: 'adaptive',
-        locale: 'en'
+        dateRange: '5D',
+        showChart: true,
+        locale: 'en',
+        width: '100%',
+        height: '100%',
+        largeChartUrl: '',
+        isTransparent: false,
+        showSymbolLogo: true,
+        showFloatingTooltip: false,
+        plotLineColorGrowing: 'rgba(202, 255, 191, 1)',
+        plotLineColorFalling: 'rgba(255, 173, 173, 1)',
+        gridLineColor: isDark ? 'rgba(55, 59, 65, 0.4)' : 'rgba(220, 220, 220, 0.8)',
+        scaleFontColor: isDark ? 'rgba(150, 152, 150, 1)' : 'rgba(100, 100, 100, 1)',
+        belowLineFillColorGrowing: 'rgba(202, 255, 191, 0.12)',
+        belowLineFillColorFalling: 'rgba(255, 173, 173, 0.12)',
+        symbolActiveColor: 'rgba(189, 178, 255, 0.15)',
+        tabs: [
+          {
+            title: 'Watchlist',
+            symbols: tvSymbols
+          }
+        ]
       };
 
       script.innerHTML = JSON.stringify(config);
       tvContainer.appendChild(script);
-      tapeSlot.appendChild(tvContainer);
-      wrap.appendChild(tapeSlot);
-
-      // Bottom slot: Interactive watchlist items with 1-Week TradingView links
-      const list = document.createElement('div');
-      list.className = 'dash-stocks-list';
-
-      symbols.forEach(sym => {
-        const item = document.createElement('a');
-        item.className = 'dash-stocks-item';
-        item.href = `https://www.tradingview.com/symbols/${encodeURIComponent(sym)}/?interval=1W`;
-        item.target = '_blank';
-        item.rel = 'noopener noreferrer';
-        item.title = `View 1-week performance for ${sym} on TradingView`;
-
-        item.innerHTML = `
-          <div class="dash-stocks-symbol-group">
-            <span class="dash-stocks-symbol">${escapeHtml(sym)}</span>
-            <span class="dash-stocks-exchange">stock</span>
-          </div>
-          <span class="dash-stocks-link">1w chart ↗</span>
-        `;
-        list.appendChild(item);
-      });
-
-      wrap.appendChild(list);
+      wrap.appendChild(tvContainer);
       container.appendChild(wrap);
     }
   }

@@ -908,7 +908,7 @@ sidebar: []
       <div id="stocks-error-msg" style="color: var(--dash-red); font-size: 0.72rem; margin-top: 6px; display: none;"></div>
 
       <div class="dash-helper-text" style="margin-top: 10px;">
-        symbols are tracked across interactive 1-week area charts and ticker tape widgets.
+        symbols are tracked across interactive 1-week area charts and live market overview watchlists.
       </div>
 
       <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dash-border);">
@@ -922,10 +922,10 @@ sidebar: []
             </div>
           </label>
           <label class="dash-view-mode-option">
-            <input type="radio" name="stocks-view-mode" value="tape" onchange="saveStocksViewMode('tape')" />
+            <input type="radio" name="stocks-view-mode" value="market" onchange="saveStocksViewMode('market')" />
             <div class="dash-view-mode-card">
-              <span class="dash-view-mode-title">ticker tape</span>
-              <span class="dash-view-mode-desc">scrolling market tape with quick watchlist links</span>
+              <span class="dash-view-mode-title">market overview</span>
+              <span class="dash-view-mode-desc">watchlist table with live prices, 1-week deltas, and sparklines</span>
             </div>
           </label>
         </div>
@@ -1326,7 +1326,7 @@ sidebar: []
 
   function getStocksViewMode() {
     const mode = localStorage.getItem(KEY_STOCKS_VIEW);
-    return (mode === 'tape') ? 'tape' : 'overview';
+    return (mode === 'market' || mode === 'tape') ? 'market' : 'overview';
   }
 
   function saveStocksViewMode(mode) {
