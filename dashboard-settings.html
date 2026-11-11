@@ -882,6 +882,60 @@ sidebar: []
     </div>
   </div>
 
+  <!-- 4. Stocks Watchlist & Display Settings -->
+  <div class="settings-card">
+    <div class="settings-card-title">
+      <span>stocks watchlist</span>
+      <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">tradingview</span>
+    </div>
+
+    <div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <label class="dash-field-label" style="margin-bottom: 0;">watchlist symbols</label>
+        <span class="dash-mono" style="font-size: 0.7rem; color: var(--dash-text-muted);">1-week performance</span>
+      </div>
+
+      <div id="settings-stocks-symbol-cards" style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+        <!-- Dynamically populated stock symbol cards -->
+      </div>
+
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <input type="text" id="new-stock-symbol" class="dash-input" placeholder="symbol (e.g. KLAC, GOOGL, NVDA)" style="margin-bottom: 0; flex: 1; min-width: 180px; text-transform: uppercase;" />
+        <button type="button" onclick="addStockSymbolCard()" class="dash-btn dash-btn-primary" style="white-space: nowrap; padding: 10px 14px;">
+          + add symbol
+        </button>
+      </div>
+      <div id="stocks-error-msg" style="color: var(--dash-red); font-size: 0.72rem; margin-top: 6px; display: none;"></div>
+
+      <div class="dash-helper-text" style="margin-top: 10px;">
+        symbols are tracked across interactive 1-week area charts and ticker tape widgets.
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--dash-border);">
+        <label class="dash-field-label">default stocks view</label>
+        <div class="dash-view-mode-selector">
+          <label class="dash-view-mode-option">
+            <input type="radio" name="stocks-view-mode" value="overview" onchange="saveStocksViewMode('overview')" />
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">symbol overview</span>
+              <span class="dash-view-mode-desc">interactive 1-week area chart with tabs per symbol</span>
+            </div>
+          </label>
+          <label class="dash-view-mode-option">
+            <input type="radio" name="stocks-view-mode" value="tape" onchange="saveStocksViewMode('tape')" />
+            <div class="dash-view-mode-card">
+              <span class="dash-view-mode-title">ticker tape</span>
+              <span class="dash-view-mode-desc">scrolling market tape with quick watchlist links</span>
+            </div>
+          </label>
+        </div>
+        <div class="dash-helper-text">
+          select the initial display view for the stocks widget. You can also toggle views anytime on the card itself.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bottom Save Action Bar -->
   <hr style="border: 0; border-top: 1px solid var(--dash-border); margin: 30px 0 20px 0;">
 
@@ -924,6 +978,10 @@ sidebar: []
   const KEY_WIDGET_ROTATE_DELAY = 'dash_widget_rotate_delay';
   const KEY_CLOCK_ROTATE_DELAY = 'dash_clock_rotate_delay';
   const KEY_SPOTIFY_AUTO_PIN = 'dash_spotify_auto_pin';
+  const KEY_STOCKS_SYMBOLS = 'dash_stocks_symbols';
+  const KEY_STOCKS_VIEW = 'dash_stocks_view';
+  const KEY_TIMER_STATE = 'dash_timer_state';
+  const DEFAULT_STOCKS_SYMBOLS = ['KLAC', 'GOOGL', 'NVDA', 'AAPL', 'MSFT'];
 
   // Standardized Card Configurations
   const DEFAULT_CARD_CONFIGS = {
@@ -951,6 +1009,20 @@ sidebar: []
     'weather-card': {
       id: 'weather-card',
       name: 'weather',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'stocks-card': {
+      id: 'stocks-card',
+      name: 'stocks',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'timer-card': {
+      id: 'timer-card',
+      name: 'timer',
       pinned: false,
       fullScreen: false,
       defaultHeight: null
@@ -1229,6 +1301,108 @@ sidebar: []
     showSaveToast('feed removed');
   }
 
+  // -------------------------------------------------------------
+  // Stocks Settings Implementation
+  // -------------------------------------------------------------
+  function loadStocksSymbols() {
+    try {
+      const stored = localStorage.getItem(KEY_STOCKS_SYMBOLS);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map(s => String(s).trim().toUpperCase()).filter(Boolean);
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to parse stocks symbols:', e);
+    }
+    return [...DEFAULT_STOCKS_SYMBOLS];
+  }
+
+  function saveStocksSymbols(symbols) {
+    localStorage.setItem(KEY_STOCKS_SYMBOLS, JSON.stringify(symbols));
+    renderStocksSymbolsList();
+  }
+
+  function getStocksViewMode() {
+    const mode = localStorage.getItem(KEY_STOCKS_VIEW);
+    return (mode === 'tape') ? 'tape' : 'overview';
+  }
+
+  function saveStocksViewMode(mode) {
+    localStorage.setItem(KEY_STOCKS_VIEW, mode);
+    showSaveToast('stocks view updated');
+  }
+
+  function renderStocksSymbolsList() {
+    const container = document.getElementById('settings-stocks-symbol-cards');
+    if (!container) return;
+
+    const symbols = loadStocksSymbols();
+    if (symbols.length === 0) {
+      container.innerHTML = `
+        <div style="padding: 12px; font-size: 0.8rem; color: var(--dash-text-muted); text-align: center; border: 1px dashed var(--dash-border); border-radius: 6px;">
+          no stock symbols configured. Add one below.
+        </div>
+      `;
+      return;
+    }
+
+    let html = '';
+    symbols.forEach(sym => {
+      html += `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 6px; background: var(--dash-sub-card-bg); border: 1px solid var(--dash-sub-card-border);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="dash-mono" style="font-size: 0.95rem; font-weight: 700; color: var(--dash-accent);">${escapeHtml(sym)}</span>
+            <span class="dash-mono" style="font-size: 0.72rem; color: var(--dash-text-muted);">stock</span>
+          </div>
+          <button type="button" onclick="removeStockSymbol('${escapeHtml(sym)}')" class="dash-btn" style="padding: 4px 10px; font-size: 0.72rem; color: var(--dash-red); border-color: rgba(255,173,173,0.3);">
+            remove
+          </button>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function addStockSymbolCard() {
+    const input = document.getElementById('new-stock-symbol');
+    const errEl = document.getElementById('stocks-error-msg');
+    if (!input) return;
+
+    const sym = input.value.trim().toUpperCase();
+    if (!sym) {
+      if (errEl) {
+        errEl.innerText = 'please enter a stock symbol (e.g. KLAC, GOOGL)';
+        errEl.style.display = 'block';
+      }
+      return;
+    }
+
+    const current = loadStocksSymbols();
+    if (current.includes(sym)) {
+      if (errEl) {
+        errEl.innerText = `symbol ${sym} is already in the watchlist`;
+        errEl.style.display = 'block';
+      }
+      return;
+    }
+
+    if (errEl) errEl.style.display = 'none';
+    current.push(sym);
+    saveStocksSymbols(current);
+    input.value = '';
+    showSaveToast('symbol added');
+  }
+
+  function removeStockSymbol(sym) {
+    const current = loadStocksSymbols();
+    const next = current.filter(s => s !== sym);
+    saveStocksSymbols(next);
+    showSaveToast('symbol removed');
+  }
+
   function renderSpotifyStatus() {
     const clientId = localStorage.getItem(KEY_SPOTIFY_CLIENT_ID);
     const token = localStorage.getItem(KEY_SPOTIFY_TOKEN);
@@ -1499,6 +1673,8 @@ sidebar: []
         widget_rotate_delay: parseInt(localStorage.getItem(KEY_WIDGET_ROTATE_DELAY), 10) || 30,
         clock_rotate_delay: getClockRotateDelay(),
         primary_tz: localStorage.getItem(KEY_PRIMARY_TZ) || 'auto',
+        stocks_symbols: loadStocksSymbols(),
+        stocks_view: getStocksViewMode(),
         card_configs: loadCardConfigs(),
       },
       data: {
@@ -1596,6 +1772,12 @@ sidebar: []
           }
           if (parsed.settings.card_configs !== undefined) {
             localStorage.setItem(KEY_CARD_CONFIGS, JSON.stringify(parsed.settings.card_configs));
+          }
+          if (parsed.settings.stocks_symbols !== undefined) {
+            saveStocksSymbols(parsed.settings.stocks_symbols);
+          }
+          if (parsed.settings.stocks_view !== undefined) {
+            localStorage.setItem(KEY_STOCKS_VIEW, parsed.settings.stocks_view);
           }
         }
         if (parsed.data) {
@@ -1704,6 +1886,10 @@ sidebar: []
 
     renderSettingsTzCards();
     renderCalendarFeedCards();
+    renderStocksSymbolsList();
+    const currentStocksView = getStocksViewMode();
+    const stocksRadio = document.querySelector(`input[name="stocks-view-mode"][value="${currentStocksView}"]`);
+    if (stocksRadio) stocksRadio.checked = true;
     populatePrimaryTzSelect();
     renderSpotifyStatus();
     updateSettingsVersionDisplay();

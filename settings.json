@@ -22,6 +22,14 @@
     "widget_rotate_delay": 30,
     "clock_rotate_delay": 10,
     "primary_tz": "auto",
+    "stocks_symbols": [
+      "KLAC",
+      "GOOGL",
+      "NVDA",
+      "AAPL",
+      "MSFT"
+    ],
+    "stocks_view": "overview",
     "card_configs": {
       "spotify-card": {
         "id": "spotify-card",
@@ -47,6 +55,20 @@
       "weather-card": {
         "id": "weather-card",
         "name": "weather",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "stocks-card": {
+        "id": "stocks-card",
+        "name": "stocks",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "timer-card": {
+        "id": "timer-card",
+        "name": "timer",
         "pinned": false,
         "fullScreen": false,
         "defaultHeight": null
@@ -103,6 +125,20 @@
       "weather-card": {
         "id": "weather-card",
         "name": "weather",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "stocks-card": {
+        "id": "stocks-card",
+        "name": "stocks",
+        "pinned": false,
+        "fullScreen": false,
+        "defaultHeight": null
+      },
+      "timer-card": {
+        "id": "timer-card",
+        "name": "timer",
         "pinned": false,
         "fullScreen": false,
         "defaultHeight": null

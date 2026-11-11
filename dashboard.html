@@ -1306,6 +1306,241 @@ sidebar: []
     text-transform: lowercase;
     text-align: right;
   }
+
+  /* 5. Stocks Widget Details */
+  #stocks-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .dash-stocks-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .dash-stocks-overview-wrap {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+  .dash-stocks-tape-wrap {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .dash-stocks-tape-slot {
+    height: 52px;
+    width: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    border: 1px solid var(--dash-sub-card-border);
+    background: var(--dash-sub-card-bg);
+  }
+
+  .dash-stocks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding-right: 2px;
+    margin: 0;
+    list-style: none;
+  }
+
+  .dash-stocks-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: 6px;
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-sub-card-border);
+    font-family: var(--dash-mono);
+    text-decoration: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .dash-stocks-item:hover {
+    border-color: var(--dash-accent);
+    background: rgba(189, 178, 255, 0.08);
+  }
+
+  .dash-stocks-symbol-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dash-stocks-symbol {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--dash-accent);
+    letter-spacing: 0.3px;
+  }
+
+  .dash-stocks-exchange {
+    font-size: 0.68rem;
+    color: var(--dash-text-muted);
+    text-transform: uppercase;
+  }
+
+  .dash-stocks-link {
+    font-size: 0.72rem;
+    color: var(--dash-text-sec);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* 6. Timer Widget Details */
+  #timer-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .dash-timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 0;
+  }
+
+  .dash-timer-presets {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+
+  .dash-timer-preset-btn {
+    padding: 4px 14px;
+    border-radius: 16px;
+    font-family: var(--dash-mono);
+    font-size: 0.76rem;
+    text-transform: lowercase;
+    cursor: pointer;
+    background: var(--dash-sub-card-bg);
+    border: 1px solid var(--dash-sub-card-border);
+    color: var(--dash-text-sec);
+    transition: all 0.15s ease;
+  }
+
+  .dash-timer-preset-btn:hover {
+    border-color: var(--dash-accent);
+    color: var(--dash-accent);
+  }
+
+  .dash-timer-preset-btn.active {
+    background: rgba(189, 178, 255, 0.15);
+    border-color: var(--dash-accent);
+    color: var(--dash-accent);
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(189, 178, 255, 0.2);
+  }
+
+  .dash-timer-display-wrap {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    min-height: 160px;
+  }
+
+  .dash-timer-svg-ring {
+    max-width: 200px;
+    max-height: 200px;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .dash-timer-ring-bg {
+    stroke: var(--dash-border);
+    fill: none;
+    stroke-width: 8;
+  }
+
+  .dash-timer-ring-fill {
+    stroke: var(--dash-accent);
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.25s linear, stroke 0.3s ease;
+  }
+
+  .dash-timer-readout-center {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .dash-timer-readout {
+    font-family: var(--dash-mono);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dash-text-pri);
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+
+  .dash-timer-sub {
+    font-family: var(--dash-mono);
+    font-size: 0.72rem;
+    color: var(--dash-text-muted);
+    text-transform: lowercase;
+    margin-top: 4px;
+  }
+
+  .dash-timer-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .dash-timer-btn {
+    min-width: 96px;
+    text-align: center;
+    padding: 7px 16px;
+    font-size: 0.78rem;
+  }
 </style>
 
 <div class="dash-container">
@@ -1498,6 +1733,77 @@ sidebar: []
           </div>
         </div>
       </div>
+
+      <!-- 5. Stocks Widget -->
+      <div id="stocks-card" class="dash-card">
+        <div class="dash-card-header">
+          <span class="dash-card-title">
+            <span id="stocks-dot" class="dash-status-dot active"></span>stocks
+          </span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button id="stocks-pin-btn" class="dash-view-toggle-btn dash-pin-btn" onclick="toggleCardPinned('stocks-card')" title="pin / unpin widget">
+              <span>📌</span>
+              <span id="stocks-pin-label">pin</span>
+            </button>
+            <button id="stocks-view-toggle" class="dash-view-toggle-btn" onclick="toggleStocksView()" title="click to toggle overview / ticker tape view">
+              <span id="stocks-view-label">overview</span>
+              <span style="font-size: 0.72rem; opacity: 0.7;">⇄</span>
+            </button>
+            <span id="stocks-badge" class="dash-badge dash-badge-active">5 symbols</span>
+          </div>
+        </div>
+
+        <div id="stocks-widget-container" class="dash-stocks-container">
+          <!-- Dynamically populated TradingView overview / ticker tape -->
+        </div>
+      </div>
+
+      <!-- 6. Timer Widget -->
+      <div id="timer-card" class="dash-card">
+        <div class="dash-card-header">
+          <span class="dash-card-title">
+            <span id="timer-dot" class="dash-status-dot idle"></span>timer
+          </span>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <button id="timer-pin-btn" class="dash-view-toggle-btn dash-pin-btn" onclick="toggleCardPinned('timer-card')" title="pin / unpin widget">
+              <span>📌</span>
+              <span id="timer-pin-label">pin</span>
+            </button>
+            <span id="timer-badge" class="dash-badge dash-badge-idle">idle</span>
+          </div>
+        </div>
+
+        <div class="dash-timer-container">
+          <!-- Presets (5m, 15m, 1h) -->
+          <div class="dash-timer-presets">
+            <button type="button" class="dash-timer-preset-btn" data-preset="5m" onclick="setTimerPreset('5m')">5m</button>
+            <button type="button" class="dash-timer-preset-btn active" data-preset="15m" onclick="setTimerPreset('15m')">15m</button>
+            <button type="button" class="dash-timer-preset-btn" data-preset="1h" onclick="setTimerPreset('1h')">1h</button>
+          </div>
+
+          <!-- Circular Progress & Digital Readout -->
+          <div class="dash-timer-display-wrap">
+            <svg class="dash-timer-svg-ring" viewBox="0 0 200 200">
+              <circle class="dash-timer-ring-bg" cx="100" cy="100" r="80" />
+              <circle id="timer-progress-ring" class="dash-timer-ring-fill" cx="100" cy="100" r="80" stroke-dasharray="502.65" stroke-dashoffset="0" />
+            </svg>
+            <div class="dash-timer-readout-center">
+              <div id="timer-display-time" class="dash-timer-readout">15:00</div>
+              <div id="timer-display-status" class="dash-timer-sub">ready (15m)</div>
+            </div>
+          </div>
+
+          <!-- Controls: Start/Pause, Reset -->
+          <div class="dash-timer-actions">
+            <button type="button" id="timer-toggle-btn" class="dash-btn dash-btn-primary dash-timer-btn" onclick="toggleTimerRunning()">
+              start ▶
+            </button>
+            <button type="button" id="timer-reset-btn" class="dash-btn dash-timer-btn" onclick="resetTimer()">
+              reset ↺
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Bottom Separator & Action Bar -->
@@ -1543,6 +1849,10 @@ sidebar: []
   const KEY_WIDGET_ROTATE_DELAY = 'dash_widget_rotate_delay';
   const KEY_CLOCK_ROTATE_DELAY = 'dash_clock_rotate_delay';
   const KEY_SPOTIFY_AUTO_PIN = 'dash_spotify_auto_pin';
+  const KEY_STOCKS_SYMBOLS = 'dash_stocks_symbols';
+  const KEY_STOCKS_VIEW = 'dash_stocks_view';
+  const KEY_TIMER_STATE = 'dash_timer_state';
+  const DEFAULT_STOCKS_SYMBOLS = ['KLAC', 'GOOGL', 'NVDA', 'AAPL', 'MSFT'];
 
   // Standardized Card Configurations
   const DEFAULT_CARD_CONFIGS = {
@@ -1570,6 +1880,20 @@ sidebar: []
     'weather-card': {
       id: 'weather-card',
       name: 'weather',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'stocks-card': {
+      id: 'stocks-card',
+      name: 'stocks',
+      pinned: false,
+      fullScreen: false,
+      defaultHeight: null
+    },
+    'timer-card': {
+      id: 'timer-card',
+      name: 'timer',
       pinned: false,
       fullScreen: false,
       defaultHeight: null
@@ -1687,7 +2011,7 @@ sidebar: []
 
   function getEffectivePinnedCardIds() {
     const configs = loadCardConfigs();
-    const manualPinned = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card']
+    const manualPinned = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card', 'stocks-card', 'timer-card']
       .filter(id => !!configs[id]?.pinned);
 
     // If any pinned widget is fullscreen, only that widget may be pinned
@@ -1717,7 +2041,7 @@ sidebar: []
 
   function getNonPinnedCards() {
     const effective = getEffectivePinnedCardIds();
-    const all = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card'];
+    const all = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card', 'stocks-card', 'timer-card'];
     const filtered = all.filter(id => !effective.includes(id));
     return filtered.length > 0 ? filtered : ['cal-card'];
   }
@@ -1853,6 +2177,10 @@ sidebar: []
     // Initialize Spotify
     initSpotify();
 
+    // Initialize Stocks & Timer
+    initStocksWidget();
+    initTimerWidget();
+
     // Sync widget and card heights
     initCardHeightSync();
   }
@@ -1891,6 +2219,9 @@ sidebar: []
 
     function sync() {
       dashSw.checked = document.documentElement.dataset.theme === 'dark';
+      if (typeof renderStocksWidget === 'function') {
+        renderStocksWidget(true);
+      }
     }
 
     sync();
@@ -1903,6 +2234,7 @@ sidebar: []
         const next = dashSw.checked ? 'dark' : 'light';
         document.documentElement.dataset.theme = next;
         sessionStorage.setItem('theme', JSON.stringify({ nightShift: dashSw.checked, autoToggleAt: 0 }));
+        sync();
       }
     });
 
@@ -3809,9 +4141,497 @@ sidebar: []
     }
   }
 
+  // -------------------------------------------------------------
+  // Stocks Widget Implementation
+  // -------------------------------------------------------------
+  let _lastStocksRenderKey = null;
+
+  function loadStocksSymbols() {
+    try {
+      const stored = localStorage.getItem(KEY_STOCKS_SYMBOLS);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map(s => String(s).trim().toUpperCase()).filter(Boolean);
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to parse stocks symbols:', e);
+    }
+    return [...DEFAULT_STOCKS_SYMBOLS];
+  }
+
+  function saveStocksSymbols(symbols) {
+    localStorage.setItem(KEY_STOCKS_SYMBOLS, JSON.stringify(symbols));
+  }
+
+  function getStocksViewMode() {
+    const mode = localStorage.getItem(KEY_STOCKS_VIEW);
+    return (mode === 'tape') ? 'tape' : 'overview';
+  }
+
+  function setStocksViewMode(mode) {
+    localStorage.setItem(KEY_STOCKS_VIEW, mode);
+  }
+
+  function toggleStocksView() {
+    const current = getStocksViewMode();
+    const next = current === 'overview' ? 'tape' : 'overview';
+    setStocksViewMode(next);
+    updateStocksViewToggleLabel();
+    renderStocksWidget(true);
+  }
+
+  function updateStocksViewToggleLabel() {
+    const labelEl = document.getElementById('stocks-view-label');
+    if (labelEl) {
+      const mode = getStocksViewMode();
+      labelEl.innerText = `view: ${mode}`;
+    }
+  }
+
+  function renderStocksWidget(force = false) {
+    const container = document.getElementById('stocks-widget-container');
+    if (!container) return;
+
+    const symbols = loadStocksSymbols();
+    const viewMode = getStocksViewMode();
+    const isDark = document.documentElement.dataset.theme !== 'light';
+    const themeStr = isDark ? 'dark' : 'light';
+    const renderKey = `${viewMode}_${themeStr}_${symbols.join(',')}`;
+
+    if (!force && _lastStocksRenderKey === renderKey && container.querySelector('.tradingview-widget-container')) {
+      return;
+    }
+    _lastStocksRenderKey = renderKey;
+
+    container.innerHTML = '';
+
+    if (viewMode === 'overview') {
+      // 1. TradingView Symbol Overview (1-Week area chart with symbol tabs)
+      const wrap = document.createElement('div');
+      wrap.className = 'dash-stocks-overview-wrap';
+
+      const tvContainer = document.createElement('div');
+      tvContainer.className = 'tradingview-widget-container';
+      tvContainer.style.width = '100%';
+      tvContainer.style.height = '100%';
+
+      const widgetSlot = document.createElement('div');
+      widgetSlot.className = 'tradingview-widget-container__widget';
+      widgetSlot.style.width = '100%';
+      widgetSlot.style.height = '100%';
+      tvContainer.appendChild(widgetSlot);
+
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js';
+      script.async = true;
+
+      const tvSymbols = symbols.map(s => [s, `${s}|1W`]);
+
+      const config = {
+        symbols: tvSymbols,
+        chartOnly: false,
+        width: '100%',
+        height: '100%',
+        locale: 'en',
+        colorTheme: themeStr,
+        autosize: true,
+        showVolume: false,
+        showMA: false,
+        hideDateRanges: false,
+        hideMarketStatus: false,
+        hideSymbolLogo: false,
+        scalePosition: 'right',
+        scaleMode: 'Normal',
+        fontFamily: "-apple-system, BlinkMacSystemFont, 'JetBrains Mono', Roboto, Ubuntu, sans-serif",
+        fontSize: '10',
+        noTimeScale: false,
+        valuesTracking: '1',
+        changeMode: 'price-and-percent',
+        chartType: 'area',
+        lineColor: '#bdb2ff',
+        bottomColor: isDark ? 'rgba(189, 178, 255, 0.04)' : 'rgba(189, 178, 255, 0.2)',
+        topColor: isDark ? 'rgba(189, 178, 255, 0.4)' : 'rgba(189, 178, 255, 0.6)',
+        lineWidth: 2,
+        dateRanges: [
+          '1d|1',
+          '1w|15',
+          '1m|60',
+          '3m|60',
+          '12m|1D',
+          'all|1M'
+        ]
+      };
+
+      script.innerHTML = JSON.stringify(config);
+      tvContainer.appendChild(script);
+      wrap.appendChild(tvContainer);
+      container.appendChild(wrap);
+
+    } else {
+      // 2. TradingView Ticker Tape + Watchlist cards
+      const wrap = document.createElement('div');
+      wrap.className = 'dash-stocks-tape-wrap';
+
+      // Top slot: Scrolling ticker tape
+      const tapeSlot = document.createElement('div');
+      tapeSlot.className = 'dash-stocks-tape-slot';
+
+      const tvContainer = document.createElement('div');
+      tvContainer.className = 'tradingview-widget-container';
+      tvContainer.style.width = '100%';
+      tvContainer.style.height = '100%';
+
+      const widgetSlot = document.createElement('div');
+      widgetSlot.className = 'tradingview-widget-container__widget';
+      tvContainer.appendChild(widgetSlot);
+
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+      script.async = true;
+
+      const tvSymbols = symbols.map(s => ({ proName: s, title: s }));
+
+      const config = {
+        symbols: tvSymbols,
+        showSymbolLogo: true,
+        colorTheme: themeStr,
+        isTransparent: true,
+        displayMode: 'adaptive',
+        locale: 'en'
+      };
+
+      script.innerHTML = JSON.stringify(config);
+      tvContainer.appendChild(script);
+      tapeSlot.appendChild(tvContainer);
+      wrap.appendChild(tapeSlot);
+
+      // Bottom slot: Interactive watchlist items with 1-Week TradingView links
+      const list = document.createElement('div');
+      list.className = 'dash-stocks-list';
+
+      symbols.forEach(sym => {
+        const item = document.createElement('a');
+        item.className = 'dash-stocks-item';
+        item.href = `https://www.tradingview.com/symbols/${encodeURIComponent(sym)}/?interval=1W`;
+        item.target = '_blank';
+        item.rel = 'noopener noreferrer';
+        item.title = `View 1-week performance for ${sym} on TradingView`;
+
+        item.innerHTML = `
+          <div class="dash-stocks-symbol-group">
+            <span class="dash-stocks-symbol">${escapeHtml(sym)}</span>
+            <span class="dash-stocks-exchange">stock</span>
+          </div>
+          <span class="dash-stocks-link">1w chart ↗</span>
+        `;
+        list.appendChild(item);
+      });
+
+      wrap.appendChild(list);
+      container.appendChild(wrap);
+    }
+  }
+
+  function initStocksWidget() {
+    updateStocksViewToggleLabel();
+    const toggleBtn = document.getElementById('stocks-view-toggle');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        toggleStocksView();
+      });
+    }
+    renderStocksWidget(true);
+  }
+
+  // -------------------------------------------------------------
+  // Timer Widget Implementation
+  // -------------------------------------------------------------
+  const TIMER_PRESETS = {
+    '5m': { label: '5m', sec: 300 },
+    '15m': { label: '15m', sec: 900 },
+    '1h': { label: '1h', sec: 3600 }
+  };
+
+  const TIMER_CIRCUMFERENCE = 2 * Math.PI * 80; // ~502.65 for r=80
+
+  let _timerInterval = null;
+  let _timerState = {
+    preset: '5m',
+    durationSec: 300,
+    remainingSec: 300,
+    isRunning: false,
+    endTimestamp: null
+  };
+
+  function loadTimerState() {
+    try {
+      const stored = localStorage.getItem(KEY_TIMER_STATE);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed && typeof parsed.durationSec === 'number') {
+          return {
+            preset: parsed.preset || '5m',
+            durationSec: parsed.durationSec || 300,
+            remainingSec: typeof parsed.remainingSec === 'number' ? parsed.remainingSec : (parsed.durationSec || 300),
+            isRunning: !!parsed.isRunning,
+            endTimestamp: parsed.endTimestamp || null
+          };
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to parse timer state:', e);
+    }
+    return {
+      preset: '5m',
+      durationSec: 300,
+      remainingSec: 300,
+      isRunning: false,
+      endTimestamp: null
+    };
+  }
+
+  function saveTimerState() {
+    localStorage.setItem(KEY_TIMER_STATE, JSON.stringify(_timerState));
+  }
+
+  function setTimerPreset(presetKey) {
+    const p = TIMER_PRESETS[presetKey];
+    if (!p) return;
+    _timerState.preset = presetKey;
+    _timerState.durationSec = p.sec;
+    _timerState.remainingSec = p.sec;
+    _timerState.isRunning = false;
+    _timerState.endTimestamp = null;
+    stopTimerCountdownLoop();
+    saveTimerState();
+    updateTimerPresetButtons();
+    updateTimerDisplay('idle');
+  }
+
+  function updateTimerPresetButtons() {
+    document.querySelectorAll('.dash-timer-preset-btn').forEach(btn => {
+      const p = btn.getAttribute('data-preset');
+      btn.classList.toggle('active', p === _timerState.preset);
+    });
+  }
+
+  function toggleTimerRunning() {
+    if (_timerState.isRunning) {
+      // Pause
+      _timerState.isRunning = false;
+      if (_timerState.endTimestamp) {
+        const left = Math.max(0, Math.ceil((_timerState.endTimestamp - Date.now()) / 1000));
+        _timerState.remainingSec = left;
+        _timerState.endTimestamp = null;
+      }
+      stopTimerCountdownLoop();
+      saveTimerState();
+      updateTimerDisplay('paused');
+    } else {
+      // Start
+      if (_timerState.remainingSec <= 0) {
+        _timerState.remainingSec = _timerState.durationSec;
+      }
+      _timerState.isRunning = true;
+      _timerState.endTimestamp = Date.now() + (_timerState.remainingSec * 1000);
+      saveTimerState();
+      startTimerCountdownLoop();
+      updateTimerDisplay('running');
+    }
+  }
+
+  function resetTimer() {
+    _timerState.isRunning = false;
+    _timerState.remainingSec = _timerState.durationSec;
+    _timerState.endTimestamp = null;
+    stopTimerCountdownLoop();
+    saveTimerState();
+    updateTimerDisplay('idle');
+  }
+
+  function startTimerCountdownLoop() {
+    stopTimerCountdownLoop();
+    _timerInterval = setInterval(() => {
+      if (!_timerState.isRunning || !_timerState.endTimestamp) return;
+      const left = Math.max(0, Math.ceil((_timerState.endTimestamp - Date.now()) / 1000));
+      _timerState.remainingSec = left;
+      if (left <= 0) {
+        _timerState.isRunning = false;
+        _timerState.endTimestamp = null;
+        stopTimerCountdownLoop();
+        saveTimerState();
+        onTimerComplete();
+      } else {
+        updateTimerDisplay('running');
+      }
+    }, 250);
+  }
+
+  function stopTimerCountdownLoop() {
+    if (_timerInterval) {
+      clearInterval(_timerInterval);
+      _timerInterval = null;
+    }
+  }
+
+  function onTimerComplete() {
+    updateTimerDisplay('finished');
+    playTimerChime();
+  }
+
+  function playTimerChime() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      if (ctx.state === 'suspended') {
+        ctx.resume();
+      }
+
+      const notes = [659.25, 880]; // E5 then A5
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + (idx * 0.16));
+
+        gain.gain.setValueAtTime(0.001, ctx.currentTime + (idx * 0.16));
+        gain.gain.exponentialRampToValueAtTime(0.2, ctx.currentTime + (idx * 0.16) + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + (idx * 0.16) + 0.6);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(ctx.currentTime + (idx * 0.16));
+        osc.stop(ctx.currentTime + (idx * 0.16) + 0.65);
+      });
+    } catch (e) {
+      console.warn('Audio chime unsupported or blocked:', e);
+    }
+  }
+
+  function formatTimerDigits(sec) {
+    const s = Math.max(0, Math.floor(sec));
+    const h = Math.floor(s / 3600);
+    const m = Math.floor((s % 3600) / 60);
+    const remS = s % 60;
+    if (h > 0) {
+      return `${h}:${String(m).padStart(2, '0')}:${String(remS).padStart(2, '0')}`;
+    }
+    return `${String(m).padStart(2, '0')}:${String(remS).padStart(2, '0')}`;
+  }
+
+  function updateTimerDisplay(forcedStatus = null) {
+    const timeEl = document.getElementById('timer-display-time');
+    const statusEl = document.getElementById('timer-display-status');
+    const ringEl = document.getElementById('timer-progress-ring');
+    const toggleBtn = document.getElementById('timer-toggle-btn');
+    const badgeEl = document.getElementById('timer-badge');
+
+    if (!timeEl) return;
+
+    let status = forcedStatus;
+    if (!status) {
+      if (_timerState.isRunning) status = 'running';
+      else if (_timerState.remainingSec <= 0) status = 'finished';
+      else if (_timerState.remainingSec < _timerState.durationSec) status = 'paused';
+      else status = 'idle';
+    }
+
+    timeEl.innerText = formatTimerDigits(_timerState.remainingSec);
+    if (statusEl) statusEl.innerText = status;
+
+    if (toggleBtn) {
+      toggleBtn.innerText = _timerState.isRunning ? 'pause' : 'start';
+      toggleBtn.classList.toggle('dash-btn-active', _timerState.isRunning);
+    }
+
+    if (badgeEl) {
+      badgeEl.innerText = status;
+      badgeEl.classList.toggle('dash-badge-active', _timerState.isRunning);
+    }
+
+    if (ringEl) {
+      const dur = _timerState.durationSec || 300;
+      const rem = Math.max(0, _timerState.remainingSec);
+      const frac = Math.max(0, Math.min(1, rem / dur));
+      // Ring depletes as time expires
+      const offset = TIMER_CIRCUMFERENCE * (1 - frac);
+      ringEl.style.strokeDashoffset = offset.toFixed(2);
+      ringEl.classList.toggle('finished', status === 'finished');
+    }
+  }
+
+  function syncTimerFromStorage() {
+    _timerState = loadTimerState();
+    updateTimerPresetButtons();
+    if (_timerState.isRunning && _timerState.endTimestamp) {
+      const left = Math.max(0, Math.ceil((_timerState.endTimestamp - Date.now()) / 1000));
+      _timerState.remainingSec = left;
+      if (left <= 0) {
+        _timerState.isRunning = false;
+        _timerState.endTimestamp = null;
+        stopTimerCountdownLoop();
+        updateTimerDisplay('finished');
+      } else {
+        startTimerCountdownLoop();
+        updateTimerDisplay('running');
+      }
+    } else {
+      stopTimerCountdownLoop();
+      updateTimerDisplay();
+    }
+  }
+
+  function initTimerWidget() {
+    _timerState = loadTimerState();
+    updateTimerPresetButtons();
+
+    document.querySelectorAll('.dash-timer-preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const p = btn.getAttribute('data-preset');
+        setTimerPreset(p);
+      });
+    });
+
+    const toggleBtn = document.getElementById('timer-toggle-btn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        toggleTimerRunning();
+      });
+    }
+
+    const resetBtn = document.getElementById('timer-reset-btn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        resetTimer();
+      });
+    }
+
+    if (_timerState.isRunning && _timerState.endTimestamp) {
+      const left = Math.max(0, Math.ceil((_timerState.endTimestamp - Date.now()) / 1000));
+      _timerState.remainingSec = left;
+      if (left <= 0) {
+        _timerState.isRunning = false;
+        _timerState.endTimestamp = null;
+        saveTimerState();
+        updateTimerDisplay('finished');
+      } else {
+        startTimerCountdownLoop();
+        updateTimerDisplay('running');
+      }
+    } else {
+      updateTimerDisplay();
+    }
+  }
+
   let _syncingCardConfigs = false;
   let _rowRotateInterval = null;
-  let _currentRotatingRow = 0; // 0: row 1 (spotify & calendar), 1: row 2 (world clock & weather)
+  let _currentRotatingRow = 0; // 0: row 1 (spotify & calendar), 1: row 2 (world clock & weather), 2: row 3 (stocks & timer)
   let _pinnedSubRotateIndex = 0; // index into getNonPinnedCards() when spotify is pinned
   let _gridIsHovered = false;
   let _cachedSpNatural = 240;
@@ -3849,7 +4669,7 @@ sidebar: []
           return;
         }
 
-        _currentRotatingRow = (_currentRotatingRow === 0 ? 1 : 0);
+        _currentRotatingRow = (_currentRotatingRow + 1) % 3;
         applyCardConfigs();
       }
     }, delaySec * 1000);
@@ -3880,7 +4700,7 @@ sidebar: []
       return;
     }
 
-    _currentRotatingRow = (_currentRotatingRow === 0 ? 1 : 0);
+    _currentRotatingRow = (_currentRotatingRow + 1) % 3;
     if (manual) {
       stopRowRotationTimer();
       startRowRotationTimer();
@@ -4024,12 +4844,14 @@ sidebar: []
 
     // 1. Determine effectively pinned cards (only active in rotating mode)
     const effectivePinned = isRotating ? getEffectivePinnedCardIds() : [];
-    const ALL_CARD_IDS = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card'];
+    const ALL_CARD_IDS = ['spotify-card', 'cal-card', 'world-clock-card', 'weather-card', 'stocks-card', 'timer-card'];
     const CARD_NAMES = {
       'spotify-card': 'spotify',
       'cal-card': 'calendar',
       'world-clock-card': 'world clock',
-      'weather-card': 'weather'
+      'weather-card': 'weather',
+      'stocks-card': 'stocks',
+      'timer-card': 'timer'
     };
 
     ALL_CARD_IDS.forEach(cardId => {
@@ -4080,10 +4902,12 @@ sidebar: []
     const calCard = document.getElementById('cal-card');
     const clockCard = document.getElementById('world-clock-card');
     const weatherCard = document.getElementById('weather-card');
+    const stocksCard = document.getElementById('stocks-card');
+    const timerCard = document.getElementById('timer-card');
     const clockPrim = document.getElementById('world-clock-primary');
     const weatherPrim = document.getElementById('weather-ascii-card');
 
-    if (!spCard || !calCard || !clockCard || !weatherCard) {
+    if (!spCard || !calCard || !clockCard || !weatherCard || !stocksCard || !timerCard) {
       _syncingCardConfigs = false;
       return;
     }
@@ -4092,6 +4916,8 @@ sidebar: []
     const calConf = configs['cal-card'] || {};
     const clockConf = configs['world-clock-card'] || {};
     const weatherConf = configs['weather-card'] || {};
+    const stocksConf = configs['stocks-card'] || {};
+    const timerConf = configs['timer-card'] || {};
 
     // 2. Dynamic & baseline heights for widgets (generous default sizing)
     const computedSpStyle = window.getComputedStyle(spCard);
@@ -4118,8 +4944,10 @@ sidebar: []
 
     const ROW1_BASELINE_HEIGHT = 440;
     const ROW2_BASELINE_HEIGHT = 400;
+    const ROW3_BASELINE_HEIGHT = 400;
     const spNatural = isRotating ? ROW1_BASELINE_HEIGHT : Math.max(ROW1_BASELINE_HEIGHT, spScrollingRequiredH);
     const row2Baseline = ROW2_BASELINE_HEIGHT;
+    const row3Baseline = ROW3_BASELINE_HEIGHT;
 
     // 3. Resolve conflicting defaults by taking the taller widget's height
     // Calendar widget matches Spotify widget by default unless calConf.defaultHeight is explicitly configured
@@ -4131,12 +4959,17 @@ sidebar: []
     const weatherReq = weatherConf.defaultHeight && weatherConf.defaultHeight > 0 ? weatherConf.defaultHeight : row2Baseline;
     let desiredRow2 = Math.max(clockReq, weatherReq);
 
+    const stocksReq = stocksConf.defaultHeight && stocksConf.defaultHeight > 0 ? stocksConf.defaultHeight : row3Baseline;
+    const timerReq = timerConf.defaultHeight && timerConf.defaultHeight > 0 ? timerConf.defaultHeight : row3Baseline;
+    let desiredRow3 = Math.max(stocksReq, timerReq);
+
     const isRow1Fs = spConf.fullScreen || calConf.fullScreen;
     const isRow2Fs = clockConf.fullScreen || weatherConf.fullScreen;
+    const isRow3Fs = stocksConf.fullScreen || timerConf.fullScreen;
     const gridGap = 16;
-    const totalDesiredGridH = (isRow1Fs || isRow2Fs)
-      ? (desiredRow1 + desiredRow2 + 48)
-      : (desiredRow1 + desiredRow2 + gridGap);
+    const totalDesiredGridH = (isRow1Fs || isRow2Fs || isRow3Fs)
+      ? (desiredRow1 + desiredRow2 + desiredRow3 + 64)
+      : (desiredRow1 + desiredRow2 + desiredRow3 + (gridGap * 2));
 
     // 4. Calculate vertical space cap from window sizing (accounting for {name}'s dashboard header)
     const availableGridH = getAvailableGridVerticalSpace(totalDesiredGridH);
@@ -4183,6 +5016,8 @@ sidebar: []
       if (effectivePinned.includes('cal-card') && calendarCurrentView === 'today') renderTodayTimeline();
       if (effectivePinned.includes('world-clock-card') && typeof getClockCardCapacity === 'function') updateWorldClocks(false);
       if (effectivePinned.includes('weather-card') && typeof getWeatherCardCapacity === 'function') renderWeatherForecast();
+      if (effectivePinned.includes('stocks-card') && typeof renderStocksWidget === 'function') renderStocksWidget();
+      if (effectivePinned.includes('timer-card') && typeof updateTimerDisplay === 'function') updateTimerDisplay();
 
       requestAnimationFrame(() => { _syncingCardConfigs = false; });
       return;
@@ -4219,12 +5054,14 @@ sidebar: []
         if (pinnedId === 'cal-card' && calendarCurrentView === 'today') renderTodayTimeline();
         if (pinnedId === 'world-clock-card' && typeof getClockCardCapacity === 'function') updateWorldClocks(false);
         if (pinnedId === 'weather-card' && typeof getWeatherCardCapacity === 'function') renderWeatherForecast();
+        if (pinnedId === 'stocks-card' && typeof renderStocksWidget === 'function') renderStocksWidget();
+        if (pinnedId === 'timer-card' && typeof updateTimerDisplay === 'function') updateTimerDisplay();
 
         requestAnimationFrame(() => { _syncingCardConfigs = false; });
         return;
       }
 
-      // Non-fullscreen: pinned widget fixed in slot 1 (order: 0), other slot (order: 1) rotates through all 3 non-pinned widgets
+      // Non-fullscreen: pinned widget fixed in slot 1 (order: 0), other slot (order: 1) rotates through all non-pinned widgets
       const nonPinned = ALL_CARD_IDS.filter(id => id !== pinnedId);
       const activeRotatedId = nonPinned[_pinnedSubRotateIndex % nonPinned.length];
 
@@ -4261,6 +5098,8 @@ sidebar: []
       if (visiblePair.includes('cal-card') && calendarCurrentView === 'today') renderTodayTimeline();
       if (visiblePair.includes('world-clock-card') && typeof getClockCardCapacity === 'function') updateWorldClocks(false);
       if (visiblePair.includes('weather-card') && typeof getWeatherCardCapacity === 'function') renderWeatherForecast();
+      if (visiblePair.includes('stocks-card') && typeof renderStocksWidget === 'function') renderStocksWidget();
+      if (visiblePair.includes('timer-card') && typeof updateTimerDisplay === 'function') updateTimerDisplay();
 
       requestAnimationFrame(() => { _syncingCardConfigs = false; });
       return;
@@ -4277,7 +5116,7 @@ sidebar: []
 
     if (isRotatingActive) {
       if (rotateBtn) rotateBtn.style.display = 'inline-flex';
-      if (rotateLabel) rotateLabel.innerText = _currentRotatingRow === 0 ? 'row 1/2' : 'row 2/2';
+      if (rotateLabel) rotateLabel.innerText = `row ${_currentRotatingRow + 1}/3`;
       startRowRotationTimer();
 
       // In rotating mode, the active visible row takes on the largest fitting vertical space
@@ -4293,23 +5132,33 @@ sidebar: []
         spCard.classList.add('dash-row-active');
         calCard.classList.add('dash-row-active');
 
-        // Hide Row 2
+        // Hide Row 2 & Row 3
         clockCard.style.display = 'none';
         weatherCard.style.display = 'none';
         clockCard.classList.remove('dash-row-active');
         weatherCard.classList.remove('dash-row-active');
+
+        stocksCard.style.display = 'none';
+        timerCard.style.display = 'none';
+        stocksCard.classList.remove('dash-row-active');
+        timerCard.classList.remove('dash-row-active');
 
         fitSpotifyArt();
 
         if (calendarCurrentView === 'today') {
           renderTodayTimeline();
         }
-      } else {
-        // Hide Row 1
+      } else if (_currentRotatingRow === 1) {
+        // Hide Row 1 & Row 3
         spCard.style.display = 'none';
         calCard.style.display = 'none';
         spCard.classList.remove('dash-row-active');
         calCard.classList.remove('dash-row-active');
+
+        stocksCard.style.display = 'none';
+        timerCard.style.display = 'none';
+        stocksCard.classList.remove('dash-row-active');
+        timerCard.classList.remove('dash-row-active');
 
         // Show Row 2 (World Clock + Weather)
         clockCard.style.display = 'flex';
@@ -4320,19 +5169,43 @@ sidebar: []
         weatherCard.classList.add('dash-row-active');
 
         syncRow2PrimaryCards();
-      }
 
-      // Update slot capacities for clock and weather when Row 2 is visible
-      if (typeof getClockCardCapacity === 'function' && _currentRotatingRow === 1) {
-        const clockCap = getClockCardCapacity();
-        if (clockCap !== _lastClockCapacity) {
-          updateWorldClocks(false);
+        if (typeof getClockCardCapacity === 'function') {
+          const clockCap = getClockCardCapacity();
+          if (clockCap !== _lastClockCapacity) {
+            updateWorldClocks(false);
+          }
         }
-      }
-      if (typeof getWeatherCardCapacity === 'function' && _currentRotatingRow === 1) {
-        const weatherCap = getWeatherCardCapacity();
-        if (weatherCap !== _lastWeatherCapacity) {
-          renderWeatherForecast();
+        if (typeof getWeatherCardCapacity === 'function') {
+          const weatherCap = getWeatherCardCapacity();
+          if (weatherCap !== _lastWeatherCapacity) {
+            renderWeatherForecast();
+          }
+        }
+      } else {
+        // Show Row 3 (Stocks + Timer)
+        spCard.style.display = 'none';
+        calCard.style.display = 'none';
+        spCard.classList.remove('dash-row-active');
+        calCard.classList.remove('dash-row-active');
+
+        clockCard.style.display = 'none';
+        weatherCard.style.display = 'none';
+        clockCard.classList.remove('dash-row-active');
+        weatherCard.classList.remove('dash-row-active');
+
+        stocksCard.style.display = 'flex';
+        timerCard.style.display = 'flex';
+        stocksCard.style.height = `${singleRowH}px`;
+        timerCard.style.height = `${singleRowH}px`;
+        stocksCard.classList.add('dash-row-active');
+        timerCard.classList.add('dash-row-active');
+
+        if (typeof renderStocksWidget === 'function') {
+          renderStocksWidget();
+        }
+        if (typeof updateTimerDisplay === 'function') {
+          updateTimerDisplay();
         }
       }
 
@@ -4342,7 +5215,7 @@ sidebar: []
       return;
     }
 
-    // Dual-row display mode (both rows visible)
+    // Scrolling display mode (all 3 rows visible)
     stopRowRotationTimer();
     if (rotateBtn) rotateBtn.style.display = 'none';
 
@@ -4350,12 +5223,17 @@ sidebar: []
     calCard.style.display = 'flex';
     clockCard.style.display = 'flex';
     weatherCard.style.display = 'flex';
+    stocksCard.style.display = 'flex';
+    timerCard.style.display = 'flex';
+
     spCard.classList.remove('dash-row-active');
     calCard.classList.remove('dash-row-active');
     clockCard.classList.remove('dash-row-active');
     weatherCard.classList.remove('dash-row-active');
+    stocksCard.classList.remove('dash-row-active');
+    timerCard.classList.remove('dash-row-active');
 
-    if (!isRow1Fs && !isRow2Fs) {
+    if (!isRow1Fs && !isRow2Fs && !isRow3Fs) {
       // In scrolling mode, rows display at their full comfortable baseline heights
       spCard.style.height = `${desiredRow1}px`;
       calCard.style.height = `${desiredRow1}px`;
@@ -4363,6 +5241,9 @@ sidebar: []
 
       clockCard.style.height = `${desiredRow2}px`;
       weatherCard.style.height = `${desiredRow2}px`;
+
+      stocksCard.style.height = `${desiredRow3}px`;
+      timerCard.style.height = `${desiredRow3}px`;
     } else {
       // Handle fullscreen cards: each fullscreen card spans its own row
       if (spConf.fullScreen) {
@@ -4388,6 +5269,17 @@ sidebar: []
         clockCard.style.height = `${desiredRow2}px`;
         weatherCard.style.height = `${desiredRow2}px`;
       }
+
+      if (stocksConf.fullScreen) {
+        stocksCard.style.height = `${Math.min(availableGridH, stocksReq)}px`;
+      }
+      if (timerConf.fullScreen) {
+        timerCard.style.height = `${Math.min(availableGridH, timerReq)}px`;
+      }
+      if (!stocksConf.fullScreen && !timerConf.fullScreen) {
+        stocksCard.style.height = `${desiredRow3}px`;
+        timerCard.style.height = `${desiredRow3}px`;
+      }
     }
 
     // 5. Sync emphasized primary cards in Row 2
@@ -4405,6 +5297,13 @@ sidebar: []
       if (weatherCap !== _lastWeatherCapacity) {
         renderWeatherForecast();
       }
+    }
+
+    if (typeof renderStocksWidget === 'function') {
+      renderStocksWidget();
+    }
+    if (typeof updateTimerDisplay === 'function') {
+      updateTimerDisplay();
     }
 
     fitSpotifyArt();
@@ -4471,6 +5370,11 @@ sidebar: []
       applyCardConfigs();
     } else if (e.key === KEY_CLOCK_ROTATE_DELAY) {
       startClockRollTimer();
+    } else if (e.key === KEY_STOCKS_SYMBOLS || e.key === KEY_STOCKS_VIEW) {
+      if (typeof updateStocksViewToggleLabel === 'function') updateStocksViewToggleLabel();
+      if (typeof renderStocksWidget === 'function') renderStocksWidget(true);
+    } else if (e.key === KEY_TIMER_STATE) {
+      if (typeof syncTimerFromStorage === 'function') syncTimerFromStorage();
     }
   });
 
