@@ -23,6 +23,12 @@ List of the classes I've taken at CMU:
 
 See more about my CMU experience at [this link]({% link _posts/2026-02-11-cmu.md %})!
 
+### degree requirement breakdown
+
+Below is my completed degree planning worksheet from the [ECE degree planner]({% link _posts/2025-10-31-18100-planning-sheet.md %}). It shows how the courses above mapped to specific B.S. in ECE degree requirements, including core curriculum, breadth and depth electives, general education, and free electives:
+
+{% include pdf.html url="/assets/misc/ece-recitation-planner-david.pdf" %}
+
 <style>
   .cmu-classes-table {
     table-layout: fixed;
